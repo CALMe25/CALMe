@@ -115,7 +115,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
       </h2>
 
       {/* Changed grid-cols-3 to grid-cols-4 for a 3x4 layout */}
-      <div className="grid grid-cols-4 p-4 bg-white rounded-xl shadow-lg border border-blue-200 max-w-full" style={{columnGap: '50px', rowGap: '10px', width: 'max-content', maxWidth: '100%'}}>
+      <div className="grid grid-cols-4 p-4 bg-white rounded-xl shadow-lg border border-blue-200 max-w-full" style={{columnGap: '40px', rowGap: '10px', width: 'max-content', maxWidth: '100%'}}>
         {cards.map(card => (
           <div
             key={card.id}
@@ -126,7 +126,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               text-5xl sm:text-6xl md:text-7xl font-bold
               transition-all duration-300 ease-in-out
               ${card.isMatched ? 'bg-green-300 opacity-70 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}
-              ${card.isFlipped || card.isMatched ? 'transform rotate-y-180' : ''}
+
               ${isChecking && !card.isFlipped && !card.isMatched ? 'cursor-not-allowed' : '' + " relative"}
             `}
             onClick={() => handleCardClick(card)}
@@ -140,17 +140,18 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
             <div
               className={`
                 absolute w-full h-full rounded-xl flex items-center justify-center
-                backface-hidden
+                transition-transform duration-300 ease-in-out
                 ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-white text-gray-800' : 'transform rotate-y-180 bg-white'}
               `}
               style={{
+                transformStyle: 'preserve-3d',
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden' // For Safari
               }}
             >
               {card.isFlipped || card.isMatched ? card.value : ''}
             </div>
-            {/* Back of the card (visible when not flipped) */}
+            {/* Back of the card (shows logo when not flipped) */}
             <div
               className={`
                 absolute w-full h-full rounded-xl flex items-center justify-center
