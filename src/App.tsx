@@ -12,7 +12,7 @@ import { classifySafety, classifyStress, extractLocation } from './nlp/semanticP
 import { AppsContext, AppsProvider, InnerApps, type AppInterface } from './appsContextApi';
 import AppLauncer from './AppLauncher/AppLauncer';
 import { ConversationController } from './nlp/separated_mermaid_interpreter_parser';
-import { Logo } from './assets/logo';
+import { Logo } from './assets/Logo';
 import type { PathLike } from 'node:fs';
 // import { Theme, ThemePanel } from "@radix-ui/themes";
 

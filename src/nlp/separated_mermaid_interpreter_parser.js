@@ -7,12 +7,14 @@ import {
   extractLocation 
 } from './semanticParser.js'
 
+
 // ============================================================================
 // MERMAID INTERPRETER - Handles flowchart structure and navigation
 // ============================================================================
 
 export class MermaidInterpreter {
-  constructor() {
+  
+  constructor(filePath) {
     this.flowchartStructure = null;
     this.currentPosition = null;
     this.navigationHistory = [];
@@ -294,9 +296,12 @@ export class MermaidInterpreter {
 
 export class NLPParser {
   constructor() {
+    this.plugins = [];
     this.setupCompromiseExtensions();
   }
-
+  registerPlugin(pluginFn) {
+    this.plugins.push(pluginFn);
+  }
   setupCompromiseExtensions() {
     // Generic compromise.js setup - NO hardcoded domain knowledge
     // All keywords come from the flowchart
@@ -340,12 +345,19 @@ export class NLPParser {
 
   performGenericAnalysis(doc, text) {
     // Generic linguistic analysis - no domain-specific knowledge
-    
-    // console.log('the doc is ', doc);
-    // console.log('the text is ', text);
+    let pluginResults = {};
+    for (const plugin of this.plugins) {
+      const result = plugin(text, doc);
+      pluginResults = { ...pluginResults, ...result };
+    }
+    //const semanticAnalysis = analyzeText(text);  
+     console.log('the doc is ', doc);
+     console.log('the text is ', text);
+     console.log('the Sentiment is ', semanticAnalysis);
     return {
+      sentiment: pluginResults.sentiment || semanticAnalysis.sentiment || 0,  
       // sentiment: doc.sentiment().out('normal'),
-      sentiment: 'negative',
+      //sentiment: 'negative',
       // sentiment: doc.sentiment, // isn't this supposed to be a number?
       // sentiment: Math.random(),
       entities: {
@@ -586,9 +598,10 @@ export class NLPParser {
 export class ConversationController {
   constructor(filePath) {
     this.interpreter = null;
-    this.nlpParser = new NLPParser();
+    this.nlpParser = new NLPParser();    
+    this.nlpParser.registerPlugin((text, doc) => analyzeText(text));
     this.isReady = false;
-    this.scriptPath = filePath || null;//'/src/conversation_flows/conversation-flow.mermaid'
+    this.scriptPath = filePath || null;
     // this.firstNode = null
   }
 
@@ -604,10 +617,10 @@ export class ConversationController {
   // async initialize(filePath) {
   async initialize() {
     console.log('🚀 Initializing conversation controller...');
-    // this.interpreter = await MermaidInterpreter.createFromFile(filePath);
-    const mermaidInterperter = new MermaidInterpreter()
-    this.interpreter = await mermaidInterperter.createFromFile(this.scriptPath); // Creates a MermaidInterperter instance
-    // this.firstNode = await mermaidInterperter.getCurrentQuestion();
+    // this.interpreter = await mermaidInterpreter.createFromFile(filePath);
+    const mermaidInterpreter = new MermaidInterpreter()
+    this.interpreter = await mermaidInterpreter.createFromFile(this.scriptPath); // Creates a MermaidInterpreter instance
+    // this.firstNode = await mermaidInterpreter.getCurrentQuestion();
     // if (!this.firstNode){
 
     // }
@@ -626,7 +639,7 @@ export class ConversationController {
     // Fixed
     if (!this.scriptPath) { // No file path defined
       return null
-    }  // initiation has occured once
+    }  // initiation has occurred once
     // if (!this.isReady || this.interpreter === null) {
     //   this.scriptPath = filePath;
     //   this.initialize()

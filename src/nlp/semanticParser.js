@@ -38,6 +38,21 @@ const crisisPlugin = {
     'scared': 'Adjective',
     'frightened': 'Adjective',
     'terrified': 'Adjective'
+  },
+  api: (Doc) => {
+    Doc.prototype.customSentiment = function() {
+      const doc = this;
+      const tags = doc.tags().out('array');
+      const hasNegation = doc.has('#Negative');
+
+      let sentiment = 'neutral';
+      if (tags.includes('DangerState') || tags.includes('DangerIndicator') || tags.includes('PanicSymptom')) {
+        sentiment = 'negative';
+      } else if (tags.includes('SafetyState') || tags.includes('CalmState')) {
+        sentiment = hasNegation ? 'negative' : 'positive';
+      }
+      return sentiment;
+    }
   }
 };
 
