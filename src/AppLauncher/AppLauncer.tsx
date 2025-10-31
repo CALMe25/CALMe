@@ -1,4 +1,5 @@
-// import React from 'react'
+import React from 'react';
+import type { AppInterface } from '../appsContextApi';
 import type { AppInterface } from '../appsContextApi';
 
 interface AppLauncherProps {
@@ -37,9 +38,12 @@ export default function AppLauncer ({chosenApp, onClose}: AppLauncherProps) {
           maxHeight: '100%',
         }}
       >
-        {chosenApp? chosenApp.main : ()=>{
+        {chosenApp ? (
+          React.cloneElement(chosenApp.main, { onGameEnd: onClose })
+        ) : () => {
             console.log('Error: No App to Launch, closing AppLauncher')
-            onClose()}}
+            onClose()
+        }}
 
       </div>
     </div>
