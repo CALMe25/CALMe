@@ -1,0 +1,3025 @@
+subtitle: ' פורטל החירום הלאומי '
+alt: ''
+bannerImage: /media/tryfit1t/פורטל-חירום-לאומי.png
+content:
+  - newsListFeatured:
+      title: עדכונים ומבזקים
+      allUpdatesUrl: https://www.oref.org.il/heb/updates-and-newsflash/update-page
+      newsItems:
+        - id: 15834
+          time: '2025-07-21T06:00:00Z'
+          hebTime: כ"ה תמוז תשפ"ה
+          title: מדיניות ההתגוננות של פיקוד העורף
+          text: |-
+            <p dir="rtl">מדיניות ההתגוננות ללא שינוי.<br /><br />המדיניות בתוקף החל <strong>מיום שלישי, 15 ביולי 2025, בשעה 18:00 ועד ליום שלישי, 22 ביולי 2025, בשעה 20:00.</strong></p>
+            <p dir="rtl"><strong><a href="https://www.oref.org.il/heb/articles/info/iron-swords/1100/" title="מדיניות התגוננות">ההנחיות המלאות מפורטות בקישור הבא</a><br /></strong></p>
+        - id: 21046
+          time: '2025-07-21T06:00:00Z'
+          hebTime: כ"ה תמוז תשפ"ה
+          title: לא נוגעים בנפלים
+          text: <p dir="rtl">בעת הזו, ייתכן שיש חימושים קטנים שהתפזרו בשטח רחב יחסית ולא התפוצצו. במקרה של זיהוי חימוש כזה, לא נוגעים! הנמצאים בחוץ נדרשים להתרחק מהאיזור בזהירות ולקרוא לכוחות הביטחון.<br />אם אתם רואים נפל או חפץ חשוד - התרחקו מהמקום, הרחיקו אנשים אחרים ודווחו למשטרת ישראל.<br /><a href="https://www.oref.org.il/heb/articles/info/iron-swords/1102/" title="נפלים וחפצים בלתי מזוהים">להנחיות המלאות</a></p>
+        - id: 16221
+          time: '2025-07-21T06:00:00Z'
+          hebTime: כ"ה תמוז תשפ"ה
+          title: הורידו את יישומון פיקוד העורף
+          text: '<p style="text-align: right;" dir="rtl">כאשר אנחנו יוצאים מהבית חשוב לדאוג שנוכל לקבל את ההתרעות בזמן אמת. לכן, הפעילו את שירותי המיקום והורידו את יישומון פיקוד העורף - אמצעי ההתרעה היחיד שמתריע בפנינו על מגוון איומים, בכל מקום בו אנו נמצאים.<br /><a href="https://onelink.to/8p5wpq">להורדת יישומון פיקוד העורף</a><br /><a href="https://www.oref.org.il/heb/articles/info/iron-swords/1107/" title="היישומון של פיקוד העורף">למידע המלא על יישומון פיקוד העורף</a></p>'
+  - usefulLinksList:
+      title: מידע חיוני
+      usefulLinksItems:
+        - link:
+            target: _self
+            name: שאלות נפוצות
+            url: https://www.oref.org.il/heb/questions-answers/faq/
+            type: Content
+        - link:
+            target: _self
+            name: קרן הפיצויים
+            url: https://share.google/xxTwizfCPtJ3YWGCc
+            type: External
+        - link:
+            target: _self
+            name: להורדת היישומון
+            url: https://onelink.to/8p5wpq
+            type: External
+        - link:
+            target: _self
+            name: שירותים חיוניים
+            url: https://www.oref.org.il/heb/recommendations/gov/
+            type: Content
+        - link:
+            target: _self
+            name: הנחיות פיקוד העורף
+            url: https://www.oref.org.il/heb/articles/info/iron-swords/1100/
+            type: Content
+        - link:
+            target: _self
+            name: הנחיות מצילות חיים
+            url: https://www.oref.org.il/heb/emergencies/life-saving-guidelines/
+            type: Content
+        - link:
+            target: _self
+            name: התמודדות בחירום
+            url: https://www.oref.org.il/heb/emergencies/coping-emergencies/
+            type: Content
+        - link:
+            target: _self
+            name: הנחיות למיגון
+            url: https://www.oref.org.il/heb/emergencies/protection-guidelines/
+            type: Content
+        - link:
+            target: _self
+            name: סניפי ברזל לרכישת מזון
+            url: https://www.gov.il/he/Departments/DynamicCollectors/iron-branches-search?skip=0
+            type: External
+  - targetAudiencesList:
+      title: מידע לקהלי יעד
+      targetAudiencesItems:
+        - alt: ''
+          text: הורים וילדים
+          icon: /media/vhshocs4/targetparents.png
+          link:
+            target: _self
+            name: הורים וילדים
+            url: https://www.oref.org.il/heb/emergencies/parents-kids/
+            type: Content
+        - alt: ''
+          text: אנשים עם מוגבלות
+          icon: /media/vp3aw1hv/8058.png
+          link:
+            target: _self
+            name: אנשים עם מוגבלות ואזרחים ותיקים
+            url: https://www.oref.org.il/heb/emergencies/disabilities-elderly/
+            type: Content
+        - alt: ''
+          text: דוברי אמהרית
+          icon: /media/aadh1xaj/דוברי-אמהרית.png
+          link:
+            target: _self
+            name: דוברי אמהרית
+            url: https://www.oref.org.il/heb/emergencies/amharic/
+            type: Content
+        - alt: ''
+          text: ציבור חרדי
+          icon: /media/3mfcrrzu/ציבור-חרדי.png
+          link:
+            target: _self
+            name: לציבור החרדי
+            url: https://www.oref.org.il/heb/emergencies/haredim/
+            type: Content
+        - alt: ''
+          text: שירותים חיוניים
+          icon: /media/fzqf2dlx/משרדי-ממשלה.png
+          link:
+            target: _self
+            name: עדכונים שוטפים על שירותים חיוניים
+            url: https://www.oref.org.il/heb/recommendations/gov/
+            type: Content
+  - emergenciesLobby:
+      title: ''
+      content:
+        - emergency:
+            id: 2458
+            title: מידע והנחיות
+            emergencyCategoryName: info
+            content:
+              - emergencySubCategory:
+                  id: 2459
+                  title: מלחמת חרבות ברזל
+                  url: iron-swords
+                  content:
+                    - alt: מאזניים שגרת חיים מול הצלת חיים
+                      subtitle: ההנחיות לקיום פעילויות חינוכיות, מקומות העבודה והתקהלויות
+                      image: /media/xq3coudy/whatsapp-image-2025-06-23-at-140614.jpeg
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: מדיניות התגוננות
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1100/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 2475
+                      path: '-1,1169,1170,1183,2458,2459,2475'
+                      title: מדיניות ההתגוננות של פיקוד העורף
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: מדיניות ההתגוננות של פיקוד העורף
+                          link: /heb/emergencies/info/iron-swords/מדיניות-התגוננות-של-פיקוד-העורף
+                    - alt: רסיס של טיל
+                      subtitle: ראיתם נפל או חפץ חשוד? לא נוגעים ולא מתקרבים, זה מסכן חיים!
+                      image: /media/2albulnk/התרחקו-מנפלים-ודווחו.png
+                      videoAlt: ''
+                      readTime: ' דקה'
+                      contentUrl:
+                        target: _self
+                        name: התרחקו מנפלים ודווחו
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1102/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 2296
+                      path: '-1,1169,1170,1183,2458,2459,2296'
+                      title: ' נפלים וחפצים בלתי מזוהים'
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: ' נפלים וחפצים בלתי מזוהים'
+                          link: /heb/emergencies/info/iron-swords/נפלים-וחפצים-בלתי-מזוהים
+                    - alt: ממשיכים להישמע להנחיות פיקוד העורף
+                      subtitle: |
+                        זה לא נגמר עד שזה לא נגמר: למרות הפסקת האש, יש להמשיך ולהישמע להנחיות פיקוד העורף
+                      image: /media/1cemrb5s/prj0419_simu_lev_ein_shinoi_heb_feed_062420252.png
+                      videoAlt: ''
+                      readTime: 1 דקות
+                      contentUrl:
+                        target: _self
+                        name: 'זה לא נגמר עד שזה לא נגמר: ממשיכים להישמע להנחיות פיקוד העורף'
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1127/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21097
+                      path: '-1,1169,1170,1183,2458,2459,21097'
+                      title: ממשיכים להישמע להנחיות
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: ממשיכים להישמע להנחיות
+                          link: /heb/emergencies/info/iron-swords/ממשיכים-להישמע-להנחיות
+                    - alt: ''
+                      subtitle: לפני קבלת התרעה על ירי טילים מתימן - תתקבל הנחיה מקדימה ביישומון פיקוד העורף
+                      image: /media/kwlpinll/הנחיה-מקדימה.jpeg
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: זמן להיערכות לפני ירי טילים מתימן
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1501/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 19960
+                      path: '-1,1169,1170,1183,2458,2459,19960'
+                      title: זמן להיערכות לפני ירי טילים מתימן
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: זמן להיערכות לפני ירי טילים מתימן
+                          link: /heb/emergencies/info/iron-swords/זמן-להיערכות-לפני-ירי-טילים-מתימן
+                    - alt: שלבי התרעה בעת ירי טילים מאיראן
+                      subtitle: הכרת השלבים בקבלת ההתרעה יאפשרו לכם להגיע למרחב המוגן
+                      image: /media/twsh25fr/whatsapp-image-2025-07-02-at-182823.jpeg
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: שלבי קבלת הנחיות בירי טילים מאיראן
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1128/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 20827
+                      path: '-1,1169,1170,1183,2458,2459,20827'
+                      title: שלבי קבלת הנחיות בירי טילים מתימן
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: שלבי קבלת הנחיות בירי טילים מתימן
+                          link: /heb/emergencies/info/iron-swords/שלבי-קבלת-הנחיות-בירי-טילים-מתימן
+                    - alt: שיגור רקטות וטילים
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/xmpnfxlx/ירי-רקטות-וטילים.png
+                      videoAlt: ''
+                      readTime: ' דקה וחצי'
+                      contentUrl:
+                        target: _self
+                        name: ירי רקטות וטילים 2
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/rocket-and-missile-attacks/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2524
+                      path: '-1,1169,1170,1183,2458,2459,2524'
+                      title: ירי רקטות וטילים
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: ירי רקטות וטילים
+                          link: /heb/emergencies/info/iron-swords/ירי-רקטות-וטילים
+                    - alt: היישומון של פיקוד העורף
+                      subtitle: כדי לקבל התרעות והנחיות מצילות חיים על מגוון איומים בהתאם למיקומכם
+                      image: /media/i0uiktbz/היישמון-של-פיקוד-העורף.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: היישומון של פיקוד העורף
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1107/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 20363
+                      path: '-1,1169,1170,1183,2458,2459,20363'
+                      title: הורידו את יישומון פיקוד העורף
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: הורידו את יישומון פיקוד העורף
+                          link: /heb/emergencies/info/iron-swords/הורידו-את-יישומון-פיקוד-העורף
+                    - alt: צופרים, טלפון עם התרעה על ירי רקטות וטילים ומחשב עם פורטל החירום הלאומי
+                      subtitle: כך נקבל התרעות בזמן אמת ובכל מקום שבו אנחנו נמצאים
+                      image: /media/edclzbe2/אמצכי-התרעה-של-פיקוד-העורף.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: אמצעי ההתרעה של פיקוד העורף
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1109/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 2661
+                      path: '-1,1169,1170,1183,2458,2459,2661'
+                      title: אמצעי ההתרעה של פיקוד העורף
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: אמצעי ההתרעה של פיקוד העורף
+                          link: /heb/emergencies/info/iron-swords/אמצעי-ההתרעה-של-פיקוד-העורף
+                    - alt: 'דירה שלושה חדרים ומרחב מוגן מודגש בירוק '
+                      subtitle: |
+                        ממ"ד, ממ"ק, מקלט או מרחב מוגן ציבורי - כך נבחר את המרחב המוגן
+                      image: /media/kd0auzyf/כיצד-נבחר-מרחב-מוגן.png
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: כיצד לבחור את המרחב המוגן המיטבי?
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1200/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 20332
+                      path: '-1,1169,1170,1183,2458,2459,20332'
+                      title: כיצד לבחור את המרחב המוגן?
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: כיצד לבחור את המרחב המוגן?
+                          link: /heb/emergencies/info/iron-swords/כיצד-לבחור-את-המרחב-המוגן
+                    - alt: כלי טיס בשמיים
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/gzphyghj/כלי-טיס-עוין.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: כלי טיס עוין
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/infiltration-of-a-hostile-aerial-vehicle/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: true
+                      id: 20543
+                      path: '-1,1169,1170,1183,2458,2459,20543'
+                      title: 'חדירת כלי טיס עוין '
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: 'חדירת כלי טיס עוין '
+                          link: /heb/emergencies/info/iron-swords/כלי-טיס-עוין-מעודכן
+                    - alt: שעון מצויר
+                      subtitle: כך תדעו בתוך כמה זמן עליכם להיכנס למרחב המוגן
+                      image: /media/mh2euepd/כך-תדעו-בתוך-כמה-זמן-עליכם-להיכנס-למרחב-המוגן.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: מה זמן הכניסה למרחב המוגן?
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1103/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 2303
+                      path: '-1,1169,1170,1183,2458,2459,2303'
+                      title: מה זמן הכניסה למרחב המוגן?
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: מה זמן הכניסה למרחב המוגן?
+                          link: /heb/emergencies/info/iron-swords/מה-זמן-הכניסה-למרחב-המוגן
+                    - alt: אנשים רצים לבניין
+                      subtitle: מדוע כה חשוב להיזהר בעת הגעה למרחב המוגן?
+                      image: /media/cn5dgrnv/לא-רצים-אל-המרחב-המוגן.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: לא רצים אל המרחב המוגן
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1204/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 20456
+                      path: '-1,1169,1170,1183,2458,2459,20456'
+                      title: לא רצים אל המרחב המוגן
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: לא רצים אל המרחב המוגן
+                          link: /heb/emergencies/info/iron-swords/לא-רצים-אל-המרחב-המוגן
+                    - alt: ציוד חירום ארוז מראש, כולל תיק, מים, מזון ושימושים אישיים
+                      subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
+                      image: /media/rxcfwroa/8086.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: נערכים למצבי חירום עם כל הציוד הנדרש
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1201/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 20361
+                      path: '-1,1169,1170,1183,2458,2459,20361'
+                      title: נערכים למצבי חירום עם כל הציוד הנדרש
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: מלחמת חרבות ברזל
+                          link: /heb/emergencies/info/iron-swords
+                        - title: נערכים למצבי חירום עם כל הציוד הנדרש
+                          link: /heb/emergencies/info/iron-swords/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש
+              - emergencySubCategory:
+                  id: 2461
+                  title: כלים להתמודדות בחירום
+                  url: emergency-management
+                  content:
+                    - alt: ילדים מאושרים
+                      subtitle: חוסר הוודאות משפיע על כולנו. לפניכם מספר דרכים שיקנו לילדים עוגנים רגשיים
+                      image: /media/rsjpfg4f/whatsapp-image-2025-06-27-at-092754.jpeg
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: 'המראות הקשים של מבצע "עם לביא": המסרים שעלינו להעביר לילדים'
+                        url: https://www.oref.org.il/heb/articles/parents-kids/iron-swords/3114/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21141
+                      path: '-1,1169,1170,1183,2458,2461,21141'
+                      title: כך נעזור לילדים לעבור את התקופה
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: כך נעזור לילדים לעבור את התקופה
+                          link: /heb/emergencies/info/emergency-management/כך-נעזור-לילדים-לעבור-את-התקופה
+                    - alt: אמא וילדה במרפסת
+                      subtitle: תגובות ילדים לחירום והאופן שבו נסייע להם להתמודד
+                      image: /media/bwqalxrj/מדברים-עם-הילדים-על-המצב.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: כך נסייע לילדים להתמודד עם מצב חירום
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1306/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8696
+                      path: '-1,1169,1170,1183,2458,2461,8696'
+                      title: סיוע לילדים להתמודד עם מצב חירום
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: סיוע לילדים להתמודד עם מצב חירום
+                          link: /heb/emergencies/info/emergency-management/כך-נסייע-לילדים-להתמודד-עם-מצב-חירום
+                    - alt: אישה במתח
+                      subtitle: |
+                        עצות להתמודדות עם הקושי הנפשי ומספרי הטלפון של קווי סיוע
+                      image: /media/rkqbdsmb/חשים-מתח-עצות-להתמודדות.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: חשים מתח? עצות להתמודדות
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1307/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8703
+                      path: '-1,1169,1170,1183,2458,2461,8703'
+                      title: התמודדות ותמיכה במצבי חירום - דגשים ומוקדי סיוע
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: התמודדות ותמיכה במצבי חירום - דגשים ומוקדי סיוע
+                          link: /heb/emergencies/info/emergency-management/התמודדות-ותמיכה-במצבי-חירום
+                    - alt: איש גולל בטלפון
+                      subtitle: בעת הזו חשוב לצרוך מידע רק ממקורות רשמיים ומהימנים
+                      image: /media/3btgw1jt/לא-מעבירים-מידע-ברשת.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: לא מעבירים מידע ברשת
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1309/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8705
+                      path: '-1,1169,1170,1183,2458,2461,8705'
+                      title: לא מעבירים מידע ברשת
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: לא מעבירים מידע ברשת
+                          link: /heb/emergencies/info/emergency-management/לא-מעבירים-מידע-ברשת
+                    - alt: אישה מטפלת באדם קשיש
+                      subtitle: דגשים למטפלים בני משפחה, מטפלים זרים ושכנים לסיוע למבוגרים בזמן חירום
+                      image: /media/5e1ldg4r/הנחיות-לבני-משפחה-ומטפלים-בקשישים.png
+                      videoAlt: ''
+                      readTime: 4 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לבני משפחה ומטפלים בקשישים
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1313/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8711
+                      path: '-1,1169,1170,1183,2458,2461,8711'
+                      title: התמודדות אוכלוסייה מבוגרת בחירום
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: התמודדות אוכלוסייה מבוגרת בחירום
+                          link: /heb/emergencies/info/emergency-management/התמודדות-אוכלוסייה-מבוגרת-בחירום
+                    - alt: איש צופה בשקיעה
+                      subtitle: אל"ם (במיל') פרופ' ירון בר דיין, מומחה ברפואה פנימית, עם כלים להתמודדות
+                      image: /media/yvyenhak/איך-להתמודד-עם-לחץ-במלחמה.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: איך להתמודד עם לחץ במלחמה?
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1117/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8700
+                      path: '-1,1169,1170,1183,2458,2461,8700'
+                      title: איך להתמודד עם לחץ במלחמה?
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: איך להתמודד עם לחץ במלחמה?
+                          link: /heb/emergencies/info/emergency-management/איך-להתמודד-עם-לחץ-במלחמה
+                    - alt: איש משתמש באייפד
+                      subtitle: עדכונים שוטפים ממשרדי הממשלה והרשויות באשר לפעילות השוטפת של המשק
+                      image: /media/31coh3s4/מידע-על-שירותים-חיוניים.png
+                      videoAlt: ''
+                      readTime: 14 דקות
+                      contentUrl:
+                        target: _self
+                        name: עדכונים שוטפים על שירותים חיוניים
+                        url: https://www.oref.org.il/heb/recommendations/gov/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8694
+                      path: '-1,1169,1170,1183,2458,2461,8694'
+                      title: מידע על שירותים חיוניים
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: מידע על שירותים חיוניים
+                          link: /heb/emergencies/info/emergency-management/מידע-על-שירותים-חיוניים
+                    - alt: איש כותב
+                      subtitle: הנחיות ההתגוננות בעת ירי אל העורף
+                      image: /media/stclb32v/getfilecontent_hh.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות פיקוד העורף במבצעי עבר
+                        url: https://www.oref.org.il/heb/articles/about/main/1007/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8712
+                      path: '-1,1169,1170,1183,2458,2461,8712'
+                      title: הנחיות פיקוד העורף במבצעי עבר
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: הנחיות פיקוד העורף במבצעי עבר
+                          link: /heb/emergencies/info/emergency-management/הנחיות-פיקוד-העורף-במבצעי-עבר
+                    - alt: אישה מדברת בטלפון
+                      subtitle: מוקדי סיוע לתמיכה נפשית במצב חירום
+                      image: /media/ixfeo3h4/תמיכה-נפשית-מוקדי-סיוע.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: התמודדות ותמיכה במצבי חירום  - דגשים ומוקדי סיוע
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1307/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8695
+                      path: '-1,1169,1170,1183,2458,2461,8695'
+                      title: תמיכה נפשית – מוקדי סיוע
+                      breadcrums:
+                        - title: מידע והנחיות
+                          link: /heb/emergencies/info
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/info/emergency-management
+                        - title: תמיכה נפשית – מוקדי סיוע
+                          link: /heb/emergencies/info/emergency-management/תמיכה-נפשית-מוקדי-סיוע
+        - emergency:
+            id: 1202
+            title: הנחיות מצילות חיים
+            emergencyCategoryName: life-saving-guidelines
+            content:
+              - emergencySubCategory:
+                  id: 1220
+                  title: הנחיות מצילות חיים
+                  url: lsg
+                  content:
+                    - alt: שיגור רקטות וטילים
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/xmpnfxlx/ירי-רקטות-וטילים.png
+                      videoAlt: ''
+                      readTime: ' דקה וחצי'
+                      contentUrl:
+                        target: _self
+                        name: ירי רקטות וטילים מעודכן
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/rocket-and-missile-attacks/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 7862
+                      path: '-1,1169,1170,1183,1202,1220,7862'
+                      title: ירי רקטות וטילים
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: ירי רקטות וטילים
+                          link: /heb/emergencies/life-saving-guidelines/lsg/ירי-רקטות-וטילים
+                    - alt: כלי טיס בשמיים
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/gzphyghj/כלי-טיס-עוין.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: כלי טיס עוין
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/infiltration-of-a-hostile-aerial-vehicle/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 7863
+                      path: '-1,1169,1170,1183,1202,1220,7863'
+                      title: כלי טיס עוין
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: כלי טיס עוין
+                          link: /heb/emergencies/life-saving-guidelines/lsg/כלי-טיס-עוין
+                    - alt: שעון מצויר
+                      subtitle: כך תדעו בתוך כמה זמן עליכם להיכנס למרחב המוגן
+                      image: /media/mh2euepd/כך-תדעו-בתוך-כמה-זמן-עליכם-להיכנס-למרחב-המוגן.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: מה זמן הכניסה למרחב המוגן?
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1103/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8603
+                      path: '-1,1169,1170,1183,1202,1220,8603'
+                      title: מה זמן הכניסה למרחב המוגן?
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: מה זמן הכניסה למרחב המוגן?
+                          link: /heb/emergencies/life-saving-guidelines/lsg/מה-זמן-הכניסה-למרחב-המוגן
+                    - alt: אנשים רצים לבניין
+                      subtitle: מדוע כה חשוב להיזהר בעת הגעה למרחב המוגן?
+                      image: /media/cn5dgrnv/לא-רצים-אל-המרחב-המוגן.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: לא רצים אל המרחב המוגן
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1204/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8605
+                      path: '-1,1169,1170,1183,1202,1220,8605'
+                      title: לא רצים אל המרחב המוגן
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: לא רצים אל המרחב המוגן
+                          link: /heb/emergencies/life-saving-guidelines/lsg/לא-רצים-אל-המרחב-המוגן
+                    - alt: איש מתרחק מהרכב
+                      subtitle: |
+                        אם מתקבלת התרעה בנסיעה יש לעצור בזהירות ולהיכנס למרחב מוגן סמוך
+                      image: /media/iltkxhao/בזמן-התרעה-מתרחקים-מהרכב.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: בזמן התרעה - מתרחקים מהרכב
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1104/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8609
+                      path: '-1,1169,1170,1183,1202,1220,8609'
+                      title: 'הנחיות בעת קבלת התרעה בנסיעה ברכב '
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: 'הנחיות בעת קבלת התרעה בנסיעה ברכב '
+                          link: /heb/emergencies/life-saving-guidelines/lsg/הנחיות-בעת-קבלת-התרעה-בנסיעה-ברכב
+                    - alt: איש שוכב על הקרקע
+                      subtitle: בשטח פתוח יש לשכב ולהגן על הראש כדי לא להיפגע מרסיסים
+                      image: /media/be2n3kiq/שכיבה.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: שכיבה על קרקע מצילה חיים
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1105/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8611
+                      path: '-1,1169,1170,1183,1202,1220,8611'
+                      title: שכיבה על קרקע מצילה חיים
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: שכיבה על קרקע מצילה חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg/שכיבה-על-קרקע-מצילה-חיים
+                    - alt: אנשים מתקהלים
+                      subtitle: '  אם מתקבלת התרעה בזמן אירוע רב משתתפים, יש לשכב על הקרקע או להשתופף במקום'
+                      image: /media/5snddmfj/הנחיות-להתקהלויות.png
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: הנחיות להתקהלויות
+                        url: https://www.oref.org.il/heb/articles/life-saving-guidelines/lsg/1401/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8614
+                      path: '-1,1169,1170,1183,1202,1220,8614'
+                      title: הנחיות להתקהלויות
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: הנחיות להתקהלויות
+                          link: /heb/emergencies/life-saving-guidelines/lsg/הנחיות-להתקהלויות
+                    - alt: רסיס של טיל
+                      subtitle: 'מתרחקים, מרחיקים ומדווחים: האופן שבו יש לפעול כשרואים נפלים'
+                      image: /media/2albulnk/התרחקו-מנפלים-ודווחו.png
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: התרחקו מנפלים ודווחו
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1102/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8590
+                      path: '-1,1169,1170,1183,1202,1220,8590'
+                      title: התרחקו מנפלים ודווחו
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: התרחקו מנפלים ודווחו
+                          link: /heb/emergencies/life-saving-guidelines/lsg/התרחקו-מנפלים-ודווחו
+                    - alt: אנשי מד"א מטפלים בנפגעים
+                      subtitle: דגשים לטיפול בנפגעים עד להגעת צוותי הסיוע
+                      image: /media/wg1kpyxp/עזרה-ראשונה-בירי-רקטות.png
+                      videoAlt: ''
+                      readTime: 4 דקות
+                      contentUrl:
+                        target: _self
+                        name: עזרה ראשונה בירי רקטות
+                        url: https://www.oref.org.il/heb/articles/life-saving-guidelines/lsg/1402/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8615
+                      path: '-1,1169,1170,1183,1202,1220,8615'
+                      title: עזרה ראשונה במצבי חירום
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines/lsg
+                        - title: עזרה ראשונה במצבי חירום
+                          link: /heb/emergencies/life-saving-guidelines/lsg/עזרה-ראשונה-במצבי-חירום
+              - emergencySubCategory:
+                  id: 1231
+                  title: אמצעי התרעה
+                  url: means-of-alert
+                  content:
+                    - alt: ''
+                      subtitle: מעתה תתקבל הנחיה מקדימה ביישומון פיקוד העורף, לפני קבלת ההתרעה
+                      image: /media/kwlpinll/הנחיה-מקדימה.jpeg
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: זמן להיערכות לפני ירי טילים מתימן
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1501/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 19869
+                      path: '-1,1169,1170,1183,1202,1231,19869'
+                      title: זמן להיערכות לפני ירי טילים מתימן
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: אמצעי התרעה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert
+                        - title: זמן להיערכות לפני ירי טילים מתימן
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert/זמן-להיערכות-לפני-ירי-טילים-מתימן
+                    - alt: היישומון של פיקוד העורף
+                      subtitle: כדי לקבל התרעות והנחיות מצילות חיים על מגוון איומים בהתאם למיקומכם
+                      image: /media/i0uiktbz/היישמון-של-פיקוד-העורף.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: היישומון של פיקוד העורף
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1107/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 2405
+                      path: '-1,1169,1170,1183,1202,1231,2405'
+                      title: הורידו את יישומון פיקוד העורף
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: אמצעי התרעה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert
+                        - title: הורידו את יישומון פיקוד העורף
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert/הורידו-את-יישומון-פיקוד-העורף
+                    - alt: טלפון עם התרעה על ירי רקטות וטילים
+                      subtitle: כך תדעו מה אזור ההתרעה שאליו אתם שייכים
+                      image: /media/psmbmksn/התרעה-ממוקדת-לכל-תושב.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: התרעה ממוקדת לכל תושב
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1108/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8621
+                      path: '-1,1169,1170,1183,1202,1231,8621'
+                      title: התרעה ממוקדת לכל תושב
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: אמצעי התרעה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert
+                        - title: התרעה ממוקדת לכל תושב
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert/התרעה-ממוקדת-לכל-תושב
+                    - alt: יישומון פיקוד העורף בטלוויזיה
+                      subtitle: מעתה ניתן לקבל התרעות בזמן אמת בצפייה בכל תוכן בטלוויזיה
+                      image: /media/ylbdmigr/יישומון-חדש-חדש-שני.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: יישומון פיקוד העורף בטלוויזיה
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1119/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 17601
+                      path: '-1,1169,1170,1183,1202,1231,17601'
+                      title: חדש! יישומון פיקוד העורף בטלוויזיה
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: אמצעי התרעה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert
+                        - title: חדש! יישומון פיקוד העורף בטלוויזיה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert/חדש-יישומון-פיקוד-העורף-בטלוויזיה
+                    - alt: צופרים, טלפון עם התרעה על ירי רקטות וטילים ומחשב עם פורטל החירום הלאומי
+                      subtitle: כך נקבל התרעות בזמן אמת ובכל מקום שבו אנחנו נמצאים
+                      image: /media/edclzbe2/אמצכי-התרעה-של-פיקוד-העורף.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: אמצעי ההתרעה של פיקוד העורף
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1109/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8616
+                      path: '-1,1169,1170,1183,1202,1231,8616'
+                      title: אמצעי ההתרעה של פיקוד העורף
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: אמצעי התרעה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert
+                        - title: אמצעי ההתרעה של פיקוד העורף
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert/אמצעי-ההתרעה-של-פיקוד-העורף
+                    - alt: הודעת חירום בטלפון
+                      subtitle: מערכת "מסר אישי", מאפשרת להעביר הודעות התגוננות באירועי חירום רחבי היקף ישירות לטלפונים הניידים
+                      image: /media/cecdfg5y/חדש.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: קיבלתם הודעת חירום?
+                        url: https://www.oref.org.il/heb/articles/life-saving-guidelines/means-of-alert/1500/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8623
+                      path: '-1,1169,1170,1183,1202,1231,8623'
+                      title: מערכת הודעות התגוננות מטעם פיקוד העורף
+                      breadcrums:
+                        - title: הנחיות מצילות חיים
+                          link: /heb/emergencies/life-saving-guidelines
+                        - title: אמצעי התרעה
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert
+                        - title: מערכת הודעות התגוננות מטעם פיקוד העורף
+                          link: /heb/emergencies/life-saving-guidelines/means-of-alert/מערכת-הודעות-התגוננות-מטעם-פיקוד-העורף
+        - emergency:
+            id: 1673
+            title: הנחיות למיגון
+            emergencyCategoryName: protection-guidelines
+            content:
+              - emergencySubCategory:
+                  id: 2147
+                  title: בחירת והכנת המרחב המוגן
+                  url: preparing-protected-space
+                  content:
+                    - alt: דירת 3 חדרים עם ממ"ד מודגש בירוק
+                      subtitle: |
+                        ממ"ד, ממ"ק, מקלט או מרחב מוגן ציבורי - כך נבחר את המרחב המוגן
+                      image: /media/kd0auzyf/כיצד-נבחר-מרחב-מוגן.png
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לבחירת המרחב המוגן
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1200/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 20384
+                      path: '-1,1169,1170,1183,1673,2147,20384'
+                      title: כיצד לבחור את המרחב המוגן?
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: כיצד לבחור את המרחב המוגן?
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/כיצד-לבחור-את-המרחב-המוגן
+                    - alt: ציוד חירום ארוז מראש, כולל תיק, מים, מזון ושימושים אישיים
+                      subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
+                      image: /media/j54iqf4x/ציוד-לשעת-חירום-ערוך.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: ציוד לשעת חירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1201/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 15696
+                      path: '-1,1169,1170,1183,1673,2147,15696'
+                      title: נערכים למצבי חירום עם כל הציוד הנדרש
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: נערכים למצבי חירום עם כל הציוד הנדרש
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש
+                    - alt: שעון מצויר
+                      subtitle: כך תדעו בתוך כמה זמן עליכם להיכנס למרחב המוגן
+                      image: /media/mh2euepd/כך-תדעו-בתוך-כמה-זמן-עליכם-להיכנס-למרחב-המוגן.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: מה זמן הכניסה למרחב המוגן?
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1103/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 20389
+                      path: '-1,1169,1170,1183,1673,2147,20389'
+                      title: מה זמן הכניסה למרחב המוגן?
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: מה זמן הכניסה למרחב המוגן?
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/מה-זמן-הכניסה-למרחב-המוגן
+                    - alt: איש סוגר את חלון הממ"ד
+                      subtitle: כדי שנוכל לשהות בממ"ד או במקלט בחירום, חשוב לוודא שהוא מוכן ומצויד
+                      image: /media/snbmpa1h/הנחיות-לתפעול-הממד-בחירום.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לתפעול הממ"ד בחירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1205/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8560
+                      path: '-1,1169,1170,1183,1673,2147,8560'
+                      title: כך נשמור את המרחב המוגן מוכן בחירום
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: כך נשמור את המרחב המוגן מוכן בחירום
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/כך-נשמור-את-המרחב-המוגן-מוכן-בחירום
+                    - alt: איש סוגר חלון ממ"ד
+                      subtitle: |
+                        אם נדרשים תיקונים בדלת ובחלון הממד יש לפנות ליצרן או לחברה המייצרת בתו תקן פריטי מסגרות למקלטים
+                      image: /media/nqjbwmlr/הנחיות-לתחזוקת-הממד.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
+                        url: https://www.oref.org.il/heb/articles/protection-guidelines/preparing-protected-space/1705/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 20794
+                      path: '-1,1169,1170,1183,1673,2147,20794'
+                      title: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/אנשי-המקצוע-המאושרים-לתיקון-דלת-וחלון-הממד
+                    - alt: חלונות סגורים של מקלט
+                      subtitle: מקלט משותף, ציבורי ומוסדי - מי אחראי לתחזוקה וכיצד נוודא שהוא מוכן לשימוש?
+                      image: /media/synb3x02/שימוש-במקלט-המשותף-בחירום.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: שימוש במקלט המשותף בחירום
+                        url: https://www.oref.org.il/heb/articles/protection-guidelines/preparing-protected-space/1704/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8576
+                      path: '-1,1169,1170,1183,1673,2147,8576'
+                      title: תחזוקת המקלט
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: תחזוקת המקלט
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/תחזוקת-המקלט
+                    - alt: איש סוגר חלון
+                      subtitle: ממ"ד, ממ"ק, ממ"מ ומקלט - המאפיינים שלהם והאופן שבו יש לתחזק אותם
+                      image: /media/vlknhxvz/מרחב-מוגן-תקני.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: מרחב מוגן תקני
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1212/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8573
+                      path: '-1,1169,1170,1183,1673,2147,8573'
+                      title: מרחב מוגן תקני
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: מרחב מוגן תקני
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/מרחב-מוגן-תקני
+                    - alt: מרחב מוגן יביל
+                      subtitle: בניית ממ"ד בהליך מזורז, מרחב מוגן נייד או שיפורי מיגון - כך תוכלו לשפר את המיגון בביתכם
+                      image: /media/1ycmq0hd/פתרונות-מיגון-חדשים.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: פתרונות מיגון חדשים
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1210/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8584
+                      path: '-1,1169,1170,1183,1673,2147,8584'
+                      title: פתרונות למיגון הבית
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: פתרונות למיגון הבית
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/פתרונות-למיגון-הבית
+                    - alt: מערכות אוורור וסינון
+                      subtitle: שימוש במערכת במרחב המוגן
+                      image: /media/5gdngjgh/מערכות-אוורור-וסינון.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: מערכות אוורור וסינון
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1215/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8561
+                      path: '-1,1169,1170,1183,1673,2147,8561'
+                      title: מערכות אוורור וסינון
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: מערכות אוורור וסינון
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/מערכות-אוורור-וסינון
+                    - alt: שרטוטים אדריכליים
+                      subtitle: חומרי העזר ודרכי יצירת התקשרות לטובת תכנון מרחבים מוגנים
+                      image: /media/p3mfofpk/הנחיות-מפרטים.png
+                      videoAlt: ''
+                      readTime: 5 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות, מפרטים ותקנות
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/shelters-protected-rooms/2306/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8575
+                      path: '-1,1169,1170,1183,1673,2147,8575'
+                      title: תכנון ובניית מרחבים מוגנים - הנחיות, תקנות ודרכי התקשרות
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: תכנון ובניית מרחבים מוגנים - הנחיות, תקנות ודרכי התקשרות
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/תכנון-ובניית-מרחבים-מוגנים-הנחיות-תקנות-ודרכי-התקשרות
+                    - alt: מדבקת תקינות של ממ"ד
+                      subtitle: בניתם מרחב מוגן? מספר דגשים לבחינה בעת קבלתו מהקבלן
+                      image: /media/vz3nh2cq/בדיקת-תקינות-לממד-חדש.jpg
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: בדיקת תקינות לממ"ד חדש
+                        url: https://www.oref.org.il/heb/articles/protection-guidelines/preparing-protected-space/1701/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8563
+                      path: '-1,1169,1170,1183,1673,2147,8563'
+                      title: בדיקת תקינות לממ"ד חדש
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: בדיקת תקינות לממ"ד חדש
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/בדיקת-תקינות-לממד-חדש
+                    - alt: איש מקליד במחשב
+                      subtitle: רשימת הטלפונים החשובים שיש להכין מראש
+                      image: /media/lwtduid4/דרכי-תקשורת-לשעת-חירום.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: דרכי תקשורת לשעת חירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1211/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 20604
+                      path: '-1,1169,1170,1183,1673,2147,20604'
+                      title: דרכי תקשורת לשעת חירום
+                      breadcrums:
+                        - title: הנחיות למיגון
+                          link: /heb/emergencies/protection-guidelines
+                        - title: בחירת והכנת המרחב המוגן
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space
+                        - title: דרכי תקשורת לשעת חירום
+                          link: /heb/emergencies/protection-guidelines/preparing-protected-space/דרכי-תקשורת-לשעת-חירום
+        - emergency:
+            id: 2148
+            title: התמודדות בחירום
+            emergencyCategoryName: coping-emergencies
+            content:
+              - emergencySubCategory:
+                  id: 2149
+                  title: תמיכה בילדים
+                  url: supporting-children
+                  content:
+                    - alt: ילדים מאושרים
+                      subtitle: חוסר הוודאות משפיע על כולנו. לפניכם מספר דרכים שיקנו לילדים עוגנים רגשיים
+                      image: /media/rsjpfg4f/whatsapp-image-2025-06-27-at-092754.jpeg
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: 'המראות הקשים של מבצע "עם לביא": המסרים שעלינו להעביר לילדים'
+                        url: https://www.oref.org.il/heb/articles/parents-kids/iron-swords/3114/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21335
+                      path: '-1,1169,1170,1183,2148,2149,21335'
+                      title: כך נעזור לילדים לעבור את התקופה
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: כך נעזור לילדים לעבור את התקופה
+                          link: /heb/emergencies/coping-emergencies/supporting-children/כך-נעזור-לילדים-לעבור-את-התקופה
+                    - alt: ילדה מחבקת דובי
+                      subtitle: מה עושים אם הילדים חוזרים לדפוסי התנהגות קודמים?
+                      image: /media/puwbppp5/התמודדות-עם-רגרסיה-של-הילדים.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: התמודדות עם רגרסיה של הילדים
+                        url: https://www.oref.org.il/heb/articles/parents-kids/iron-swords/3105/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8578
+                      path: '-1,1169,1170,1183,2148,2149,8578'
+                      title: התמודדות עם רגרסיה אצל הילדים
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: התמודדות עם רגרסיה אצל הילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children/התמודדות-עם-רגרסיה-אצל-הילדים
+                    - alt: אמא מדברת עם הילדה שלה
+                      subtitle: הדברים שאנחנו כהורים יכולים לעשות
+                      image: /media/2camq02r/צילום-מסך-2025-06-22-153512.png
+                      videoAlt: ''
+                      readTime: '3 דקות '
+                      contentUrl:
+                        target: _self
+                        name: יוצאים גדולים בצעדים קטנים
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1306/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8562
+                      path: '-1,1169,1170,1183,2148,2149,8562'
+                      title: כך נסייע לילדים להתמודד עם מצב חירום
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: כך נסייע לילדים להתמודד עם מצב חירום
+                          link: /heb/emergencies/coping-emergencies/supporting-children/כך-נסייע-לילדים-להתמודד-עם-מצב-חירום
+                    - alt: אמא מדברת עם הילדה שלה
+                      subtitle: מדוע חשוב להסביר לילדים את המתרחש וכיצד לעשות זאת
+                      image: /media/1e1iafla/מדוע-לדבר-על-מצבי-חירום.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: מדוע לדבר עם ילדים על מצבי חירום?
+                        url: https://www.oref.org.il/heb/articles/parents-kids/iron-swords/3112/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21336
+                      path: '-1,1169,1170,1183,2148,2149,21336'
+                      title: איך לדבר עם ילדים על מצב חירום?
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: איך לדבר עם ילדים על מצב חירום?
+                          link: /heb/emergencies/coping-emergencies/supporting-children/איך-לדבר-עם-ילדים-על-מצב-חירום-הורים
+                    - alt: ילדה מפחדת
+                      subtitle: כך נסביר לילדים את התפקיד של האזעקה
+                      image: /media/tp1p5tyc/למה-ההתרעה-כל-כך-מפחידה.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: למה האזעקה כל כך חזקה? -הורים
+                        url: https://www.oref.org.il/heb/articles/parents-kids/iron-swords/3110/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8607
+                      path: '-1,1169,1170,1183,2148,2149,8607'
+                      title: למה האזעקה כל כך חזקה?
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: למה האזעקה כל כך חזקה?
+                          link: /heb/emergencies/coping-emergencies/supporting-children/למה-האזעקה-כל-כך-חזקה
+                    - alt: משפחה אוכלת
+                      subtitle: מתבגרים רבים חווים דכדוך בתקופה זו. כיצד נגביר את תחושת הביטחון שלהם?
+                      image: /media/oznji24f/כך-נסייע-לבני-הנוער.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: כך נסייע לבני הנוער
+                        url: https://www.oref.org.il/heb/articles/parents-kids/iron-swords/3106/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8597
+                      path: '-1,1169,1170,1183,2148,2149,8597'
+                      title: כך נסייע לבני הנוער
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: כך נסייע לבני הנוער
+                          link: /heb/emergencies/coping-emergencies/supporting-children/כך-נסייע-לבני-הנוער
+                    - alt: מיכל דליות מסבירה
+                      subtitle: איך לתווך לילדים את המלחמה, ולספק להן כלים להתמודדות רגשית? מיכל דליות מסבירה
+                      image: /media/a5clcnvb/כך-תפתחו-חוסן-רגשי-בילדים.png
+                      videoAlt: ''
+                      readTime: 4 דקות
+                      contentUrl:
+                        target: _self
+                        name: כך תפתחו חוסן רגשי בילדים
+                        url: https://www.oref.org.il/heb/articles/coping-emergencies/supporting-children/1800/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8604
+                      path: '-1,1169,1170,1183,2148,2149,8604'
+                      title: כך תפתחו חוסן רגשי בילדים
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: כך תפתחו חוסן רגשי בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children/כך-תפתחו-חוסן-רגשי-בילדים
+                    - alt: אבא ובן מדברים
+                      subtitle: איך להסביר את מצב החירום ובאילו שיטות ניתן להירגע?
+                      image: /media/nthcc3s5/תיווך-המצב-לילדים-על-הרצף-האוטיסטי.jpg
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: תיווך המצב לילדים על הרצף האוטיסטי
+                        url: https://www.oref.org.il/heb/articles/coping-emergencies/supporting-children/1802/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 8816
+                      path: '-1,1169,1170,1183,2148,2149,8816'
+                      title: 'תיווך המצב לילדים ובוגרים עם צרכים מיוחדים '
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: תמיכה בילדים
+                          link: /heb/emergencies/coping-emergencies/supporting-children
+                        - title: 'תיווך המצב לילדים ובוגרים עם צרכים מיוחדים '
+                          link: /heb/emergencies/coping-emergencies/supporting-children/תיווך-המצב-לילדים-ובוגרים-עם-צרכים-מיוחדים
+              - emergencySubCategory:
+                  id: 2150
+                  title: כלים להתמודדות בחירום
+                  url: emergency-tools
+                  content:
+                    - alt: אישה במתח
+                      subtitle: 'עצות להתמודדות עם הקושי הנפשי ומספרי הטלפון של קווי הסיוע '
+                      image: /media/rkqbdsmb/חשים-מתח-עצות-להתמודדות.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: חשים מתח? עצות להתמודדות
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1307/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8864
+                      path: '-1,1169,1170,1183,2148,2150,8864'
+                      title: התמודדות ותמיכה במצבי חירום - דגשים ומוקדי סיוע
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: התמודדות ותמיכה במצבי חירום - דגשים ומוקדי סיוע
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/התמודדות-ותמיכה-במצבי-חירום-דגשים-ומוקדי-סיוע
+                    - alt: שני אנשים מדברים
+                      subtitle: ערבות הדדית תציל חיים - בואו לעזור ולתרום
+                      image: /media/xfzaxhzw/כך-תוכלו-להתנדב-ולסייע.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: כך תוכלו להתנדב ולסייע
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1114/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8870
+                      path: '-1,1169,1170,1183,2148,2150,8870'
+                      title: ' כך תוכלו להתנדב ולסייע'
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: ' כך תוכלו להתנדב ולסייע'
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/כך-תוכלו-להתנדב-ולסייע
+                    - alt: אישה מטפלת באדם קשיש
+                      subtitle: דגשים למטפלים במבוגרים בזמן חירום
+                      image: /media/5e1ldg4r/הנחיות-לבני-משפחה-ומטפלים-בקשישים.png
+                      videoAlt: ''
+                      readTime: 4 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לבני משפחה ומטפלים בקשישים
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1313/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8869
+                      path: '-1,1169,1170,1183,2148,2150,8869'
+                      title: הנחיות לבני משפחה ומטפלים בקשישים
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: הנחיות לבני משפחה ומטפלים בקשישים
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/הנחיות-לבני-משפחה-ומטפלים-בקשישים
+                    - alt: איש גולל בטלפון
+                      subtitle: בעת הזו חשוב לצרוך מידע רק ממקורות רשמיים ומהימנים
+                      image: /media/3btgw1jt/לא-מעבירים-מידע-ברשת.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: לא מעבירים מידע ברשת
+                        url: https://www.oref.org.il/heb/articles/info/emergency-management/1309/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8871
+                      path: '-1,1169,1170,1183,2148,2150,8871'
+                      title: לא מעבירים מידע ברשת
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: לא מעבירים מידע ברשת
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/לא-מעבירים-מידע-ברשת
+                    - alt: איש צופה בשקיעה
+                      subtitle: אל"ם (במיל') פרופ' ירון בר דיין, מומחה ברפואה פנימית, עם כלים להתמודדות
+                      image: /media/yvyenhak/איך-להתמודד-עם-לחץ-במלחמה.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: איך להתמודד עם לחץ במלחמה?
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1117/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 3039
+                      path: '-1,1169,1170,1183,2148,2150,3039'
+                      title: איך להתמודד עם לחץ במלחמה?
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: איך להתמודד עם לחץ במלחמה?
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/איך-להתמודד-עם-לחץ-במלחמה
+                    - alt: איש משתמש באייפד
+                      subtitle: עדכונים שוטפים ממשרדי הממשלה והרשויות באשר לפעילות השוטפת של המשק
+                      image: /media/5syd1azj/צילום-מסך-2025-03-02-122937.jpg
+                      videoAlt: ''
+                      readTime: 14 דקות
+                      contentUrl:
+                        target: _self
+                        name: עדכונים שוטפים על שירותים חיוניים
+                        url: https://www.oref.org.il/heb/recommendations/gov/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 19634
+                      path: '-1,1169,1170,1183,2148,2150,19634'
+                      title: מידע על שירותים חיוניים
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: מידע על שירותים חיוניים
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/עדכונים-שוטפים-על-שירותים-חיוניים
+                    - alt: אבא וילדים משחקים בטלפון
+                      subtitle: הולכים לעבודה וללימודים בהתאם להנחיות פיקוד העורף
+                      image: /media/asvcg1zf/צילום-מסך-2025-03-02-122618.jpg
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: לחיות לצד ההנחיות
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1110/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 21321
+                      path: '-1,1169,1170,1183,2148,2150,21321'
+                      title: לחיות לצד ההנחיות
+                      breadcrums:
+                        - title: התמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies
+                        - title: כלים להתמודדות בחירום
+                          link: /heb/emergencies/coping-emergencies/emergency-tools
+                        - title: לחיות לצד ההנחיות
+                          link: /heb/emergencies/coping-emergencies/emergency-tools/לחיות-לצד-ההנחיות
+        - emergency:
+            id: 1204
+            title: איומים בטחוניים
+            emergencyCategoryName: security-threats
+            content:
+              - emergencySubCategory:
+                  id: 1219
+                  title: איומים ביטחוניים
+                  url: main
+                  content:
+                    - alt: כלי טיס בשמיים
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/gzphyghj/כלי-טיס-עוין.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: כלי טיס עוין
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/infiltration-of-a-hostile-aerial-vehicle/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 7867
+                      path: '-1,1169,1170,1183,1204,1219,7867'
+                      title: כלי טיס עוין
+                      breadcrums:
+                        - title: איומים בטחוניים
+                          link: /heb/emergencies/security-threats
+                        - title: איומים ביטחוניים
+                          link: /heb/emergencies/security-threats/main
+                        - title: כלי טיס עוין
+                          link: /heb/emergencies/security-threats/main/כלי-טיס-עוין
+                    - alt: התרעה בטלפון על כלי טיס עוין
+                      subtitle: 'הכרת אופן קבלת ההתרעה והנחיות ההתנהגות - יכולה להציל חיים. '
+                      image: /media/4bylckzf/התרעה-על-חדירת-כלי-טיס-עברית.png
+                      videoAlt: ''
+                      readTime: 2 דקות וחצי
+                      contentUrl:
+                        target: _self
+                        name: התרעה על חדירה  כלי טיס
+                        url: https://www.oref.org.il/heb/articles/security-threats/main/2000/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8779
+                      path: '-1,1169,1170,1183,1204,1219,8779'
+                      title: התרעה על חדירת כלי טיס עוין
+                      breadcrums:
+                        - title: איומים בטחוניים
+                          link: /heb/emergencies/security-threats
+                        - title: איומים ביטחוניים
+                          link: /heb/emergencies/security-threats/main
+                        - title: התרעה על חדירת כלי טיס עוין
+                          link: /heb/emergencies/security-threats/main/התרעה-על-חדירת-כלי-טיס-עוין
+                    - alt: גדר
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/sfnn43us/חדירת-מחבלים.png
+                      videoAlt: ''
+                      readTime: ' דקה'
+                      contentUrl:
+                        target: _self
+                        name: חדירת מחבלים
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/terrorist-infiltration/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2532
+                      path: '-1,1169,1170,1183,1204,1219,2532'
+                      title: חדירת מחבלים
+                      breadcrums:
+                        - title: איומים בטחוניים
+                          link: /heb/emergencies/security-threats
+                        - title: איומים ביטחוניים
+                          link: /heb/emergencies/security-threats/main
+                        - title: חדירת מחבלים
+                          link: /heb/emergencies/security-threats/main/חדירת-מחבלים
+        - emergency:
+            id: 1677
+            title: רעידת אדמה
+            emergencyCategoryName: earthquake
+            content:
+              - emergencySubCategory:
+                  id: 2262
+                  title: היערכות והתמודדות
+                  url: preparation-coping
+                  content:
+                    - alt: מוקד הרעידה
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/ctvb4w4x/guideathquacke.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: רעידת אדמה
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/earthquake/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2579
+                      path: '-1,1169,1170,1183,1677,2262,2579'
+                      title: רעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake/preparation-coping/רעידת-אדמה
+                    - alt: מגניטודה
+                      subtitle: מה היא רעידת אדמה, כיצד היא מתרחשת ומה האיום בישראל?
+                      image: /media/os0hr5iq/8162.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: רעידות אדמה - האיום בישראל
+                        url: https://www.oref.org.il/heb/articles/earthquake/preparation-coping/2501/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9110
+                      path: '-1,1169,1170,1183,1677,2262,9110'
+                      title: מהי רעידת אדמה והאיום בישראל
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: מהי רעידת אדמה והאיום בישראל
+                          link: /heb/emergencies/earthquake/preparation-coping/מהי-רעידת-אדמה-והאיום-בישראל
+                    - alt: התרעה בטלפון על רעידת אדמה
+                      subtitle: ביישומון פיקוד העורף, בפורטל החירום הלאומי, בצופרים ובאמצעי התקשורת
+                      image: /media/m1hfzncl/רעידת-אדמה-עברית.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: התרעה על רעידת אדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/preparation-coping/2502/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9114
+                      path: '-1,1169,1170,1183,1677,2262,9114'
+                      title: התרעה על רעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: התרעה על רעידת אדמה
+                          link: /heb/emergencies/earthquake/preparation-coping/התרעה-על-רעידת-אדמה
+                    - alt: איש מקבע ספריה לקיר
+                      subtitle: קבלת התרעות, הכרת ההנחיות והכנת הבית והמשפחה
+                      image: /media/bshccjev/8118.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: היערכות לרעידת אדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/preparation-coping/2503/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9122
+                      path: '-1,1169,1170,1183,1677,2262,9122'
+                      title: היערכות לרעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: היערכות לרעידת אדמה
+                          link: /heb/emergencies/earthquake/preparation-coping/היערכות-לרעידת-אדמה
+                    - alt: איש פותח דלת לחדר מדרגות
+                      subtitle: כך תדעו כיצד לבחור את המקום הבטוח שתוכלו להגיע אליו בתוך שניות ברעידת אדמה
+                      image: /media/kupjkncq/מקום-בטוח-כתבה.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: בחירת מקום בטוח ברעידת אדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/preparation-coping/2504/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 2676
+                      path: '-1,1169,1170,1183,1677,2262,2676'
+                      title: המקום הבטוח ברעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: המקום הבטוח ברעידת אדמה
+                          link: /heb/emergencies/earthquake/preparation-coping/המקום-הבטוח-ברעידת-אדמה
+                    - alt: רשימת ציוד נדרש לשעת חירום
+                      subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
+                      image: /media/mvefad3h/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: ציוד לשעת חירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1201/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9129
+                      path: '-1,1169,1170,1183,1677,2262,9129'
+                      title: נערכים למצבי חירום עם כל הציוד הנדרש
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: נערכים למצבי חירום עם כל הציוד הנדרש
+                          link: /heb/emergencies/earthquake/preparation-coping/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש
+                    - alt: אמא וילדה כותבות
+                      subtitle: כל המילים שחשוב להכיר
+                      image: /media/5juprbtt/רעידת-אדמה-מילון-לילדים.jpg
+                      videoAlt: ''
+                      readTime: 7 דקות
+                      contentUrl:
+                        target: _self
+                        name: רעידת אדמה - מילון לילדים
+                        url: https://www.oref.org.il/heb/articles/parents-kids/earthquake/3300/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 19461
+                      path: '-1,1169,1170,1183,1677,2262,19461'
+                      title: רעידת אדמה - מילון לילדים
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: היערכות והתמודדות
+                          link: /heb/emergencies/earthquake/preparation-coping
+                        - title: רעידת אדמה - מילון לילדים
+                          link: /heb/emergencies/earthquake/preparation-coping/רעידת-אדמה-מילון-לילדים
+              - emergencySubCategory:
+                  id: 2263
+                  title: לאחר רעידת אדמה
+                  url: after-quake
+                  content:
+                    - alt: הריסות מבנים לאחר רעידת אדמה
+                      subtitle: גם אם רעידת האדמה הסתיימה - הסכנה עוד לא חלפה
+                      image: /media/xwlnezgv/הנחיות-לאחר-רעידת-אדמה.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לאחר רעידת אדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/after-quake/2600/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 2998
+                      path: '-1,1169,1170,1183,1677,2263,2998'
+                      title: הנחיות לאחר רעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: הנחיות לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake/הנחיות-לאחר-רעידת-אדמה
+                    - alt: איש חילוץ מחלץ אנשים מתחת להריסות
+                      subtitle: הנחיות לחילוץ לכודים מתחת להריסות
+                      image: /media/4h2hddna/חילוץ-לכודים.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: חילוץ לכודים מתחת להריסות
+                        url: https://www.oref.org.il/heb/articles/earthquake/after-quake/2601/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9526
+                      path: '-1,1169,1170,1183,1677,2263,9526'
+                      title: חילוץ לכודים מתחת להריסות
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: חילוץ לכודים מתחת להריסות
+                          link: /heb/emergencies/earthquake/after-quake/חילוץ-לכודים-מתחת-להריסות
+                    - alt: איש בודק דופק
+                      subtitle: דגשים לטיפול בפצועים כתוצאה מרעידת אדמה
+                      image: /media/dyrja0yb/עזרה-ראשונה-ברעידת-אדמה.png
+                      videoAlt: ''
+                      readTime: 4 דקות
+                      contentUrl:
+                        target: _self
+                        name: עזרה ראשונה במצבי חירום
+                        url: https://www.oref.org.il/heb/articles/life-saving-guidelines/lsg/1402/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9528
+                      path: '-1,1169,1170,1183,1677,2263,9528'
+                      title: עזרה ראשונה ברעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: עזרה ראשונה ברעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake/עזרה-ראשונה-ברעידת-אדמה
+                    - alt: אנשים אורזים שימורים ובקבוקי מים
+                      subtitle: כיצד להשיג את הציוד ההכרחי להישרדות?
+                      image: /media/0iwn21vj/הצטיידות-לאחר-רעידת-אדמה.jpg
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הצטיידות לאחר רעידת אדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/after-quake/2604/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9531
+                      path: '-1,1169,1170,1183,1677,2263,9531'
+                      title: הצטיידות לאחר רעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: הצטיידות לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake/הצטיידות-לאחר-רעידת-אדמה
+                    - alt: בית חולים שדה
+                      subtitle: כך מסייעים לתושבים לאחר רעידת אדמה
+                      image: /media/ytpd3ef5/אתרי-סיוע-לאוכלוסיה.png
+                      videoAlt: ''
+                      readTime: ' דקה וחצי'
+                      contentUrl:
+                        target: _self
+                        name: אתרי סיוע לאוכלוסייה
+                        url: https://www.oref.org.il/heb/articles/earthquake/after-quake/2605/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9532
+                      path: '-1,1169,1170,1183,1677,2263,9532'
+                      title: אתרי סיוע לאוכלוסייה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: אתרי סיוע לאוכלוסייה
+                          link: /heb/emergencies/earthquake/after-quake/אתרי-סיוע-לאוכלוסייה
+                    - alt: מבנה שנפגע מרעידת אדמה
+                      subtitle: מה צריך לבדוק לפני שחוזרים לבית לאחר רעידת אדמה?
+                      image: /media/p04f2zxs/כניסה-למבנה-לאחר-רעידת-אדמה.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: כניסה למבנה לאחר רעידת אדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/after-quake/2606/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9533
+                      path: '-1,1169,1170,1183,1677,2263,9533'
+                      title: כניסה למבנה לאחר רעידת אדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: כניסה למבנה לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake/כניסה-למבנה-לאחר-רעידת-אדמה
+                    - alt: רעידת אדמה בקרקע
+                      subtitle: רעידות משנה, גלישת מדרונות ושריפות - תופעות לאחר רעידת אדמה
+                      image: /media/keki30vx/ההשפעות-של-רעידת-האדמה.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: ההשפעות של רעידת האדמה
+                        url: https://www.oref.org.il/heb/articles/earthquake/after-quake/2607/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9534
+                      path: '-1,1169,1170,1183,1677,2263,9534'
+                      title: ההשפעות של רעידת האדמה
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: לאחר רעידת אדמה
+                          link: /heb/emergencies/earthquake/after-quake
+                        - title: ההשפעות של רעידת האדמה
+                          link: /heb/emergencies/earthquake/after-quake/ההשפעות-של-רעידת-האדמה
+              - emergencySubCategory:
+                  id: 2264
+                  title: צונמי
+                  url: tsunami
+                  content:
+                    - alt: גל סוער
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/xjpf2y3b/צונאמי-כתבה.png
+                      videoAlt: ''
+                      readTime: חצי דקה
+                      contentUrl:
+                        target: _self
+                        name: צונאמי
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/fear-of-a-tsunami/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2710
+                      path: '-1,1169,1170,1183,1677,2264,2710'
+                      title: צונמי
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: צונמי
+                          link: /heb/emergencies/earthquake/tsunami
+                        - title: צונמי
+                          link: /heb/emergencies/earthquake/tsunami/צונמי
+                    - alt: חוף ים
+                      subtitle: האפשרות שיתרחש צונמי בארץ וההיערכות הנדרשת
+                      image: /media/rvte0kuj/צונאמי-הסיכון-בישראל-וההיערכות-הנדרשת.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: האיום בישראל מצונאמי
+                        url: https://www.oref.org.il/heb/articles/earthquake/tsunami/2700/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9335
+                      path: '-1,1169,1170,1183,1677,2264,9335'
+                      title: האיום בישראל מצונמי
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: צונמי
+                          link: /heb/emergencies/earthquake/tsunami
+                        - title: האיום בישראל מצונמי
+                          link: /heb/emergencies/earthquake/tsunami/האיום-בישראל-מצונמי
+                    - alt: התרעה בטלפון על חשש לצונמי
+                      subtitle: כך נדע שיש חשש לצונמי
+                      image: /media/nzedtntz/התרעה-על-צונאמי.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: התרעה על צונאמי
+                        url: https://www.oref.org.il/heb/articles/earthquake/tsunami/2701/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9346
+                      path: '-1,1169,1170,1183,1677,2264,9346'
+                      title: התרעה על צונמי
+                      breadcrums:
+                        - title: רעידת אדמה
+                          link: /heb/emergencies/earthquake
+                        - title: צונמי
+                          link: /heb/emergencies/earthquake/tsunami
+                        - title: התרעה על צונמי
+                          link: /heb/emergencies/earthquake/tsunami/התרעה-על-צונמי
+        - emergency:
+            id: 2151
+            title: היערכות לחירום
+            emergencyCategoryName: emergency-preparedness
+            content:
+              - emergencySubCategory:
+                  id: 2152
+                  title: נערכים בשגרה, מוכנים בחירום
+                  url: preparing-routine
+                  content:
+                    - alt: מפת ישראל עם בניינים
+                      subtitle: הסכנות שחשוב להיערך אליהן מראש
+                      image: /media/3mwcip0s/האיומים-על-מדינת-ישראל.png
+                      videoAlt: ''
+                      readTime: 6 דקות
+                      contentUrl:
+                        target: _self
+                        name: אילו מצבי חירום מאיימים עלינו וכיצד ניתן להיערך מראש?
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/preparing-routine/2100/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8946
+                      path: '-1,1169,1170,1183,2151,2152,8946'
+                      title: האיומים על מדינת ישראל
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: האיומים על מדינת ישראל
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/האיומים-על-מדינת-ישראל
+                    - alt: רשימת ציוד נדרש לשעת חירום
+                      subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
+                      image: /media/mvefad3h/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: ציוד לשעת חירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1201/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8951
+                      path: '-1,1169,1170,1183,2151,2152,8951'
+                      title: נערכים למצבי חירום עם כל הציוד הנדרש
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: נערכים למצבי חירום עם כל הציוד הנדרש
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש
+                    - alt: 'משפחה '
+                      subtitle: מדברים, משתפים ומתרגלים - כך נכין את המשפחה למצבי חירום
+                      image: /media/x5inytme/תוכנית-חירום-משפחתית.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: תוכנית חירום משפחתית
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/preparing-routine/2102/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8948
+                      path: '-1,1169,1170,1183,2151,2152,8948'
+                      title: הכנת תוכנית חירום משפחתית
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: הכנת תוכנית חירום משפחתית
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/הכנת-תוכנית-חירום-משפחתית
+                    - alt: ידיים מחזיקות איור של בית
+                      subtitle: כך נהפוך את הבית למקום הבטוח ביותר
+                      image: /media/uyvkmnvf/8088.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: הכנת הבית לחירום - היערכות לחירום
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/preparing-routine/2104/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8950
+                      path: '-1,1169,1170,1183,2151,2152,8950'
+                      title: הכנת הבית לחירום
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: הכנת הבית לחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/הכנת-הבית-לחירום
+                    - alt: ''
+                      subtitle: רשימת הטלפונים החשובים שצריך להכין מראש
+                      image: /media/lwtduid4/דרכי-תקשורת-לשעת-חירום.png
+                      videoAlt: ''
+                      readTime: 3 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: דרכי תקשורת לשעת חירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1211/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21215
+                      path: '-1,1169,1170,1183,2151,2152,21215'
+                      title: דרכי תקשורת לשעת חירום
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: דרכי תקשורת לשעת חירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/דרכי-תקשורת-לשעת-חירום
+                    - alt: 'עמוד חשמל '
+                      subtitle: 'כך תיערכו מראש ותתנהלו נכון בעת הפסקות חשמל '
+                      image: /media/ufqlq1zz/הפסקת-חשמל.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: היערכות להפסקות חשמל ממושכות
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/preparing-routine/2108/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 18290
+                      path: '-1,1169,1170,1183,2151,2152,18290'
+                      title: היערכות להפסקות חשמל
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: היערכות להפסקות חשמל
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/היערכות-להפסקות-חשמל
+                    - alt: מרחב מוגן נייד
+                      subtitle: ' הליך מזורז לבניית ממ"ד או שיפורי מיגון - כך תבנו מיגון בביתכם'
+                      image: /media/rmwbywde/7905.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21214
+                      path: '-1,1169,1170,1183,2151,2152,21214'
+                      title: 'פתרונות למיגון הבית '
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: נערכים בשגרה, מוכנים בחירום
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine
+                        - title: 'פתרונות למיגון הבית '
+                          link: /heb/emergencies/emergency-preparedness/preparing-routine/פתרונות-למיגון-הבית
+              - emergencySubCategory:
+                  id: 2153
+                  title: התרעה והנחיה מצילת חיים
+                  url: life-saving-alert-guideline
+                  content:
+                    - alt: צופרים, טלפון עם התרעה על ירי רקטות וטילים ומחשב עם פורטל החירום הלאומי
+                      subtitle: כך נקבל התרעות בזמן אמת ובכל מקום שבו אנחנו נמצאים
+                      image: /media/edclzbe2/אמצכי-התרעה-של-פיקוד-העורף.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: אמצעי ההתרעה של פיקוד העורף
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1109/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8897
+                      path: '-1,1169,1170,1183,2151,2153,8897'
+                      title: אמצעי ההתרעה של פיקוד העורף
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: התרעה והנחיה מצילת חיים
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline
+                        - title: אמצעי ההתרעה של פיקוד העורף
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline/אמצעי-ההתרעה-של-פיקוד-העורף
+                    - alt: התרעה בטלפון על ירי רקטות וטילים
+                      subtitle: כך תדעו מה אזור ההתרעה שאליו אתם שייכים
+                      image: /media/psmbmksn/התרעה-ממוקדת-לכל-תושב.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: התרעה ממוקדת לכל תושב
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1108/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8898
+                      path: '-1,1169,1170,1183,2151,2153,8898'
+                      title: התרעה ממוקדת לכל תושב
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: התרעה והנחיה מצילת חיים
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline
+                        - title: התרעה ממוקדת לכל תושב
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline/התרעה-ממוקדת-לכל-תושב
+                    - alt: יישומון פיקוד העורף
+                      subtitle: חדש - מענה מיוחד לחרשים וכבדי שמיעה, וקבלת התרעת "צבע אדום"
+                      image: /media/i0uiktbz/היישמון-של-פיקוד-העורף.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: היישומון של פיקוד העורף
+                        url: https://www.oref.org.il/heb/articles/info/iron-swords/1107/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8895
+                      path: '-1,1169,1170,1183,2151,2153,8895'
+                      title: יישומון פיקוד העורף
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: התרעה והנחיה מצילת חיים
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline
+                        - title: יישומון פיקוד העורף
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline/יישומון-פיקוד-העורף
+                    - alt: הודעת חירום בטלפון
+                      subtitle: חדש - הודעות מתפרצות לנייד עם הנחיות מצילות חיים
+                      image: /media/cecdfg5y/חדש.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: קיבלתם הודעת חירום?
+                        url: https://www.oref.org.il/heb/articles/life-saving-guidelines/means-of-alert/1500/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 8899
+                      path: '-1,1169,1170,1183,2151,2153,8899'
+                      title: מערכת הודעות התגוננות מטעם פיקוד העורף
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: התרעה והנחיה מצילת חיים
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline
+                        - title: מערכת הודעות התגוננות מטעם פיקוד העורף
+                          link: /heb/emergencies/emergency-preparedness/life-saving-alert-guideline/מערכת-הודעות-התגוננות-מטעם-פיקוד-העורף
+              - emergencySubCategory:
+                  id: 2154
+                  title: מקלטים וממ"דים
+                  url: shelters-protected-rooms
+                  content:
+                    - alt: איש סוגר את חלון הממ"ד
+                      subtitle: כדי שנוכל לשהות בממ"ד או במקלט בחירום, חשוב לוודא שהוא מוכן ומצויד
+                      image: /media/snbmpa1h/הנחיות-לתפעול-הממד-בחירום.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לתפעול הממ"ד בחירום
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1205/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21236
+                      path: '-1,1169,1170,1183,2151,2154,21236'
+                      title: כך נשמור את המרחב המוגן מוכן בחירום
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: כך נשמור את המרחב המוגן מוכן בחירום
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/כך-נשמור-את-המרחב-המוגן-מוכן-בחירום
+                    - alt: איש סוגר חלון
+                      subtitle: ממ"ד, ממ"ק, ממ"מ ומקלט - המאפיינים שלהם והאופן שבו יש לתחזק אותם
+                      image: /media/vlknhxvz/מרחב-מוגן-תקני.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: מרחב מוגן תקני
+                        url: https://www.oref.org.il/heb/articles/info/preparing-protected-space/1212/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21237
+                      path: '-1,1169,1170,1183,2151,2154,21237'
+                      title: מרחב מוגן תקני
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: מרחב מוגן תקני
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/מרחב-מוגן-תקני
+                    - alt: חלונות סגורים של מקלט
+                      subtitle: מקלט משותף, ציבורי ומוסדי - מי אחראי לתחזוקה וכיצד נוודא שהוא מוכן לשימוש?
+                      image: /media/synb3x02/שימוש-במקלט-המשותף-בחירום.png
+                      videoAlt: ''
+                      readTime: 4 דקות
+                      contentUrl:
+                        target: _self
+                        name: הכנת המקלט המשותף לחירום
+                        url: https://www.oref.org.il/heb/articles/protection-guidelines/preparing-protected-space/1704/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9019
+                      path: '-1,1169,1170,1183,2151,2154,9019'
+                      title: תחזוקת המקלט
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: תחזוקת המקלט
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/תחזוקת-המקלט
+                    - alt: איש סוגר חלון ממ"ד
+                      subtitle: |
+                        אם נדרשים תיקונים בדלת ובחלון הממד יש לפנות ליצרן או לחברה המייצרת בתו תקן פריטי מסגרות למקלטים
+                      image: /media/nqjbwmlr/הנחיות-לתחזוקת-הממד.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
+                        url: https://www.oref.org.il/heb/articles/protection-guidelines/preparing-protected-space/1705/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21238
+                      path: '-1,1169,1170,1183,2151,2154,21238'
+                      title: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/אנשי-המקצוע-המאושרים-לתיקון-דלת-וחלון-הממד
+                    - alt: שרטוט
+                      subtitle: חומרי העזר ודרכי יצירת התקשרות לטובת תכנון מרחבים מוגנים
+                      image: /media/0xalfqmh/הנחיות-מפרטים-ותקנות.png
+                      videoAlt: ''
+                      readTime: 5 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הנחיות, מפרטים ותקנות
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/shelters-protected-rooms/2306/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9047
+                      path: '-1,1169,1170,1183,2151,2154,9047'
+                      title: תכנון ובניית מרחבים מוגנים
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: תכנון ובניית מרחבים מוגנים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/תכנון-ובניית-מרחבים-מוגנים
+                    - alt: מדבקת תקינות של ממ"ד
+                      subtitle: בניתם מרחב מוגן? מספר דגשים לבחינה בעת קבלתו מהקבלן
+                      image: /media/vz3nh2cq/בדיקת-תקינות-לממד-חדש.jpg
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: בדיקת תקינות לממ"ד חדש
+                        url: https://www.oref.org.il/heb/articles/protection-guidelines/preparing-protected-space/1701/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 21239
+                      path: '-1,1169,1170,1183,2151,2154,21239'
+                      title: בדיקת תקינות לממ"ד חדש
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: בדיקת תקינות לממ"ד חדש
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/בדיקת-תקינות-לממד-חדש
+                    - alt: מרחב מוגן נייד
+                      subtitle: ' הליך מזורז לבניית ממ"ד או שיפורי מיגון - כך תבנו מיגון בביתכם'
+                      image: /media/w1rfb1yw/מרחב-מוגן-נייד.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: מרחב מוגן נייד
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/shelters-protected-rooms/2305/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9036
+                      path: '-1,1169,1170,1183,2151,2154,9036'
+                      title: 'פתרונות למיגון הבית '
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: מקלטים וממ"דים
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
+                        - title: 'פתרונות למיגון הבית '
+                          link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/פתרונות-למיגון-הבית
+              - emergencySubCategory:
+                  id: 2155
+                  title: חינוך לחירום
+                  url: emergency-education
+                  content:
+                    - alt: מדריכת חירום מאויירת
+                      subtitle: ' יום חינוך לחירום בבתי הספר היסודיים והכשרת חילוץ לתלמידי כיתות י'''
+                      image: /media/33zdklj4/8179.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: יום כתום
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/emergency-education/2400/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9012
+                      path: '-1,1169,1170,1183,2151,2155,9012'
+                      title: חינוך והכשרות לחירום בבתי הספר
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: חינוך לחירום
+                          link: /heb/emergencies/emergency-preparedness/emergency-education
+                        - title: חינוך והכשרות לחירום בבתי הספר
+                          link: /heb/emergencies/emergency-preparedness/emergency-education/חינוך-והכשרות-לחירום-בבתי-הספר
+                    - alt: מדריכת חירום מסבירה לילד
+                      subtitle: כיצד מזמינים הדרכה לחירום ומה תוכנה?
+                      image: /media/4tolanzg/8191.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הדרכות לציבור הרחב
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/emergency-education/2406/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9028
+                      path: '-1,1169,1170,1183,2151,2155,9028'
+                      title: הדרכות לציבור הרחב
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: חינוך לחירום
+                          link: /heb/emergencies/emergency-preparedness/emergency-education
+                        - title: הדרכות לציבור הרחב
+                          link: /heb/emergencies/emergency-preparedness/emergency-education/הדרכות-לציבור-הרחב
+                    - alt: איש מקליד במחשב
+                      subtitle: 'חדש: הכשרה מקוונת לממוני הג"א במפעלים ובמוסדות'
+                      image: /media/rrkfs5x3/8097.png
+                      videoAlt: ''
+                      readTime: 5 דקות
+                      contentUrl:
+                        target: _self
+                        name: קורס מקוון לממוני הג"א
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/emergency-education/2407/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9097
+                      path: '-1,1169,1170,1183,2151,2155,9097'
+                      title: קורס מקוון לממוני הג"א
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: חינוך לחירום
+                          link: /heb/emergencies/emergency-preparedness/emergency-education
+                        - title: קורס מקוון לממוני הג"א
+                          link: /heb/emergencies/emergency-preparedness/emergency-education/קורס-מקוון-לממוני-הגא
+                    - alt: צוותי חילוץ מחלצים אנשים מתוך הריסות
+                      subtitle: התוכנית להכשרת צוותי סע"ר ברשויות ובארגוני ממשלה
+                      image: /media/knofnpt4/הכשרת-צוותי-סער.png
+                      videoAlt: ''
+                      readTime: שתיים וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: הכשרת צוותי חילוץ קל
+                        url: https://www.oref.org.il/heb/articles/emergency-preparedness/emergency-education/2408/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9095
+                      path: '-1,1169,1170,1183,2151,2155,9095'
+                      title: הכשרת צוותי חילוץ קל
+                      breadcrums:
+                        - title: היערכות לחירום
+                          link: /heb/emergencies/emergency-preparedness
+                        - title: חינוך לחירום
+                          link: /heb/emergencies/emergency-preparedness/emergency-education
+                        - title: הכשרת צוותי חילוץ קל
+                          link: /heb/emergencies/emergency-preparedness/emergency-education/הכשרת-צוותי-חילוץ-קל
+        - emergency:
+            id: 1998
+            title: חומרים מסוכנים
+            emergencyCategoryName: hazardous-materials
+            content:
+              - emergencySubCategory:
+                  id: 2265
+                  title: חומרים מסוכנים
+                  url: main
+                  content:
+                    - alt: חומר מסוכן דולף ממפעל תעשייתי
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/mbbcnhoc/אירוע-חומרים-מסוכנים.png
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: אירוע חומרים מסוכנים
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/hazardous-materials-event/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2819
+                      path: '-1,1169,1170,1183,1998,2265,2819'
+                      title: אירוע חומרים מסוכנים
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: אירוע חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main/אירוע-חומרים-מסוכנים
+                    - alt: התרעה בטלפון על חומרים מסוכנים
+                      subtitle: אמצעי ההתרעה על אירוע חומרים מסוכנים כתוצאה מירי טילים
+                      image: /media/hj5oktou/התרעה-על-חומס.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: התרעה על אירוע חומרים מסוכנים
+                        url: https://www.oref.org.il/heb/articles/hazardous-materials/main/2801/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9023
+                      path: '-1,1169,1170,1183,1998,2265,9023'
+                      title: התרעה על אירוע חומרים מסוכנים
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: התרעה על אירוע חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main/התרעה-על-אירוע-חומרים-מסוכנים
+                    - alt: איש מבצע החייאה לנפגע
+                      subtitle: דגשים למתן עזרה ראשונה לנפגעים כתוצאה מחשיפה לחומרים מסוכנים
+                      image: /media/0jfahyxh/טיפול-בנפגעים-מחומרים-מסוכנים.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: נזקים וטיפול בנפגעים באירוע חומרים מסוכנים
+                        url: https://www.oref.org.il/heb/articles/hazardous-materials/main/2804/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9089
+                      path: '-1,1169,1170,1183,1998,2265,9089'
+                      title: טיפול בנפגעים מחומרים מסוכנים
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: טיפול בנפגעים מחומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main/טיפול-בנפגעים-מחומרים-מסוכנים
+                    - alt: חלון מנופץ
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/whabqmft/סכנת-פיצוץ-והדף-חזק.png
+                      videoAlt: ''
+                      readTime: דקה
+                      contentUrl:
+                        target: _self
+                        name: סכנת פיצוץ והדף חזק
+                        url: https://www.oref.org.il/heb/life-saving-guidelines/fear-of-explosion-and-strong-blast/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2645
+                      path: '-1,1169,1170,1183,1998,2265,2645'
+                      title: סכנת פיצוץ והדף חזק
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: סכנת פיצוץ והדף חזק
+                          link: /heb/emergencies/hazardous-materials/main/סכנת-פיצוץ-והדף-חזק
+                    - alt: מיכלי חומר מסוכן
+                      subtitle: סוגי החומרים המסוכנים והמקומות שבהם הם נמצאים
+                      image: /media/mbadwrqo/מהם-חומרים-מסוכנים.png
+                      videoAlt: ''
+                      readTime: '2 דקות וחצי '
+                      contentUrl:
+                        target: _self
+                        name: מהם חומרים מסוכנים?
+                        url: https://www.oref.org.il/heb/articles/hazardous-materials/main/2803/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9138
+                      path: '-1,1169,1170,1183,1998,2265,9138'
+                      title: מהם חומרים מסוכנים?
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: מהם חומרים מסוכנים?
+                          link: /heb/emergencies/hazardous-materials/main/מהם-חומרים-מסוכנים
+                    - alt: שריפה במפעל
+                      subtitle: מהם הנזקים והסימפטומים האפשריים וכיצד לטפל בנפגעים?
+                      image: /media/b1ofeto2/נזקי-אירוע-חומרים-מסוכנים.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: נזקי אירוע חומרים מסוכנים
+                        url: https://www.oref.org.il/heb/articles/hazardous-materials/main/2804/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9184
+                      path: '-1,1169,1170,1183,1998,2265,9184'
+                      title: חומרים מסוכנים - נזקים וטיפול בנפגעים באירוע
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: חומרים מסוכנים - נזקים וטיפול בנפגעים באירוע
+                          link: /heb/emergencies/hazardous-materials/main/נזקי-אירוע-חומרים-מסוכנים
+                    - alt: איש עם מסיכה שמחזיק טופס
+                      subtitle: סמכויות מרכז חומרים מסוכנים, חובות מחזיקי חומרים מסוכנים, טפסים להורדה ודרכי התקשרות
+                      image: /media/zwvndkss/חומרים-מסוכנים-במערכה-ביטחונית.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: טפסים למחזיקי חומרים מסוכנים
+                        url: https://www.oref.org.il/heb/articles/hazardous-materials/main/2805/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9221
+                      path: '-1,1169,1170,1183,1998,2265,9221'
+                      title: חומרים מסוכנים - אחריות, טפסים ודרכי התקשרות
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: חומרים מסוכנים - אחריות, טפסים ודרכי התקשרות
+                          link: /heb/emergencies/hazardous-materials/main/חומרים-מסוכנים-אחריות-טפסים-ודרכי-התקשרות
+                    - alt: משפחה קוראת ספר
+                      subtitle: חומרים מסוכנים בסביבתם של ילדים
+                      image: /media/up3lxf5b/לדבר-עם-הילדים-על-חומרים-מסוכנים.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: לדבר עם הילדים על חומרים מסוכנים
+                        url: https://www.oref.org.il/heb/articles/hazardous-materials/main/2807/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9225
+                      path: '-1,1169,1170,1183,1998,2265,9225'
+                      title: לדבר עם הילדים על חומרים מסוכנים
+                      breadcrums:
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials
+                        - title: חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main
+                        - title: לדבר עם הילדים על חומרים מסוכנים
+                          link: /heb/emergencies/hazardous-materials/main/לדבר-עם-הילדים-על-חומרים-מסוכנים
+        - emergency:
+            id: 1675
+            title: שריפות וסופות
+            emergencyCategoryName: fires-storms
+            content:
+              - emergencySubCategory:
+                  id: 2266
+                  title: שריפות
+                  url: fires
+                  content:
+                    - alt: שריפה בשטח פתוח
+                      subtitle: |
+                        דרכי מניעת שריפות בשטח פתוח והנחיות התנהגות 
+                      image: /media/0z0dspyt/שריפות-בשטחים-פתוחים.png
+                      videoAlt: ''
+                      readTime: 2 דקות וחצי
+                      contentUrl:
+                        target: _self
+                        name: הנחיות לשריפות בשטחים פתוחים
+                        url: https://www.oref.org.il/heb/articles/fires-storms/fires/2902/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9288
+                      path: '-1,1169,1170,1183,1675,2266,9288'
+                      title: שריפות בשטחים פתוחים
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: שריפות
+                          link: /heb/emergencies/fires-storms/fires
+                        - title: שריפות בשטחים פתוחים
+                          link: /heb/emergencies/fires-storms/fires/שריפות-בשטחים-פתוחים
+                    - alt: אנשי כבאות והצלה מכבים שריפה
+                      subtitle: הנחיות מצילות חיים
+                      image: /media/h3yp5mta/שריפות-הנחיות-מצילות-חיים.png
+                      videoAlt: ''
+                      readTime: ' 2 וחצי דקות '
+                      contentUrl:
+                        target: _self
+                        name: שריפות - הנחיות מצילות חיים
+                        url: https://www.oref.org.il/heb/articles/fires-storms/fires/2900/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: true
+                      id: 2943
+                      path: '-1,1169,1170,1183,1675,2266,2943'
+                      title: שריפות
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: שריפות
+                          link: /heb/emergencies/fires-storms/fires
+                        - title: שריפות
+                          link: /heb/emergencies/fires-storms/fires/שריפות
+                    - alt: מטפה
+                      subtitle: התקנת גלאי עשן, הצטיידות במטפה ותרגול - דגשים חשובים
+                      image: /media/wlxhwey2/הגנה-על-הבית-מפני-שריפה.png
+                      videoAlt: ''
+                      readTime: 4 דקות
+                      contentUrl:
+                        target: _self
+                        name: הגנה על הבית מפני שריפה
+                        url: https://www.oref.org.il/heb/articles/fires-storms/fires/2904/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9292
+                      path: '-1,1169,1170,1183,1675,2266,9292'
+                      title: הגנה על הבית מפני שריפה
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: שריפות
+                          link: /heb/emergencies/fires-storms/fires
+                        - title: הגנה על הבית מפני שריפה
+                          link: /heb/emergencies/fires-storms/fires/הגנה-על-הבית-מפני-שריפה
+                    - alt: מסוק כיבוי בזמן שריפה
+                      subtitle: |
+                        כיצד נגרמות שריפות, אילו סוגי שריפות קיימות, ומה משפיע על עוצמתן? מדריך
+                      image: /media/gruabjxd/מהי-שריפה.png
+                      videoAlt: ''
+                      readTime: 3 דקות
+                      contentUrl:
+                        target: _self
+                        name: מהי שריפה?
+                        url: https://www.oref.org.il/heb/articles/fires-storms/fires/2906/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9294
+                      path: '-1,1169,1170,1183,1675,2266,9294'
+                      title: כיצד נגרמות שריפות?
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: שריפות
+                          link: /heb/emergencies/fires-storms/fires
+                        - title: כיצד נגרמות שריפות?
+                          link: /heb/emergencies/fires-storms/fires/כיצד-נגרמות-שריפות
+                    - alt: הצתה של חוט בשקע
+                      subtitle: כללי זהירות בבית ודגשים לקיום שיחה משפחתית
+                      image: /media/ptdat4rm/בטיחות-באש-ליד-ילדים.png
+                      videoAlt: ''
+                      readTime: 2 וחצי דקות
+                      contentUrl:
+                        target: _self
+                        name: בטיחות באש ליד ילדים
+                        url: https://www.oref.org.il/heb/articles/fires-storms/fires/2907/
+                        type: Content
+                      showOnHomePage: false
+                      isGuideline: false
+                      id: 9295
+                      path: '-1,1169,1170,1183,1675,2266,9295'
+                      title: בטיחות באש בסביבת ילדים
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: שריפות
+                          link: /heb/emergencies/fires-storms/fires
+                        - title: בטיחות באש בסביבת ילדים
+                          link: /heb/emergencies/fires-storms/fires/בטיחות-באש-בסביבת-ילדים
+              - emergencySubCategory:
+                  id: 2267
+                  title: מזג אוויר סוער
+                  url: stormy-weather
+                  content:
+                    - alt: שמשת חלון רטובה מגשם
+                      subtitle: חימום בטוח וזהירות משיטפונות - דגשים חשובים
+                      image: /media/wj1p15l0/היערכות-למזג-אוויר-סוער.png
+                      videoAlt: ''
+                      readTime: דקה וחצי
+                      contentUrl:
+                        target: _self
+                        name: היערכות למזג אוויר סוער
+                        url: https://www.oref.org.il/heb/articles/fires-storms/stormy-weather/3001/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9398
+                      path: '-1,1169,1170,1183,1675,2267,9398'
+                      title: מזג אוויר קיצון - היערכות והתמודדות
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: מזג אוויר סוער
+                          link: /heb/emergencies/fires-storms/stormy-weather
+                        - title: מזג אוויר קיצון - היערכות והתמודדות
+                          link: /heb/emergencies/fires-storms/stormy-weather/מזג-אוויר-קיצון-היערכות-והתמודדות
+                    - alt: אמא מלבישה את בתה במעיל
+                      subtitle: דגשים לקיום שיחה משפחתית על התמודדות עם מזג אוויר סוער
+                      image: /media/kxsfzmot/הכנת-המשפחה-לסופה.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: שיחה משפחתית על הסופה
+                        url: https://www.oref.org.il/heb/articles/fires-storms/stormy-weather/3003/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9400
+                      path: '-1,1169,1170,1183,1675,2267,9400'
+                      title: הכנת המשפחה לסופה
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: מזג אוויר סוער
+                          link: /heb/emergencies/fires-storms/stormy-weather
+                        - title: הכנת המשפחה לסופה
+                          link: /heb/emergencies/fires-storms/stormy-weather/הכנת-המשפחה-לסופה
+                    - alt: ספה בשיטפון
+                      subtitle: 10 דגשים לשיחה משפחתית על התמודדות עם שיטפון
+                      image: /media/drwd2h1s/הכנת-הילדים-לשיטפון.png
+                      videoAlt: ''
+                      readTime: 2 דקות
+                      contentUrl:
+                        target: _self
+                        name: הכנת הילדים לשיטפון
+                        url: https://www.oref.org.il/heb/articles/fires-storms/stormy-weather/3004/
+                        type: Content
+                      showOnHomePage: true
+                      isGuideline: false
+                      id: 9401
+                      path: '-1,1169,1170,1183,1675,2267,9401'
+                      title: הכנת הילדים לשיטפון
+                      breadcrums:
+                        - title: שריפות וסופות
+                          link: /heb/emergencies/fires-storms
+                        - title: מזג אוויר סוער
+                          link: /heb/emergencies/fires-storms/stormy-weather
+                        - title: הכנת הילדים לשיטפון
+                          link: /heb/emergencies/fires-storms/stormy-weather/הכנת-הילדים-לשיטפון
+  - contactsList:
+      title: איך תרצו לדבר איתנו?
+      contactsItems:
+        - alt: סמליל של טלפון
+          text: חייגו
+          icon: /media/vnzbubpz/8072.png
+          link:
+            target: _self
+            name: tel:104
+            url: tel:104
+            type: External
+          isClickableOnDesktop: false
+        - alt: סמליל של מעטפה
+          text: כתבו לנו
+          icon: /media/km4amiei/8074.png
+          link:
+            target: _self
+            name: צרו קשר
+            url: https://www.oref.org.il/heb/contact-page/
+            type: Content
+          isClickableOnDesktop: true
+        - alt: סמליל של לוגו פייסבוק
+          text: פנו בפייסבוק
+          icon: /media/m20bsg2o/8076.png
+          link:
+            target: _self
+            name: http://m.me/pikudhaoref
+            url: http://m.me/pikudhaoref
+            type: External
+          isClickableOnDesktop: true
+        - alt: סמליל של לוגו וואצפ
+          text: פנו ב WhatsApp
+          icon: /media/tt4iyv5s/8077.png
+          link:
+            target: _self
+            name: https://wa.me/message/ULZ3NFT3CRT6L1
+            url: https://api.whatsapp.com/send/?phone=972529104104&text&type=phone_number&app_absent=0
+            type: External
+          isClickableOnDesktop: true
+        - alt: סמליל של סמס
+          text: שלחו
+          icon: /media/sfvdeme3/8075.png
+          link:
+            target: _self
+            name: sms:+972529104104
+            url: sms:+972529104104
+            type: External
+          isClickableOnDesktop: true
+id: 1177
+alias: homePage
+path: /heb/home-page/
+title: מלחמת חרבות ברזל
+windowTitle: דף הבית
+pageSeoProperties:
+  metaTags:
+    - name: description
+      content: |
+        פורטל החירום הלאומי של פיקוד העורף, מרכז את כל המידע, השאלות והתשובות, ההנחיות והעדכונים לתרחישי החירום השונים. כל המידע הרשמי לו אתם זקוקים בשגרה ובעיתות חירום.
+    - name: og:title
+      content: פורטל חירום לאומי
+    - name: og:description
+      content: |
+        פורטל החירום הלאומי של פיקוד העורף, מרכז את כל המידע, השאלות והתשובות, ההנחיות והעדכונים לתרחישי החירום השונים. כל המידע הרשמי לו אתם זקוקים בשגרה ובחירום.
+    - name: og:image
+      content: /media/kvpohwhe/8480-1.jpg
+    - name: og:url
+      content: ''
+  linkTags:
+    - rel: canonical
+      href: ''
+    - rel: alternate
+      href: ''
+      hrefLang: en
+    - rel: alternate
+      href: ''
+      hrefLang: he
+    - rel: alternate
+      href: ''
+      hrefLang: ru
+    - rel: alternate
+      href: ''
+      hrefLang: ar
+breadcrums: []
