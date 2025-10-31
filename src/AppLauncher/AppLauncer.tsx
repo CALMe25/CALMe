@@ -1,6 +1,5 @@
 import React from 'react';
 import type { AppInterface } from '../appsContextApi';
-import type { AppInterface } from '../appsContextApi';
 
 interface AppLauncherProps {
   chosenApp: AppInterface | undefined;
