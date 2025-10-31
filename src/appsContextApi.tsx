@@ -1,5 +1,6 @@
 import { createContext, type ReactElement } from 'react';
 import BreathingExercise from './breathing_module/BreathingExercise';
+import MatchingGame from './MatchingGame';
 
 // Define the App interface as provided by the user
 // Using a union type for 'name' for strict type checking
