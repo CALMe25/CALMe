@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Button } from "./ui/button";
-// import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+
 import { Play, Pause, Mic } from "lucide-react";
 import { AppsContext, type AppInterface } from '../appsContextApi';
 

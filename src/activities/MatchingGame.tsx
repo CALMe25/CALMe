@@ -1,7 +1,7 @@
 // src/games/MatchingGame.tsx
 
 import React, { useState, useEffect } from 'react';
-import calmeLogo from './assets/calme-logo.svg';
+import calmeLogo from '../assets/calme-logo.svg';
 
 // Define the type for a single card
 interface Card {

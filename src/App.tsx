@@ -8,9 +8,9 @@ import { Button } from "./chat_interface/ui/button";
 import { MoreVertical, Settings, Accessibility } from "lucide-react"; // Icon TODO - CHANGE
 import { toast } from "sonner"; // pop up notifications
 import './styles/globals.css';
-import { classifySafety, classifyStress, extractLocation } from './nlp/semanticParser.js';
+
 import { AppsContext, AppsProvider, InnerApps, type AppInterface } from './appsContextApi';
-import AppLauncer from './AppLauncher/AppLauncer';
+import AppLauncher from './AppLauncher/AppLauncher';
 import { ConversationController } from './nlp/separated_mermaid_interpreter_parser';
 import { Logo } from './assets/Logo';
 import type { PathLike } from 'node:fs';
@@ -197,62 +197,7 @@ function App() {
   
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
-  /*const [messages, setMessages] = useState<Message[]>([
-    // These are all messages in the chat
-    // TODO: change content to be defined be the user ingut or parser's result
-      {
-      id: '1',
-      type: 'message',
-      content: 'Hello! I can help you relax and have fun. What would you like to do today?',
-      timestamp: new Date(Date.now() - 210000).toISOString(),
-      isUser: false,
-    },
-    {
-      id: '2',
-      type: 'audio',
-      content: 'Voice message',
-      timestamp: new Date(Date.now() - 180000).toISOString(),
-      isUser: true,
-      audioDuration: 4.2,
-    },
-    {
-      id: '3',
-      type: 'app-buttons',
-      content: 'Here are some great relaxation activities:',
-      timestamp: new Date(Date.now() - 150000).toISOString(),
-      isUser: false,
-      appsTypes: 'activities',
-    },
-    {
-      id: '4',
-      type: 'message',
-      content: 'I\'m also looking for some fun games to play',
-      timestamp: new Date(Date.now() - 120000).toISOString(),
-      isUser: true,
-    },
-    {
-      id: '5',
-      type: 'app-buttons',
-      content: 'Perfect! Here are some entertaining games:',
-      timestamp: new Date(Date.now() - 90000).toISOString(),
-      isUser: false,
-      appsTypes: 'games',
-    },
-    {
-      id: '6',
-      type: 'message',
-      content: 'What\'s your favorite activity?',
-      timestamp: new Date(Date.now() - 60000).toISOString(),
-      isUser: true,
-    },
-    {
-      id: '7',
-      type: 'message',
-      content: 'I think breathing exercises are great for starting the day, and painting is wonderful for creativity!',
-      timestamp: new Date(Date.now() - 30000).toISOString(),
-      isUser: false,
-    },
-  ]);*/
+
 
   const appsContext = useContext(AppsContext);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
@@ -379,63 +324,7 @@ function App() {
   
   
 
-  // const getResult = () => {
-  //   // This function assesses the stress level and defines a result of Stress Level in %
-  //   // TODO: combine with text generator from bucket
-  //   // TODO: Solve High stress immediate breathing app
     
-  //   if (!userInput.trim()) return; 
-    
-  //   let stepResult: ClassificationResult | ExtractionResult;
-    
-  //   if (currentStep === 'safety') {
-  //     stepResult = classifyTextSemantic(userInput, SAFETY_ASSESSMENT);
-  //     setResult(stepResult);
-      
-  //     // Determine next step based on safety result
-  //     const safetyResult = stepResult as ClassificationResult;
-  //     if (safetyResult.category === 'SAFE') {
-  //       setCurrentStep('location');
-  //     } else if (safetyResult.category === 'DANGER') {
-  //       setCurrentStep('complete'); // In real app, would trigger emergency protocol
-  //     } else {
-  //       // UNSURE - could ask clarification or proceed to location
-  //       setCurrentStep('location');
-  //     }
-      
-  //   } else if (currentStep === 'location') {
-  //     stepResult = extractInformationSemantic(userInput, LOCATION_EXTRACTION);
-  //     setResult(stepResult);
-      
-  //     // Move to stress assessment
-  //     setCurrentStep('stress');
-      
-  //   } else if (currentStep === 'stress') {
-  //     stepResult = classifyTextSemantic(userInput, STRESS_ASSESSMENT);
-  //     setResult(stepResult);
-      
-  //     // Check if user is highly stressed and trigger breathing exercise
-  //     const stressResult = stepResult as ClassificationResult;
-  //     if (stressResult.category === 'HIGH_STRESS') {
-  //       setShouldAutoLaunchApp(true);
-  //       console.log('High stress detected, setting breathing timer...');
-  //       // Launch breathing exercise immediately
-  //       const timer = setTimeout(() => {
-  //         console.log('Breathing timer fired, launching exercise...');
-  //         const breathingApp = appsContext?.find((subapps)=>(subapps.name==='breathing'));
-  //         setChosenApp(breathingApp);
-  //         setShowAppsLauncher(true);
-  //         console.log('setShowAppsLauncher(true) called');
-  //       }, 1500);
-  //       setAppsTimeout(timer);
-  //     }
-  //     setCurrentStep('complete');
-  //   }
-  //   console.log(`getResult finnished result is ${result?.type} cerrentStep is ${currentStep}`);
-  //   // Clear input for next question
-  //   setUserInput('');
-  // };
-  
   const handleSendMessage = (e:any) => {
     // This app recieves the e.target.value from the chat input and turns it into a message in the chat area
     if (!e.trim()) return; 

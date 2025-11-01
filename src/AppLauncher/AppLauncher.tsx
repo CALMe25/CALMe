@@ -6,7 +6,7 @@ interface AppLauncherProps {
   onClose: ()=>void;
 }
 
-export default function AppLauncer ({chosenApp, onClose}: AppLauncherProps) {
+export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
 
   return (
     <div

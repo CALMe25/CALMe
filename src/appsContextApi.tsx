@@ -1,6 +1,6 @@
 import { createContext, type ReactElement } from 'react';
-import BreathingExercise from './breathing_module/BreathingExercise';
-import MatchingGame from './MatchingGame';
+import BreathingExercise from './activities/breathing_module/BreathingExercise';
+import MatchingGame from './activities/MatchingGame';
 
 // Define the App interface as provided by the user
 // Using a union type for 'name' for strict type checking
@@ -72,7 +72,7 @@ export const InnerApps: AppInterface[] = [
     </g>
   </svg>
       ),
-      main: <MatchingGame onGameEnd={() => {}} />,
+      main: <MatchingGame/>,
       description: 'Test your memory and concentration with this classic matching game.',
     },
     {
@@ -127,8 +127,6 @@ export const InnerApps: AppInterface[] = [
 
 // Create the context with a default undefined value.
 export const AppsContext = createContext<AppInterface[] | undefined>(undefined);
-
-
 export const AppsProvider  = AppsContext.Provider
 export const AppsConsumer = AppsContext.Consumer;
 
