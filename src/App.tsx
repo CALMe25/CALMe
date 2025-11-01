@@ -9,7 +9,8 @@ import { MoreVertical, Settings, Accessibility } from "lucide-react"; // Icon TO
 import { toast } from "sonner"; // pop up notifications
 import './styles/globals.css';
 
-import { AppsContext, AppsProvider, InnerApps, type AppInterface } from './appsContextApi';
+import { AppsContext, AppsProvider } from './appsContextApi';
+import { InnerApps, type AppInterface } from './appsData';
 import AppLauncher from './AppLauncher/AppLauncher';
 import { ConversationController } from './nlp/separated_mermaid_interpreter_parser';
 import { Logo } from './assets/Logo';
@@ -668,7 +669,7 @@ function App() {
         }
         
         {showAppsLauncher && (
-        <AppLauncer chosenApp={chosenApp} onClose={closeAppLauncher} />
+        <AppLauncher chosenApp={chosenApp} onClose={closeAppLauncher} />
         )}
 
         {shouldAutoLaunchApp && (
