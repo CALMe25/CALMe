@@ -27,7 +27,7 @@ export const InnerApps: AppInterface[] = [
         //   <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
         // </svg>
       ),
-      main: BreathingExercise(),
+      main: <BreathingExercise />,
       description: 'A guided breathing exercise to help you relax and focus.',
     },
     {
@@ -52,22 +52,9 @@ export const InnerApps: AppInterface[] = [
       name: 'matching-cards',
       type: 'games',
       label: 'Matching Cards',
-      icon: (
-        // Example SVG icon for cards (playing cards)
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-    <g>
-      <rect x="2" y="4" width="4" height="6" rx="1" opacity="0.3"/>
-      <rect x="7" y="4" width="4" height="6" rx="1" fill="currentColor"/>
-      <rect x="12" y="4" width="4" height="6" rx="1" opacity="0.3"/>
-      <rect x="17" y="4" width="4" height="6" rx="1" fill="currentColor"/>
-      <rect x="2" y="12" width="4" height="6" rx="1" fill="currentColor"/>
-      <rect x="7" y="12" width="4" height="6" rx="1" opacity="0.3"/>
-      <rect x="12" y="12" width="4" height="6" rx="1" fill="currentColor"/>
-      <rect x="17" y="12" width="4" height="6" rx="1" opacity="0.3"/>
-    </g>
-  </svg>
-      ),
-      main: <MatchingGame />,
+      icon: undefined,
+      // pass the component itself so AppLauncher can create it and inject props like onGameEnd
+      main: MatchingGame,
       description: 'Test your memory and concentration with this classic matching game.',
     },
     {
