@@ -1,4 +1,5 @@
-import { InnerApps, type AppInterface } from './appsData';
+import { createContext, type ReactElement } from 'react';
+import { InnerApps } from './appsData';
 import BreathingExercise from './activities/breathing_module/BreathingExercise';
 import MatchingGame from './activities/MatchingGame';
 
@@ -18,7 +19,6 @@ export interface AppInterface {
 // interface AppsContextType {
 //   apps: App[];
 // }
-
 
 
 // Create the context with a default undefined value.
