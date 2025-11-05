@@ -37,7 +37,7 @@ function App() {
   const [appsTimeout, setAppsTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
 
-  const appsContext = useContext(AppsContext);
+  const appsContext = useContext(AppsContext) ?? InnerApps;
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -418,6 +418,35 @@ function App() {
         className="flex-1 overflow-y-auto px-4"
         >
           <div className="space-y-4 pb-4 mt-2">
+            {appsContext && appsContext.length > 0 && (
+              <div className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-2xl border border-border/60 bg-muted/30 p-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-sm font-medium text-muted-foreground">
+                    Quick Activities
+                  </h2>
+                  <span className="text-xs text-muted-foreground/80">
+                    Tap to launch
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {appsContext
+                    .filter(app =>
+                      ['breathing', 'stretching', 'matching-cards', 'sudoku'].includes(app.name)
+                    )
+                    .map((app, index) => (
+                      <Button
+                        key={app.name ?? index}
+                        onClick={() => handleAppLaunch(app)}
+                        className="flex h-auto flex-col items-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500"
+                        size="sm"
+                      >
+                        {app.icon}
+                        <span className="leading-tight text-white">{app.label}</span>
+                      </Button>
+                    ))}
+                </div>
+              </div>
+            )}
             {conversationHistory.map((message, index) => (
               <ChatMessage
                 key={index}
