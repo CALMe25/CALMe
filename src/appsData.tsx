@@ -4,11 +4,12 @@ import MatchingGame from './activities/MatchingGame';
 import StretchingRoutine from './activities/StretchingRoutine';
 import SudokuGame from './activities/SudokuGame';
 import DigitalCanvas from './activities/DigitalCanvas';
+import SnakeGame from './activities/SnakeGame';
 
 // Define the App interface as provided by the user
 // Using a union type for 'name' for strict type checking
 export interface AppInterface {
-  name: 'breathing' | 'stretching' | 'matching-cards' | 'sudoku' | 'puzzle' | 'paint';
+  name: 'breathing' | 'stretching' | 'matching-cards' | 'sudoku' | 'puzzle' | 'paint' | 'snake';
   type: 'activities' | 'games';
   label: string;
   // icon is a ReactElement that renders an SVG, e.g., <svg>...</svg>
@@ -106,5 +107,16 @@ export const InnerApps: AppInterface[] = [
       ),
       main: <DigitalCanvas />,
       description: 'A simple drawing application to unleash your creativity.',
+    },
+    {
+      name: 'snake',
+      type: 'games',
+      label: 'Snake Game',
+      icon: (
+        // Example SVG icon for snake
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-12h2v2h-2v-2zm0 4h2v6h-2v-6z"/></svg>
+      ),
+      main: <SnakeGame onGameEnd={() => {}} />,
+      description: 'A classic snake game to test your reflexes.',
     },
   ];

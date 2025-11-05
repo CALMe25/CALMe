@@ -42,7 +42,7 @@ function App() {
   const appsContext = useContext(AppsContext);
   const resolvedApps = appsContext ?? InnerApps;
   const quickActivityOrder = React.useMemo(
-    () => ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint'] as const,
+    () => ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint', 'snake'] as const,
     []
   );
   const scrollAreaRef = useRef<HTMLDivElement>(null);
