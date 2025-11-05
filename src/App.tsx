@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import './App.css'
 import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
@@ -37,8 +37,13 @@ function App() {
   const [appsTimeout, setAppsTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
 
-  const appsContext = useContext(AppsContext) ?? InnerApps;
+  const appsContext = useContext(AppsContext);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  const ACTIVITY_PROMPT_NODES = React.useMemo(
+    () => new Set(['activity_choice', 'activity_choice_clarify']),
+    []
+  );
 
   useEffect(() => {
     const initializeConversation = async () => {
@@ -52,24 +57,29 @@ function App() {
       }
       try {
         const initialNode = conversationController.getCurrentNode();
+        const activityPrompt = ACTIVITY_PROMPT_NODES.has(initialNode.id);
         setConversationHistory([{
           id: Date.now().toString(),
-          type: 'message',
+          type: activityPrompt ? 'app-buttons' : 'message',
           content: initialNode.content || "Hello! I'm here with you.",
           timestamp: new Date().toISOString(),
           isUser: false,
-          nodeId: initialNode.id
+          nodeId: initialNode.id,
+          appsTypes: activityPrompt ? 'activities' : undefined,
         }]);
         setIsInitialized(true);
       } catch (error) {
         console.error('Error initializing conversation:', error);
+        const fallbackId = 'start';
+        const activityPrompt = ACTIVITY_PROMPT_NODES.has(fallbackId);
         setConversationHistory([{
           id: Date.now().toString(),
-          type: 'message',
+          type: activityPrompt ? 'app-buttons' : 'message',
           content: "Welcome to CALMe. I'm here to support you.",
           timestamp: new Date().toISOString(),
           isUser: false,
-          nodeId: 'start'
+          nodeId: fallbackId,
+          appsTypes: activityPrompt ? 'activities' : undefined,
         }]);
         setIsInitialized(true);
       }
@@ -105,13 +115,15 @@ function App() {
       const stepResult = conversationController.runParser(parserType, userInput);
       const { nextNode, activityTrigger } = conversationController.processParserOutput(stepResult);
 
+      const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
       const newMessage: Message = {
         id: Date.now().toString(),
-        type: 'message',
+        type: activityPrompt ? 'app-buttons' : 'message',
         content: nextNode.content || "How can I help you?",
         timestamp: new Date().toISOString(),
         isUser: false,
-        nodeId: nextNode.id
+        nodeId: nextNode.id,
+        appsTypes: activityPrompt ? 'activities' : undefined,
       };
 
       setConversationHistory(prev => [...prev, newMessage]);
@@ -225,13 +237,15 @@ function App() {
         conversationController.moveToNode(activityReturnNode);
         const returnNode = conversationController.getCurrentNode();
 
+        const activityPrompt = ACTIVITY_PROMPT_NODES.has(returnNode.id);
         const returnMessage: Message = {
           id: Date.now().toString(),
-          type: 'message',
+          type: activityPrompt ? 'app-buttons' : 'message',
           content: returnNode.content || "Welcome back! How was that?",
           timestamp: new Date().toISOString(),
           isUser: false,
-          nodeId: returnNode.id
+          nodeId: returnNode.id,
+          appsTypes: activityPrompt ? 'activities' : undefined,
         };
 
         setConversationHistory(prev => [...prev, returnMessage]);
@@ -418,35 +432,6 @@ function App() {
         className="flex-1 overflow-y-auto px-4"
         >
           <div className="space-y-4 pb-4 mt-2">
-            {appsContext && appsContext.length > 0 && (
-              <div className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-2xl border border-border/60 bg-muted/30 p-4">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-sm font-medium text-muted-foreground">
-                    Quick Activities
-                  </h2>
-                  <span className="text-xs text-muted-foreground/80">
-                    Tap to launch
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {appsContext
-                    .filter(app =>
-                      ['breathing', 'stretching', 'matching-cards', 'sudoku'].includes(app.name)
-                    )
-                    .map((app, index) => (
-                      <Button
-                        key={app.name ?? index}
-                        onClick={() => handleAppLaunch(app)}
-                        className="flex h-auto flex-col items-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500"
-                        size="sm"
-                      >
-                        {app.icon}
-                        <span className="leading-tight text-white">{app.label}</span>
-                      </Button>
-                    ))}
-                </div>
-              </div>
-            )}
             {conversationHistory.map((message, index) => (
               <ChatMessage
                 key={index}
