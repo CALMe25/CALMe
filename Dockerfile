@@ -1,0 +1,71 @@
+# Dockerfile for CALMe PWA
+# Multi-stage build for optimized image
+
+# Global args for all stages
+ARG NODE_VERSION=22
+ARG NODE_TAG=alpine
+ARG NGINX_VERSION=1.29
+ARG NGINX_TAG=alpine-slim
+
+# Build stage
+FROM node:${NODE_VERSION}-${NODE_TAG} AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Add package files
+COPY package*.json ./
+
+# Install all dependencies (including dev dependencies for build)
+RUN npm ci --silent
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN npx vite build
+
+# Server stage
+FROM nginx:${NGINX_VERSION}-${NGINX_TAG} AS server
+
+# User/group variables
+ARG NGINX_USER=nginx-user
+ARG NGINX_GROUP=nginx-group
+ARG NGINX_UID=1001
+ARG NGINX_GID=1001
+
+# Install security updates
+RUN apk upgrade --no-cache
+
+# Create nginx user for security
+RUN addgroup -g ${NGINX_GID} -S ${NGINX_GROUP} && \
+    adduser -S -D -H -u ${NGINX_UID} -h /var/cache/nginx -s /sbin/nologin -G ${NGINX_GROUP} -g ${NGINX_GROUP} ${NGINX_USER}
+
+# Copy built assets from builder stage
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Set proper permissions
+RUN chown -R ${NGINX_USER}:${NGINX_GROUP} /usr/share/nginx/html && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /var/cache/nginx && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /var/log/nginx && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /etc/nginx/conf.d
+
+# Create pid directory and set permissions
+RUN mkdir -p /var/run/nginx && \
+    chown -R ${NGINX_USER}:${NGINX_GROUP} /var/run/nginx
+
+# Switch to non-root user
+USER ${NGINX_USER}
+
+# Expose port
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/ || exit 1
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

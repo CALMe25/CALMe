@@ -1,0 +1,70 @@
+---
+name: CI
+'on':
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+env:
+  REGISTRY: ghcr.io
+  IMAGE_TITLE: calme
+permissions:
+  contents: read
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      # 1) Checkout repo for local build context
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # 2) Docker Buildx prerequisites
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      # 3) Build image locally (no push)
+      - name: Build image with Bake
+        uses: docker/bake-action@v6
+        with:
+          files: |
+            docker-bake.hcl
+            docker-bake.override.hcl
+          targets: local
+          load: true
+          set: |
+            *.cache-from=type=gha
+            *.cache-to=type=gha,mode=max
+            *.tags=ghcr.io/calme25/calme:latest
+      # 4) Start container with compose
+      - name: Start container
+        run: docker compose up -d
+      # 5) Wait for container to be ready
+      - name: Wait for container startup
+        run: |
+          echo "Waiting for container to start..."
+          timeout 60s bash -c 'until docker compose ps calme | grep -q "Up"; do sleep 2; done'
+          echo "Container is up, waiting for health check..."
+          timeout 60s bash -c 'until docker compose ps calme | grep -q "healthy"; do sleep 2; done'
+          echo "Container is healthy!"
+      # 6) Run health check tests
+      - name: Test application health
+        run: |
+          # Test root endpoint
+          echo "Testing root endpoint..."
+          curl -f http://localhost:8080/ || exit 1
+          echo "Root endpoint OK"
+
+          # Test health endpoint
+          echo "Testing health endpoint..."
+          curl -f http://localhost:8080/health || exit 1
+          echo "Health endpoint OK"
+
+          echo "All health checks passed!"
+      # 7) Show container logs for debugging
+      - name: Show container logs
+        if: always()
+        run: docker compose logs calme
+      # 8) Clean up
+      - name: Stop and remove containers
+        if: always()
+        run: docker compose down

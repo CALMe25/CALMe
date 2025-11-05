@@ -1,0 +1,8 @@
+---
+name: calme
+services:
+  calme:
+    image: ghcr.io/calme25/calme:latest
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
