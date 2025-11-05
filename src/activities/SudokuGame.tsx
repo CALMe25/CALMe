@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 
 type CellValue = number | null;
 type Grid = CellValue[][];
+type Difficulty = 'easy' | 'medium' | 'hard';
 
-// Simple Sudoku puzzle generator (easy difficulty)
-const generatePuzzle = (): { puzzle: Grid; solution: Grid } => {
-  // Pre-made easy puzzle for demo
-  const solution: Grid = [
+// Multiple solution templates for variety
+const solutionTemplates: Grid[] = [
+  [
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -16,16 +16,55 @@ const generatePuzzle = (): { puzzle: Grid; solution: Grid } => {
     [9, 6, 1, 5, 3, 7, 2, 8, 4],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [3, 4, 5, 2, 8, 6, 1, 7, 9],
-  ];
+  ],
+  [
+    [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    [4, 5, 6, 7, 8, 9, 1, 2, 3],
+    [7, 8, 9, 1, 2, 3, 4, 5, 6],
+    [2, 1, 4, 3, 6, 5, 8, 9, 7],
+    [3, 6, 5, 8, 9, 7, 2, 1, 4],
+    [8, 9, 7, 2, 1, 4, 3, 6, 5],
+    [5, 3, 1, 6, 4, 2, 9, 7, 8],
+    [6, 4, 2, 9, 7, 8, 5, 3, 1],
+    [9, 7, 8, 5, 3, 1, 6, 4, 2],
+  ],
+  [
+    [8, 2, 7, 1, 5, 4, 3, 9, 6],
+    [9, 6, 5, 3, 2, 7, 1, 4, 8],
+    [3, 4, 1, 6, 8, 9, 7, 5, 2],
+    [5, 9, 3, 4, 6, 8, 2, 7, 1],
+    [4, 7, 2, 5, 1, 3, 6, 8, 9],
+    [6, 1, 8, 9, 7, 2, 4, 3, 5],
+    [7, 8, 6, 2, 3, 5, 9, 1, 4],
+    [1, 5, 4, 7, 9, 6, 8, 2, 3],
+    [2, 3, 9, 8, 4, 1, 5, 6, 7],
+  ],
+];
 
-  // Create puzzle by removing some numbers
+const generatePuzzle = (difficulty: Difficulty): { puzzle: Grid; solution: Grid } => {
+  // Pick a random solution template
+  const solution = solutionTemplates[Math.floor(Math.random() * solutionTemplates.length)].map(row => [...row]);
+
+  // Create puzzle by removing cells based on difficulty
   const puzzle: Grid = solution.map(row => [...row]);
-  const cellsToRemove = 40; // Remove 40 cells for easy difficulty
 
-  for (let i = 0; i < cellsToRemove; i++) {
+  const cellsToRemove = {
+    easy: 35,    // 35 removed = 46 given
+    medium: 45,  // 45 removed = 36 given
+    hard: 55,    // 55 removed = 26 given
+  }[difficulty];
+
+  const removed = new Set<string>();
+
+  while (removed.size < cellsToRemove) {
     const row = Math.floor(Math.random() * 9);
     const col = Math.floor(Math.random() * 9);
-    puzzle[row][col] = null;
+    const key = `${row},${col}`;
+
+    if (!removed.has(key)) {
+      puzzle[row][col] = null;
+      removed.add(key);
+    }
   }
 
   return { puzzle, solution };
@@ -36,7 +75,8 @@ interface SudokuGameProps {
 }
 
 export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
-  const [{ puzzle, solution }] = useState(() => generatePuzzle());
+  const [difficulty, setDifficulty] = useState<Difficulty>('easy');
+  const [{ puzzle, solution }, setPuzzleData] = useState(() => generatePuzzle('easy'));
   const [grid, setGrid] = useState<Grid>(puzzle.map(row => [...row]));
   const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
   const [errors, setErrors] = useState<Set<string>>(new Set());
@@ -86,12 +126,15 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     }
   };
 
-  const resetGame = () => {
-    const { puzzle: newPuzzle, solution: newSolution } = generatePuzzle();
-    setGrid(newPuzzle.map(row => [...row]));
+  const startNewGame = (newDifficulty?: Difficulty) => {
+    const diff = newDifficulty || difficulty;
+    const newPuzzleData = generatePuzzle(diff);
+    setPuzzleData(newPuzzleData);
+    setGrid(newPuzzleData.puzzle.map(row => [...row]));
     setSelectedCell(null);
     setErrors(new Set());
     setIsComplete(false);
+    if (newDifficulty) setDifficulty(newDifficulty);
   };
 
   const getCellClass = (row: number, col: number) => {
@@ -99,39 +142,77 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     const isSelected = selectedCell?.[0] === row && selectedCell?.[1] === col;
     const hasError = errors.has(`${row},${col}`);
 
-    let className = 'w-12 h-12 flex items-center justify-center border text-lg font-semibold cursor-pointer transition-colors ';
+    let className = 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-colors ';
 
     if (isOriginal) {
-      className += 'bg-gray-700 text-white font-bold cursor-not-allowed ';
+      className += 'bg-slate-700 text-sky-200 font-bold cursor-not-allowed ';
     } else if (isSelected) {
-      className += 'bg-sky-500 text-white ';
+      className += 'bg-sky-500 text-white ring-1 sm:ring-2 ring-sky-300 ';
     } else if (hasError) {
-      className += 'bg-red-500/30 text-red-300 ';
+      className += 'bg-red-600/40 text-red-200 ';
     } else {
-      className += 'bg-gray-800 text-sky-300 hover:bg-gray-700 ';
+      className += 'bg-slate-800 text-emerald-300 hover:bg-slate-700 ';
     }
 
-    // Thicker borders for 3x3 boxes
-    if (col % 3 === 0) className += 'border-l-2 ';
-    if (row % 3 === 0) className += 'border-t-2 ';
-    if (col === 8) className += 'border-r-2 ';
-    if (row === 8) className += 'border-b-2 ';
+    // Thicker borders for 3x3 boxes with better visibility
+    if (col % 3 === 0) className += 'border-l-2 sm:border-l-3 md:border-l-4 border-slate-400 ';
+    else className += 'border-l border-slate-600 ';
+
+    if (row % 3 === 0) className += 'border-t-2 sm:border-t-3 md:border-t-4 border-slate-400 ';
+    else className += 'border-t border-slate-600 ';
+
+    if (col === 8) className += 'border-r-2 sm:border-r-3 md:border-r-4 border-slate-400 ';
+    if (row === 8) className += 'border-b-2 sm:border-b-3 md:border-b-4 border-slate-400 ';
 
     return className;
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 text-white h-full">
-      <h2 className="text-3xl font-bold text-sky-400 mb-6">Sudoku</h2>
+    <div className="flex flex-col items-center p-2 md:p-4 text-white w-full max-w-2xl mx-auto">
+      <h2 className="text-xl md:text-2xl font-bold text-sky-400 mb-2">Sudoku</h2>
+
+      {/* Difficulty Selector */}
+      <div className="mb-2 flex gap-1.5 md:gap-2">
+        <button
+          onClick={() => startNewGame('easy')}
+          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${
+            difficulty === 'easy'
+              ? 'bg-green-500 text-white'
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          Easy
+        </button>
+        <button
+          onClick={() => startNewGame('medium')}
+          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${
+            difficulty === 'medium'
+              ? 'bg-yellow-500 text-white'
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          Medium
+        </button>
+        <button
+          onClick={() => startNewGame('hard')}
+          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${
+            difficulty === 'hard'
+              ? 'bg-red-500 text-white'
+              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+          }`}
+        >
+          Hard
+        </button>
+      </div>
 
       {isComplete && (
-        <div className="mb-4 px-6 py-3 bg-green-500 text-white rounded-lg text-lg font-semibold">
+        <div className="mb-2 px-3 py-1.5 bg-green-500 text-white rounded text-xs md:text-base font-semibold animate-pulse">
           🎉 Congratulations! You solved it!
         </div>
       )}
 
       {/* Sudoku Grid */}
-      <div className="mb-6 inline-block border-2 border-gray-600">
+      <div className="mb-3 inline-block border-2 md:border-4 border-slate-400 rounded-sm shadow-xl">
         {grid.map((row, rowIndex) => (
           <div key={rowIndex} className="flex">
             {row.map((cell, colIndex) => (
@@ -148,12 +229,12 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       </div>
 
       {/* Number Pad */}
-      <div className="grid grid-cols-5 gap-2 mb-6 max-w-md">
+      <div className="grid grid-cols-5 gap-1 sm:gap-1.5 md:gap-2 mb-3">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
           <button
             key={num}
             onClick={() => handleNumberInput(num)}
-            className="w-12 h-12 bg-indigo-500 hover:bg-indigo-600 rounded-lg text-xl font-bold transition-colors"
+            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-base sm:text-lg md:text-xl font-bold transition-colors shadow-sm hover:shadow-md"
             disabled={!selectedCell}
           >
             {num}
@@ -161,7 +242,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
         ))}
         <button
           onClick={() => handleNumberInput(null)}
-          className="w-12 h-12 bg-red-500 hover:bg-red-600 rounded-lg text-sm font-semibold transition-colors"
+          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-red-500 hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-xs sm:text-sm font-semibold transition-colors shadow-sm hover:shadow-md"
           disabled={!selectedCell}
         >
           Clear
@@ -169,26 +250,29 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       </div>
 
       {/* Control Buttons */}
-      <div className="flex gap-4">
+      <div className="flex gap-2 mb-3">
         <button
-          onClick={resetGame}
-          className="px-6 py-2 bg-indigo-500 hover:bg-indigo-600 rounded-lg font-semibold transition-colors"
+          onClick={() => startNewGame()}
+          className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-indigo-500 hover:bg-indigo-600 rounded font-semibold transition-colors shadow-sm"
         >
           New Game
         </button>
         {onGameEnd && (
           <button
             onClick={onGameEnd}
-            className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold transition-colors"
+            className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-gray-700 hover:bg-gray-600 rounded font-semibold transition-colors shadow-sm"
           >
             Exit
           </button>
         )}
       </div>
 
-      <p className="mt-6 text-gray-400 text-sm text-center max-w-md">
-        Click a cell and use the number pad to fill it in. Original numbers cannot be changed.
-      </p>
+      {/* Legend */}
+      <div className="text-xs md:text-sm text-gray-400 space-y-0.5 text-center px-2 max-w-md">
+        <p><span className="text-sky-200 font-bold">Blue:</span> Original</p>
+        <p><span className="text-emerald-300">Green:</span> Your inputs</p>
+        <p><span className="text-red-200">Red:</span> Errors</p>
+      </div>
     </div>
   );
 }

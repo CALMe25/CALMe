@@ -10,13 +10,12 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
 
   return (
     <div
-      className="relative w-full h-full pb-19 flex items-center justify-center overflow-hidden bg-gray-900" // Dark background for the display area
-
+      className="relative w-full h-full pb-19 overflow-y-auto overflow-x-hidden bg-gray-900" // Dark background with scroll
     >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute top-4 right-4 z-20 p-2 rounded-full bg-gray-700/50 text-white hover:bg-gray-600/70 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-950 transition-colors duration-200"
+          className="absolute top-4 right-4 z-50 p-2 rounded-full bg-gray-700/50 text-white hover:bg-gray-600/70 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-gray-950 transition-colors duration-200"
         >
           {/* SVG for the 'X' icon */}
           <svg
@@ -31,11 +30,7 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
           </svg>
         </button>
       <div
-        className={`flex items-center justify-center p-4 px-4`}
-        style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
-        }}
+        className="min-h-full w-full flex items-center justify-center p-4"
       >
         {chosenApp ? (
           React.cloneElement(chosenApp.main, { onGameEnd: onClose })

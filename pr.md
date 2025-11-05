@@ -65,22 +65,31 @@ This PR fixes broken activity launcher buttons and upgrades their visual design 
 **Features:**
 
 - 9x9 Sudoku grid with pre-filled numbers
+- Three difficulty levels (Easy, Medium, Hard) with dynamic puzzle generation
+- Multiple solution templates for variety
 - Interactive number pad (1-9 + Clear)
 - Click to select cells and fill in numbers
-- Visual distinction between original and user-filled cells
+- High contrast color scheme:
+  - Blue cells (slate-700) for original numbers
+  - Green text (emerald-300) for user inputs
+  - Red background (red-600/40) for incorrect entries
+- Thicker borders (border-2/3/4) separating 3x3 boxes for better visibility
 - Error highlighting for incorrect entries
 - Completion detection with congratulations message
 - New Game button to generate fresh puzzles
 - Exit button to close game
+- Fully responsive design with Tailwind breakpoints (sm/md)
+- Compact legend for color coding
 
 **Files Added:**
 
-- `src/activities/SudokuGame.tsx`: New Sudoku game component
+- `src/activities/SudokuGame.tsx`: New Sudoku game component (279 lines)
 
 **Files Modified:**
 
 - `src/appsData.tsx`: Add SudokuGame with grid icon
-- `src/App.tsx`: Include sudoku in activity buttons
+- `src/App.tsx`: Include sudoku in activity buttons and hide chat when app launches
+- `src/AppLauncher/AppLauncher.tsx`: Add overflow-y-auto for scrollable apps
 
 ## Testing
 
@@ -90,6 +99,11 @@ All features have been tested and verified:
 - ✅ Stretching Routine works with all 5 exercises, timers, and navigation
 - ✅ Matching Cards game launches and is fully playable
 - ✅ Sudoku game generates puzzles, accepts input, and validates solutions
+- ✅ Sudoku difficulty levels (Easy/Medium/Hard) work correctly with appropriate cell counts
+- ✅ Sudoku responsive design works at different zoom levels and screen sizes
+- ✅ Chat interface hides when apps are launched for full-screen experience
+- ✅ Close (X) button appears in top-right corner of launched apps
+- ✅ Apps are scrollable when content exceeds viewport height
 - ✅ Button styling matches applauncher design with 2x2 grid layout
 - ✅ Icons display properly for all 4 activities
 - ✅ Hover effects work as expected
@@ -115,11 +129,12 @@ Beautiful indigo buttons in 2x2 grid with icons for 4 activities:
 ### Files Modified/Added
 
 ```text
-src/App.tsx                           | ~30 lines modified
-src/appsData.tsx                      | ~40 lines modified
-src/activities/StretchingRoutine.tsx  | 227 lines added
-src/activities/SudokuGame.tsx         | 220 lines added
-4 files changed, ~500 insertions(+), ~20 deletions(-)
+src/App.tsx                            | ~35 lines modified
+src/appsData.tsx                       | ~40 lines modified
+src/AppLauncher/AppLauncher.tsx        | ~10 lines modified
+src/activities/StretchingRoutine.tsx   | 220 lines added
+src/activities/SudokuGame.tsx          | 279 lines added
+5 files changed, ~520 insertions(+), ~25 deletions(-)
 ```
 
 ### Commits
@@ -127,6 +142,7 @@ src/activities/SudokuGame.tsx         | 220 lines added
 1. `fix: resolve app launcher button functionality by fixing context scope`
 2. `style: update activity buttons to match applauncher design`
 3. `feat: implement stretching routine and sudoku game activities`
+4. `refactor: improve sudoku responsive design and enhance app launcher UX`
 
 ## Breaking Changes
 

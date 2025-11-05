@@ -696,7 +696,8 @@ function App() {
             </div>
           )}
         {/* Fixed Footer - Chat Input */}
-        <div 
+        {!showAppsLauncher && (
+        <div
         // className="flex-shrink-0 fixed z-1000 bottom-0 left-0 border-t bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/80" //new
         className="fixed z-1000 bottom-0 flex flex-col w-full mx-auto bg-background border-t self-center " //
         >
@@ -707,6 +708,7 @@ function App() {
             // onAddAttachment={handleAddAttachment}
           />
         </div>
+        )}
         </div>
         </AppsProvider>
       {/* </Theme> */}
