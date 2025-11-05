@@ -397,7 +397,6 @@ function App() {
         <div 
         className="flex flex-col h-screen w-full mx-0 bg-background border-x border-border"
         >
-        {!showAppsLauncher && (
         <header 
         className="flex-shrink-0 flex z-1000 items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/80"
         >
@@ -431,7 +430,6 @@ function App() {
             </Button>
           </div>
         </header>
-        )}
 
         {!showAppsLauncher &&
         <ScrollArea ref={scrollAreaRef} 
