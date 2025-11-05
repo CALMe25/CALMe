@@ -12,6 +12,7 @@ import { AppsContext, AppsProvider, InnerApps, type AppInterface, quickActivityO
 import AppLauncer from './AppLauncher/AppLauncer';
 import { ConversationController } from './conversation/ConversationController';
 import { AlertTimer } from './components/AlertTimer';
+import { DarkModeToggle } from './components/DarkModeToggle';
 
 interface Message {
   id: string;
@@ -419,6 +420,7 @@ function App() {
             <Button variant="ghost" size="sm" className="h-8 w-8" onClick={handleAccessibility}>
               <Accessibility className="w-4 h-4" />
             </Button>
+            <DarkModeToggle />
             <Button variant="ghost" size="sm" className="h-8 w-8" onClick={handleSettings}>
               <Settings className="w-4 h-4" />
             </Button>
