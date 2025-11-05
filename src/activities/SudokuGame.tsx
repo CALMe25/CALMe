@@ -145,62 +145,47 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     let className = 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-colors ';
 
     if (isOriginal) {
-      className += 'bg-slate-700 text-sky-200 font-bold cursor-not-allowed ';
+      className += 'bg-secondary text-primary font-bold cursor-not-allowed ';
     } else if (isSelected) {
-      className += 'bg-sky-500 text-white ring-1 sm:ring-2 ring-sky-300 ';
+      className += 'bg-primary text-primary-foreground ring-1 sm:ring-2 ring-primary ';
     } else if (hasError) {
-      className += 'bg-red-600/40 text-red-200 ';
+      className += 'bg-destructive/40 text-destructive-foreground ';
     } else {
-      className += 'bg-slate-800 text-emerald-300 hover:bg-slate-700 ';
+      className += 'bg-card text-accent-foreground hover:bg-accent ';
     }
 
     // Thicker borders for 3x3 boxes with better visibility
-    if (col % 3 === 0) className += 'border-l-2 sm:border-l-3 md:border-l-4 border-slate-400 ';
-    else className += 'border-l border-slate-600 ';
+    if (col % 3 === 0) className += 'border-l-2 sm:border-l-3 md:border-l-4 border-border ';
+    else className += 'border-l border-border ';
 
-    if (row % 3 === 0) className += 'border-t-2 sm:border-t-3 md:border-t-4 border-slate-400 ';
-    else className += 'border-t border-slate-600 ';
+    if (row % 3 === 0) className += 'border-t-2 sm:border-t-3 md:border-t-4 border-border ';
+    else className += 'border-t border-border ';
 
-    if (col === 8) className += 'border-r-2 sm:border-r-3 md:border-r-4 border-slate-400 ';
-    if (row === 8) className += 'border-b-2 sm:border-b-3 md:border-b-4 border-slate-400 ';
+    if (col === 8) className += 'border-r-2 sm:border-r-3 md:border-r-4 border-border ';
+    if (row === 8) className += 'border-b-2 sm:border-b-3 md:border-b-4 border-border ';
 
     return className;
   };
 
   return (
-    <div className="flex flex-col items-center p-2 md:p-4 text-white w-full max-w-2xl mx-auto h-full max-h-screen overflow-y-auto">
-      <h2 className="text-xl md:text-2xl font-bold text-sky-400 mb-2">Sudoku</h2>
+    <div className="flex flex-col items-center p-2 md:p-4 bg-background text-foreground w-full max-w-2xl mx-auto h-full max-h-screen overflow-y-auto">
+      <h2 className="text-xl md:text-2xl font-bold text-primary mb-2">Sudoku</h2>
 
       {/* Difficulty Selector */}
       <div className="mb-2 flex gap-1.5 md:gap-2">
         <button
           onClick={() => startNewGame('easy')}
-          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${
-            difficulty === 'easy'
-              ? 'bg-green-500 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
-        >
+          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'easy' ? 'bg-green-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
           Easy
         </button>
         <button
           onClick={() => startNewGame('medium')}
-          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${
-            difficulty === 'medium'
-              ? 'bg-yellow-500 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
-        >
+          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'medium' ? 'bg-yellow-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
           Medium
         </button>
         <button
           onClick={() => startNewGame('hard')}
-          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${
-            difficulty === 'hard'
-              ? 'bg-red-500 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-          }`}
-        >
+          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'hard' ? 'bg-red-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
           Hard
         </button>
       </div>
@@ -212,7 +197,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       )}
 
       {/* Sudoku Grid */}
-      <div className="mb-3 inline-block border-2 md:border-4 border-slate-400 rounded-sm shadow-xl">
+      <div className="mb-3 inline-block border-2 md:border-4 border-border rounded-sm shadow-xl">
         {grid.map((row, rowIndex) => (
           <div key={rowIndex} className="flex">
             {row.map((cell, colIndex) => (
@@ -234,7 +219,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           <button
             key={num}
             onClick={() => handleNumberInput(num)}
-            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-base sm:text-lg md:text-xl font-bold transition-colors shadow-sm hover:shadow-md"
+            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-primary text-primary-foreground hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed rounded text-base sm:text-lg md:text-xl font-bold transition-colors shadow-sm hover:shadow-md"
             disabled={!selectedCell}
           >
             {num}
@@ -242,7 +227,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
         ))}
         <button
           onClick={() => handleNumberInput(null)}
-          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-red-500 hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed rounded text-xs sm:text-sm font-semibold transition-colors shadow-sm hover:shadow-md"
+          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-destructive text-destructive-foreground hover:bg-destructive/80 disabled:opacity-50 disabled:cursor-not-allowed rounded text-xs sm:text-sm font-semibold transition-colors shadow-sm hover:shadow-md"
           disabled={!selectedCell}
         >
           Clear
@@ -253,14 +238,14 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => startNewGame()}
-          className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-indigo-500 hover:bg-indigo-600 rounded font-semibold transition-colors shadow-sm"
+          className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-primary text-primary-foreground hover:bg-primary/80 rounded font-semibold transition-colors shadow-sm"
         >
           New Game
         </button>
         {onGameEnd && (
           <button
             onClick={onGameEnd}
-            className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-gray-700 hover:bg-gray-600 rounded font-semibold transition-colors shadow-sm"
+            className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-secondary text-secondary-foreground hover:bg-accent rounded font-semibold transition-colors shadow-sm"
           >
             Exit
           </button>
@@ -268,10 +253,10 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       </div>
 
       {/* Legend */}
-      <div className="text-xs md:text-sm text-gray-400 space-y-0.5 text-center px-2 max-w-md">
-        <p><span className="text-sky-200 font-bold">Blue:</span> Original</p>
-        <p><span className="text-emerald-300">Green:</span> Your inputs</p>
-        <p><span className="text-red-200">Red:</span> Errors</p>
+      <div className="text-xs md:text-sm text-muted-foreground space-y-0.5 text-center px-2 max-w-md">
+        <p><span className="text-primary font-bold">Blue:</span> Original</p>
+        <p><span className="text-accent-foreground">Green:</span> Your inputs</p>
+        <p><span className="text-destructive-foreground">Red:</span> Errors</p>
       </div>
     </div>
   );

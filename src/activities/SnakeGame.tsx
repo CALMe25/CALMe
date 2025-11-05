@@ -100,16 +100,18 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const isDarkMode = document.documentElement.classList.contains('dark');
+
     // Clear canvas
-    ctx.fillStyle = '#2d3748';
+    ctx.fillStyle = isDarkMode ? '#2d3748' : '#f0f0f0';
     ctx.fillRect(0, 0, canvasSize, canvasSize);
 
     // Draw food
-    ctx.fillStyle = '#f56565';
+    ctx.fillStyle = isDarkMode ? '#f56565' : '#c53030';
     ctx.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
 
     // Draw snake
-    ctx.fillStyle = '#68d391';
+    ctx.fillStyle = isDarkMode ? '#68d391' : '#4a5568';
     snake.forEach(segment => {
       ctx.fillRect(segment.x * snakeSize, segment.y * snakeSize, snakeSize, snakeSize);
     });
@@ -123,27 +125,27 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', padding: '20px', color: 'white' }}>
-      <h1 style={{ marginBottom: '20px' }}>Snake Game</h1>
+    <div className="flex flex-col items-center justify-center h-full p-5 bg-background text-foreground">
+      <h1 className="text-2xl font-bold mb-5">Snake Game</h1>
       <canvas
         ref={canvasRef}
         width={canvasSize}
         height={canvasSize}
-        style={{ border: '1px solid #ccc', maxWidth: '100%' }}
+        className="border border-border max-w-full"
       />
-      <div style={{ marginTop: '20px' }}>
-        <button onClick={() => setDirection({ x: 0, y: -1 })} style={{ padding: '10px 20px', fontSize: '1.2rem' }}>↑</button>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', marginTop: '10px' }}>
-          <button onClick={() => setDirection({ x: -1, y: 0 })} style={{ padding: '10px 20px', fontSize: '1.2rem' }}>←</button>
-          <button onClick={() => setDirection({ x: 1, y: 0 })} style={{ padding: '10px 20px', fontSize: '1.2rem' }}>→</button>
+      <div className="mt-5">
+        <button onClick={() => setDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>
+        <div className="flex justify-center gap-5 mt-2.5">
+          <button onClick={() => setDirection({ x: -1, y: 0 })} className="p-3 text-2xl">←</button>
+          <button onClick={() => setDirection({ x: 1, y: 0 })} className="p-3 text-2xl">→</button>
         </div>
-        <button style={{ marginTop: '10px', padding: '10px 20px', fontSize: '1.2rem' }} onClick={() => setDirection({ x: 0, y: 1 })}>↓</button>
+        <button className="mt-2.5 p-3 text-2xl" onClick={() => setDirection({ x: 0, y: 1 })}>↓</button>
       </div>
       {gameOver && (
-        <div style={{ marginTop: '20px' }}>
-          <h2>Game Over</h2>
-          <button onClick={restartGame} style={{ marginRight: '10px', padding: '10px 20px', fontSize: '1.2rem' }}>Restart</button>
-          {onGameEnd && <button onClick={onGameEnd} style={{ padding: '10px 20px', fontSize: '1.2rem' }}>Exit</button>}
+        <div className="mt-5 text-center">
+          <h2 className="text-xl font-bold">Game Over</h2>
+          <button onClick={restartGame} className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md">Restart</button>
+          {onGameEnd && <button onClick={onGameEnd} className="p-3 text-lg bg-secondary text-secondary-foreground rounded-md">Exit</button>}
         </div>
       )}
     </div>

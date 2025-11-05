@@ -1,5 +1,3 @@
-// src/games/MatchingGame.tsx
-
 import React, { useState, useEffect } from 'react';
 import calmeLogo from '../assets/calme-logo.svg';
 
@@ -109,13 +107,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start h-full max-h-screen bg-gray-100 p-2 sm:p-4 font-inter overflow-y-auto">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-4 sm:mb-6 md:mb-8 rounded-lg p-2 sm:p-3 shadow-md bg-white">
+    <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6 md:mb-8 rounded-lg p-2 sm:p-3 shadow-md bg-card">
         Matching Game
       </h2>
 
       {/* Responsive grid: 2 cols on mobile, 3 on tablet, 4 on desktop */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 md:gap-10 p-4 bg-white rounded-xl shadow-lg border border-blue-200 w-full max-w-full"  style={{ maxWidth: '100%' }}>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 md:gap-10 p-4 bg-card rounded-xl shadow-lg border border-border w-full max-w-full"  style={{ maxWidth: '100%' }}>
         {cards.map(card => (
           <div
             key={card.id}
@@ -125,7 +123,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               rounded-xl shadow-md cursor-pointer
               text-5xl sm:text-6xl md:text-7xl font-bold
               transition-all duration-300 ease-in-out
-              ${card.isMatched ? 'bg-green-300 opacity-70 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}
+              ${card.isMatched ? 'bg-green-300 dark:bg-green-700 opacity-70 cursor-not-allowed' : 'bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-700'}
 
               ${isChecking && !card.isFlipped && !card.isMatched ? 'cursor-not-allowed' : '' + " relative"}
             `}
@@ -141,7 +139,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               className={`
                 absolute w-full h-full rounded-xl flex items-center justify-center
                 transition-transform duration-300 ease-in-out
-                ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-white text-gray-800' : 'transform rotate-y-180 bg-white'}
+                ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-card text-foreground' : 'transform rotate-y-180 bg-card'}
               `}
               style={{
                 transformStyle: 'preserve-3d',
@@ -156,7 +154,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               className={`
                 absolute w-full h-full rounded-xl flex items-center justify-center
                 backface-hidden
-                ${card.isFlipped || card.isMatched ? 'transform rotate-y-180 bg-white' : 'transform rotate-y-0 bg-white'}
+                ${card.isFlipped || card.isMatched ? 'transform rotate-y-180 bg-card' : 'transform rotate-y-0 bg-card'}
               `}
               style={{
                 backfaceVisibility: 'hidden',
@@ -166,7 +164,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               {!card.isFlipped && !card.isMatched && !flippedCards.includes(card.id) && (
                 <div className="flex flex-col items-center justify-center w-full h-full">
                   <img src={calmeLogo} alt="CALMe Logo" className="w-20 h-20 mx-auto mb-2" />
-                  <span className="text-xl font-bold text-blue-700" style={{letterSpacing: '2px'}}>CALMe</span>
+                  <span className="text-xl font-bold text-primary" style={{letterSpacing: '2px'}}>CALMe</span>
                 </div>
               )}
             </div>

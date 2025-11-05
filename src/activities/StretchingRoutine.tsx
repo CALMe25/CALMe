@@ -137,22 +137,22 @@ export default function StretchingRoutine() {
   const progress = ((exercise.duration - timeRemaining) / exercise.duration) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-start p-6 text-white h-full max-h-screen overflow-y-auto">
-      <h2 className="text-3xl font-bold text-sky-400 mb-2">Stretching Routine</h2>
-      <p className="text-gray-300 mb-6">Exercise {currentExercise + 1} of {exercises.length}</p>
+    <div className="flex flex-col items-center justify-start p-6 bg-background text-foreground h-full max-h-screen overflow-y-auto">
+      <h2 className="text-3xl font-bold text-primary mb-2">Stretching Routine</h2>
+      <p className="text-muted-foreground mb-6">Exercise {currentExercise + 1} of {exercises.length}</p>
 
-      <div className="bg-gray-800 rounded-2xl p-6 max-w-lg w-full shadow-xl">
-        <h3 className="text-2xl font-semibold mb-2">{exercise.name}</h3>
-        <p className="text-gray-400 mb-4">{exercise.description}</p>
+      <div className="bg-card rounded-2xl p-6 max-w-lg w-full shadow-xl">
+        <h3 className="text-2xl font-semibold mb-2 text-primary">{exercise.name}</h3>
+        <p className="text-muted-foreground mb-4">{exercise.description}</p>
 
         {/* Timer Display */}
         <div className="mb-6">
-          <div className="text-5xl font-bold text-sky-400 text-center mb-2">
+          <div className="text-5xl font-bold text-primary text-center mb-2">
             {timeRemaining}s
           </div>
-          <div className="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div className="w-full bg-secondary rounded-full h-3 overflow-hidden">
             <div
-              className="bg-sky-400 h-full transition-all duration-1000 ease-linear"
+              className="bg-primary h-full transition-all duration-1000 ease-linear"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -160,10 +160,10 @@ export default function StretchingRoutine() {
 
         {/* Instructions */}
         <div className="mb-6">
-          <h4 className="text-lg font-semibold mb-3">Instructions:</h4>
+          <h4 className="text-lg font-semibold mb-3 text-primary">Instructions:</h4>
           <ol className="list-decimal list-inside space-y-2">
             {exercise.instructions.map((instruction, index) => (
-              <li key={index} className="text-gray-300">
+              <li key={index} className="text-muted-foreground">
                 {instruction}
               </li>
             ))}
@@ -175,7 +175,7 @@ export default function StretchingRoutine() {
           <button
             onClick={previousExercise}
             disabled={currentExercise === 0}
-            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+            className="px-4 py-2 bg-secondary hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
           >
             ← Previous
           </button>
@@ -185,19 +185,14 @@ export default function StretchingRoutine() {
               if (timer) clearInterval(timer);
               setIsActive(false);
             } : startExercise}
-            className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
-              isActive
-                ? 'bg-red-500 hover:bg-red-600'
-                : 'bg-sky-500 hover:bg-sky-600'
-            }`}
-          >
+            className={`px-6 py-2 rounded-lg font-semibold transition-colors ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
             {isActive ? 'Pause' : timeRemaining === 0 ? 'Restart' : 'Start'}
           </button>
 
           <button
             onClick={nextExercise}
             disabled={currentExercise === exercises.length - 1}
-            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+            className="px-4 py-2 bg-secondary hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
           >
             Next →
           </button>
@@ -205,13 +200,13 @@ export default function StretchingRoutine() {
 
         <button
           onClick={resetRoutine}
-          className="w-full px-4 py-2 bg-indigo-500 hover:bg-indigo-600 rounded-lg transition-colors"
+          className="w-full px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/80 rounded-lg transition-colors"
         >
           Reset Routine
         </button>
       </div>
 
-      <p className="mt-6 text-gray-400 text-sm text-center max-w-md">
+      <p className="mt-6 text-muted-foreground text-sm text-center max-w-md">
         Take your time with each stretch. Listen to your body and never force a movement.
       </p>
     </div>

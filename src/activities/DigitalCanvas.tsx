@@ -7,15 +7,15 @@ interface DigitalCanvasProps {
 
 const BRUSH_SIZES = [3, 6, 10, 16] as const;
 const PALETTE = [
-  '#1e293b', // slate-800
-  '#ef4444', // red-500
-  '#f97316', // orange-500
-  '#facc15', // yellow-400
-  '#22c55e', // green-500
-  '#0ea5e9', // sky-500
-  '#a855f7', // violet-500
-  '#ec4899', // pink-500
-  '#ffffff', // white
+  'var(--foreground)', 
+  '#ef4444', 
+  '#f97316', 
+  '#facc15', 
+  '#22c55e', 
+  '#0ea5e9', 
+  '#a855f7', 
+  '#ec4899', 
+  'var(--background)', 
 ] as const;
 
 export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
@@ -49,7 +49,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
       context.lineJoin = 'round';
       context.lineWidth = brushSize;
       context.strokeStyle = brushColor;
-      context.fillStyle = '#f8fafc';
+      context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--background');
       context.fillRect(0, 0, rect.width, rect.height);
 
       contextRef.current = context;
@@ -113,15 +113,15 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     const canvas = canvasRef.current;
     const context = contextRef.current;
     if (!canvas || !context) return;
-    context.fillStyle = '#f8fafc';
+    context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--background');
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
     context.fillStyle = brushColor;
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center bg-slate-950/90 p-4 text-slate-50">
-      <div className="flex h-full w-full max-w-5xl flex-col gap-5 rounded-2xl border border-slate-900/60 bg-slate-950/60 p-4 shadow-lg lg:gap-6">
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/70 p-3 shadow-lg">
+    <div className="flex h-full w-full items-center justify-center bg-background p-4 text-foreground">
+      <div className="flex h-full w-full max-w-5xl flex-col gap-5 rounded-2xl border border-border bg-card p-4 shadow-lg lg:gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-muted/50 p-3 shadow-lg">
           <div className="flex items-center gap-3">
             <div className="font-semibold">Brush</div>
             <div className="flex items-center gap-2">
@@ -129,13 +129,9 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                 <button
                   key={size}
                   type="button"
-                  className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${
-                    brushSize === size ? 'border-indigo-400 bg-indigo-500/30' : 'border-slate-700 bg-slate-800'
-                  }`}
-                  onClick={() => setBrushSize(size)}
-                >
+                  className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${brushSize === size ? 'border-primary bg-primary/20' : 'border-border bg-secondary'}`}>
                   <span
-                    className="rounded-full bg-slate-100"
+                    className="rounded-full bg-foreground"
                     style={{ width: size / 2 + 4, height: size / 2 + 4 }}
                   />
                 </button>
@@ -149,9 +145,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                 <button
                   key={color}
                   type="button"
-                  className={`h-7 w-7 rounded-full border transition ${
-                    brushColor === color ? 'border-white/80 scale-110' : 'border-white/20'
-                  }`}
+                  className={`h-7 w-7 rounded-full border transition ${brushColor === color ? 'border-primary scale-110' : 'border-border'}`}
                   style={{ backgroundColor: color }}
                   onClick={() => setBrushColor(color)}
                 />
@@ -159,17 +153,17 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="secondary" className="bg-slate-700 hover:bg-slate-600" onClick={handleClear}>
+            <Button variant="secondary" onClick={handleClear}>
               Clear
             </Button>
             {onGameEnd && (
-              <Button variant="secondary" className="bg-indigo-500 hover:bg-indigo-400" onClick={onGameEnd}>
+              <Button variant="primary" onClick={onGameEnd}>
                 Done
               </Button>
             )}
           </div>
         </div>
-        <div className="relative flex-1 min-h-[320px] overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-inner sm:min-h-[420px] lg:min-h-[560px] xl:min-h-[640px]">
+        <div className="relative flex-1 min-h-[320px] overflow-hidden rounded-2xl border border-border bg-background shadow-inner sm:min-h-[420px] lg:min-h-[560px] xl:min-h-[640px]">
           <canvas
             ref={canvasRef}
             className="h-full w-full touch-none"
