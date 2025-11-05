@@ -1,6 +1,8 @@
 import { type ReactElement } from 'react';
 import BreathingExercise from './activities/breathing_module/BreathingExercise';
 import MatchingGame from './activities/MatchingGame';
+import StretchingRoutine from './activities/StretchingRoutine';
+import SudokuGame from './activities/SudokuGame';
 
 // Define the App interface as provided by the user
 // Using a union type for 'name' for strict type checking
@@ -35,17 +37,12 @@ export const InnerApps: AppInterface[] = [
       type: 'activities',
       label: 'Stretching Routine',
       icon: (
-        // Example SVG icon for stretching (person stretching)
+        // SVG icon for stretching (person stretching)
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
           <path d="M14.12 10H19V8.2H15.38L13.38 4.87C13.08 4.37 12.54 4.03 11.92 4.03C11.74 4.03 11.58 4.06 11.42 4.11L6.3 5.8L7 7.68L11.42 6.15L12.89 8.54L8 14.89V22H9.8V16.31L13.31 12.9L14.8 14.39V22H16.6V13.89L14.12 10.34V10M8.5 12C9.88 12 11 10.88 11 9.5C11 8.12 9.88 7 8.5 7C7.12 7 6 8.12 6 9.5C6 10.88 7.12 12 8.5 12Z"/>
         </svg>
       ),
-      main: (
-        <div className="text-center p-6 bg-gray-600 rounded-lg text-white">
-          <p className="text-xl font-bold mb-2">Stretching Routine App</p>
-          <p>Content for various stretching exercises will go here.</p>
-        </div>
-      ),
+      main: <StretchingRoutine />,
       description: 'Follow along with simple stretching exercises to improve flexibility.',
     },
     {
@@ -76,15 +73,10 @@ export const InnerApps: AppInterface[] = [
       type: 'games',
       label: 'Sudoku',
       icon: (
-        // Example SVG icon for Sudoku (grid with numbers)
+        // SVG icon for Sudoku (grid with numbers)
         <div className="w-5 h-5 border border-current grid grid-cols-3 gap-0.5"><div className="bg-current"></div><div></div><div className="bg-current"></div><div></div><div className="bg-current"></div><div></div><div className="bg-current"></div><div></div><div className="bg-current"></div></div>
       ),
-      main: (
-        <div className="text-center p-6 bg-gray-600 rounded-lg text-white">
-          <p className="text-xl font-bold mb-2">Sudoku Game</p>
-          <p>The interactive Sudoku grid will appear here.</p>
-        </div>
-      ),
+      main: <SudokuGame onGameEnd={() => {}} />,
       description: 'A challenging number puzzle game to sharpen your logic skills.',
     },
     {

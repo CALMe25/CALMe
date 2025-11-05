@@ -553,8 +553,13 @@ function App() {
         className="flex-1 overflow-y-auto px-4" // new
         >
           <div className="space-y-4 pb-4 mt-2">
-            <div className="flex justify-center gap-4">
-                {appsContext.filter(app => app.name === 'breathing' || app.name === 'matching-cards').map((app, index) => (
+            <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                {appsContext.filter(app =>
+                  app.name === 'breathing' ||
+                  app.name === 'stretching' ||
+                  app.name === 'matching-cards' ||
+                  app.name === 'sudoku'
+                ).map((app, index) => (
                   <Button
                     key={index}
                     onClick={() => handleAppLaunch(app)}
