@@ -46,7 +46,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
 
   return (
     <div style={{
-      padding: '24px',
+      padding: '12px',
       background: 'linear-gradient(180deg, #0f172a 0%, #111827 100%)',
       height: '100%',
       maxHeight: '100vh',
@@ -56,11 +56,11 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
       color: '#f8fafc',
       fontFamily: "'Inter', sans-serif",
     }}>
-      <div style={{ maxWidth: '620px', margin: '0 auto', width: '100%' }}>
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+      <div style={{ maxWidth: '620px', margin: '0 auto', width: '100%', padding: '0 8px' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
           <div>
-            <h1 style={{ fontSize: '1.875rem', fontWeight: 700, marginBottom: '4px' }}>Breathing Exercise</h1>
-            <p style={{ color: '#94a3b8' }}>Follow the rhythm to calm your nervous system.</p>
+            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '4px' }}>Breathing Exercise</h1>
+            <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>Follow the rhythm to calm your nervous system.</p>
           </div>
           {onGameEnd && (
             <button
@@ -68,17 +68,18 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '6px',
-                padding: '6px 12px',
+                gap: '4px',
+                padding: '6px 10px',
                 borderRadius: '999px',
                 border: '1px solid rgba(148,163,184,0.4)',
                 background: 'transparent',
                 color: '#94a3b8',
-                fontSize: '0.875rem',
-                cursor: 'pointer'
+                fontSize: '0.75rem',
+                cursor: 'pointer',
+                flexShrink: 0
               }}
             >
-              <span style={{ fontSize: '1rem', lineHeight: 1 }}>✕</span>
+              <span style={{ fontSize: '0.875rem', lineHeight: 1 }}>✕</span>
               Exit
             </button>
           )}
@@ -86,9 +87,9 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
 
         <section style={{
           display: 'grid',
-          gap: '16px',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          marginBottom: '28px',
+          gap: '12px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+          marginBottom: '20px',
         }}>
           {Object.entries(TIMING_PRESETS).map(([keyName, preset]) => (
             <button
@@ -163,14 +164,14 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
 
         <div style={{
           position: 'relative',
-          height: '320px',
-          borderRadius: '24px',
+          height: '280px',
+          borderRadius: '20px',
           background: 'radial-gradient(circle at top, rgba(59,130,246,0.12), transparent 65%)',
           border: '1px solid rgba(59,130,246,0.15)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          marginBottom: '28px',
+          marginBottom: '20px',
           overflow: 'hidden'
         }}>
           <div style={{
@@ -202,17 +203,17 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
           )}
         </div>
 
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
           <button
             onClick={restartExercise}
             style={{
-              flex: 1,
-              padding: '12px 16px',
+              flex: '1 1 140px',
+              padding: '10px 14px',
               backgroundColor: '#1d4ed8',
               color: 'white',
               border: 'none',
               borderRadius: '12px',
-              fontSize: '1rem',
+              fontSize: '0.9rem',
               fontWeight: 600,
               cursor: 'pointer',
               transition: 'background .2s'
@@ -223,13 +224,13 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
           <button
             onClick={handleComplete}
             style={{
-              flex: 1,
-              padding: '12px 16px',
+              flex: '1 1 140px',
+              padding: '10px 14px',
               backgroundColor: '#10b981',
               color: 'white',
               border: 'none',
               borderRadius: '12px',
-              fontSize: '1rem',
+              fontSize: '0.9rem',
               fontWeight: 600,
               cursor: 'pointer',
               transition: 'background .2s'
@@ -240,14 +241,14 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
         </div>
 
         <div style={{
-          padding: '16px',
-          borderRadius: '16px',
+          padding: '14px',
+          borderRadius: '14px',
           background: 'rgba(148,163,184,0.08)',
           border: '1px solid rgba(148,163,184,0.15)',
           color: '#94a3b8',
-          fontSize: '0.9rem'
+          fontSize: '0.85rem'
         }}>
-          <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '8px', color: '#e2e8f0' }}>How it helps</h3>
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '8px', color: '#e2e8f0' }}>How it helps</h3>
           <ul style={{ paddingLeft: '18px', margin: 0 }}>
             <li style={{ marginBottom: '6px' }}>Inhale through your nose for 4 seconds</li>
             <li style={{ marginBottom: '6px' }}>Hold your breath gently for 7 seconds — allow your body to soften</li>
