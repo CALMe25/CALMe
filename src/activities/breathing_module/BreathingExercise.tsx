@@ -62,27 +62,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
             <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '4px' }}>Breathing Exercise</h1>
             <p style={{ color: '#94a3b8', fontSize: '0.875rem' }}>Follow the rhythm to calm your nervous system.</p>
           </div>
-          {onGameEnd && (
-            <button
-              onClick={onGameEnd}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                padding: '6px 10px',
-                borderRadius: '999px',
-                border: '1px solid rgba(148,163,184,0.4)',
-                background: 'transparent',
-                color: '#94a3b8',
-                fontSize: '0.75rem',
-                cursor: 'pointer',
-                flexShrink: 0
-              }}
-            >
-              <span style={{ fontSize: '0.875rem', lineHeight: 1 }}>✕</span>
-              Exit
-            </button>
-          )}
+
         </header>
 
         <section style={{
