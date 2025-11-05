@@ -137,7 +137,7 @@ export default function StretchingRoutine() {
   const progress = ((exercise.duration - timeRemaining) / exercise.duration) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 text-white h-full">
+    <div className="flex flex-col items-center justify-start p-6 text-white h-full max-h-screen overflow-y-auto">
       <h2 className="text-3xl font-bold text-sky-400 mb-2">Stretching Routine</h2>
       <p className="text-gray-300 mb-6">Exercise {currentExercise + 1} of {exercises.length}</p>
 

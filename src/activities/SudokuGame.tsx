@@ -168,7 +168,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
   };
 
   return (
-    <div className="flex flex-col items-center p-2 md:p-4 text-white w-full max-w-2xl mx-auto">
+    <div className="flex flex-col items-center p-2 md:p-4 text-white w-full max-w-2xl mx-auto h-full max-h-screen overflow-y-auto">
       <h2 className="text-xl md:text-2xl font-bold text-sky-400 mb-2">Sudoku</h2>
 
       {/* Difficulty Selector */}
