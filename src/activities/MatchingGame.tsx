@@ -1,6 +1,5 @@
-// src/games/MatchingGame.tsx
-
 import React, { useState, useEffect } from 'react';
+import calmeLogo from '../assets/calme-logo.svg';
 
 // Define the type for a single card
 interface Card {
@@ -58,17 +57,18 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
       setIsChecking(false);
     } else {
       setTimeout(() => {
-        setCards(prevCards =>
-          prevCards.map(card =>
-            card.id === id1 || card.id === id2 ? { ...card, isFlipped: false } : card
-          )
-        );
-        setFlippedCards([]);
-        setIsChecking(false);
-      }, 1000);
+          setCards(prevCards =>
+            // Wait for the flip animation to finish before hiding the emoji
+            prevCards.map(card =>
+              card.id === id1 || card.id === id2 ? { ...card, isFlipped: false } : card
+            )
+          );
+          setFlippedCards([]);
+          setIsChecking(false);
+        }, 1500); // 1.5 s for flip animation
+      }
     }
-  }
-}, [flippedCards]);
+  }, [flippedCards, cards]);
 
   // Effect to check if the game is won
   useEffect(() => {
@@ -107,13 +107,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 font-inter">
-      <h2 className="text-4xl font-bold text-blue-700 mb-8 rounded-lg p-3 shadow-md bg-white">
+    <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6 md:mb-8 rounded-lg p-2 sm:p-3 shadow-md bg-card">
         Matching Game
       </h2>
 
-      {/* Changed grid-cols-3 to grid-cols-4 for a 3x4 layout */}
-      <div className="grid grid-cols-4 gap-4 p-4 bg-white rounded-xl shadow-lg border border-blue-200 w-[500px] max-w-full">
+      {/* Responsive grid: 2 cols on mobile, 3 on tablet, 4 on desktop */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 md:gap-10 p-4 bg-card rounded-xl shadow-lg border border-border w-full max-w-full"  style={{ maxWidth: '100%' }}>
         {cards.map(card => (
           <div
             key={card.id}
@@ -123,8 +123,8 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               rounded-xl shadow-md cursor-pointer
               text-5xl sm:text-6xl md:text-7xl font-bold
               transition-all duration-300 ease-in-out
-              ${card.isMatched ? 'bg-green-300 opacity-70 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}
-              ${card.isFlipped || card.isMatched ? 'transform rotate-y-180' : ''}
+              ${card.isMatched ? 'bg-green-300 dark:bg-green-700 opacity-70 cursor-not-allowed' : 'bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-700'}
+
               ${isChecking && !card.isFlipped && !card.isMatched ? 'cursor-not-allowed' : '' + " relative"}
             `}
             onClick={() => handleCardClick(card)}
@@ -138,44 +138,50 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
             <div
               className={`
                 absolute w-full h-full rounded-xl flex items-center justify-center
-                backface-hidden
-                ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-white text-gray-800' : 'transform rotate-y-180 bg-blue-500'}
+                transition-transform duration-300 ease-in-out
+                ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-card text-foreground' : 'transform rotate-y-180 bg-card'}
               `}
               style={{
+                transformStyle: 'preserve-3d',
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden' // For Safari
               }}
             >
               {card.isFlipped || card.isMatched ? card.value : ''}
             </div>
-            {/* Back of the card (visible when not flipped) */}
+            {/* Back of the card (shows logo when not flipped) */}
             <div
               className={`
                 absolute w-full h-full rounded-xl flex items-center justify-center
                 backface-hidden
-                ${card.isFlipped || card.isMatched ? 'transform rotate-y-180 bg-blue-500' : 'transform rotate-y-0 bg-blue-500'}
+                ${card.isFlipped || card.isMatched ? 'transform rotate-y-180 bg-card' : 'transform rotate-y-0 bg-card'}
               `}
               style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden' // For Safari
               }}
             >
-              {!card.isFlipped && !card.isMatched ? '?' : ''} {/* Show '?' on the back */}
+              {!card.isFlipped && !card.isMatched && !flippedCards.includes(card.id) && (
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                  <img src={calmeLogo} alt="CALMe Logo" className="w-20 h-20 mx-auto mb-2" />
+                  <span className="text-xl font-bold text-primary" style={{letterSpacing: '2px'}}>CALMe</span>
+                </div>
+              )}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-8 flex space-x-4">
+      <div className="mt-4 sm:mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
         <button
           onClick={resetGame}
-          className="px-6 py-3 bg-indigo-600 text-black font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300"
+          className="px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 w-full sm:w-auto"
         >
           Reset Game
         </button>
         <button
           onClick={onGameEnd}
-          className="px-6 py-3 bg-red-500 text-black font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300"
+          className="px-4 sm:px-6 py-2 sm:py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300 w-full sm:w-auto"
         >
           Exit Game
         </button>

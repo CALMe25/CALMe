@@ -1,0 +1,34 @@
+---
+config:
+  layout: elk
+---
+flowchart TD
+
+%% Start
+    StressLevel{"Stress Level Assessment?"} -- No Stress --> NoStress["relaxed, calm, fine, good, peaceful, content, at ease, comfortable, stable, balanced, centered, focused, clear, rational, positive, confident, strong, capable, prepared, ready, alert, aware, present, mindful"]
+    StressLevel -- Slightly Stress --> LowStress["slightly worried, minor concern, manageable, mild anxiety, little tension, some unease, bit nervous, somewhat concerned, mildly stressed, low level worry, gentle anxiety, light stress, minor discomfort"]
+    StressLevel -- Moderate Stress --> ModerateStress["anxious, worried, uncomfortable, tense, stressed, concerned, uneasy, nervous, apprehensive, agitated, restless, on edge, uptight, worked up, tired out, exhausted, fatigued, weary, drained, overwhelmed, struggling, fighting, battling"]
+    StressLevel -- High Stress  --> HighStress["very anxious, panicked, overwhelmed, intense, severe stress, extreme worry, high anxiety, major concern, significant nervousness, substantial pressure, heavy strain, crushing doubt, paralyzing concern, crippling worry, debilitating fear, immobilizing tension, shocking burden"]
+    NoStress --> WellnessCheck["Thanks for checking in. Try a small activity together?"]
+    WellnessCheck -- Yes --> ActivityMenu["Activity Selection"]
+    WellnessCheck -- No --> EndSession["Have a beautiful day!"]
+    LowStress --> LocationCheck{"Where are you right now?"}
+    ModerateStress --> EmergencyProtocol["EMERGENCY PROTOCOL ACTIVATED"]
+    HighStress --> EmergencyProtocol
+    SupportCheck@{ label: "Is the person you're helping with you right now?" } -- Yes, here with me --> InPersonSupport["In-Person Support Tips"]
+    SupportCheck -- No, remote help --> RemoteSupport["Remote Support Tips"]
+    InPersonSupport --> SupportGuidance["Send this message: Take a deep breath... I am with you"]
+    RemoteSupport --> SupportGuidance
+    SupportGuidance --> ActivityMenu
+    EmergencyProtocol --> CommunicationProtocol{"Communication Protocol Selection"}
+    CommunicationProtocol --> CognitiveCommunication["COGNITIVE COMMUNICATION: Let me give you clear facts"]
+    CognitiveCommunication --> LocationCheck
+    LocationCheck -- In Safe Space --> InSafety["safe room, shelter, protected area, mamad, miklat, reinforced space, secure location, bomb shelter, safe zone, emergency shelter, designated shelter, approved location, secured area"]
+    LocationCheck -- Moving to Safety --> MovingToSafety["traveling, walking, in transit, on the way, heading to safety, moving toward shelter, approaching safe space, going to mamad, walking to miklat, running to shelter, hurrying to safety, rushing to protection, evacuating to shelter"]
+    LocationCheck -- Exposed/Unsheltered --> ExposedLocation["outdoors, open area, street, field, parking lot, roof, balcony, yard, park, beach, highway, bridge, vehicle, temporary structure"]
+    InSafety --> ActivityMenu
+    MovingToSafety --> ActivityMenu
+    ExposedLocation --> UrgentEvacuation["URGENT: Move to shelter immediately"]
+    UrgentEvacuation --> ActivityMenu
+
+

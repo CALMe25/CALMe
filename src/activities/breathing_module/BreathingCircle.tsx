@@ -14,6 +14,7 @@ export default function BreathingCircle({timings, repeat, color = 'bg-sky-500', 
   const [transitionDuration, setTransitionDuration] = useState('0ms');
   // State to track the current animation cycle
   const [cycle, setCycle] = useState(0);
+  const sideSize: number = 8;
 
   useEffect(() => {
     // --- Validation and Loop Control ---
@@ -89,10 +90,10 @@ export default function BreathingCircle({timings, repeat, color = 'bg-sky-500', 
   };
 
   return (
-    <div className="flex items-center justify-center w-64 h-64"
+    <div className={`flex items-center justify-center w-${sideSize}rem h-${sideSize}rem`}
     style={{
-      width: '8rem',
-      height: '8rem',
+      // width: '8rem',
+      // height: '8rem',
       alignSelf: 'center',
       display: 'flex',
       flexDirection: 'column',
@@ -103,7 +104,7 @@ export default function BreathingCircle({timings, repeat, color = 'bg-sky-500', 
       <br></br>
       <div
         style={circleStyle}
-        className={`w-32 h-32 rounded-full shadow-lg ${color}`}
+        className={`w-${sideSize/2}rem h-${sideSize/2}rem rounded-full shadow-lg ${color}`}
       ></div>
     </div>
   );
