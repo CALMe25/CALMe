@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type JSXElementConstructor, type ReactElement, useContext } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
@@ -6,15 +6,16 @@ import { ScrollArea } from "./chat_interface/ui/scroll-area";
 // import { Avatar, AvatarFallback, AvatarImage } from "./chat_interface/ui/avatar";
 import { Button } from "./chat_interface/ui/button";
 import { MoreVertical, Settings, Accessibility } from "lucide-react"; // Icon TODO - CHANGE
-import { toast } from "sonner"; // pop up notifications
+import { toast, Toaster } from "sonner"; // pop up notifications
 import './styles/globals.css';
 
-import { AppsContext, AppsProvider } from './appsContextApi';
+import { AppsProvider } from './appsContextApi';
 import { InnerApps, type AppInterface } from './appsData';
 import AppLauncher from './AppLauncher/AppLauncher';
 import { ConversationController } from './nlp/separated_mermaid_interpreter_parser';
 import { Logo } from './assets/Logo';
 import type { PathLike } from 'node:fs';
+import { AlertTimer } from './components/AlertTimer';
 // import { Theme, ThemePanel } from "@radix-ui/themes";
 
 
@@ -195,6 +196,9 @@ function App() {
   const [shouldAutoLaunchApp, setShouldAutoLaunchApp] = useState(false);
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);
   const [appsTimeout, setAppsTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [showAlertButton, setShowAlertButton] = useState(true);
+  const [alertTimer, setAlertTimer] = useState<number | null>(null);
+  const [alertInterval, setAlertInterval] = useState<ReturnType<typeof setInterval> | null>(null);
   
   const [loading, setLoading] = useState(true);
   // const [error, setError] = useState(null);
@@ -502,6 +506,62 @@ function App() {
     toast.info('Opening settings');
   };
 
+  const handleDemoAlert = () => {
+    if (alertInterval) {
+      clearInterval(alertInterval);
+      setAlertInterval(null);
+    }
+
+    setShowAlertButton(false);
+    setAlertTimer(180);
+
+    setConversationHistory(prev => [
+      ...prev,
+      {
+        id: `${Date.now()}_alert_start`,
+        type: 'message',
+        content: "We've entered alert mode. Stay sheltered—we'll get through the next few minutes together.",
+        timestamp: new Date().toISOString(),
+        isUser: false,
+      }
+    ]);
+
+    const interval = setInterval(() => {
+      setAlertTimer(prev => {
+        if (prev === null) {
+          return prev;
+        }
+        if (prev <= 1) {
+          clearInterval(interval);
+          setAlertInterval(null);
+          setShowAlertButton(true);
+          setConversationHistory(prevHistory => [
+            ...prevHistory,
+            {
+              id: `${Date.now()}_alert_clear`,
+              type: 'message',
+              content: "Look at that, we made it! It's safe to step out whenever you feel ready.",
+              timestamp: new Date().toISOString(),
+              isUser: false,
+            }
+          ]);
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    setAlertInterval(interval);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (alertInterval) {
+        clearInterval(alertInterval);
+      }
+    };
+  }, [alertInterval]);
+
 
   // const currentQuestionData = getCurrentQuestion();
 
@@ -514,6 +574,7 @@ function App() {
     <>
       {/* <Theme accentColor="crimson" grayColor="sand" radius="large" scaling="95%"> */}
       <AppsProvider value={InnerApps}>
+        <Toaster />
         <div 
         className="flex flex-col h-screen w-full mx-auto bg-background border-x border-border" // new
         >
@@ -531,9 +592,20 @@ function App() {
               <h1 className="text-xl font-large">CALMe</h1>
               {/* <p className="text-xs text-muted-foreground">Ready to help</p> */}
             </div>
+            <AlertTimer timeRemaining={alertTimer} />
           </div>
           
           <div className="flex items-center gap-2">
+            {showAlertButton && (
+              <Button 
+                variant="destructive" 
+                size="sm" 
+                onClick={handleDemoAlert}
+                className="bg-red-600 hover:bg-red-700"
+              >
+                Demo - RED ALERT
+              </Button>
+            )}
             <Button variant="ghost" size="sm" className="h-8 w-8" onClick={handleAccessibility}>
               <Accessibility className="w-4 h-4" />
             </Button>
