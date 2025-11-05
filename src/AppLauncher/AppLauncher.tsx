@@ -8,6 +8,40 @@ interface AppLauncherProps {
 
 export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
 
+  const renderApp = () => {
+    if (!chosenApp) {
+      return (
+        <div className="text-white text-center">
+          <p>No app selected</p>
+        </div>
+      );
+    }
+
+    if (!React.isValidElement(chosenApp.main)) {
+      return (
+        <div className="text-white text-center">
+          <p>Unable to launch app.</p>
+        </div>
+      );
+    }
+
+    if (chosenApp.name === 'matching-cards') {
+      return React.cloneElement(chosenApp.main as React.ReactElement<Record<string, unknown>>, {
+        onGameEnd: onClose,
+      });
+    }
+
+    const elementProps = (chosenApp.main.props ?? {}) as Record<string, unknown>;
+
+    if (typeof elementProps.onGameEnd === 'function') {
+      return React.cloneElement(chosenApp.main as React.ReactElement<Record<string, unknown>>, {
+        onGameEnd: onClose,
+      });
+    }
+
+    return chosenApp.main;
+  };
+
   return (
     <div
       className="relative w-full h-full pb-19 overflow-y-auto overflow-x-hidden bg-gray-900" // Dark background with scroll
@@ -32,12 +66,7 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
       <div
         className="min-h-full w-full flex items-center justify-center p-4"
       >
-        {chosenApp ? (
-          React.cloneElement(chosenApp.main, { onGameEnd: onClose })
-        ) : () => {
-            console.log('Error: No App to Launch, closing AppLauncher')
-            onClose()
-        }}
+        {renderApp()}
 
       </div>
     </div>

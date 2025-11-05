@@ -1,4 +1,5 @@
 // import React from 'react'
+import React from 'react';
 import type { AppInterface } from '../appsContextApi';
 
 interface AppLauncherProps {
@@ -7,6 +8,40 @@ interface AppLauncherProps {
 }
 
 export default function AppLauncer ({chosenApp, onClose}: AppLauncherProps) {
+
+  const renderApp = () => {
+    if (!chosenApp) {
+      return (
+        <div className="text-white text-center">
+          <p>No app selected</p>
+        </div>
+      );
+    }
+
+    if (!React.isValidElement(chosenApp.main)) {
+      return (
+        <div className="text-white text-center">
+          <p>Unable to launch app.</p>
+        </div>
+      );
+    }
+
+    if (chosenApp.name === 'matching-cards') {
+      return React.cloneElement(chosenApp.main as React.ReactElement<Record<string, unknown>>, {
+        onGameEnd: onClose,
+      });
+    }
+
+    const elementProps = (chosenApp.main.props ?? {}) as Record<string, unknown>;
+
+    if (typeof elementProps.onGameEnd === 'function') {
+      return React.cloneElement(chosenApp.main as React.ReactElement<Record<string, unknown>>, {
+        onGameEnd: onClose,
+      });
+    }
+
+    return chosenApp.main;
+  };
 
   return (
     <div
@@ -37,11 +72,7 @@ export default function AppLauncer ({chosenApp, onClose}: AppLauncherProps) {
           maxHeight: '100%',
         }}
       >
-        {chosenApp ? chosenApp.main : (
-          <div className="text-white text-center">
-            <p>No app selected</p>
-          </div>
-        )}
+        {renderApp()}
 
       </div>
     </div>
