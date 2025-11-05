@@ -4,6 +4,7 @@ import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
 import { ScrollArea } from "./chat_interface/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "./chat_interface/ui/avatar";
+import { Logo } from './assets/Logo';
 import { Button } from "./chat_interface/ui/button";
 import { MoreVertical, Settings, Accessibility } from "lucide-react";
 import { toast, Toaster } from "sonner";
@@ -396,14 +397,12 @@ function App() {
         <div 
         className="flex flex-col h-screen w-full mx-0 bg-background border-x border-border"
         >
+        {!showAppsLauncher && (
         <header 
         className="flex-shrink-0 flex z-1000 items-center justify-between p-4 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/80"
         >
           <div className="flex items-center gap-3">
-            <Avatar className="w-10 h-10">
-              <AvatarImage src="/api/placeholder/40/40" />
-              <AvatarFallback className="bg-primary text-primary-foreground">AI</AvatarFallback>
-            </Avatar>
+            <Logo/>
             <div className="flex items-center gap-4">
               <h1 className="text-xl font-large">CALMe</h1>
               <AlertTimer timeRemaining={alertTimer} />
@@ -432,6 +431,7 @@ function App() {
             </Button>
           </div>
         </header>
+        )}
 
         {!showAppsLauncher &&
         <ScrollArea ref={scrollAreaRef} 
@@ -503,6 +503,7 @@ function App() {
               <strong>High stress detected.</strong> A breathing exercise will launch automatically to help you calm down.
             </div>
           )}
+        {!showAppsLauncher && (
         <div 
         className="fixed z-1000 bottom-0 flex flex-col w-full mx-auto bg-background border-t self-center"
         >
@@ -511,6 +512,7 @@ function App() {
             onVoiceInput={handleVoiceInput}
           />
         </div>
+        )}
         </div>
         </AppsProvider>
     </>
