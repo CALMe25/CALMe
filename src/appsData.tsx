@@ -3,6 +3,7 @@ import BreathingExercise from './activities/breathing_module/BreathingExercise';
 import MatchingGame from './activities/MatchingGame';
 import StretchingRoutine from './activities/StretchingRoutine';
 import SudokuGame from './activities/SudokuGame';
+import DigitalCanvas from './activities/DigitalCanvas';
 
 // Define the App interface as provided by the user
 // Using a union type for 'name' for strict type checking
@@ -103,12 +104,7 @@ export const InnerApps: AppInterface[] = [
         // Example SVG icon for paint (paint brush)
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-1.31C18.16 19.67 21 16.17 21 12c0-4.97-4.03-9-9-9zm0 2c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg>
       ),
-      main: (
-        <div className="text-center p-6 bg-gray-600 rounded-lg text-white">
-          <p className="text-xl font-bold mb-2">Digital Canvas App</p>
-          <p>Unleash your creativity with this simple drawing tool.</p>
-        </div>
-      ),
+      main: <DigitalCanvas />,
       description: 'A simple drawing application to unleash your creativity.',
     },
   ];

@@ -25,21 +25,10 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
       );
     }
 
-    if (chosenApp.name === 'matching-cards') {
-      return React.cloneElement(chosenApp.main as React.ReactElement<Record<string, unknown>>, {
-        onGameEnd: onClose,
-      });
-    }
-
-    const elementProps = (chosenApp.main.props ?? {}) as Record<string, unknown>;
-
-    if (typeof elementProps.onGameEnd === 'function') {
-      return React.cloneElement(chosenApp.main as React.ReactElement<Record<string, unknown>>, {
-        onGameEnd: onClose,
-      });
-    }
-
-    return chosenApp.main;
+    return React.cloneElement(
+      chosenApp.main as React.ReactElement<Record<string, unknown>>,
+      { onGameEnd: onClose }
+    );
   };
 
   return (

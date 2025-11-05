@@ -1,123 +1,256 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BreathingCircle from './BreathingCircle';
 
-// interface BreathingExerciseProps {
-//   onClose: () => void;
-//   onComplete?: () => void;
-// }
+type BreathingTimings = [number, number, number];
 
-const DEFAULT_TIMINGS = [4000, 7000, 8000]; // 4-7-8 breathing technique
-const DEFAULT_REPEAT = 4;
+interface BreathingExerciseProps {
+  onGameEnd?: () => void;
+}
 
-// export default function BreathingExercise({ onClose, onComplete }: BreathingExerciseProps) {
-export default function BreathingExercise() {
-  const [timings] = useState(DEFAULT_TIMINGS);
-  const [repeatCount] = useState(DEFAULT_REPEAT);
-  const [key, setKey] = useState(Date.now());
+const TIMING_PRESETS: Record<string, { timings: BreathingTimings; label: string }> = {
+  classic: {
+    timings: [4000, 7000, 8000],
+    label: 'Classic 4-7-8',
+  },
+  short: {
+    timings: [3000, 5000, 6000],
+    label: 'Calm Starter',
+  },
+  gentle: {
+    timings: [5000, 5000, 6000],
+    label: 'Gentle Flow',
+  },
+};
+
+export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps) {
+  const [presetKey, setPresetKey] = useState<keyof typeof TIMING_PRESETS>('classic');
+  const [key, setKey] = useState(0);
   const [isActive, setIsActive] = useState(true);
+  const [repeatCount, setRepeatCount] = useState(4);
 
-  const restartExercise = () => {
-    setKey(Date.now());
-    setIsActive(true);
-  };
+  useEffect(() => {
+    setKey(prev => prev + 1);
+  }, [presetKey, repeatCount]);
+
+  const { timings, label } = TIMING_PRESETS[presetKey];
 
   const handleComplete = () => {
     setIsActive(false);
-    // if (onComplete) {
-    //   onComplete();
-    // }
+    onGameEnd?.();
+  };
+
+  const restartExercise = () => {
+    setIsActive(true);
+    setKey(prev => prev + 1);
   };
 
   return (
     <div style={{
-      position: 'relative',
-      top: 0,
-      left: 0,
-      // right: 0,
-      // bottom: 0,
-      // backgroundColor: 'rgba(0, 0, 0, 0.8)',
+      padding: '24px',
+      background: 'linear-gradient(180deg, #0f172a 0%, #111827 100%)',
+      minHeight: '100%',
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      alignSelf: 'center',
-      // zIndex: 1000
+      flexDirection: 'column',
+      color: '#f8fafc',
+      fontFamily: "'Inter', sans-serif",
     }}>
-      <div style={{
-        // backgroundColor: '#1f2937',
-        color: 'white',
-        // padding: '40px',
-        // borderRadius: '16px',
-        textAlign: 'center',
-        maxWidth: '500px',
-        width: '100%',
-        height: '80%',
-      }}>
-        {/* <div style={{ marginBottom: '20px' }}>
-          <button
-            // onClick={onClose}
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#9ca3af',
-              fontSize: '24px',
-              cursor: 'pointer'
-            }}
-          >
-            ×
-          </button>
-        </div> */}
+      <div style={{ maxWidth: '620px', margin: '0 auto', width: '100%' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+          <div>
+            <h1 style={{ fontSize: '1.875rem', fontWeight: 700, marginBottom: '4px' }}>Breathing Exercise</h1>
+            <p style={{ color: '#94a3b8' }}>Follow the rhythm to calm your nervous system.</p>
+          </div>
+          {onGameEnd && (
+            <button
+              onClick={onGameEnd}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 12px',
+                borderRadius: '999px',
+                border: '1px solid rgba(148,163,184,0.4)',
+                background: 'transparent',
+                color: '#94a3b8',
+                fontSize: '0.875rem',
+                cursor: 'pointer'
+              }}
+            >
+              <span style={{ fontSize: '1rem', lineHeight: 1 }}>✕</span>
+              Exit
+            </button>
+          )}
+        </header>
 
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#0ea5e9', marginBottom: '10px' }}>
-          Breathing Exercise
-        </h2>
-        <p style={{fontSize: '1rem', color: '#9ca3af', marginBottom: '1rem' }}>
-          Follow the circle to regulate your breathing
-        </p>
-        <div className={'flex justify-center align-center m-4'}>
+        <section style={{
+          display: 'grid',
+          gap: '16px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+          marginBottom: '28px',
+        }}>
+          {Object.entries(TIMING_PRESETS).map(([keyName, preset]) => (
+            <button
+              key={keyName}
+              onClick={() => setPresetKey(keyName as keyof typeof TIMING_PRESETS)}
+              style={{
+                padding: '12px 14px',
+                borderRadius: '16px',
+                border: presetKey === keyName ? '1px solid rgba(59,130,246,0.4)' : '1px solid rgba(148,163,184,0.2)',
+                background: presetKey === keyName ? 'rgba(37, 99, 235, 0.15)' : 'rgba(148,163,184,0.08)',
+                color: '#e2e8f0',
+                textAlign: 'left',
+                cursor: 'pointer',
+                transition: 'all .2s ease'
+              }}
+            >
+              <div style={{ fontWeight: 600, marginBottom: '4px' }}>{preset.label}</div>
+              <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
+                {preset.timings[0] / 1000}s inhale · {preset.timings[1] / 1000}s hold · {preset.timings[2] / 1000}s exhale
+              </div>
+            </button>
+          ))}
+
+          <div style={{
+            padding: '12px 16px',
+            borderRadius: '16px',
+            border: '1px solid rgba(148,163,184,0.2)',
+            background: 'rgba(148,163,184,0.05)',
+            color: '#e2e8f0'
+          }}>
+            <div style={{ fontWeight: 600, marginBottom: '8px' }}>Cycles</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button
+                onClick={() => setRepeatCount(prev => Math.max(2, prev - 1))}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(148,163,184,0.3)',
+                  background: 'transparent',
+                  color: '#e2e8f0',
+                  fontSize: '1.25rem',
+                  lineHeight: 1,
+                  cursor: 'pointer'
+                }}
+              >
+                −
+              </button>
+              <span style={{ fontSize: '1.125rem', fontWeight: 600 }}>{repeatCount}</span>
+              <button
+                onClick={() => setRepeatCount(prev => Math.min(12, prev + 1))}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(148,163,184,0.3)',
+                  background: 'transparent',
+                  color: '#e2e8f0',
+                  fontSize: '1.25rem',
+                  lineHeight: 1,
+                  cursor: 'pointer'
+                }}
+              >
+                +
+              </button>
+            </div>
+            <p style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '6px' }}>
+              Recommended: 4–8 cycles for a complete calm down.
+            </p>
+          </div>
+        </section>
+
+        <div style={{
+          position: 'relative',
+          height: '320px',
+          borderRadius: '24px',
+          background: 'radial-gradient(circle at top, rgba(59,130,246,0.12), transparent 65%)',
+          border: '1px solid rgba(59,130,246,0.15)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginBottom: '28px',
+          overflow: 'hidden'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: '16px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            color: '#bae6fd',
+            fontWeight: 600,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            fontSize: '0.75rem'
+          }}>
+            {label}
+          </div>
+          <div style={{
+            position: 'absolute',
+            bottom: '16px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            color: '#cbd5f5',
+            fontSize: '0.85rem'
+          }}>
+            {isActive ? 'Follow the breathing guide' : 'Paused'}
+          </div>
+
           {isActive && (
-          <BreathingCircle key={key} timings={timings} repeat={repeatCount} />
-        )}
+            <BreathingCircle key={`${key}-${presetKey}-${repeatCount}`} timings={timings} repeat={repeatCount} />
+          )}
         </div>
-        
 
-        <div style={{ marginTop: '30px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
           <button
             onClick={restartExercise}
             style={{
-              padding: '8px 16px',
-              backgroundColor: '#0ea5e9',
+              flex: 1,
+              padding: '12px 16px',
+              backgroundColor: '#1d4ed8',
               color: 'white',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '12px',
               fontSize: '1rem',
+              fontWeight: 600,
               cursor: 'pointer',
-              marginBottom: '5px'
+              transition: 'background .2s'
             }}
           >
             Restart Exercise
           </button>
-          <br></br>
           <button
             onClick={handleComplete}
             style={{
-              padding: '8px 16px',
+              flex: 1,
+              padding: '12px 16px',
               backgroundColor: '#10b981',
               color: 'white',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '12px',
               fontSize: '1rem',
-              cursor: 'pointer'
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'background .2s'
             }}
           >
             I Feel Better
           </button>
         </div>
 
-        <div style={{ marginTop: '20px', fontSize: '14px', color: '#6b7280' }}>
-          <p>4-7-8 Breathing Technique: Inhale for 4 seconds, hold for 7 seconds, exhale for 8 seconds</p>
+        <div style={{
+          padding: '16px',
+          borderRadius: '16px',
+          background: 'rgba(148,163,184,0.08)',
+          border: '1px solid rgba(148,163,184,0.15)',
+          color: '#94a3b8',
+          fontSize: '0.9rem'
+        }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '8px', color: '#e2e8f0' }}>How it helps</h3>
+          <ul style={{ paddingLeft: '18px', margin: 0 }}>
+            <li style={{ marginBottom: '6px' }}>Inhale through your nose for 4 seconds</li>
+            <li style={{ marginBottom: '6px' }}>Hold your breath gently for 7 seconds — allow your body to soften</li>
+            <li>Exhale slowly through your mouth for 8 seconds, imagining stress leaving your body</li>
+          </ul>
         </div>
       </div>
     </div>
