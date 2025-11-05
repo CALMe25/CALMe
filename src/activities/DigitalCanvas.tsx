@@ -119,64 +119,66 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   };
 
   return (
-    <div className="flex h-full w-full flex-col gap-4 bg-slate-950/90 p-4 text-slate-50">
-      <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-slate-800 bg-slate-900/70 p-3 shadow-lg">
-        <div className="flex items-center gap-3">
-          <div className="font-semibold">Brush</div>
-          <div className="flex items-center gap-2">
-            {BRUSH_SIZES.map((size) => (
-              <button
-                key={size}
-                type="button"
-                className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${
-                  brushSize === size ? 'border-indigo-400 bg-indigo-500/30' : 'border-slate-700 bg-slate-800'
-                }`}
-                onClick={() => setBrushSize(size)}
-              >
-                <span
-                  className="rounded-full bg-slate-100"
-                  style={{ width: size / 2 + 4, height: size / 2 + 4 }}
+    <div className="flex h-full w-full items-center justify-center bg-slate-950/90 p-4 text-slate-50">
+      <div className="flex h-full w-full max-w-5xl flex-col gap-5 rounded-2xl border border-slate-900/60 bg-slate-950/60 p-4 shadow-lg lg:gap-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/70 p-3 shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="font-semibold">Brush</div>
+            <div className="flex items-center gap-2">
+              {BRUSH_SIZES.map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${
+                    brushSize === size ? 'border-indigo-400 bg-indigo-500/30' : 'border-slate-700 bg-slate-800'
+                  }`}
+                  onClick={() => setBrushSize(size)}
+                >
+                  <span
+                    className="rounded-full bg-slate-100"
+                    style={{ width: size / 2 + 4, height: size / 2 + 4 }}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="font-semibold">Colors</div>
+            <div className="flex items-center gap-2">
+              {PALETTE.map((color) => (
+                <button
+                  key={color}
+                  type="button"
+                  className={`h-7 w-7 rounded-full border transition ${
+                    brushColor === color ? 'border-white/80 scale-110' : 'border-white/20'
+                  }`}
+                  style={{ backgroundColor: color }}
+                  onClick={() => setBrushColor(color)}
                 />
-              </button>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="font-semibold">Colors</div>
           <div className="flex items-center gap-2">
-            {PALETTE.map((color) => (
-              <button
-                key={color}
-                type="button"
-                className={`h-7 w-7 rounded-full border transition ${
-                  brushColor === color ? 'border-white/80 scale-110' : 'border-white/20'
-                }`}
-                style={{ backgroundColor: color }}
-                onClick={() => setBrushColor(color)}
-              />
-            ))}
+            <Button variant="secondary" className="bg-slate-700 hover:bg-slate-600" onClick={handleClear}>
+              Clear
+            </Button>
+            {onGameEnd && (
+              <Button variant="secondary" className="bg-indigo-500 hover:bg-indigo-400" onClick={onGameEnd}>
+                Done
+              </Button>
+            )}
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Button variant="secondary" className="bg-slate-700 hover:bg-slate-600" onClick={handleClear}>
-            Clear
-          </Button>
-          {onGameEnd && (
-            <Button variant="secondary" className="bg-indigo-500 hover:bg-indigo-400" onClick={onGameEnd}>
-              Done
-            </Button>
-          )}
+        <div className="relative flex-1 min-h-[320px] overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-inner sm:min-h-[420px] lg:min-h-[560px] xl:min-h-[640px]">
+          <canvas
+            ref={canvasRef}
+            className="h-full w-full touch-none"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={finishDrawing}
+            onPointerLeave={finishDrawing}
+          />
         </div>
-      </div>
-      <div className="relative flex-1 overflow-hidden rounded-2xl border border-slate-800 bg-slate-950 shadow-inner">
-        <canvas
-          ref={canvasRef}
-          className="h-full w-full touch-none"
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={finishDrawing}
-          onPointerLeave={finishDrawing}
-        />
       </div>
     </div>
   );
