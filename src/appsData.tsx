@@ -53,8 +53,8 @@ export const InnerApps: AppInterface[] = [
       type: 'games',
       label: 'Matching Cards',
       icon: undefined,
-      // pass the component itself so AppLauncher can create it and inject props like onGameEnd
-      main: MatchingGame,
+      // pass the JSX element directly - AppLauncher will clone it with onGameEnd prop
+      main: <MatchingGame onGameEnd={() => {}} />,
       description: 'Test your memory and concentration with this classic matching game.',
     },
     {

@@ -200,7 +200,8 @@ function App() {
   // const [error, setError] = useState(null);
 
 
-  const appsContext = useContext(AppsContext);
+  // Use InnerApps directly instead of context since we're in the same component
+  const appsContext = InnerApps;
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
