@@ -69,6 +69,7 @@ interface Message {
   content: ClassificationResult | ExtractionResult | string | null,
   timestamp: string;
   isUser: boolean;
+  nodeId?: string;
   appsTypes?: 'activities' | 'games';
   audioDuration?: number;
   // step: ConversationStep;
@@ -265,6 +266,7 @@ function App() {
         content: `${currentQuestionData? currentQuestionData.question : "I couldn't quite get that, can you say it differenly please?"}`,
         timestamp: new Date().toISOString(),
         isUser: false,
+        nodeId: currentQuestionData?.id ?? 'system',
         // step: currentStep, 
         // result: result,
         };
@@ -307,14 +309,15 @@ function App() {
       const initConversation = async()=>{
         if (!conversationController) return
         try{
-          const question = await conversationController.getCurrentQuestion()?.question;
-          console.log(question);
+          const questionData = await conversationController.getCurrentQuestion();
+          console.log(questionData?.question);
           const firstMessage: Message = {
             id: Date.now().toString(),
             type: 'message',
-            content: question || "Hello User! I'm here with you, How are you feeling right now?",
+            content: questionData?.question || "Hello User! I'm here with you, How are you feeling right now?",
             timestamp: new Date().toISOString(),
             isUser: false,
+            nodeId: questionData?.id ?? 'system',
             // step: currentStep, 
             // result: null,
             }
@@ -340,6 +343,7 @@ function App() {
       content: e,
       timestamp: new Date().toISOString(),
       isUser: true,
+      nodeId: 'user',
       // step: currentStep, 
       // result: null,
       };
@@ -523,6 +527,7 @@ function App() {
         content: "We've entered alert mode. Stay sheltered—we'll get through the next few minutes together.",
         timestamp: new Date().toISOString(),
         isUser: false,
+        nodeId: 'alert_start',
       }
     ]);
 
@@ -543,6 +548,7 @@ function App() {
               content: "Look at that, we made it! It's safe to step out whenever you feel ready.",
               timestamp: new Date().toISOString(),
               isUser: false,
+              nodeId: 'alert_all_clear',
             }
           ]);
           return null;
@@ -670,9 +676,10 @@ function App() {
                 content={`${message.content}`}
                 // content={!message.result? `${message.content}` : message.result.type === 'classification' 
                 //     ? ` ${message.result.category} (${Math.round(message.result.confidence * 100)}% confidence)`
-                //     : ` "${message.result.extractedValue}" (${Math.round(.tsxmessage.result.confidence * │ 100)}% confidence)`} 
+                //     : ` "${message.result.extractedValue}" (${Math.round(.tsxmessage.result.confidence *  │ 100)}% confidence)`} 
                 timestamp={message.timestamp}
                 isUser={message.isUser}
+                nodeId={message.nodeId}
                 appsTypes={message.appsTypes}
                 audioDuration={message.audioDuration}
                 onAppLaunch={handleAppLaunch} // to activate button
