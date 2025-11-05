@@ -2,9 +2,9 @@ import { useContext, useState } from 'react';
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Play, Pause, Mic } from "lucide-react";
-import { AppsContext, InnerApps, type AppInterface } from '../appsContextApi';
+import { AppsContext, InnerApps, type AppInterface, quickActivityOrder } from '../appsContextApi';
 
-const QUICK_ACTIVITY_ORDER = ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint'] as const;
+
 
 interface ChatMessageProps {
   id: string;
@@ -136,7 +136,7 @@ export function ChatMessage({
             {type === 'app-buttons' && (
               <div className="grid grid-cols-2 gap-2">
                 {(appsTypes === 'activities'
-                  ? QUICK_ACTIVITY_ORDER.map(name => apps.find(app => app.name === name))
+                  ? quickActivityOrder.map(name => apps.find(app => app.name === name))
                   : apps.filter(app => (appsTypes ? app.type === appsTypes : true))
                 )
                   .filter((app): app is AppInterface => Boolean(app))

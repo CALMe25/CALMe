@@ -18,6 +18,8 @@ export interface AppInterface {
   description?: string | undefined;
 }
 
+export const quickActivityOrder = ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint', 'snake'] as const;
+
 export const InnerApps: AppInterface[] = [
     {
       name: 'breathing',

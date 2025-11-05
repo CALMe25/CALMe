@@ -1,8 +1,8 @@
 import { createContext } from 'react';
-import { InnerApps } from './appsData';
+import { InnerApps, quickActivityOrder } from './appsData';
 import type { AppInterface } from './appsData';
 
-export { InnerApps };
+export { InnerApps, quickActivityOrder };
 export type { AppInterface };
 
 export const AppsContext = createContext<AppInterface[] | undefined>(undefined);

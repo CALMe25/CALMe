@@ -8,7 +8,7 @@ import { Logo } from './assets/Logo';
 import { Button } from "./chat_interface/ui/button";
 import { MoreVertical, Settings, Accessibility } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import { AppsContext, AppsProvider, InnerApps, type AppInterface } from './appsContextApi';
+import { AppsContext, AppsProvider, InnerApps, type AppInterface, quickActivityOrder } from './appsContextApi';
 import AppLauncer from './AppLauncher/AppLauncer';
 import { ConversationController } from './conversation/ConversationController';
 import { AlertTimer } from './components/AlertTimer';
@@ -41,10 +41,7 @@ function App() {
 
   const appsContext = useContext(AppsContext);
   const resolvedApps = appsContext ?? InnerApps;
-  const quickActivityOrder = React.useMemo(
-    () => ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint', 'snake'] as const,
-    []
-  );
+
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const ACTIVITY_PROMPT_NODES = React.useMemo(
