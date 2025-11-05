@@ -554,12 +554,17 @@ function App() {
         >
           <div className="space-y-4 pb-4 mt-2">
             <div className="flex justify-center gap-4">
-                <Button onClick={() => handleAppLaunch(appsContext?.find(app => app.name === 'breathing'))}>
-                    Breathing Exercise
-                </Button>
-                <Button onClick={() => handleAppLaunch(appsContext?.find(app => app.name === 'matching-cards'))}>
-                    Matching Cards
-                </Button>
+                {appsContext.filter(app => app.name === 'breathing' || app.name === 'matching-cards').map((app, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleAppLaunch(app)}
+                    className="bg-indigo-500 text-white border-0 rounded-xl p-3 h-auto flex flex-col items-center gap-1 transition-all duration-200 hover:scale-105 text-xs"
+                    size="sm"
+                  >
+                    {app.icon}
+                    <span className="leading-tight">{app.label}</span>
+                  </Button>
+                ))}
             </div>
             {/* {messages.map((message) => (
               <>

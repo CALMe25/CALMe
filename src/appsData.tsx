@@ -52,7 +52,21 @@ export const InnerApps: AppInterface[] = [
       name: 'matching-cards',
       type: 'games',
       label: 'Matching Cards',
-      icon: undefined,
+      icon: (
+        // SVG icon for cards (playing cards grid pattern)
+        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <g>
+            <rect x="2" y="4" width="4" height="6" rx="1" opacity="0.3"/>
+            <rect x="7" y="4" width="4" height="6" rx="1" fill="currentColor"/>
+            <rect x="12" y="4" width="4" height="6" rx="1" opacity="0.3"/>
+            <rect x="17" y="4" width="4" height="6" rx="1" fill="currentColor"/>
+            <rect x="2" y="12" width="4" height="6" rx="1" fill="currentColor"/>
+            <rect x="7" y="12" width="4" height="6" rx="1" opacity="0.3"/>
+            <rect x="12" y="12" width="4" height="6" rx="1" fill="currentColor"/>
+            <rect x="17" y="12" width="4" height="6" rx="1" opacity="0.3"/>
+          </g>
+        </svg>
+      ),
       // pass the JSX element directly - AppLauncher will clone it with onGameEnd prop
       main: <MatchingGame onGameEnd={() => {}} />,
       description: 'Test your memory and concentration with this classic matching game.',
