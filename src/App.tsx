@@ -36,8 +36,14 @@ function App() {
   const [chosenApp, setChosenApp] = useState<AppInterface | undefined>();
   const [appsTimeout, setAppsTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
+  const [showQuickPanel, setShowQuickPanel] = useState(true);
 
   const appsContext = useContext(AppsContext);
+  const resolvedApps = appsContext ?? InnerApps;
+  const quickActivityOrder = React.useMemo(
+    () => ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint'] as const,
+    []
+  );
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
   const ACTIVITY_PROMPT_NODES = React.useMemo(
@@ -432,6 +438,43 @@ function App() {
         className="flex-1 overflow-y-auto px-4"
         >
           <div className="space-y-4 pb-4 mt-2">
+            {resolvedApps.length > 0 && (
+              <div className="mx-auto flex w-full max-w-md flex-col gap-3 rounded-2xl border border-border/60 bg-muted/30 p-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-sm font-medium text-muted-foreground">Quick Activities</h2>
+                    <p className="text-xs text-muted-foreground/70">Launch an activity any time</p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full text-muted-foreground hover:text-foreground"
+                    onClick={() => setShowQuickPanel((prev) => !prev)}
+                    aria-label={showQuickPanel ? 'Hide quick activities' : 'Show quick activities'}
+                  >
+                    {showQuickPanel ? '−' : '+'}
+                  </Button>
+                </div>
+                {showQuickPanel && (
+                  <div className="grid grid-cols-2 gap-3">
+                    {quickActivityOrder
+                      .map(name => resolvedApps.find(app => app.name === name))
+                      .filter((app): app is AppInterface => Boolean(app))
+                      .map(app => (
+                        <Button
+                          key={app.name}
+                          onClick={() => handleAppLaunch(app)}
+                          className="flex h-auto flex-col items-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500"
+                          size="sm"
+                        >
+                          {app.icon}
+                          <span className="leading-tight text-white">{app.label}</span>
+                        </Button>
+                      ))}
+                  </div>
+                )}
+              </div>
+            )}
             {conversationHistory.map((message, index) => (
               <ChatMessage
                 key={index}

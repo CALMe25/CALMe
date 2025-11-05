@@ -2,7 +2,9 @@ import { useContext, useState } from 'react';
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Play, Pause, Mic } from "lucide-react";
-import { AppsContext, type AppInterface } from '../appsContextApi';
+import { AppsContext, InnerApps, type AppInterface } from '../appsContextApi';
+
+const QUICK_ACTIVITY_ORDER = ['breathing', 'stretching', 'matching-cards', 'sudoku', 'paint'] as const;
 
 interface ChatMessageProps {
   id: string;
@@ -32,7 +34,7 @@ export function ChatMessage({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const apps = useContext(AppsContext);
+  const apps = useContext(AppsContext) ?? InnerApps;
 
   const formatTime = (timeString: string) => {
     return new Date(timeString).toLocaleTimeString([], { 
@@ -131,14 +133,16 @@ export function ChatMessage({
               <p className="text-sm leading-relaxed mb-3">{content}</p>
             )}
 
-            {type === 'app-buttons' && apps && apps.length > 0 && (
+            {type === 'app-buttons' && (
               <div className="grid grid-cols-2 gap-2">
-                {apps
-                  .filter(app => app.type === appsTypes)
-                  .slice(0, 4)
-                  .map((app, index) => (
+                {(appsTypes === 'activities'
+                  ? QUICK_ACTIVITY_ORDER.map(name => apps.find(app => app.name === name))
+                  : apps.filter(app => (appsTypes ? app.type === appsTypes : true))
+                )
+                  .filter((app): app is AppInterface => Boolean(app))
+                  .map((app) => (
                     <Button
-                      key={index}
+                      key={app.name}
                       onClick={() => onAppLaunch?.(app)}
                       className="bg-indigo-500 text-white border-0 rounded-xl p-3 h-auto flex flex-col items-center gap-1 transition-all duration-200 hover:scale-105 text-xs"
                       size="sm"
