@@ -48,7 +48,9 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
     <div style={{
       padding: '24px',
       background: 'linear-gradient(180deg, #0f172a 0%, #111827 100%)',
-      minHeight: '100%',
+      height: '100%',
+      maxHeight: '100vh',
+      overflowY: 'auto',
       display: 'flex',
       flexDirection: 'column',
       color: '#f8fafc',

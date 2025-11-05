@@ -109,7 +109,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4 font-inter">
+    <div className="flex flex-col items-center justify-start h-full max-h-screen bg-gray-100 p-4 font-inter overflow-y-auto">
       <h2 className="text-4xl font-bold text-blue-700 mb-8 rounded-lg p-3 shadow-md bg-white">
         Matching Game
       </h2>

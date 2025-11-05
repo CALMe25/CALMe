@@ -33,7 +33,12 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
 
   return (
     <div
-      className="relative w-full h-full pb-19 overflow-y-auto overflow-x-hidden bg-gray-900" // Dark background with scroll
+      className="relative w-full h-full pb-19 overflow-hidden bg-gray-900" // Dark background, overflow hidden for scaling
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
     >
         <button
           onClick={onClose}
@@ -53,7 +58,12 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
           </svg>
         </button>
       <div
-        className="min-h-full w-full flex items-center justify-center p-4"
+        className="w-full h-full flex items-center justify-center"
+        style={{
+          maxHeight: '100vh',
+          maxWidth: '100vw',
+          overflow: 'auto',
+        }}
       >
         {renderApp()}
 
