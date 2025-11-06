@@ -129,21 +129,21 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   return (
     <div className="flex h-full w-full items-center justify-center bg-background p-2 sm:p-3 md:p-4 text-foreground overflow-hidden">
       <div className="flex h-full w-full max-w-5xl flex-col gap-3 sm:gap-4 lg:gap-5 rounded-2xl border border-border bg-card p-2 sm:p-3 md:p-4 shadow-lg">
-        {/* Toolbar - properly responsive */}
-        <div className="flex flex-col gap-3 rounded-xl border border-border bg-muted/50 p-2 sm:p-3 shadow-lg">
+        {/* Toolbar - properly responsive with proportional scaling */}
+        <div className="flex flex-col gap-2.5 sm:gap-3 rounded-xl border border-border bg-muted/50 p-2.5 sm:p-3 md:p-4 shadow-lg">
           {/* Brush sizes section */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <div className="font-semibold text-sm sm:text-base whitespace-nowrap">Brush</div>
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="font-semibold text-xs xs:text-sm sm:text-base whitespace-nowrap">Brush</div>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {BRUSH_SIZES.map((size) => (
                 <button
                   key={size}
                   type="button"
                   onClick={() => setBrushSize(size)}
-                  className={`flex h-10 w-10 sm:h-11 sm:w-11 min-w-[44px] min-h-[44px] items-center justify-center rounded-full border transition active:scale-95 ${brushSize === size ? 'border-primary bg-primary/20 scale-110' : 'border-border bg-secondary'}`}>
+                  className={`flex h-11 w-11 xs:h-12 xs:w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 items-center justify-center rounded-full border-2 transition active:scale-95 ${brushSize === size ? 'border-primary bg-primary/20 scale-105' : 'border-border bg-secondary'}`}>
                   <span
                     className="rounded-full bg-foreground"
-                    style={{ width: size / 2 + 4, height: size / 2 + 4 }}
+                    style={{ width: size / 2 + 3, height: size / 2 + 3 }}
                   />
                 </button>
               ))}
@@ -151,14 +151,14 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
           </div>
           
           {/* Colors section */}
-          <div className="flex items-start gap-2 sm:gap-3">
-            <div className="font-semibold text-sm sm:text-base whitespace-nowrap pt-1">Colors</div>
+          <div className="flex items-start gap-2 sm:gap-2.5">
+            <div className="font-semibold text-xs xs:text-sm sm:text-base whitespace-nowrap pt-1.5">Colors</div>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {PALETTE.map((color) => (
                 <button
                   key={color}
                   type="button"
-                  className={`h-10 w-10 sm:h-11 sm:w-11 min-w-[44px] min-h-[44px] rounded-full border transition active:scale-95 ${brushColor === color ? 'border-primary scale-110 ring-2 ring-primary ring-offset-2' : 'border-border'}`}
+                  className={`h-11 w-11 xs:h-12 xs:w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 rounded-full border-2 transition active:scale-95 ${brushColor === color ? 'border-primary scale-105 ring-2 ring-primary ring-offset-1' : 'border-border'}`}
                   style={{ backgroundColor: color }}
                   onClick={() => setBrushColor(color)}
                   aria-label={`Select color ${color}`}
@@ -168,11 +168,11 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
           </div>
           
           {/* Action buttons */}
-          <div className="flex items-center gap-2 justify-end pt-1">
+          <div className="flex items-center gap-2 sm:gap-2.5 justify-end pt-1">
             <Button 
               variant="secondary" 
               onClick={handleClear}
-              className="min-h-[44px] h-10 px-4 sm:px-6"
+              className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
             >
               Clear
             </Button>
@@ -180,7 +180,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
               <Button 
                 variant="primary" 
                 onClick={onGameEnd}
-                className="min-h-[44px] h-10 px-4 sm:px-6"
+                className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
               >
                 Done
               </Button>

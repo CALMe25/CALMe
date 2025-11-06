@@ -20,6 +20,7 @@ export default {
         'safe-bottom': 'env(safe-area-inset-bottom)',
         'safe-left': 'env(safe-area-inset-left)',
         'safe-right': 'env(safe-area-inset-right)',
+        '13': '3.25rem', // 52px for intermediate responsive sizing
       },
       borderRadius: {
         lg: "var(--radius)",
