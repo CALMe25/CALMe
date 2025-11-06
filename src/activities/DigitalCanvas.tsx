@@ -132,18 +132,18 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
         {/* Toolbar - properly responsive with proportional scaling */}
         <div className="flex flex-col gap-2.5 sm:gap-3 rounded-xl border border-border bg-muted/50 p-2.5 sm:p-3 md:p-4 shadow-lg">
           {/* Brush sizes section */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            <div className="font-semibold text-xs xs:text-sm sm:text-base whitespace-nowrap">Brush</div>
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <div className="font-semibold text-[10px] xs:text-xs sm:text-sm whitespace-nowrap">Brush</div>
+            <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5">
               {BRUSH_SIZES.map((size) => (
                 <button
                   key={size}
                   type="button"
                   onClick={() => setBrushSize(size)}
-                  className={`flex h-11 w-11 xs:h-12 xs:w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 items-center justify-center rounded-full border-2 transition active:scale-95 ${brushSize === size ? 'border-primary bg-primary/20 scale-105' : 'border-border bg-secondary'}`}>
+                  className={`flex h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center rounded-full border transition active:scale-95 ${brushSize === size ? 'border-primary bg-primary/20 scale-105' : 'border-border bg-secondary'}`}>
                   <span
                     className="rounded-full bg-foreground"
-                    style={{ width: size / 2 + 3, height: size / 2 + 3 }}
+                    style={{ width: Math.max(3, size / 2 + 1), height: Math.max(3, size / 2 + 1) }}
                   />
                 </button>
               ))}
@@ -151,14 +151,14 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
           </div>
           
           {/* Colors section */}
-          <div className="flex items-start gap-2 sm:gap-2.5">
-            <div className="font-semibold text-xs xs:text-sm sm:text-base whitespace-nowrap pt-1.5">Colors</div>
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <div className="font-semibold text-[10px] xs:text-xs sm:text-sm whitespace-nowrap">Colors</div>
+            <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide pr-1">
               {PALETTE.map((color) => (
                 <button
                   key={color}
                   type="button"
-                  className={`h-11 w-11 xs:h-12 xs:w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 rounded-full border-2 transition active:scale-95 ${brushColor === color ? 'border-primary scale-105 ring-2 ring-primary ring-offset-1' : 'border-border'}`}
+                  className={`h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 rounded-full border transition active:scale-95 flex-shrink-0 ${brushColor === color ? 'border-primary scale-105 ring-1 ring-primary ring-offset-0' : 'border-border'}`}
                   style={{ backgroundColor: color }}
                   onClick={() => setBrushColor(color)}
                   aria-label={`Select color ${color}`}
