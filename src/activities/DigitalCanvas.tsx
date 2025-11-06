@@ -69,7 +69,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [brushSize, brushColor]); // Added brushSize and brushColor to dependencies
+  }, []);
 
   useEffect(() => {
     if (contextRef.current) {
@@ -124,7 +124,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     if (!canvas || !context) return;
     context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--background');
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    context.fillStyle = getCssVariableValue(brushColor);
+
   };
 
   return (
