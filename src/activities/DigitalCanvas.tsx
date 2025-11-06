@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../chat_interface/ui/button';
 
@@ -18,21 +19,20 @@ const PALETTE = [
   'var(--background)', 
 ] as const;
 
+const getCssVariableValue = (variable: string) => {
+  if (variable.startsWith('var(')) {
+    const varName = variable.substring(4, variable.length - 1);
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  }
+  return variable;
+};
+
 export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [brushSize, setBrushSize] = useState<typeof BRUSH_SIZES[number]>(BRUSH_SIZES[1]);
   const [brushColor, setBrushColor] = useState<string>(PALETTE[0]);
-
-
-  const getCssVariableValue = (variable: string) => {
-    if (variable.startsWith('var(')) {
-      const varName = variable.substring(4, variable.length - 1);
-      return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-    }
-    return variable;
-  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -69,7 +69,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [brushSize, brushColor]); // Added brushSize and brushColor to dependencies
 
   useEffect(() => {
     if (contextRef.current) {
@@ -124,7 +124,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     if (!canvas || !context) return;
     context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--background');
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    context.fillStyle = brushColor;
+    context.fillStyle = getCssVariableValue(brushColor);
   };
 
   return (
