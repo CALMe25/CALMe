@@ -138,6 +138,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                 <button
                   key={size}
                   type="button"
+                  onClick={() => setBrushSize(size)}
                   className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${brushSize === size ? 'border-primary bg-primary/20' : 'border-border bg-secondary'}`}>
                   <span
                     className="rounded-full bg-foreground"
