@@ -175,13 +175,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
       <div className="mt-4 sm:mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
         <button
           onClick={resetGame}
-          className="px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 w-full sm:w-auto"
+          className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 w-full sm:w-auto"
         >
           Reset Game
         </button>
         <button
           onClick={onGameEnd}
-          className="px-4 sm:px-6 py-2 sm:py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300 w-full sm:w-auto"
+          className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300 w-full sm:w-auto"
         >
           Exit Game
         </button>

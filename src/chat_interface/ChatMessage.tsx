@@ -74,16 +74,16 @@ export function ChatMessage({
 
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`}>
-      <div className={`flex items-start gap-3 max-w-[280px] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
-        <Avatar className="w-8 h-8 flex-shrink-0">
+      <div className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[280px] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+        <Avatar className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
           <AvatarImage src={isUser ? undefined : "/api/placeholder/32/32"} />
-          <AvatarFallback className={isUser ? "bg-primary text-primary-foreground" : "bg-muted"}>
+          <AvatarFallback className={isUser ? "bg-primary text-primary-foreground text-xs" : "bg-muted text-xs"}>
             {isUser ? "U" : "AI"}
           </AvatarFallback>
         </Avatar>
 
-        <div className="flex flex-col">
-          <div className={`px-4 py-3 rounded-2xl ${
+        <div className="flex flex-col min-w-0">
+          <div className={`px-3 sm:px-4 py-2 sm:py-3 rounded-2xl ${
             isUser 
               ? 'bg-primary text-primary-foreground rounded-br-sm' 
               : 'bg-muted text-muted-foreground rounded-bl-sm'
@@ -134,7 +134,7 @@ export function ChatMessage({
             )}
 
             {type === 'app-buttons' && (
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
                 {(appsTypes === 'activities'
                   ? quickActivityOrder.map(name => apps.find(app => app.name === name))
                   : apps.filter(app => (appsTypes ? app.type === appsTypes : true))
@@ -144,11 +144,11 @@ export function ChatMessage({
                     <Button
                       key={app.name}
                       onClick={() => onAppLaunch?.(app)}
-                      className="bg-indigo-500 text-white border-0 rounded-xl p-3 h-auto flex flex-col items-center gap-1 transition-all duration-200 hover:scale-105 text-xs"
+                      className="bg-indigo-500 text-white border-0 rounded-xl p-3 min-h-[60px] h-auto flex flex-col items-center justify-center gap-1 transition-all duration-200 hover:scale-105 active:scale-95 text-xs sm:text-sm"
                       size="sm"
                     >
-                      {app.icon}
-                      <span className="leading-tight">{app.label}</span>
+                      <div className="scale-110">{app.icon}</div>
+                      <span className="leading-tight text-center">{app.label}</span>
                     </Button>
                   ))}
               </div>

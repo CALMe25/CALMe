@@ -114,7 +114,31 @@
   * {
     @apply border-border outline-ring/50;
   }
+  
+  html,
   body {
     @apply bg-background text-foreground;
+    /* Prevent text size adjustment on mobile */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior: none;
+    /* Better font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  #root {
+    /* Ensure root takes full height */
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  
+  /* Touch target sizes for mobile - only apply to actual buttons */
+  button:not([class*="min-h-"]):not([class*="min-w-"]),
+  [role="button"]:not([class*="min-h-"]):not([class*="min-w-"]) {
+    min-height: 44px;
+    min-width: 44px;
   }
 }
