@@ -1,5 +1,4 @@
-
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '../chat_interface/ui/button';
 
 interface DigitalCanvasProps {
@@ -128,59 +127,77 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center bg-background p-4 text-foreground">
-      <div className="flex h-full w-full max-w-5xl flex-col gap-5 rounded-2xl border border-border bg-card p-4 shadow-lg lg:gap-6">
-        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-muted/50 p-3 shadow-lg">
-          <div className="flex items-center gap-3">
-            <div className="font-semibold">Brush</div>
-            <div className="flex items-center gap-2">
+    <div className="flex h-full w-full items-center justify-center bg-background p-2 sm:p-3 md:p-4 text-foreground overflow-hidden">
+      <div className="flex h-full w-full max-w-5xl flex-col gap-3 sm:gap-4 lg:gap-5 rounded-2xl border border-border bg-card p-2 sm:p-3 md:p-4 shadow-lg">
+        {/* Toolbar - properly responsive with proportional scaling */}
+        <div className="flex flex-col gap-2.5 sm:gap-3 rounded-xl border border-border bg-muted/50 p-2.5 sm:p-3 md:p-4 shadow-lg">
+          {/* Brush sizes section */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <div className="font-semibold text-xs xs:text-sm sm:text-base whitespace-nowrap">Brush</div>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {BRUSH_SIZES.map((size) => (
                 <button
                   key={size}
                   type="button"
                   onClick={() => setBrushSize(size)}
-                  className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${brushSize === size ? 'border-primary bg-primary/20' : 'border-border bg-secondary'}`}>
+                  className={`flex h-11 w-11 xs:h-12 xs:w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 items-center justify-center rounded-full border-2 transition active:scale-95 ${brushSize === size ? 'border-primary bg-primary/20 scale-105' : 'border-border bg-secondary'}`}>
                   <span
                     className="rounded-full bg-foreground"
-                    style={{ width: size / 2 + 4, height: size / 2 + 4 }}
+                    style={{ width: size / 2 + 3, height: size / 2 + 3 }}
                   />
                 </button>
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="font-semibold">Colors</div>
-            <div className="flex items-center gap-2">
+          
+          {/* Colors section */}
+          <div className="flex items-start gap-2 sm:gap-2.5">
+            <div className="font-semibold text-xs xs:text-sm sm:text-base whitespace-nowrap pt-1.5">Colors</div>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {PALETTE.map((color) => (
                 <button
                   key={color}
                   type="button"
-                  className={`h-7 w-7 rounded-full border transition ${brushColor === color ? 'border-primary scale-110' : 'border-border'}`}
+                  className={`h-11 w-11 xs:h-12 xs:w-12 sm:h-13 sm:w-13 md:h-14 md:w-14 rounded-full border-2 transition active:scale-95 ${brushColor === color ? 'border-primary scale-105 ring-2 ring-primary ring-offset-1' : 'border-border'}`}
                   style={{ backgroundColor: color }}
                   onClick={() => setBrushColor(color)}
+                  aria-label={`Select color ${color}`}
                 />
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="secondary" onClick={handleClear}>
+          
+          {/* Action buttons */}
+          <div className="flex items-center gap-2 sm:gap-2.5 justify-end pt-1">
+            <Button 
+              variant="secondary" 
+              onClick={handleClear}
+              className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
+            >
               Clear
             </Button>
             {onGameEnd && (
-              <Button variant="primary" onClick={onGameEnd}>
+              <Button 
+                variant="primary" 
+                onClick={onGameEnd}
+                className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
+              >
                 Done
               </Button>
             )}
           </div>
         </div>
-        <div className="relative flex-1 min-h-[320px] overflow-hidden rounded-2xl border border-border bg-background shadow-inner sm:min-h-[420px] lg:min-h-[560px] xl:min-h-[640px]">
+        
+        {/* Canvas area - properly responsive */}
+        <div className="relative flex-1 min-h-[280px] sm:min-h-[380px] md:min-h-[480px] lg:min-h-[560px] overflow-hidden rounded-2xl border border-border bg-background shadow-inner">
           <canvas
             ref={canvasRef}
-            className="h-full w-full touch-none"
+            className="absolute inset-0 h-full w-full touch-none"
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={finishDrawing}
             onPointerLeave={finishDrawing}
+            onPointerCancel={finishDrawing}
           />
         </div>
       </div>

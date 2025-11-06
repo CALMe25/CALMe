@@ -175,17 +175,17 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       <div className="mb-2 flex gap-1.5 md:gap-2">
         <button
           onClick={() => startNewGame('easy')}
-          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'easy' ? 'bg-green-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
+          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'easy' ? 'bg-green-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
           Easy
         </button>
         <button
           onClick={() => startNewGame('medium')}
-          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'medium' ? 'bg-yellow-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
+          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'medium' ? 'bg-yellow-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
           Medium
         </button>
         <button
           onClick={() => startNewGame('hard')}
-          className={`px-2 py-1 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'hard' ? 'bg-red-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
+          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'hard' ? 'bg-red-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
           Hard
         </button>
       </div>
@@ -238,14 +238,14 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => startNewGame()}
-          className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-primary text-primary-foreground hover:bg-primary/80 rounded font-semibold transition-colors shadow-sm"
+          className="min-h-[44px] px-3 py-2 text-xs sm:text-sm md:text-base bg-primary text-primary-foreground hover:bg-primary/80 rounded font-semibold transition-colors shadow-sm"
         >
           New Game
         </button>
         {onGameEnd && (
           <button
             onClick={onGameEnd}
-            className="px-3 py-1.5 text-xs sm:text-sm md:text-base bg-secondary text-secondary-foreground hover:bg-accent rounded font-semibold transition-colors shadow-sm"
+            className="min-h-[44px] px-3 py-2 text-xs sm:text-sm md:text-base bg-secondary text-secondary-foreground hover:bg-accent rounded font-semibold transition-colors shadow-sm"
           >
             Exit
           </button>

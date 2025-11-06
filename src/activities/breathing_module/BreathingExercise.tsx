@@ -45,73 +45,73 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
   };
 
   return (
-    <div className="p-3 bg-white dark:bg-gradient-to-b dark:from-slate-900 dark:to-slate-800 h-full max-h-screen overflow-y-auto flex flex-col text-slate-900 dark:text-slate-50 font-sans">
+    <div className="p-3 sm:p-4 bg-white dark:bg-gradient-to-b dark:from-slate-900 dark:to-slate-800 h-full max-h-screen overflow-y-auto flex flex-col text-slate-900 dark:text-slate-50 font-sans">
       <div className="max-w-xl mx-auto w-full px-2">
-        <header className="flex justify-between items-center mb-4">
+        <header className="flex justify-between items-center mb-3 sm:mb-4">
           <div>
-            <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">Breathing Exercise</h1>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">Follow the rhythm to calm your nervous system.</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 mb-1">Breathing Exercise</h1>
+            <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm">Follow the rhythm to calm your nervous system.</p>
           </div>
         </header>
 
-        <section className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-5">
+        <section className="grid gap-2 sm:gap-3 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 mb-4 sm:mb-5">
           {Object.entries(TIMING_PRESETS).map(([keyName, preset]) => (
             <button
               key={keyName}
               onClick={() => setPresetKey(keyName as keyof typeof TIMING_PRESETS)}
-              className={`p-3 rounded-2xl border text-left transition-all duration-200 ${presetKey === keyName ? 'border-blue-400 bg-blue-50 dark:bg-blue-500/15 dark:border-blue-500/30' : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50'}`}>
-              <div className="font-semibold text-slate-800 dark:text-slate-200 mb-1">{preset.label}</div>
+              className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all duration-200 min-h-[60px] active:scale-95 ${presetKey === keyName ? 'border-blue-400 bg-blue-50 dark:bg-blue-500/15 dark:border-blue-500/30' : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50'}`}>
+              <div className="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200 mb-1">{preset.label}</div>
               <div className="text-xs text-slate-500 dark:text-slate-400">
-                {preset.timings[0] / 1000}s inhale · {preset.timings[1] / 1000}s hold · {preset.timings[2] / 1000}s exhale
+                {preset.timings[0] / 1000}s · {preset.timings[1] / 1000}s · {preset.timings[2] / 1000}s
               </div>
             </button>
           ))}
 
-          <div className="p-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-slate-200">
-            <div className="font-semibold mb-2">Cycles</div>
-            <div className="flex items-center gap-2">
+          <div className="p-2.5 sm:p-3 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-800 dark:text-slate-200 min-h-[60px]">
+            <div className="font-semibold text-sm sm:text-base mb-2">Cycles</div>
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 onClick={() => setRepeatCount(prev => Math.max(2, prev - 1))}
-                className="w-8 h-8 rounded-md border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-xl leading-none">
+                className="w-9 h-9 sm:w-10 sm:h-10 min-w-[44px] min-h-[44px] rounded-md border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-xl leading-none active:scale-95">
                 −
               </button>
-              <span className="text-lg font-semibold">{repeatCount}</span>
+              <span className="text-base sm:text-lg font-semibold min-w-[2ch] text-center">{repeatCount}</span>
               <button
                 onClick={() => setRepeatCount(prev => Math.min(12, prev + 1))}
-                className="w-8 h-8 rounded-md border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-xl leading-none">
+                className="w-9 h-9 sm:w-10 sm:h-10 min-w-[44px] min-h-[44px] rounded-md border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-xl leading-none active:scale-95">
                 +
               </button>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1.5 hidden xs:block">
               Recommended: 4–8 cycles.
             </p>
           </div>
         </section>
 
-        <div className="relative h-72 rounded-2xl bg-slate-100 dark:bg-slate-800/50 dark:bg-radial-gradient-t-blue-900/30 border border-slate-200 dark:border-blue-500/20 flex items-center justify-center mb-5 overflow-hidden">
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 text-blue-400 dark:text-blue-300 font-semibold tracking-widest uppercase text-xs">{label}</div>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-slate-600 dark:text-slate-400 text-sm">{isActive ? 'Follow the breathing guide' : 'Paused'}</div>
+        <div className="relative h-48 xs:h-56 sm:h-72 rounded-2xl bg-slate-100 dark:bg-slate-800/50 dark:bg-radial-gradient-t-blue-900/30 border border-slate-200 dark:border-blue-500/20 flex items-center justify-center mb-4 sm:mb-5 overflow-hidden">
+          <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 text-blue-400 dark:text-blue-300 font-semibold tracking-widest uppercase text-xs">{label}</div>
+          <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 text-slate-600 dark:text-slate-400 text-xs sm:text-sm">{isActive ? 'Follow the breathing guide' : 'Paused'}</div>
 
           {isActive && (
             <BreathingCircle key={`${key}-${presetKey}-${repeatCount}`} timings={timings} repeat={repeatCount} />
           )}
         </div>
 
-        <div className="flex gap-3 mb-4 flex-wrap">
+        <div className="flex gap-2 sm:gap-3 mb-4 flex-col xs:flex-row">
           <button
             onClick={restartExercise}
-            className="flex-1 basis-32 p-2.5 bg-blue-600 text-white border-none rounded-xl text-sm font-semibold cursor-pointer transition-colors hover:bg-blue-700">
+            className="flex-1 min-h-[48px] p-3 bg-blue-600 text-white border-none rounded-xl text-sm font-semibold cursor-pointer transition-all hover:bg-blue-700 active:scale-95">
             Restart Exercise
           </button>
           <button
             onClick={handleComplete}
-            className="flex-1 basis-32 p-2.5 bg-emerald-500 text-white border-none rounded-xl text-sm font-semibold cursor-pointer transition-colors hover:bg-emerald-600">
+            className="flex-1 min-h-[48px] p-3 bg-emerald-500 text-white border-none rounded-xl text-sm font-semibold cursor-pointer transition-all hover:bg-emerald-600 active:scale-95">
             I Feel Better
           </button>
         </div>
 
-        <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-sm">
-          <h3 className="text-base font-semibold mb-2 text-slate-700 dark:text-slate-200">How it helps</h3>
+        <div className="p-3 sm:p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-xs sm:text-sm">
+          <h3 className="text-sm sm:text-base font-semibold mb-2 text-slate-700 dark:text-slate-200">How it helps</h3>
           <ul className="list-disc list-inside space-y-1.5">
             <li>Inhale through your nose for 4 seconds</li>
             <li>Hold your breath gently for 7 seconds — allow your body to soften</li>
