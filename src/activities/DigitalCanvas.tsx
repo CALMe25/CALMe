@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../chat_interface/ui/button';
 
@@ -17,6 +18,14 @@ const PALETTE = [
   '#ec4899', 
   'var(--background)', 
 ] as const;
+
+const getCssVariableValue = (variable: string) => {
+  if (variable.startsWith('var(')) {
+    const varName = variable.substring(4, variable.length - 1);
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  }
+  return variable;
+};
 
 export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -48,7 +57,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
       context.lineCap = 'round';
       context.lineJoin = 'round';
       context.lineWidth = brushSize;
-      context.strokeStyle = brushColor;
+      context.strokeStyle = getCssVariableValue(brushColor);
       context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--background');
       context.fillRect(0, 0, rect.width, rect.height);
 
@@ -70,7 +79,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
 
   useEffect(() => {
     if (contextRef.current) {
-      contextRef.current.strokeStyle = brushColor;
+      contextRef.current.strokeStyle = getCssVariableValue(brushColor);
     }
   }, [brushColor]);
 
@@ -115,7 +124,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     if (!canvas || !context) return;
     context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--background');
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-    context.fillStyle = brushColor;
+
   };
 
   return (
@@ -129,6 +138,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                 <button
                   key={size}
                   type="button"
+                  onClick={() => setBrushSize(size)}
                   className={`flex h-7 w-7 items-center justify-center rounded-full border transition ${brushSize === size ? 'border-primary bg-primary/20' : 'border-border bg-secondary'}`}>
                   <span
                     className="rounded-full bg-foreground"
