@@ -77,13 +77,13 @@ export default function AppLauncer ({chosenApp, onClose}: AppLauncherProps) {
       role="dialog"
       aria-modal="true"
       aria-label={chosenApp?.label ?? 'Activity'}
-      className="flex h-full w-full items-center justify-center bg-slate-950/70 px-3 py-4 sm:px-6"
+      className="flex h-full w-full items-center justify-center bg-slate-950/70 px-3 py-4 backdrop-blur-sm sm:px-6"
       style={{
         paddingTop: `calc(env(safe-area-inset-top, 0px) + 1rem)`,
         paddingBottom: `calc(env(safe-area-inset-bottom, 0px) + 1rem)`,
       }}
     >
-      <div className="relative flex h-full w-full max-w-6xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-gray-900/95 text-white shadow-2xl">
+      <div className="relative flex h-full w-full max-w-6xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-gray-900/90 text-white shadow-[0_25px_80px_rgba(15,23,42,0.75)]">
         <header className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 sm:px-6">
           <div className="flex flex-col">
             <span className="text-xs font-semibold uppercase tracking-widest text-white/60">Activity</span>

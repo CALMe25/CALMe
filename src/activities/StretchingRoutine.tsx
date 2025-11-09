@@ -183,39 +183,41 @@ export default function StretchingRoutine() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-col gap-2 xs:flex-row xs:flex-wrap sm:gap-3">
-            <button
-              onClick={previousExercise}
-              disabled={currentExercise === 0}
-              className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
-            >
-              ← Previous
-            </button>
+          <div className="sticky bottom-3 z-20 mt-6 space-y-2 rounded-2xl border border-border/60 bg-card/95 p-3 shadow-lg backdrop-blur-sm xs:flex xs:flex-col xs:space-y-2 sm:static sm:mt-6 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-0 sm:space-y-0">
+            <div className="flex flex-col gap-2 xs:flex-row xs:flex-wrap sm:gap-3">
+              <button
+                onClick={previousExercise}
+                disabled={currentExercise === 0}
+                className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
+              >
+                ← Previous
+              </button>
+
+              <button
+                onClick={isActive ? () => {
+                  if (timer) clearInterval(timer);
+                  setIsActive(false);
+                } : startExercise}
+                className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
+                {isActive ? 'Pause' : timeRemaining === 0 ? 'Restart' : 'Start'}
+              </button>
+
+              <button
+                onClick={nextExercise}
+                disabled={currentExercise === exercises.length - 1}
+                className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
+              >
+                Next →
+              </button>
+            </div>
 
             <button
-              onClick={isActive ? () => {
-                if (timer) clearInterval(timer);
-                setIsActive(false);
-              } : startExercise}
-              className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
-              {isActive ? 'Pause' : timeRemaining === 0 ? 'Restart' : 'Start'}
-            </button>
-
-            <button
-              onClick={nextExercise}
-              disabled={currentExercise === exercises.length - 1}
-              className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
+              onClick={resetRoutine}
+              className="w-full min-h-[44px] rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground transition-all hover:bg-primary/80 active:scale-95 sm:text-base"
             >
-              Next →
+              Reset Routine
             </button>
           </div>
-
-          <button
-            onClick={resetRoutine}
-            className="mt-3 w-full min-h-[44px] rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground transition-all hover:bg-primary/80 active:scale-95 sm:mt-4 sm:text-base"
-          >
-            Reset Routine
-          </button>
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground sm:text-sm">

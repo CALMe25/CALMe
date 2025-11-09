@@ -33,10 +33,12 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     return initialCards.sort(() => Math.random() - 0.5);
   };
 
+  const totalPairs = cardEmojis.length;
   const [cards, setCards] = useState<Card[]>(initializeCards());
   const [flippedCards, setFlippedCards] = useState<number[]>([]); // Stores IDs of currently flipped cards
   const [matchesFound, setMatchesFound] = useState(0);
   const [isChecking, setIsChecking] = useState(false); // To prevent flipping more than 2 cards at once
+  const [showWinBanner, setShowWinBanner] = useState(false);
 
   // Effect to check for matches when two cards are flipped
   useEffect(() => {
@@ -70,16 +72,12 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     }
   }, [flippedCards, cards]);
 
-  // Effect to check if the game is won
+  // Effect to surface a celebration banner when the board is cleared
   useEffect(() => {
-    // There are 6 pairs for a 3x4 grid, so 6 matches to win
-    if (matchesFound === 6) {
-      // NOTE: Using alert() is generally discouraged in React apps for better UX.
-      // Consider replacing this with a custom modal component or a simple message display.
-      alert('Congratulations! You matched all pairs!');
-      onGameEnd(); // Notify parent component (App.tsx)
+    if (matchesFound === totalPairs) {
+      setShowWinBanner(true);
     }
-  }, [matchesFound, onGameEnd]);
+  }, [matchesFound, totalPairs]);
 
   // Handle card click
   const handleCardClick = (clickedCard: Card) => {
@@ -104,13 +102,27 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     setFlippedCards([]);
     setMatchesFound(0);
     setIsChecking(false);
+    setShowWinBanner(false);
   };
 
   return (
     <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6 md:mb-8 rounded-lg p-2 sm:p-3 shadow-md bg-card">
-        Matching Game
-      </h2>
+      <div className="mb-3 w-full rounded-lg bg-card p-3 text-center shadow-md sm:mb-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-primary">Matching Game</h2>
+        <p className="text-sm text-muted-foreground">{matchesFound} / {totalPairs} matches complete</p>
+      </div>
+
+      {showWinBanner && (
+        <div className="mb-4 flex w-full items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900 shadow-sm sm:mb-5">
+          <div className="text-sm sm:text-base font-semibold">🎉 Great work! You cleared the board.</div>
+          <button
+            onClick={resetGame}
+            className="rounded-full border border-amber-400 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-900 transition hover:bg-amber-100"
+          >
+            Play again
+          </button>
+        </div>
+      )}
 
       {/* Responsive grid: 2 cols on mobile, 3 on tablet, 4 on desktop */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 md:gap-10 p-4 bg-card rounded-xl shadow-lg border border-border w-full max-w-full"  style={{ maxWidth: '100%' }}>

@@ -6,6 +6,7 @@ interface SnakeGameProps {
 
 const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [canvasSize, setCanvasSize] = useState(400);
 
@@ -124,6 +125,41 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     setGameOver(false);
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLCanvasElement>) => {
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLCanvasElement>) => {
+    const start = touchStartRef.current;
+    const touch = event.changedTouches[0];
+    touchStartRef.current = null;
+    if (!start || !touch) return;
+
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+    const threshold = 20;
+
+    if (Math.max(absX, absY) < threshold) return;
+
+    if (absX > absY) {
+      if (dx > 0 && direction.x === 0) {
+        setDirection({ x: 1, y: 0 });
+      } else if (dx < 0 && direction.x === 0) {
+        setDirection({ x: -1, y: 0 });
+      }
+    } else {
+      if (dy > 0 && direction.y === 0) {
+        setDirection({ x: 0, y: 1 });
+      } else if (dy < 0 && direction.y === 0) {
+        setDirection({ x: 0, y: -1 });
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-full p-5 bg-background text-foreground">
       <h1 className="text-2xl font-bold mb-5">Snake Game</h1>
@@ -131,7 +167,10 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
         ref={canvasRef}
         width={canvasSize}
         height={canvasSize}
-        className="border border-border max-w-full"
+        className="border border-border max-w-full touch-none"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={() => (touchStartRef.current = null)}
       />
       <div className="mt-5">
         <button onClick={() => setDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>
