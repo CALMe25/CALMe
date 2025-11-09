@@ -136,6 +136,14 @@ export default function StretchingRoutine() {
     }
   };
 
+  const pauseExercise = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setIsActive(false);
+  };
+
   const resetRoutine = () => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
@@ -177,7 +185,7 @@ export default function StretchingRoutine() {
             </div>
 
             <div className="flex-1 rounded-xl border border-border/60 bg-muted/30 p-3 sm:p-4">
-              <h4 className="text-base sm:text-lg font-semibold mb-3 text-primary">Instructions</h4>
+              <h4 className="text-base sm:text-lg font-semibold mb-3 text-primary">Instructions:</h4>
               <ol className="list-decimal list-inside space-y-2">
                 {exercise.instructions.map((instruction, index) => (
                   <li key={index} className="text-sm sm:text-base text-muted-foreground">
@@ -199,13 +207,7 @@ export default function StretchingRoutine() {
               </button>
 
               <button
-                onClick={isActive ? () => {
-                if (timerRef.current) {
-                  clearInterval(timerRef.current);
-                  timerRef.current = null;
-                }
-                  setIsActive(false);
-                } : startExercise}
+                onClick={isActive ? pauseExercise : startExercise}
                 className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
                 {isActive ? 'Pause' : timeRemaining === 0 ? 'Restart' : 'Start'}
               </button>
