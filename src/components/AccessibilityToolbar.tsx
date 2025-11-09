@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 interface AccessibilityToolbarProps {
   open: boolean;
@@ -199,6 +200,11 @@ export function AccessibilityToolbar({ open, onClose }: AccessibilityToolbarProp
         }
       } catch (error) {
         console.error(error);
+        if (!cancelled) {
+          toast.error('Failed to load accessibility toolbar', {
+            description: 'The accessibility toolbar script could not be loaded. Please try again or contact support.',
+          });
+        }
       } finally {
         if (!cancelled) {
           onClose();

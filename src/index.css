@@ -167,8 +167,8 @@
 }
 
 :root.a11y-high-contrast body {
-  background-color: #050505 !important;
-  color: #ffffff !important;
+  background-color: #050505;
+  color: #ffffff;
 }
 
 :root.a11y-dyslexic-font body {
@@ -180,8 +180,8 @@
 :root.a11y-highlight-links button.link,
 :root.a11y-highlight-links [role="link"] {
   position: relative;
-  text-decoration: underline solid 3px currentColor !important;
-  outline: 2px solid currentColor !important;
+  text-decoration: underline solid 3px currentColor;
+  outline: 2px solid currentColor;
   outline-offset: 2px;
 }
 

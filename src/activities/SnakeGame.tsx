@@ -146,13 +146,25 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const handlePointerStart = (event: React.PointerEvent<HTMLCanvasElement>) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     pointerStartRef.current = { x: event.clientX, y: event.clientY };
-    event.currentTarget.setPointerCapture(event.pointerId);
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch (error) {
+      // Pointer capture failed - may not be supported or interaction requirements not met
+      console.debug('setPointerCapture failed:', error);
+    }
   };
 
   const handlePointerEnd = (event: React.PointerEvent<HTMLCanvasElement>) => {
     const start = pointerStartRef.current;
     pointerStartRef.current = null;
-    event.currentTarget.releasePointerCapture(event.pointerId);
+    try {
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+    } catch (error) {
+      // Release pointer capture failed - may not have had capture
+      console.debug('releasePointerCapture failed:', error);
+    }
     if (!start) return;
 
     const dx = event.clientX - start.x;
