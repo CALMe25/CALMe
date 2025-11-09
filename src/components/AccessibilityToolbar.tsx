@@ -217,7 +217,6 @@ export function AccessibilityToolbar({ open, onClose }: AccessibilityToolbarProp
       try {
         await loadToolbarScript();
         if (cancelled) return;
-        patchToolbarBehavior();
         const toolbar = createToolbarInstance();
         if (toolbar?.openBox) {
           toolbar.openBox();
