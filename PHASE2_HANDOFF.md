@@ -29,7 +29,7 @@ src/
 ├── conversation/             # Conversation flow (placeholder)
 │   └── ConversationController.ts
 ├── AppLauncher/              # Activity launcher
-│   └── AppLauncer.tsx
+│   └── AppLauncher.tsx
 ├── appsContextApi.tsx        # Apps context and configuration
 └── App.tsx                   # Main app with basic flow logic
 ```

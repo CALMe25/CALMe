@@ -6,6 +6,7 @@ interface SnakeGameProps {
 
 const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [canvasSize, setCanvasSize] = useState(400);
 
@@ -18,6 +19,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const [snake, setSnake] = useState(initialSnake);
   const [food, setFood] = useState(initialFood);
   const [direction, setDirection] = useState({ x: 1, y: 0 });
+  const directionRef = useRef(direction);
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,19 +32,24 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   }, []);
 
   useEffect(() => {
+    directionRef.current = direction;
+  }, [direction]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      const currentDirection = directionRef.current;
       switch (e.key) {
         case 'ArrowUp':
-          if (direction.y === 0) setDirection({ x: 0, y: -1 });
+          if (currentDirection.y === 0) setDirection({ x: 0, y: -1 });
           break;
         case 'ArrowDown':
-          if (direction.y === 0) setDirection({ x: 0, y: 1 });
+          if (currentDirection.y === 0) setDirection({ x: 0, y: 1 });
           break;
         case 'ArrowLeft':
-          if (direction.x === 0) setDirection({ x: -1, y: 0 });
+          if (currentDirection.x === 0) setDirection({ x: -1, y: 0 });
           break;
         case 'ArrowRight':
-          if (direction.x === 0) setDirection({ x: 1, y: 0 });
+          if (currentDirection.x === 0) setDirection({ x: 1, y: 0 });
           break;
         default:
           break;
@@ -51,7 +58,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [direction]);
+  }, []);
 
   useEffect(() => {
     if (gameOver) return;
@@ -124,6 +131,43 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     setGameOver(false);
   };
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLCanvasElement>) => {
+    const touch = event.changedTouches[0];
+    if (!touch) return;
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLCanvasElement>) => {
+    const start = touchStartRef.current;
+    const touch = event.changedTouches[0];
+    touchStartRef.current = null;
+    if (!start || !touch) return;
+
+    const dx = touch.clientX - start.x;
+    const dy = touch.clientY - start.y;
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+    const threshold = 20;
+
+    if (Math.max(absX, absY) < threshold) return;
+
+    const currentDirection = directionRef.current;
+
+    if (absX > absY) {
+      if (dx > 0 && currentDirection.x === 0) {
+        setDirection({ x: 1, y: 0 });
+      } else if (dx < 0 && currentDirection.x === 0) {
+        setDirection({ x: -1, y: 0 });
+      }
+    } else {
+      if (dy > 0 && currentDirection.y === 0) {
+        setDirection({ x: 0, y: 1 });
+      } else if (dy < 0 && currentDirection.y === 0) {
+        setDirection({ x: 0, y: -1 });
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-full p-5 bg-background text-foreground">
       <h1 className="text-2xl font-bold mb-5">Snake Game</h1>
@@ -131,7 +175,10 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
         ref={canvasRef}
         width={canvasSize}
         height={canvasSize}
-        className="border border-border max-w-full"
+        className="border border-border max-w-full touch-none"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={() => (touchStartRef.current = null)}
       />
       <div className="mt-5">
         <button onClick={() => setDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>

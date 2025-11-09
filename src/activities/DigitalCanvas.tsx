@@ -178,7 +178,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
             </Button>
             {onGameEnd && (
               <Button 
-                variant="primary" 
+                variant="default" 
                 onClick={onGameEnd}
                 className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
               >
