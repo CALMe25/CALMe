@@ -16,6 +16,9 @@ WORKDIR /app
 # Add package files
 COPY package*.json ./
 
+# Copy `generate-notice.ts` for postinstall script
+COPY generate-notice.ts ./
+
 # Install all dependencies (including dev dependencies for build)
 RUN npm ci --silent
 
