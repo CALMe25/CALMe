@@ -6,7 +6,7 @@ interface SnakeGameProps {
 
 const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [canvasSize, setCanvasSize] = useState(400);
 
@@ -20,6 +20,19 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const [food, setFood] = useState(initialFood);
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const directionRef = useRef(direction);
+
+  const setDirectionImmediate = (dir: { x: number; y: number }) => {
+    directionRef.current = dir;
+    setDirection(dir);
+  };
+
+  const tryChangeDirection = (next: { x: number; y: number }) => {
+    const current = directionRef.current;
+    if ((next.x !== 0 && current.x !== 0) || (next.y !== 0 && current.y !== 0)) {
+      return;
+    }
+    setDirectionImmediate(next);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,19 +50,18 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      const currentDirection = directionRef.current;
       switch (e.key) {
         case 'ArrowUp':
-          if (currentDirection.y === 0) setDirection({ x: 0, y: -1 });
+          tryChangeDirection({ x: 0, y: -1 });
           break;
         case 'ArrowDown':
-          if (currentDirection.y === 0) setDirection({ x: 0, y: 1 });
+          tryChangeDirection({ x: 0, y: 1 });
           break;
         case 'ArrowLeft':
-          if (currentDirection.x === 0) setDirection({ x: -1, y: 0 });
+          tryChangeDirection({ x: -1, y: 0 });
           break;
         case 'ArrowRight':
-          if (currentDirection.x === 0) setDirection({ x: 1, y: 0 });
+          tryChangeDirection({ x: 1, y: 0 });
           break;
         default:
           break;
@@ -127,45 +139,57 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const restartGame = () => {
     setSnake(initialSnake);
     setFood(initialFood);
-    setDirection({ x: 1, y: 0 });
+    setDirectionImmediate({ x: 1, y: 0 });
     setGameOver(false);
   };
 
-  const handleTouchStart = (event: React.TouchEvent<HTMLCanvasElement>) => {
-    const touch = event.changedTouches[0];
-    if (!touch) return;
-    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  const handlePointerStart = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    pointerStartRef.current = { x: event.clientX, y: event.clientY };
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture failed - graceful degradation, no action needed
+    }
   };
 
-  const handleTouchEnd = (event: React.TouchEvent<HTMLCanvasElement>) => {
-    const start = touchStartRef.current;
-    const touch = event.changedTouches[0];
-    touchStartRef.current = null;
-    if (!start || !touch) return;
+  const handlePointerEnd = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    const start = pointerStartRef.current;
+    pointerStartRef.current = null;
+    try {
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+    } catch {
+      // Release pointer capture failed - graceful degradation, no action needed
+    }
+    if (!start) return;
 
-    const dx = touch.clientX - start.x;
-    const dy = touch.clientY - start.y;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
     const absX = Math.abs(dx);
     const absY = Math.abs(dy);
     const threshold = 20;
 
     if (Math.max(absX, absY) < threshold) return;
 
-    const currentDirection = directionRef.current;
-
     if (absX > absY) {
-      if (dx > 0 && currentDirection.x === 0) {
-        setDirection({ x: 1, y: 0 });
-      } else if (dx < 0 && currentDirection.x === 0) {
-        setDirection({ x: -1, y: 0 });
+      if (dx > 0) {
+        tryChangeDirection({ x: 1, y: 0 });
+      } else if (dx < 0) {
+        tryChangeDirection({ x: -1, y: 0 });
       }
     } else {
-      if (dy > 0 && currentDirection.y === 0) {
-        setDirection({ x: 0, y: 1 });
-      } else if (dy < 0 && currentDirection.y === 0) {
-        setDirection({ x: 0, y: -1 });
+      if (dy > 0) {
+        tryChangeDirection({ x: 0, y: 1 });
+      } else if (dy < 0) {
+        tryChangeDirection({ x: 0, y: -1 });
       }
     }
+  };
+
+  const handlePointerCancel = () => {
+    pointerStartRef.current = null;
   };
 
   return (
@@ -176,17 +200,18 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
         width={canvasSize}
         height={canvasSize}
         className="border border-border max-w-full touch-none"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onTouchCancel={() => (touchStartRef.current = null)}
+        onPointerDown={handlePointerStart}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerCancel}
+        onPointerLeave={handlePointerCancel}
       />
       <div className="mt-5">
-        <button onClick={() => setDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>
+        <button onClick={() => tryChangeDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>
         <div className="flex justify-center gap-5 mt-2.5">
-          <button onClick={() => setDirection({ x: -1, y: 0 })} className="p-3 text-2xl">←</button>
-          <button onClick={() => setDirection({ x: 1, y: 0 })} className="p-3 text-2xl">→</button>
+          <button onClick={() => tryChangeDirection({ x: -1, y: 0 })} className="p-3 text-2xl">←</button>
+          <button onClick={() => tryChangeDirection({ x: 1, y: 0 })} className="p-3 text-2xl">→</button>
         </div>
-        <button className="mt-2.5 p-3 text-2xl" onClick={() => setDirection({ x: 0, y: 1 })}>↓</button>
+        <button className="mt-2.5 p-3 text-2xl" onClick={() => tryChangeDirection({ x: 0, y: 1 })}>↓</button>
       </div>
       {gameOver && (
         <div className="mt-5 text-center">

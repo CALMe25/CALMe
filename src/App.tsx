@@ -9,6 +9,7 @@ import { Menu, MoreVertical, Settings, Accessibility } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { AppsContext, AppsProvider, InnerApps, type AppInterface, quickActivityOrder } from './appsContextApi';
 import AppLauncher from './AppLauncher/AppLauncher';
+import { AccessibilityToolbar } from './components/AccessibilityToolbar';
 import { ConversationController } from './conversation/ConversationController';
 import { AlertTimer } from './components/AlertTimer';
 import { DarkModeToggle } from './components/DarkModeToggle';
@@ -40,6 +41,7 @@ function App() {
   const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
   const [showQuickPanel, setShowQuickPanel] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
   const appsContext = useContext(AppsContext);
   const resolvedApps = appsContext ?? InnerApps;
@@ -297,7 +299,7 @@ function App() {
   };
 
   const handleAccessibility = () => {
-    toast.info('Accessibility options');
+    setAccessibilityOpen(true);
   };
 
   const handleSettings = () => {
@@ -456,9 +458,9 @@ function App() {
                   <SheetTitle>Menu</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-2 mt-6">
-                  <Button 
-                    variant="ghost" 
-                    className="justify-start h-12 gap-3" 
+                  <Button
+                    variant="ghost"
+                    className="justify-start h-12 gap-3"
                     onClick={() => {
                       handleAccessibility();
                       setMobileMenuOpen(false);
@@ -583,6 +585,7 @@ function App() {
         </div>
         )}
         </div>
+        <AccessibilityToolbar open={accessibilityOpen} onClose={() => setAccessibilityOpen(false)} />
         </AppsProvider>
     </>
   )

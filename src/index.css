@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -150,4 +151,47 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;  /* Chrome, Safari, Opera */
   }
+}
+
+:root.a11y-high-contrast {
+  --background: #050505;
+  --foreground: #f5f5f5;
+  --card: #0f0f0f;
+  --card-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #050505;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f5f5f5;
+  --border: rgba(255, 255, 255, 0.35);
+  --ring: #ffffff;
+}
+
+:root.a11y-high-contrast body {
+  background-color: #050505;
+  color: #ffffff;
+}
+
+:root.a11y-dyslexic-font body {
+  font-family: 'Atkinson Hyperlegible', 'Arial', 'Verdana', system-ui, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+:root.a11y-highlight-links a,
+:root.a11y-highlight-links button.link,
+:root.a11y-highlight-links [role="link"] {
+  position: relative;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: currentColor;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+:root.a11y-reduce-motion *,
+:root.a11y-reduce-motion *::before,
+:root.a11y-reduce-motion *::after {
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
 }
