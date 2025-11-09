@@ -226,7 +226,7 @@ export function AccessibilityToolbar({ open, onClose }: AccessibilityToolbarProp
         console.error(error);
         if (!cancelled) {
           toast.error('Failed to load accessibility toolbar', {
-            description: 'The accessibility toolbar script could not be loaded. Please try again or contact support.',
+            description: 'Could not load /vendor/acc_toolbar.min.js. Please ensure the file exists at the expected path.',
           });
         }
       } finally {

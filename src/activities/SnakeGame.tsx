@@ -148,9 +148,8 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     pointerStartRef.current = { x: event.clientX, y: event.clientY };
     try {
       event.currentTarget.setPointerCapture(event.pointerId);
-    } catch (error) {
-      // Pointer capture failed - may not be supported or interaction requirements not met
-      console.debug('setPointerCapture failed:', error);
+    } catch {
+      // Pointer capture failed - graceful degradation, no action needed
     }
   };
 
@@ -161,9 +160,8 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       if (event.currentTarget.hasPointerCapture(event.pointerId)) {
         event.currentTarget.releasePointerCapture(event.pointerId);
       }
-    } catch (error) {
-      // Release pointer capture failed - may not have had capture
-      console.debug('releasePointerCapture failed:', error);
+    } catch {
+      // Release pointer capture failed - graceful degradation, no action needed
     }
     if (!start) return;
 
