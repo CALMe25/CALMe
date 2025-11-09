@@ -29,7 +29,6 @@ const getCssVariableValue = (variable: string) => {
 export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [brushSize, setBrushSize] = useState<typeof BRUSH_SIZES[number]>(BRUSH_SIZES[1]);
   const [brushColor, setBrushColor] = useState<string>(PALETTE[0]);
@@ -39,7 +38,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     if (!canvas) return;
 
     const resizeCanvas = () => {
-      const parent = containerRef.current;
+      const parent = canvas.parentElement;
       if (!parent) return;
 
       const rect = parent.getBoundingClientRect();
@@ -65,12 +64,9 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     };
 
     resizeCanvas();
-    const observer = new ResizeObserver(resizeCanvas);
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+    window.addEventListener('resize', resizeCanvas);
     return () => {
-      observer.disconnect();
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
@@ -131,69 +127,69 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   };
 
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-background p-2 text-foreground sm:p-3 md:p-4">
-      <div className="flex h-full w-full max-w-5xl flex-col gap-3 rounded-2xl border border-border bg-card p-2 shadow-lg sm:gap-4 sm:p-3 md:p-4">
-        <div className="flex flex-col gap-3 rounded-2xl border border-border/60 bg-muted/40 p-3 shadow-lg sm:flex-row sm:flex-wrap sm:items-center">
-          <div className="flex flex-1 items-center gap-2 overflow-x-auto">
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground xs:text-xs sm:text-sm">Brush</span>
-            <div className="flex items-center gap-1">
+    <div className="flex h-full w-full items-center justify-center bg-background p-2 sm:p-3 md:p-4 text-foreground overflow-hidden">
+      <div className="flex h-full w-full max-w-5xl flex-col gap-3 sm:gap-4 lg:gap-5 rounded-2xl border border-border bg-card p-2 sm:p-3 md:p-4 shadow-lg">
+        {/* Toolbar - properly responsive with proportional scaling */}
+        <div className="flex flex-col gap-2.5 sm:gap-3 rounded-xl border border-border bg-muted/50 p-2.5 sm:p-3 md:p-4 shadow-lg">
+          {/* Brush sizes section */}
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <div className="font-semibold text-[10px] xs:text-xs sm:text-sm whitespace-nowrap">Brush</div>
+            <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5">
               {BRUSH_SIZES.map((size) => (
                 <button
                   key={size}
                   type="button"
                   onClick={() => setBrushSize(size)}
-                  aria-pressed={brushSize === size}
-                  className={`flex h-9 w-9 items-center justify-center rounded-full border transition active:scale-95 sm:h-10 sm:w-10 ${brushSize === size ? 'border-primary bg-primary/20 shadow-inner' : 'border-border bg-secondary'}`}
-                >
+                  className={`flex h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center rounded-full border transition active:scale-95 ${brushSize === size ? 'border-primary bg-primary/20 scale-105' : 'border-border bg-secondary'}`}>
                   <span
                     className="rounded-full bg-foreground"
-                    style={{ width: Math.max(4, size / 2 + 2), height: Math.max(4, size / 2 + 2) }}
+                    style={{ width: Math.max(3, size / 2 + 1), height: Math.max(3, size / 2 + 1) }}
                   />
                 </button>
               ))}
             </div>
           </div>
-
-          <div className="flex flex-1 items-center gap-2 overflow-x-auto">
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground xs:text-xs sm:text-sm">Colors</span>
-            <div className="flex items-center gap-1 pr-1">
+          
+          {/* Colors section */}
+          <div className="flex items-center gap-1 sm:gap-1.5">
+            <div className="font-semibold text-[10px] xs:text-xs sm:text-sm whitespace-nowrap">Colors</div>
+            <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide pr-1">
               {PALETTE.map((color) => (
                 <button
                   key={color}
                   type="button"
-                  aria-label={`Select color ${color}`}
-                  aria-pressed={brushColor === color}
-                  className={`h-8 w-8 rounded-full border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary sm:h-10 sm:w-10 ${brushColor === color ? 'border-primary scale-105' : 'border-border'}`}
+                  className={`h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 rounded-full border transition active:scale-95 flex-shrink-0 ${brushColor === color ? 'border-primary scale-105 ring-1 ring-primary ring-offset-0' : 'border-border'}`}
                   style={{ backgroundColor: color }}
                   onClick={() => setBrushColor(color)}
+                  aria-label={`Select color ${color}`}
                 />
               ))}
             </div>
           </div>
-
-          <div className="flex items-center gap-2 sm:gap-3 sm:justify-end">
-            <Button
-              variant="secondary"
+          
+          {/* Action buttons */}
+          <div className="flex items-center gap-2 sm:gap-2.5 justify-end pt-1">
+            <Button 
+              variant="secondary" 
               onClick={handleClear}
-              className="min-h-[44px] px-4 text-sm sm:px-5 sm:text-base"
+              className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
             >
               Clear
             </Button>
             {onGameEnd && (
-              <Button
+              <Button 
+                variant="default" 
                 onClick={onGameEnd}
-                className="min-h-[44px] px-4 text-sm sm:px-5 sm:text-base"
+                className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
               >
                 Done
               </Button>
             )}
           </div>
         </div>
-
-        <div
-          ref={containerRef}
-          className="relative flex-1 min-h-[280px] overflow-hidden rounded-2xl border border-border bg-background shadow-inner sm:min-h-[360px] md:min-h-[460px] lg:min-h-[560px]"
-        >
+        
+        {/* Canvas area - properly responsive */}
+        <div className="relative flex-1 min-h-[280px] sm:min-h-[380px] md:min-h-[480px] lg:min-h-[560px] overflow-hidden rounded-2xl border border-border bg-background shadow-inner">
           <canvas
             ref={canvasRef}
             className="absolute inset-0 h-full w-full touch-none"

@@ -532,11 +532,11 @@ function App() {
                         <Button
                           key={app.name}
                           onClick={() => handleAppLaunch(app)}
-                          className="flex h-auto min-h-[72px] w-full flex-col items-center justify-center gap-2 rounded-xl border border-primary/30 bg-primary px-4 py-3 text-xs font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:scale-[1.02] hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring sm:text-sm"
+                          className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
                           size="sm"
                         >
-                          <div className="scale-110 text-primary-foreground">{app.icon}</div>
-                          <span className="leading-tight text-center text-primary-foreground">{app.label}</span>
+                          <div className="text-white scale-110">{app.icon}</div>
+                          <span className="leading-tight text-white text-center">{app.label}</span>
                         </Button>
                       ))}
                   </div>

@@ -6,9 +6,8 @@ interface SnakeGameProps {
 
 const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const boardRef = useRef<HTMLDivElement>(null);
   const [gameOver, setGameOver] = useState(false);
-  const [canvasSize, setCanvasSize] = useState(360);
+  const [canvasSize, setCanvasSize] = useState(400);
 
   // Game settings
   const snakeSize = 20;
@@ -21,20 +20,13 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const [direction, setDirection] = useState({ x: 1, y: 0 });
 
   useEffect(() => {
-    const resize = () => {
-      if (!boardRef.current) return;
-      const hostWidth = boardRef.current.offsetWidth;
-      const size = Math.min(hostWidth, 520);
-      const rounded = Math.floor(size / snakeSize) * snakeSize;
-      setCanvasSize(Math.max(240, rounded));
+    const handleResize = () => {
+      const size = Math.min(window.innerWidth * 0.9, 400);
+      setCanvasSize(size);
     };
-
-    resize();
-    const observer = new ResizeObserver(resize);
-    if (boardRef.current) {
-      observer.observe(boardRef.current);
-    }
-    return () => observer.disconnect();
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -133,75 +125,29 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-background p-3 text-foreground sm:p-4">
-      <div className="w-full max-w-3xl space-y-4">
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-          <h1 className="text-2xl font-bold text-primary">Snake Game</h1>
-          {gameOver && (
-            <span className="text-sm font-semibold text-destructive">Game over — try again.</span>
-          )}
+    <div className="flex flex-col items-center justify-center h-full p-5 bg-background text-foreground">
+      <h1 className="text-2xl font-bold mb-5">Snake Game</h1>
+      <canvas
+        ref={canvasRef}
+        width={canvasSize}
+        height={canvasSize}
+        className="border border-border max-w-full"
+      />
+      <div className="mt-5">
+        <button onClick={() => setDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>
+        <div className="flex justify-center gap-5 mt-2.5">
+          <button onClick={() => setDirection({ x: -1, y: 0 })} className="p-3 text-2xl">←</button>
+          <button onClick={() => setDirection({ x: 1, y: 0 })} className="p-3 text-2xl">→</button>
         </div>
-
-        <div
-          ref={boardRef}
-          className="relative aspect-square w-full overflow-hidden rounded-3xl border border-border bg-card shadow-inner"
-        >
-          <canvas
-            ref={canvasRef}
-            width={canvasSize}
-            height={canvasSize}
-            className="h-full w-full"
-          />
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 sm:mx-auto sm:w-64">
-          <button
-            onClick={() => setDirection({ x: 0, y: -1 })}
-            className="col-span-3 rounded-2xl bg-secondary py-3 text-lg font-semibold"
-            aria-label="Move up"
-          >
-            ↑
-          </button>
-          <button
-            onClick={() => setDirection({ x: -1, y: 0 })}
-            className="rounded-2xl bg-secondary py-3 text-lg font-semibold"
-            aria-label="Move left"
-          >
-            ←
-          </button>
-          <button
-            onClick={() => setDirection({ x: 1, y: 0 })}
-            className="rounded-2xl bg-secondary py-3 text-lg font-semibold"
-            aria-label="Move right"
-          >
-            →
-          </button>
-          <button
-            onClick={() => setDirection({ x: 0, y: 1 })}
-            className="col-span-3 rounded-2xl bg-secondary py-3 text-lg font-semibold"
-            aria-label="Move down"
-          >
-            ↓
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-2 sm:flex-row sm:justify-center">
-          <button
-            onClick={restartGame}
-            className="min-h-[44px] rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/80 sm:text-base"
-          >
-            Restart
-          </button>
-          {onGameEnd && (
-            <button
-              onClick={onGameEnd}
-              className="min-h-[44px] rounded-xl bg-secondary px-4 py-2 text-sm font-semibold text-secondary-foreground transition-colors hover:bg-accent sm:text-base"
-            >
-              Exit
-            </button>
-          )}
-        </div>
+        <button className="mt-2.5 p-3 text-2xl" onClick={() => setDirection({ x: 0, y: 1 })}>↓</button>
       </div>
+      {gameOver && (
+        <div className="mt-5 text-center">
+          <h2 className="text-xl font-bold">Game Over</h2>
+          <button onClick={restartGame} className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md">Restart</button>
+          {onGameEnd && <button onClick={onGameEnd} className="p-3 text-lg bg-secondary text-secondary-foreground rounded-md">Exit</button>}
+        </div>
+      )}
     </div>
   );
 };
