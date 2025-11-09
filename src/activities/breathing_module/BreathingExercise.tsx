@@ -126,7 +126,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
             ))}
           </div>
         ) : (
-          <section className="grid grid-cols-1 gap-2 sm:gap-3 md:[grid-template-columns:repeat(auto-fit,minmax(180px,1fr))] mb-4 sm:mb-5">
+          <section className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] mb-4 sm:mb-5">
             {presetButtons}
             {cyclesCard}
           </section>
