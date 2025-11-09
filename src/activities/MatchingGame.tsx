@@ -109,7 +109,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
       <div className="mb-3 w-full rounded-lg bg-card p-3 text-center shadow-md sm:mb-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-primary">Matching Game</h2>
-        <p className="text-sm text-muted-foreground" aria-live="polite">
+        <p className="text-sm text-muted-foreground">
           {matchesFound} / {totalPairs} matches complete
         </p>
       </div>

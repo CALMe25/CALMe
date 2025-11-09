@@ -76,7 +76,7 @@ export default function AppLauncer ({chosenApp, onClose}: AppLauncherProps) {
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label={chosenApp?.label ?? 'Activity'}
+      aria-label={`${chosenApp?.label ?? 'Activity'} dialog`}
       className="flex h-full w-full items-center justify-center bg-slate-950/70 px-3 py-4 backdrop-blur-sm sm:px-6"
       style={{
         paddingTop: `calc(env(safe-area-inset-top, 0px) + 1rem)`,
