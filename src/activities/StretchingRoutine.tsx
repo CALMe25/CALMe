@@ -86,23 +86,27 @@ export default function StretchingRoutine() {
   }, []);
 
   const startExercise = () => {
-    setIsActive(true);
-    setTimeRemaining(exercises[currentExercise].duration);
-
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
 
+    const initialDuration =
+      timeRemaining === 0 ? exercises[currentExercise].duration : timeRemaining;
+
+    setIsActive(true);
+    setTimeRemaining(initialDuration);
+
+    let remaining = initialDuration;
     const interval = setInterval(() => {
-      setTimeRemaining((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          timerRef.current = null;
-          setIsActive(false);
-          return 0;
-        }
-        return prev - 1;
-      });
+      remaining -= 1;
+      if (remaining <= 0) {
+        clearInterval(interval);
+        timerRef.current = null;
+        setIsActive(false);
+        setTimeRemaining(0);
+        return;
+      }
+      setTimeRemaining(remaining);
     }, 1000);
 
     timerRef.current = interval;
