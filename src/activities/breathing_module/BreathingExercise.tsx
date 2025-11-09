@@ -38,13 +38,16 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
     const media = window.matchMedia('(max-height: 600px)');
     const handleChange = () => setIsCompactLayout(media.matches);
     handleChange();
+    let cleanup: () => void;
     if (typeof media.addEventListener === 'function') {
       media.addEventListener('change', handleChange);
-      return () => media.removeEventListener('change', handleChange);
+      cleanup = () => media.removeEventListener('change', handleChange);
     } else {
       media.addListener(handleChange);
-      return () => media.removeListener(handleChange);
+      cleanup = () => media.removeListener(handleChange);
     }
+
+    return cleanup;
   }, []);
 
   const { timings, label } = TIMING_PRESETS[presetKey];
