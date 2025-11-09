@@ -1,7 +1,12 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx 
 import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
 
+/**
+ * Custom packages that are not detected by license-checker-rseidelsohn.
+ * These are typically manually vendored packages or non-npm dependencies.
+ * Add entries in the format: { name: 'package@version', url: 'repo-url', license: 'LICENSE-TYPE' }
+ */
 const customPackages = [
   { name: 'acc_toolbar@1.02', url: 'https://github.com/mickidum/acc_toolbar', license: 'MIT' }
 ];
