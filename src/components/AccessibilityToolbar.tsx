@@ -158,14 +158,38 @@ const loadToolbarScript = () =>
       script.src = '/vendor/acc_toolbar.min.js';
       script.async = true;
       document.body.appendChild(script);
+    } else {
+      // If the script already exists, check its state
+      if (script.getAttribute('data-loaded') === 'true') {
+        resolve();
+        return;
+      }
+      // If the script has errored, reject
+      if (script.getAttribute('data-error') === 'true') {
+        reject(
+          new Error(
+            `Failed to load accessibility toolbar script from ${script.src}. Please check if the file exists.`
+          )
+        );
+        return;
+      }
     }
 
-    const handleLoad = () => resolve();
-    const handleError = () => reject(
-      new Error(
-        `Failed to load accessibility toolbar script from ${script.src}. Please check if the file exists.`
-      )
-    );
+    // Store src in a local variable after confirming script is not null
+    const scriptSrc = script.src;
+
+    const handleLoad = () => {
+      script!.setAttribute('data-loaded', 'true');
+      resolve();
+    };
+    const handleError = () => {
+      script!.setAttribute('data-error', 'true');
+      reject(
+        new Error(
+          `Failed to load accessibility toolbar script from ${scriptSrc}. Please check if the file exists.`
+        )
+      );
+    };
 
     script.addEventListener('load', handleLoad, { once: true });
     script.addEventListener('error', handleError, { once: true });

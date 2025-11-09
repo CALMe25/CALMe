@@ -180,7 +180,9 @@
 :root.a11y-highlight-links button.link,
 :root.a11y-highlight-links [role="link"] {
   position: relative;
-  text-decoration: underline solid 3px currentColor;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-decoration-color: currentColor;
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
