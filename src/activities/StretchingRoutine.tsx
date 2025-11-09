@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Exercise {
   id: number;
@@ -75,24 +75,29 @@ export default function StretchingRoutine() {
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(exercises[0].duration);
-  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     return () => {
-      if (timer) {
-        clearInterval(timer);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
       }
     };
-  }, [timer]);
+  }, []);
 
   const startExercise = () => {
     setIsActive(true);
     setTimeRemaining(exercises[currentExercise].duration);
 
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+
     const interval = setInterval(() => {
       setTimeRemaining((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
+          timerRef.current = null;
           setIsActive(false);
           return 0;
         }
@@ -100,13 +105,13 @@ export default function StretchingRoutine() {
       });
     }, 1000);
 
-    setTimer(interval);
+    timerRef.current = interval;
   };
 
   const nextExercise = () => {
-    if (timer) {
-      clearInterval(timer);
-      setTimer(null);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
     }
 
     if (currentExercise < exercises.length - 1) {
@@ -118,9 +123,9 @@ export default function StretchingRoutine() {
   };
 
   const previousExercise = () => {
-    if (timer) {
-      clearInterval(timer);
-      setTimer(null);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
     }
 
     if (currentExercise > 0) {
@@ -132,9 +137,9 @@ export default function StretchingRoutine() {
   };
 
   const resetRoutine = () => {
-    if (timer) {
-      clearInterval(timer);
-      setTimer(null);
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
     }
     setCurrentExercise(0);
     setTimeRemaining(exercises[0].duration);
@@ -195,7 +200,10 @@ export default function StretchingRoutine() {
 
               <button
                 onClick={isActive ? () => {
-                  if (timer) clearInterval(timer);
+                if (timerRef.current) {
+                  clearInterval(timerRef.current);
+                  timerRef.current = null;
+                }
                   setIsActive(false);
                 } : startExercise}
                 className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
