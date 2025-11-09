@@ -458,14 +458,14 @@ function App() {
                   <SheetTitle>Menu</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-2 mt-6">
-                    <Button 
-                      variant="ghost" 
-                      className="justify-start h-12 gap-3" 
-                      onClick={() => {
-                        handleAccessibility();
-                        setMobileMenuOpen(false);
-                      }}
-                    >
+                  <Button
+                    variant="ghost"
+                    className="justify-start h-12 gap-3"
+                    onClick={() => {
+                      handleAccessibility();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
                     <Accessibility className="w-5 h-5" />
                     <span>Accessibility</span>
                   </Button>
