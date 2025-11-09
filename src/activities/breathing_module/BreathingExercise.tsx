@@ -66,9 +66,10 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
     </button>
   );
 
-  const presetButtons = Object.entries(TIMING_PRESETS).map(([keyName, preset]) =>
-    renderPresetButton(keyName, preset.label, preset.timings)
-  );
+  const presetCards = Object.entries(TIMING_PRESETS).map(([keyName, preset]) => ({
+    key: keyName,
+    node: renderPresetButton(keyName, preset.label, preset.timings),
+  }));
 
   const cyclesCard = (
     <div
@@ -97,6 +98,8 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
     </div>
   );
 
+  const allCards = [...presetCards, { key: 'cycles', node: cyclesCard }];
+
   const handleComplete = () => {
     setIsActive(false);
     onGameEnd?.();
@@ -119,16 +122,17 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
 
         {isCompactLayout ? (
           <div className="mb-4 flex gap-2 overflow-x-auto pb-1 sm:mb-5">
-            {[...presetButtons, cyclesCard].map((node, index) => (
-              <div key={`compact-${index}`} className="min-w-[200px] flex-shrink-0">
+            {allCards.map(({ key, node }) => (
+              <div key={key} className="min-w-[200px] flex-shrink-0">
                 {node}
               </div>
             ))}
           </div>
         ) : (
           <section className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] mb-4 sm:mb-5">
-            {presetButtons}
-            {cyclesCard}
+            {allCards.map(({ key, node }) => (
+              <div key={key}>{node}</div>
+            ))}
           </section>
         )}
 
