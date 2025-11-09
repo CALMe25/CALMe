@@ -146,13 +146,13 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const handlePointerStart = (event: React.PointerEvent<HTMLCanvasElement>) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     pointerStartRef.current = { x: event.clientX, y: event.clientY };
-    event.currentTarget.setPointerCapture?.(event.pointerId);
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const handlePointerEnd = (event: React.PointerEvent<HTMLCanvasElement>) => {
     const start = pointerStartRef.current;
     pointerStartRef.current = null;
-    event.currentTarget.releasePointerCapture?.(event.pointerId);
+    event.currentTarget.releasePointerCapture(event.pointerId);
     if (!start) return;
 
     const dx = event.clientX - start.x;

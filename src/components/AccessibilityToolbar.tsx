@@ -160,7 +160,11 @@ const loadToolbarScript = () =>
     }
 
     const handleLoad = () => resolve();
-    const handleError = () => reject(new Error('Failed to load accessibility toolbar script'));
+    const handleError = () => reject(
+      new Error(
+        `Failed to load accessibility toolbar script from ${script.src}. Please check if the file exists.`
+      )
+    );
 
     script.addEventListener('load', handleLoad, { once: true });
     script.addEventListener('error', handleError, { once: true });

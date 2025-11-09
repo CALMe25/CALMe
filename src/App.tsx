@@ -462,8 +462,8 @@ function App() {
                       variant="ghost" 
                       className="justify-start h-12 gap-3" 
                       onClick={() => {
-                        setMobileMenuOpen(false);
                         handleAccessibility();
+                        setMobileMenuOpen(false);
                       }}
                     >
                     <Accessibility className="w-5 h-5" />
