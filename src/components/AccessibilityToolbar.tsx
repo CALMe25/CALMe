@@ -39,7 +39,7 @@ const KEYBOARD_ATTR = 'data-calme-kb-tabindex';
 const KEYBOARD_ORIGINAL_ATTR = 'data-calme-kb-original-tabindex';
 
 const CONFIG: MicAccessToolConfig = {
-  link: 'https://www.calme.org/accessibility',
+  link: 'https://github.com/CALMe25/CALMe/accessibility.md',
   contact: 'mailto:accessibility@calme.org',
   buttonPosition: 'right',
   forceLang: typeof navigator !== 'undefined' ? navigator.language : 'en',
