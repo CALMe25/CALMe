@@ -200,7 +200,7 @@ export default function StretchingRoutine() {
             </div>
           </div>
 
-          <div className="sticky bottom-3 z-20 mt-6 space-y-2 rounded-2xl border border-border/60 bg-card/95 p-3 shadow-lg backdrop-blur-sm xs:flex xs:flex-col xs:space-y-2 sm:static sm:mt-6 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-0 sm:space-y-0">
+          <div className="sticky bottom-3 z-20 mt-6 space-y-2 rounded-2xl border border-border/60 bg-card/95 p-3 shadow-lg backdrop-blur-0 xs:flex xs:flex-col xs:space-y-2 sm:static sm:mt-6 sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none sm:backdrop-blur-0 sm:space-y-0">
             <div className="flex flex-col gap-2 xs:flex-row xs:flex-wrap sm:gap-3">
               <button
                 onClick={previousExercise}
