@@ -148,7 +148,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
           )}
         </div>
 
-        <div className="sticky bottom-0 z-10 mb-4 flex flex-col gap-2 rounded-2xl bg-white/90 p-2 shadow-sm backdrop-blur dark:bg-slate-900/80 xs:flex-row xs:items-center sm:gap-3 md:static md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
+        <div className="sticky bottom-0 z-10 mb-4 flex flex-col gap-2 rounded-2xl bg-white/90 p-2 shadow-sm backdrop-blur dark:bg-slate-900/80 xs:flex-row xs:items-center sm:gap-3 md:static md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-0">
           <button
             onClick={restartExercise}
             className="flex-1 min-h-[48px] p-3 bg-blue-600 text-white border-none rounded-xl text-sm font-semibold cursor-pointer transition-all hover:bg-blue-700 active:scale-95">

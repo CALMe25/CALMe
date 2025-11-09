@@ -26,6 +26,11 @@ export default function AppLauncher ({chosenApp, onClose}: AppLauncherProps) {
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
         if (focusableElements.length === 0) return;
+        if (focusableElements.length === 1) {
+          event.preventDefault();
+          focusableElements[0].focus();
+          return;
+        }
 
         const first = focusableElements[0];
         const last = focusableElements[focusableElements.length - 1];
