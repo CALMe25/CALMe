@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Exercise {
   id: number;
@@ -77,6 +77,14 @@ export default function StretchingRoutine() {
   const [timeRemaining, setTimeRemaining] = useState(exercises[0].duration);
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
+  useEffect(() => {
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, [timer]);
+
   const startExercise = () => {
     setIsActive(true);
     setTimeRemaining(exercises[currentExercise].duration);
@@ -137,78 +145,83 @@ export default function StretchingRoutine() {
   const progress = ((exercise.duration - timeRemaining) / exercise.duration) * 100;
 
   return (
-    <div className="flex flex-col items-center justify-start p-3 sm:p-4 md:p-6 bg-background text-foreground h-full max-h-screen overflow-y-auto">
-      <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-2">Stretching Routine</h2>
-      <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">Exercise {currentExercise + 1} of {exercises.length}</p>
+    <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-background p-3 text-foreground sm:p-4 md:p-6">
+      <div className="w-full max-w-4xl">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary">Stretching Routine</h2>
+          <p className="text-sm sm:text-base text-muted-foreground">Exercise {currentExercise + 1} of {exercises.length}</p>
+        </div>
 
-      <div className="bg-card rounded-2xl p-4 sm:p-5 md:p-6 max-w-lg w-full shadow-xl">
-        <h3 className="text-xl sm:text-2xl font-semibold mb-2 text-primary">{exercise.name}</h3>
-        <p className="text-sm sm:text-base text-muted-foreground mb-4">{exercise.description}</p>
+        <div className="mt-4 rounded-2xl bg-card p-4 shadow-xl sm:p-5 md:p-6">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:gap-8">
+            <div className="flex-1">
+              <h3 className="text-xl sm:text-2xl font-semibold mb-1 text-primary">{exercise.name}</h3>
+              <p className="text-sm sm:text-base text-muted-foreground mb-4">{exercise.description}</p>
 
-        {/* Timer Display */}
-        <div className="mb-5 sm:mb-6">
-          <div className="text-4xl sm:text-5xl font-bold text-primary text-center mb-2">
-            {timeRemaining}s
+              <div className="mb-5 sm:mb-6">
+                <div className="text-4xl sm:text-5xl font-bold text-primary text-center mb-2">
+                  {timeRemaining}s
+                </div>
+                <div className="w-full bg-secondary rounded-full h-2.5 sm:h-3 overflow-hidden">
+                  <div
+                    className="bg-primary h-full transition-all duration-1000 ease-linear"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 rounded-xl border border-border/60 bg-muted/30 p-3 sm:p-4">
+              <h4 className="text-base sm:text-lg font-semibold mb-3 text-primary">Instructions</h4>
+              <ol className="list-decimal list-inside space-y-2">
+                {exercise.instructions.map((instruction, index) => (
+                  <li key={index} className="text-sm sm:text-base text-muted-foreground">
+                    {instruction}
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
-          <div className="w-full bg-secondary rounded-full h-2.5 sm:h-3 overflow-hidden">
-            <div
-              className="bg-primary h-full transition-all duration-1000 ease-linear"
-              style={{ width: `${progress}%` }}
-            />
+
+          <div className="mt-6 flex flex-col gap-2 xs:flex-row xs:flex-wrap sm:gap-3">
+            <button
+              onClick={previousExercise}
+              disabled={currentExercise === 0}
+              className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
+            >
+              ← Previous
+            </button>
+
+            <button
+              onClick={isActive ? () => {
+                if (timer) clearInterval(timer);
+                setIsActive(false);
+              } : startExercise}
+              className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
+              {isActive ? 'Pause' : timeRemaining === 0 ? 'Restart' : 'Start'}
+            </button>
+
+            <button
+              onClick={nextExercise}
+              disabled={currentExercise === exercises.length - 1}
+              className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
+            >
+              Next →
+            </button>
           </div>
-        </div>
 
-        {/* Instructions */}
-        <div className="mb-5 sm:mb-6">
-          <h4 className="text-base sm:text-lg font-semibold mb-3 text-primary">Instructions:</h4>
-          <ol className="list-decimal list-inside space-y-2">
-            {exercise.instructions.map((instruction, index) => (
-              <li key={index} className="text-sm sm:text-base text-muted-foreground">
-                {instruction}
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        {/* Control Buttons */}
-        <div className="flex flex-col xs:flex-row gap-2 sm:gap-3 justify-center mb-4">
           <button
-            onClick={previousExercise}
-            disabled={currentExercise === 0}
-            className="min-h-[44px] px-4 py-2 bg-secondary hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all active:scale-95 text-sm sm:text-base"
+            onClick={resetRoutine}
+            className="mt-3 w-full min-h-[44px] rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground transition-all hover:bg-primary/80 active:scale-95 sm:mt-4 sm:text-base"
           >
-            ← Previous
-          </button>
-
-          <button
-            onClick={isActive ? () => {
-              if (timer) clearInterval(timer);
-              setIsActive(false);
-            } : startExercise}
-            className={`min-h-[44px] px-6 py-2 rounded-lg font-semibold transition-all active:scale-95 text-sm sm:text-base ${isActive ? 'bg-destructive text-destructive-foreground hover:bg-destructive/80' : 'bg-primary text-primary-foreground hover:bg-primary/80'}`}>
-            {isActive ? 'Pause' : timeRemaining === 0 ? 'Restart' : 'Start'}
-          </button>
-
-          <button
-            onClick={nextExercise}
-            disabled={currentExercise === exercises.length - 1}
-            className="min-h-[44px] px-4 py-2 bg-secondary hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-all active:scale-95 text-sm sm:text-base"
-          >
-            Next →
+            Reset Routine
           </button>
         </div>
 
-        <button
-          onClick={resetRoutine}
-          className="w-full min-h-[44px] px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/80 rounded-lg transition-all active:scale-95 text-sm sm:text-base"
-        >
-          Reset Routine
-        </button>
+        <p className="mt-4 text-center text-xs text-muted-foreground sm:text-sm">
+          Take your time with each stretch. Listen to your body and never force a movement.
+        </p>
       </div>
-
-      <p className="mt-4 sm:mt-6 text-muted-foreground text-xs sm:text-sm text-center max-w-md px-4">
-        Take your time with each stretch. Listen to your body and never force a movement.
-      </p>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import calmeLogo from '../assets/calme-logo.svg';
 
 // Define the type for a single card
@@ -17,6 +17,7 @@ interface MatchingGameProps {
 const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
   // Emojis for the cards (6 pairs for a 3x4 grid = 12 cards)
   const cardEmojis = ['🍎', '🍌', '🍇', '🍋', '🍊', '🍓']; // Now 6 unique emojis
+  const totalMatches = cardEmojis.length;
 
   // Function to initialize and shuffle the cards for a 3x4 grid
   const initializeCards = (): Card[] => {
@@ -37,6 +38,8 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
   const [flippedCards, setFlippedCards] = useState<number[]>([]); // Stores IDs of currently flipped cards
   const [matchesFound, setMatchesFound] = useState(0);
   const [isChecking, setIsChecking] = useState(false); // To prevent flipping more than 2 cards at once
+  const [showCelebration, setShowCelebration] = useState(false);
+  const celebrationTimeout = useRef<number | null>(null);
 
   // Effect to check for matches when two cards are flipped
   useEffect(() => {
@@ -70,16 +73,26 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     }
   }, [flippedCards, cards]);
 
-  // Effect to check if the game is won
+  // Effect to surface a celebration banner when the board is cleared
   useEffect(() => {
-    // There are 6 pairs for a 3x4 grid, so 6 matches to win
-    if (matchesFound === 6) {
-      // NOTE: Using alert() is generally discouraged in React apps for better UX.
-      // Consider replacing this with a custom modal component or a simple message display.
-      alert('Congratulations! You matched all pairs!');
-      onGameEnd(); // Notify parent component (App.tsx)
+    if (matchesFound === totalMatches) {
+      if (celebrationTimeout.current) {
+        window.clearTimeout(celebrationTimeout.current);
+      }
+      setShowCelebration(true);
+      celebrationTimeout.current = window.setTimeout(() => {
+        setShowCelebration(false);
+        celebrationTimeout.current = null;
+      }, 4000);
     }
-  }, [matchesFound, onGameEnd]);
+
+    return () => {
+      if (celebrationTimeout.current) {
+        window.clearTimeout(celebrationTimeout.current);
+        celebrationTimeout.current = null;
+      }
+    };
+  }, [matchesFound, totalMatches]);
 
   // Handle card click
   const handleCardClick = (clickedCard: Card) => {
@@ -100,91 +113,99 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
 
   // Reset game function
   const resetGame = () => {
+    if (celebrationTimeout.current) {
+      window.clearTimeout(celebrationTimeout.current);
+      celebrationTimeout.current = null;
+    }
     setCards(initializeCards());
     setFlippedCards([]);
     setMatchesFound(0);
     setIsChecking(false);
+    setShowCelebration(false);
   };
 
   return (
-    <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-6 md:mb-8 rounded-lg p-2 sm:p-3 shadow-md bg-card">
-        Matching Game
-      </h2>
+    <div className="flex h-full flex-col items-center overflow-y-auto bg-background p-3 font-inter text-foreground sm:p-4">
+      <div className="w-full max-w-5xl space-y-4 sm:space-y-6">
+        <div className="flex flex-col gap-3 rounded-2xl border border-border bg-card/80 p-4 shadow-md sm:flex-row sm:items-center sm:justify-between sm:p-5">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Calm focus</p>
+            <h2 className="text-2xl font-bold text-primary sm:text-3xl">Matching Game</h2>
+            <p className="text-sm text-muted-foreground">{matchesFound} / {totalMatches} matches complete</p>
+          </div>
+          {showCelebration && (
+            <div className="rounded-2xl bg-emerald-500/20 px-4 py-2 text-sm font-semibold text-emerald-600 dark:text-emerald-300">
+              🎉 Great job! You cleared the board.
+            </div>
+          )}
+        </div>
 
-      {/* Responsive grid: 2 cols on mobile, 3 on tablet, 4 on desktop */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-6 md:gap-10 p-4 bg-card rounded-xl shadow-lg border border-border w-full max-w-full"  style={{ maxWidth: '100%' }}>
-        {cards.map(card => (
-          <div
-            key={card.id}
-            className={`
-              w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36
-              flex items-center justify-center
-              rounded-xl shadow-md cursor-pointer
-              text-5xl sm:text-6xl md:text-7xl font-bold
-              transition-all duration-300 ease-in-out
-              ${card.isMatched ? 'bg-green-300 dark:bg-green-700 opacity-70 cursor-not-allowed' : 'bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-700'}
-
-              ${isChecking && !card.isFlipped && !card.isMatched ? 'cursor-not-allowed' : '' + " relative"}
-            `}
-            onClick={() => handleCardClick(card)}
-            style={{
-              // This transforms the inner content to appear correctly when the card is flipped
-              transformStyle: 'preserve-3d',
-              perspective: '1000px'
-            }}
-          >
-            {/* Front of the card (hidden when flipped) */}
+        <div className="grid gap-3 rounded-2xl border border-border bg-card/70 p-3 shadow-lg sm:gap-4 sm:p-4 md:p-6 [grid-template-columns:repeat(auto-fit,minmax(120px,1fr))]">
+          {cards.map(card => (
             <div
+              key={card.id}
               className={`
-                absolute w-full h-full rounded-xl flex items-center justify-center
-                transition-transform duration-300 ease-in-out
-                ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-card text-foreground' : 'transform rotate-y-180 bg-card'}
+                relative flex aspect-square w-full min-h-[110px] items-center justify-center
+                rounded-2xl shadow-md cursor-pointer text-4xl sm:text-5xl md:text-6xl font-bold
+                transition-all duration-300 ease-in-out
+                ${card.isMatched ? 'bg-green-300 dark:bg-green-700 opacity-70 cursor-not-allowed' : 'bg-blue-500 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-700'}
+                ${isChecking && !card.isFlipped && !card.isMatched ? 'cursor-not-allowed' : ''}
               `}
+              onClick={() => handleCardClick(card)}
               style={{
                 transformStyle: 'preserve-3d',
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden' // For Safari
+                perspective: '1000px'
               }}
             >
-              {card.isFlipped || card.isMatched ? card.value : ''}
+              <div
+                className={`
+                  absolute inset-0 flex items-center justify-center rounded-2xl
+                  transition-transform duration-300 ease-in-out
+                  ${card.isFlipped || card.isMatched ? 'transform rotate-y-0 bg-card text-foreground' : 'transform rotate-y-180 bg-card'}
+                `}
+                style={{
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden'
+                }}
+              >
+                {card.isFlipped || card.isMatched ? card.value : ''}
+              </div>
+              <div
+                className={`
+                  absolute inset-0 flex items-center justify-center rounded-2xl
+                  ${card.isFlipped || card.isMatched ? 'transform rotate-y-180 bg-card' : 'transform rotate-y-0 bg-card'}
+                `}
+                style={{
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden'
+                }}
+              >
+                {!card.isFlipped && !card.isMatched && !flippedCards.includes(card.id) && (
+                  <div className="flex h-full w-full flex-col items-center justify-center">
+                    <img src={calmeLogo} alt="CALMe Logo" className="mx-auto mb-2 w-14 sm:w-16" />
+                    <span className="text-base font-bold uppercase tracking-[0.4em] text-primary sm:text-lg">CALMe</span>
+                  </div>
+                )}
+              </div>
             </div>
-            {/* Back of the card (shows logo when not flipped) */}
-            <div
-              className={`
-                absolute w-full h-full rounded-xl flex items-center justify-center
-                backface-hidden
-                ${card.isFlipped || card.isMatched ? 'transform rotate-y-180 bg-card' : 'transform rotate-y-0 bg-card'}
-              `}
-              style={{
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden' // For Safari
-              }}
-            >
-              {!card.isFlipped && !card.isMatched && !flippedCards.includes(card.id) && (
-                <div className="flex flex-col items-center justify-center w-full h-full">
-                  <img src={calmeLogo} alt="CALMe Logo" className="w-20 h-20 mx-auto mb-2" />
-                  <span className="text-xl font-bold text-primary" style={{letterSpacing: '2px'}}>CALMe</span>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <div className="mt-4 sm:mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
-        <button
-          onClick={resetGame}
-          className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 w-full sm:w-auto"
-        >
-          Reset Game
-        </button>
-        <button
-          onClick={onGameEnd}
-          className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300 w-full sm:w-auto"
-        >
-          Exit Game
-        </button>
+        <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button
+            onClick={resetGame}
+            className="min-h-[48px] rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-indigo-700"
+          >
+            Reset Game
+          </button>
+          <button
+            onClick={onGameEnd}
+            className="min-h-[48px] rounded-lg bg-red-500 px-4 py-2 font-semibold text-white transition-colors hover:bg-red-600"
+          >
+            Exit Game
+          </button>
+        </div>
       </div>
     </div>
   );

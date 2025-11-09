@@ -54,7 +54,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
           </div>
         </header>
 
-        <section className="grid gap-2 sm:gap-3 grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 mb-4 sm:mb-5">
+        <section className="grid grid-cols-1 gap-2 sm:gap-3 md:[grid-template-columns:repeat(auto-fit,minmax(180px,1fr))] mb-4 sm:mb-5">
           {Object.entries(TIMING_PRESETS).map(([keyName, preset]) => (
             <button
               key={keyName}
@@ -88,7 +88,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
           </div>
         </section>
 
-        <div className="relative h-48 xs:h-56 sm:h-72 rounded-2xl bg-slate-100 dark:bg-slate-800/50 dark:bg-radial-gradient-t-blue-900/30 border border-slate-200 dark:border-blue-500/20 flex items-center justify-center mb-4 sm:mb-5 overflow-hidden">
+        <div className="relative min-h-[14rem] xs:min-h-[16rem] sm:min-h-[20rem] lg:min-h-[24rem] rounded-2xl bg-slate-100 dark:bg-slate-800/50 dark:bg-radial-gradient-t-blue-900/30 border border-slate-200 dark:border-blue-500/20 flex items-center justify-center mb-4 sm:mb-5 overflow-hidden">
           <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 text-blue-400 dark:text-blue-300 font-semibold tracking-widest uppercase text-xs">{label}</div>
           <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 text-slate-600 dark:text-slate-400 text-xs sm:text-sm">{isActive ? 'Follow the breathing guide' : 'Paused'}</div>
 
@@ -97,7 +97,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
           )}
         </div>
 
-        <div className="flex gap-2 sm:gap-3 mb-4 flex-col xs:flex-row">
+        <div className="sticky bottom-0 z-10 mb-4 flex flex-col gap-2 rounded-2xl bg-white/90 p-2 shadow-sm backdrop-blur dark:bg-slate-900/80 xs:flex-row xs:items-center sm:gap-3 md:static md:bg-transparent md:p-0 md:shadow-none md:backdrop-blur-none">
           <button
             onClick={restartExercise}
             className="flex-1 min-h-[48px] p-3 bg-blue-600 text-white border-none rounded-xl text-sm font-semibold cursor-pointer transition-all hover:bg-blue-700 active:scale-95">
