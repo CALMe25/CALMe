@@ -109,11 +109,17 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
       <div className="mb-3 w-full rounded-lg bg-card p-3 text-center shadow-md sm:mb-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-primary">Matching Game</h2>
-        <p className="text-sm text-muted-foreground">{matchesFound} / {totalPairs} matches complete</p>
+        <p className="text-sm text-muted-foreground" aria-live="polite">
+          {matchesFound} / {totalPairs} matches complete
+        </p>
       </div>
 
       {showWinBanner && (
-        <div className="mb-4 flex w-full items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900 shadow-sm sm:mb-5">
+        <div
+          role="status"
+          aria-live="polite"
+          className="mb-4 flex w-full items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900 shadow-sm sm:mb-5"
+        >
           <div className="text-sm sm:text-base font-semibold">🎉 Great work! You cleared the board.</div>
           <button
             onClick={resetGame}
