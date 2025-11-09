@@ -53,7 +53,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
     <button
       key={keyName}
       onClick={() => setPresetKey(keyName as keyof typeof TIMING_PRESETS)}
-      className={`w-full p-2.5 sm:p-3 rounded-2xl border text-left transition-all duration-200 min-h-[60px] active:scale-95 ${
+      className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all duration-200 min-h-[60px] active:scale-95 ${
         presetKey === keyName
           ? 'border-blue-400 bg-blue-50 dark:bg-blue-500/15 dark:border-blue-500/30'
           : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50'
