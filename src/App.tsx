@@ -8,7 +8,7 @@ import { Button } from "./chat_interface/ui/button";
 import { Menu, MoreVertical, Settings, Accessibility } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import { AppsContext, AppsProvider, InnerApps, type AppInterface, quickActivityOrder } from './appsContextApi';
-import AppLauncer from './AppLauncher/AppLauncer';
+import AppLauncher from './AppLauncher/AppLauncher';
 import { ConversationController } from './conversation/ConversationController';
 import { AlertTimer } from './components/AlertTimer';
 import { DarkModeToggle } from './components/DarkModeToggle';
@@ -563,7 +563,7 @@ function App() {
         }
         
         {showAppsLauncher && (
-        <AppLauncer chosenApp={chosenApp} onClose={closeAppLauncher} />
+        <AppLauncher chosenApp={chosenApp} onClose={closeAppLauncher} />
         )}
 
         {shouldAutoLaunchApp && (

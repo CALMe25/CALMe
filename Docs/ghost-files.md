@@ -18,7 +18,7 @@ While combing through the repo after the merge I spotted a few pockets of code t
 The chat UI imports everything from `src/chat_interface/ui/*`, so this parallel set is just sitting there.
 
 ## Oddball AppLauncher File
-- `src/AppLauncher/AppLauncer.tsx`
+- `src/AppLauncher/AppLauncher.tsx`
 
 The misspelled version came across from main. We only use `AppLauncher.tsx`, so this one has no references.
 
