@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Send, Mic, Plus } from "lucide-react";
@@ -9,14 +9,18 @@ interface ChatInputProps {
   onAddAttachment?: () => void;
 }
 
-export function ChatInput({ onSendMessage, onVoiceInput, onAddAttachment }: ChatInputProps) {
-  const [message, setMessage] = useState('');
+export function ChatInput({
+  onSendMessage,
+  onVoiceInput,
+  onAddAttachment,
+}: ChatInputProps) {
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim()) {
       onSendMessage(message.trim());
-      setMessage('');
+      setMessage("");
     }
   };
 
@@ -33,7 +37,7 @@ export function ChatInput({ onSendMessage, onVoiceInput, onAddAttachment }: Chat
         >
           <Plus className="w-5 h-5" />
         </Button>
-        
+
         <div className="flex-1 relative">
           <Input
             value={message}
@@ -41,7 +45,7 @@ export function ChatInput({ onSendMessage, onVoiceInput, onAddAttachment }: Chat
             placeholder="Type a message..."
             className="pr-12 h-11 rounded-full bg-muted border-0 focus-visible:ring-1 focus-visible:ring-ring text-base"
           />
-          
+
           <Button
             type="button"
             variant="ghost"
@@ -53,7 +57,7 @@ export function ChatInput({ onSendMessage, onVoiceInput, onAddAttachment }: Chat
             <Mic className="w-4 h-4" />
           </Button>
         </div>
-        
+
         <Button
           type="submit"
           size="sm"

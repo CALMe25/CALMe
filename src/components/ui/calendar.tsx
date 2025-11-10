@@ -56,10 +56,20 @@ function Calendar({
   } as Record<string, unknown>;
 
   const calendarComponents = {
-    IconLeft: ({ className: iconClassName, ...iconProps }: { className?: string }) => (
+    IconLeft: ({
+      className: iconClassName,
+      ...iconProps
+    }: {
+      className?: string;
+    }) => (
       <ChevronLeft className={cn("size-4", iconClassName)} {...iconProps} />
     ),
-    IconRight: ({ className: iconClassName, ...iconProps }: { className?: string }) => (
+    IconRight: ({
+      className: iconClassName,
+      ...iconProps
+    }: {
+      className?: string;
+    }) => (
       <ChevronRight className={cn("size-4", iconClassName)} {...iconProps} />
     ),
   } as Record<string, React.ComponentType<any>>;

@@ -1,16 +1,12 @@
-import nlp from 'compromise'
+import nlp from "compromise";
 
-import {
-  analyzeText
-} from './semanticParser.js'
-
+import { analyzeText } from "./semanticParser.js";
 
 // ============================================================================
 // MERMAID INTERPRETER - Handles flowchart structure and navigation
 // ============================================================================
 
 export class MermaidInterpreter {
-
   constructor() {
     this.flowchartStructure = null;
     this.currentPosition = null;
@@ -28,7 +24,7 @@ export class MermaidInterpreter {
   // static async createFromFile(filePath = '/conversation-flow.mermaid') {
   async createFromFile(filePath) {
     if (!filePath) {
-      throw ('No file source given');
+      throw "No file source given";
     }
     const interpreter = new MermaidInterpreter();
     // const flowchartText = await FlowchartLoader.loadFromFile(filePath); // old
@@ -39,26 +35,34 @@ export class MermaidInterpreter {
 
   async interpret(mermaidText) {
     // console.log(mermaidText);
-    console.log('🔍 Interpreting Mermaid flowchart...');
+    console.log("🔍 Interpreting Mermaid flowchart...");
     this.flowchartStructure = this.parseMermaidSyntax(mermaidText);
     this.currentPosition = {
       nodeId: this.findStartNode(),
-      nodeType: 'question',
-      waitingForResponse: true
+      nodeType: "question",
+      waitingForResponse: true,
     };
     this.isReady = true;
-    console.log(`✅ Mermaid interpreted: ${this.flowchartStructure.nodes.size} nodes, ${this.flowchartStructure.edges.length} edges`);
+    console.log(
+      `✅ Mermaid interpreted: ${this.flowchartStructure.nodes.size} nodes, ${this.flowchartStructure.edges.length} edges`,
+    );
   }
 
   parseMermaidSyntax(text) {
     // console.log(text);
     const nodes = new Map();
     const edges = [];
-    
-    const lines = text.split('\n')
-      .map(line => line.trim())
-      .filter(line => line && !line.startsWith('flowchart') && !line.startsWith('%%'));
-    
+
+    const lines = text
+      .split("\n")
+
+      .map((line) => line.trim())
+
+      .filter(
+        (line) =>
+          line && !line.startsWith("flowchart") && !line.startsWith("%%"),
+      );
+
     // Phase 1: Extract all nodes
     for (const line of lines) {
       const questionMatch = line.match(/(\w+)\{([^}]+)\}/);
@@ -69,38 +73,38 @@ export class MermaidInterpreter {
         const [, nodeId, text] = questionMatch;
         nodes.set(nodeId, {
           id: nodeId,
-          type: 'question',
+          type: "question",
           text: text,
           outgoingEdges: [],
-          categories: new Map()
+          categories: new Map(),
         });
       }
-      
+
       if (keywordMatch) {
         const [, nodeId, keywordString] = keywordMatch;
         nodes.set(nodeId, {
           id: nodeId,
-          type: 'keywords',
+          type: "keywords",
           text: keywordString,
-          keywords: keywordString.split(',').map(k => k.trim()),
-          outgoingEdges: []
+          keywords: keywordString.split(",").map((k) => k.trim()),
+          outgoingEdges: [],
         });
       }
     }
-    
+
     // Phase 2: Extract all edges/connections
     for (const line of lines) {
       const categoryEdgeMatch = line.match(/(\w+)\s*-->\s*\|([^|]+)\|\s*(\w+)/);
       const directEdgeMatch = line.match(/(\w+)\s*-->\s*(\w+)/);
-      
+
       if (categoryEdgeMatch) {
         const [, fromId, label, toId] = categoryEdgeMatch;
         const edge = {
           from: fromId,
           to: toId,
           label: label.trim(),
-          type: 'category',
-          category: this.normalizeCategory(label.trim())
+          type: "category",
+          category: this.normalizeCategory(label.trim()),
         };
         edges.push(edge);
         if (nodes.has(fromId)) {
@@ -111,7 +115,7 @@ export class MermaidInterpreter {
         const edge = {
           from: fromId,
           to: toId,
-          type: 'direct'
+          type: "direct",
         };
         edges.push(edge);
         if (nodes.has(fromId)) {
@@ -119,25 +123,25 @@ export class MermaidInterpreter {
         }
       }
     }
-    
+
     // Phase 3: Build question categories from edges
     this.buildQuestionCategories(nodes);
-    
+
     return { nodes, edges };
   }
 
   buildQuestionCategories(nodes) {
     for (const [, node] of nodes) {
-      if (node.type === 'question') {
+      if (node.type === "question") {
         for (const edge of node.outgoingEdges) {
-          if (edge.type === 'category') {
+          if (edge.type === "category") {
             const targetNode = nodes.get(edge.to);
-            if (targetNode && targetNode.type === 'keywords') {
+            if (targetNode && targetNode.type === "keywords") {
               node.categories.set(edge.category, {
                 name: edge.label,
                 keywords: targetNode.keywords,
                 keywordNodeId: edge.to,
-                nextPath: this.findNextNodeFromKeywords(targetNode)
+                nextPath: this.findNextNodeFromKeywords(targetNode),
               });
             }
           }
@@ -147,17 +151,19 @@ export class MermaidInterpreter {
   }
 
   findNextNodeFromKeywords(keywordNode) {
-    const nextEdge = keywordNode.outgoingEdges.find(edge => edge.type === 'direct');
+    const nextEdge = keywordNode.outgoingEdges.find(
+      (edge) => edge.type === "direct",
+    );
     return nextEdge ? nextEdge.to : null;
   }
 
   normalizeCategory(text) {
-    return text.toUpperCase().replace(/\s+/g, '_');
+    return text.toUpperCase().replace(/\s+/g, "_");
   }
 
   findStartNode() {
     for (const [nodeId, node] of this.flowchartStructure.nodes) {
-      if (node.type === 'question') {
+      if (node.type === "question") {
         return nodeId;
       }
     }
@@ -171,8 +177,8 @@ export class MermaidInterpreter {
 
   getCurrentQuestion() {
     const currentNode = this.getCurrentNode();
-    
-    if (!currentNode || currentNode.type !== 'question') {
+
+    if (!currentNode || currentNode.type !== "question") {
       return null;
     }
 
@@ -180,25 +186,26 @@ export class MermaidInterpreter {
     currentNode.categories.forEach((categoryData, categoryKey) => {
       categories[categoryKey] = {
         keywords: categoryData.keywords,
-        sampleInputs: [`Example: ${categoryData.name}`]
+        sampleInputs: [`Example: ${categoryData.name}`],
       };
     });
 
     return {
       id: currentNode.id,
-      type: 'classification',
-      question: currentNode.text.slice(1,-1),
+      type: "classification",
+      question: currentNode.text.slice(1, -1),
       categories: categories,
       clarificationResponse: `Could you tell me more about: ${currentNode.text.toLowerCase()}`,
-      defaultCategory: Array.from(currentNode.categories.keys())[0] || 'UNKNOWN'
+      defaultCategory:
+        Array.from(currentNode.categories.keys())[0] || "UNKNOWN",
     };
   }
 
   // Navigate based on classification result
   navigateToCategory(category) {
     const currentNode = this.getCurrentNode();
-    if (!currentNode || currentNode.type !== 'question') {
-      return { success: false, error: 'Not at a question node' };
+    if (!currentNode || currentNode.type !== "question") {
+      return { success: false, error: "Not at a question node" };
     }
 
     const categoryData = currentNode.categories.get(category);
@@ -210,42 +217,47 @@ export class MermaidInterpreter {
     this.navigationHistory.push({
       from: this.currentPosition.nodeId,
       category: category,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     // Move to keyword node first
     this.currentPosition.nodeId = categoryData.keywordNodeId;
-    this.currentPosition.nodeType = 'keywords';
+    this.currentPosition.nodeType = "keywords";
 
     // Then immediately move to next question if available
     if (categoryData.nextPath) {
       const nextNode = this.flowchartStructure.nodes.get(categoryData.nextPath);
       this.currentPosition.nodeId = categoryData.nextPath;
-      this.currentPosition.nodeType = nextNode?.type || 'unknown';
-      this.currentPosition.waitingForResponse = nextNode?.type === 'question';
+      this.currentPosition.nodeType = nextNode?.type || "unknown";
+      this.currentPosition.waitingForResponse = nextNode?.type === "question";
     }
 
     return { success: true, newPosition: this.currentPosition };
   }
 
   isAtQuestion() {
-    return this.currentPosition.nodeType === 'question' && this.currentPosition.waitingForResponse;
+    return (
+      this.currentPosition.nodeType === "question" &&
+      this.currentPosition.waitingForResponse
+    );
   }
 
   isComplete() {
     const currentNode = this.getCurrentNode();
-    return currentNode?.text?.toLowerCase().includes('complete') ||
-           currentNode?.text?.toLowerCase().includes('conversation complete');
+    return (
+      currentNode?.text?.toLowerCase().includes("complete") ||
+      currentNode?.text?.toLowerCase().includes("conversation complete")
+    );
   }
 
   shouldTriggerAction() {
     const currentNode = this.getCurrentNode();
     if (!currentNode) return null;
-    
+
     const text = currentNode.text.toLowerCase();
-    if (text.includes('breathing app')) return 'LAUNCH_BREATHING';
-    if (text.includes('activities')) return 'SHOW_ACTIVITIES';
-    if (text.includes('emergency')) return 'EMERGENCY_PROTOCOL';
+    if (text.includes("breathing app")) return "LAUNCH_BREATHING";
+    if (text.includes("activities")) return "SHOW_ACTIVITIES";
+    if (text.includes("emergency")) return "EMERGENCY_PROTOCOL";
     return null;
   }
 
@@ -255,11 +267,13 @@ export class MermaidInterpreter {
       totalNodes: this.flowchartStructure?.nodes.size || 0,
       totalEdges: this.flowchartStructure?.edges.length || 0,
       questionNodes: Array.from(this.flowchartStructure?.nodes || [])
-        .filter(([, node]) => node.type === 'question').length,
+
+        .filter(([, node]) => node.type === "question").length,
       keywordNodes: Array.from(this.flowchartStructure?.nodes || [])
-        .filter(([, node]) => node.type === 'keywords').length,
+
+        .filter(([, node]) => node.type === "keywords").length,
       currentPosition: this.currentPosition,
-      navigationSteps: this.navigationHistory.length
+      navigationSteps: this.navigationHistory.length,
     };
   }
 }
@@ -304,9 +318,33 @@ export class NLPParser {
     // All keywords come from the flowchart
     nlp.extend({
       // Only general linguistic patterns, no domain-specific keywords
-      intensifiers: ['very', 'really', 'extremely', 'totally', 'completely', 'absolutely'],
-      negations: ['not', 'no', 'never', 'none', 'nothing', 'cant', 'wont', 'dont'],
-      uncertainty: ['maybe', 'perhaps', 'possibly', 'might', 'could', 'think', 'guess']
+      intensifiers: [
+        "very",
+        "really",
+        "extremely",
+        "totally",
+        "completely",
+        "absolutely",
+      ],
+      negations: [
+        "not",
+        "no",
+        "never",
+        "none",
+        "nothing",
+        "cant",
+        "wont",
+        "dont",
+      ],
+      uncertainty: [
+        "maybe",
+        "perhaps",
+        "possibly",
+        "might",
+        "could",
+        "think",
+        "guess",
+      ],
     });
   }
 
@@ -317,26 +355,33 @@ export class NLPParser {
     // const text = userInput.toLowerCase();
     const doc = nlp(userInput.toLowerCase());
     const text = userInput.toLowerCase();
-    console.log('the doc is ', doc);
-    console.log('the text is ', text);
+    console.log("the doc is ", doc);
+    console.log("the text is ", text);
 
     // Perform NLP analysis using only generic linguistic features
     const nlpAnalysis = this.performGenericAnalysis(doc, text);
-    
+
     // Score categories using ONLY keywords from the flowchart
-    const scores = this.scoreFlowchartCategories(text, doc, questionData.categories, nlpAnalysis);
-    
+    const scores = this.scoreFlowchartCategories(
+      text,
+      doc,
+      questionData.categories,
+      nlpAnalysis,
+    );
+
     // Select best match
     const bestMatch = this.selectBestCategory(scores, questionData);
-    
+
     return {
-      type: 'classification',
+      type: "classification",
       category: bestMatch.category,
       confidence: bestMatch.confidence,
       matchedKeywords: bestMatch.matchedElements,
       nlpAnalysis: nlpAnalysis,
       reasoning: bestMatch.reasoning,
-      alternativeScores: scores.filter(s => s.category !== bestMatch.category)
+      alternativeScores: scores.filter(
+        (s) => s.category !== bestMatch.category,
+      ),
     };
   }
 
@@ -347,32 +392,36 @@ export class NLPParser {
       const result = plugin(text, doc);
       pluginResults = { ...pluginResults, ...result };
     }
-    //const semanticAnalysis = analyzeText(text);  
-     console.log('the doc is ', doc);
-     console.log('the text is ', text);
-     console.log('the Sentiment is ', semanticAnalysis);
+    //const semanticAnalysis = analyzeText(text);
+    console.log("the doc is ", doc);
+    console.log("the text is ", text);
+    console.log("the Sentiment is ", semanticAnalysis);
     return {
-      sentiment: pluginResults.sentiment || semanticAnalysis.sentiment || 0,  
+      sentiment: pluginResults.sentiment || semanticAnalysis.sentiment || 0,
       // sentiment: doc.sentiment().out('normal'),
       //sentiment: 'negative',
       // sentiment: doc.sentiment, // isn't this supposed to be a number?
       // sentiment: Math.random(),
       entities: {
-        people: doc.people().out('array'),
-        places: doc.places().out('array'),
-        organizations: doc.organizations().out('array')
+        people: doc.people().out("array"),
+        places: doc.places().out("array"),
+        organizations: doc.organizations().out("array"),
       },
       linguistic: {
-        emotions: doc.match('#Emotion').out('array'), // Generic emotion detection
-        intensifiers: doc.match('(very|really|extremely|totally|completely|absolutely)').out('array'),
-        negations: doc.has('#Negative'),
-        uncertainties: doc.match('(maybe|perhaps|possibly|might|could|think|guess)').out('array'),
-        questions: doc.questions().out('array'),
-        verbs: doc.verbs().out('array'),
-        adjectives: doc.adjectives().out('array'),
+        emotions: doc.match("#Emotion").out("array"), // Generic emotion detection
+        intensifiers: doc
+          .match("(very|really|extremely|totally|completely|absolutely)")
+          .out("array"),
+        negations: doc.has("#Negative"),
+        uncertainties: doc
+          .match("(maybe|perhaps|possibly|might|could|think|guess)")
+          .out("array"),
+        questions: doc.questions().out("array"),
+        verbs: doc.verbs().out("array"),
+        adjectives: doc.adjectives().out("array"),
         length: text.length,
-        wordCount: text.split(/\s+/).length
-      }
+        wordCount: text.split(/\s+/).length,
+      },
     };
   }
 
@@ -380,10 +429,12 @@ export class NLPParser {
     const scores = [];
 
     // Score each category using ONLY the keywords from the flowchart
-    for (const [categoryKey, categoryData] of Object.entries(flowchartCategories)) {
+    for (const [categoryKey, categoryData] of Object.entries(
+      flowchartCategories,
+    )) {
       let score = 0;
       let matchedElements = [];
-      
+
       // 1. Direct keyword matching from flowchart (40% weight)
       for (const keyword of categoryData.keywords) {
         if (text.includes(keyword.toLowerCase())) {
@@ -391,37 +442,52 @@ export class NLPParser {
           matchedElements.push(`flowchart-keyword: ${keyword}`);
         }
       }
-      
+
       // 2. Lemmatized matching of flowchart keywords (30% weight)
       for (const keyword of categoryData.keywords) {
         const keywordDoc = nlp(keyword);
-        const lemma = keywordDoc.verbs().toInfinitive().text() || 
-                     keywordDoc.nouns().toSingular().text() || keyword;
-        
-        if (doc.has(lemma) && lemma !== keyword && !text.includes(keyword.toLowerCase())) {
+        const lemma =
+          keywordDoc.verbs().toInfinitive().text() ||
+          keywordDoc.nouns().toSingular().text() ||
+          keyword;
+
+        if (
+          doc.has(lemma) &&
+          lemma !== keyword &&
+          !text.includes(keyword.toLowerCase())
+        ) {
           score += 0.3;
           matchedElements.push(`flowchart-lemma: ${lemma}`);
         }
       }
-      
+
       // 3. Semantic similarity to flowchart keywords (20% weight)
-      const semanticScore = this.calculateFlowchartSemanticScore(doc, categoryData.keywords, nlpAnalysis);
-      score += semanticScore * 0.20;
+      const semanticScore = this.calculateFlowchartSemanticScore(
+        doc,
+        categoryData.keywords,
+        nlpAnalysis,
+      );
+      score += semanticScore * 0.2;
       if (semanticScore > 0.1) {
-        matchedElements.push(`semantic-similarity: ${semanticScore.toFixed(2)}`);
+        matchedElements.push(
+          `semantic-similarity: ${semanticScore.toFixed(2)}`,
+        );
       }
-      
+
       // 4. Generic linguistic patterns (10% weight)
-      const linguisticScore = this.calculateGenericLinguisticScore(nlpAnalysis, categoryKey);
-      score += linguisticScore * 0.10;
+      const linguisticScore = this.calculateGenericLinguisticScore(
+        nlpAnalysis,
+        categoryKey,
+      );
+      score += linguisticScore * 0.1;
       if (linguisticScore > 0.1) {
         matchedElements.push(`linguistic: ${linguisticScore.toFixed(2)}`);
       }
-      
+
       scores.push({
         category: categoryKey,
         score: score,
-        matchedElements: matchedElements
+        matchedElements: matchedElements,
       });
     }
 
@@ -430,79 +496,88 @@ export class NLPParser {
 
   calculateFlowchartSemanticScore(doc, flowchartKeywords, nlpAnalysis) {
     let score = 0;
-    
+
     // Check if any flowchart keywords appear in different forms in the text
     for (const keyword of flowchartKeywords) {
       const keywordDoc = nlp(keyword);
-      
+
       // Check for synonyms or related words using compromise.js
-      if (keywordDoc.has('#Emotion') && nlpAnalysis.linguistic.emotions.length > 0) {
+      if (
+        keywordDoc.has("#Emotion") &&
+        nlpAnalysis.linguistic.emotions.length > 0
+      ) {
         score += 0.2;
       }
-      
-      if (keywordDoc.has('#Place') && nlpAnalysis.entities.places.length > 0) {
+
+      if (keywordDoc.has("#Place") && nlpAnalysis.entities.places.length > 0) {
         score += 0.3;
       }
-      
+
       // Check for semantic relationships
-      const keywordSentiment = keywordDoc.sentiment().out('normal');
+      const keywordSentiment = keywordDoc.sentiment().out("normal");
       if (Math.abs(keywordSentiment - nlpAnalysis.sentiment) < 0.3) {
         score += 0.1;
       }
     }
-    
+
     return Math.min(1.0, score);
   }
 
   calculateGenericLinguisticScore(nlpAnalysis, categoryKey) {
     let score = 0;
-    
+
     // Generic patterns that don't rely on hardcoded knowledge
-    
+
     // Sentiment-based scoring
     if (nlpAnalysis.sentiment > 0.3) {
       // Positive sentiment might indicate categories with positive keywords
       score += 0.1;
     } else if (nlpAnalysis.sentiment < -0.3) {
-      // Negative sentiment might indicate categories with negative keywords  
+      // Negative sentiment might indicate categories with negative keywords
       score += 0.1;
     }
-    
+
     // Uncertainty patterns
     if (nlpAnalysis.linguistic.uncertainties.length > 0) {
       // If category name suggests uncertainty (contains "unsure", "maybe", etc.)
-      if (categoryKey.toLowerCase().includes('unsure') || 
-          categoryKey.toLowerCase().includes('uncertain') ||
-          categoryKey.toLowerCase().includes('maybe')) {
+      if (
+        categoryKey.toLowerCase().includes("unsure") ||
+        categoryKey.toLowerCase().includes("uncertain") ||
+        categoryKey.toLowerCase().includes("maybe")
+      ) {
         score += 0.3;
       }
     }
-    
-    // Intensity patterns  
+
+    // Intensity patterns
     if (nlpAnalysis.linguistic.intensifiers.length > 0) {
       // If category suggests high intensity
-      if (categoryKey.toLowerCase().includes('high') || 
-          categoryKey.toLowerCase().includes('extreme') ||
-          categoryKey.toLowerCase().includes('severe')) {
+      if (
+        categoryKey.toLowerCase().includes("high") ||
+        categoryKey.toLowerCase().includes("extreme") ||
+        categoryKey.toLowerCase().includes("severe")
+      ) {
         score += 0.2;
       }
     }
-    
+
     // Length-based patterns
     if (nlpAnalysis.linguistic.wordCount > 10) {
       // Longer responses might indicate more complex categories
       score += 0.05;
     }
-    
+
     // Question patterns
     if (nlpAnalysis.linguistic.questions.length > 0) {
       // Questions often indicate uncertainty
-      if (categoryKey.toLowerCase().includes('unsure') || 
-          categoryKey.toLowerCase().includes('uncertain')) {
+      if (
+        categoryKey.toLowerCase().includes("unsure") ||
+        categoryKey.toLowerCase().includes("uncertain")
+      ) {
         score += 0.2;
       }
     }
-    
+
     return Math.min(1.0, score);
   }
 
@@ -512,15 +587,15 @@ export class NLPParser {
         category: questionData.defaultCategory,
         confidence: 0.3,
         matchedElements: [],
-        reasoning: 'No categories available from flowchart'
+        reasoning: "No categories available from flowchart",
       };
     }
 
     const bestScore = scores[0];
-    
+
     // Dynamic confidence calculation based on score distribution
     let confidence = Math.min(0.95, Math.max(0.3, bestScore.score));
-    
+
     // Boost confidence if there's a clear winner
     if (scores.length > 1) {
       const secondBest = scores[1];
@@ -529,7 +604,7 @@ export class NLPParser {
         confidence = Math.min(0.95, confidence + 0.1);
       }
     }
-    
+
     // Require minimum threshold for meaningful classification
     const threshold = 0.15;
     if (bestScore.score < threshold) {
@@ -537,7 +612,7 @@ export class NLPParser {
         category: questionData.defaultCategory,
         confidence: 0.3,
         matchedElements: [],
-        reasoning: `Best score ${bestScore.score.toFixed(3)} below threshold ${threshold}, using default category from flowchart`
+        reasoning: `Best score ${bestScore.score.toFixed(3)} below threshold ${threshold}, using default category from flowchart`,
       };
     }
 
@@ -545,45 +620,45 @@ export class NLPParser {
       category: bestScore.category,
       confidence: confidence,
       matchedElements: bestScore.matchedElements,
-      reasoning: `Best flowchart match: ${bestScore.category} (score: ${bestScore.score.toFixed(3)}). Elements: ${bestScore.matchedElements.join(', ')}`
+      reasoning: `Best flowchart match: ${bestScore.category} (score: ${bestScore.score.toFixed(3)}). Elements: ${bestScore.matchedElements.join(", ")}`,
     };
   }
 
   // Method for extraction-type questions
   extractInformation(userInput, questionData) {
     const doc = nlp(userInput);
-    
+
     switch (questionData.informationType) {
-      case 'location': {
-        const places = doc.places().out('array');
+      case "location": {
+        const places = doc.places().out("array");
         if (places.length > 0) {
           return {
-            type: 'extraction',
+            type: "extraction",
             extractedValue: places[0],
             confidence: 0.8,
-            informationType: 'location',
-            extractionMethod: 'compromise.js places()'
+            informationType: "location",
+            extractionMethod: "compromise.js places()",
           };
         }
 
         // Fallback to nouns
-        const nouns = doc.nouns().out('array');
+        const nouns = doc.nouns().out("array");
         return {
-          type: 'extraction',
+          type: "extraction",
           extractedValue: nouns[0] || userInput.trim(),
           confidence: nouns.length > 0 ? 0.6 : 0.4,
-          informationType: 'location',
-          extractionMethod: 'compromise.js nouns() fallback'
+          informationType: "location",
+          extractionMethod: "compromise.js nouns() fallback",
         };
       }
-        
+
       default:
         return {
-          type: 'extraction',
+          type: "extraction",
           extractedValue: userInput.trim(),
           confidence: 0.5,
           informationType: questionData.informationType,
-          extractionMethod: 'direct text'
+          extractionMethod: "direct text",
         };
     }
   }
@@ -596,7 +671,7 @@ export class NLPParser {
 export class ConversationController {
   constructor(filePath) {
     this.interpreter = null;
-    this.nlpParser = new NLPParser();    
+    this.nlpParser = new NLPParser();
     this.nlpParser.registerPlugin((text) => analyzeText(text));
     this.isReady = false;
     this.scriptPath = filePath || null;
@@ -614,16 +689,16 @@ export class ConversationController {
 
   // async initialize(filePath) {
   async initialize() {
-    console.log('🚀 Initializing conversation controller...');
+    console.log("🚀 Initializing conversation controller...");
     // this.interpreter = await mermaidInterpreter.createFromFile(filePath);
-    const mermaidInterpreter = new MermaidInterpreter()
+    const mermaidInterpreter = new MermaidInterpreter();
     this.interpreter = await mermaidInterpreter.createFromFile(this.scriptPath); // Creates a MermaidInterpreter instance
     // this.firstNode = await mermaidInterpreter.getCurrentQuestion();
     // if (!this.firstNode){
 
     // }
     this.isReady = true;
-    console.log('✅ Conversation controller ready');
+    console.log("✅ Conversation controller ready");
   }
 
   getCurrentQuestion() {
@@ -631,13 +706,14 @@ export class ConversationController {
     // if (!this.isReady || !this.interpreter.isAtQuestion()) {
     //   return null;
     // }
-    
+
     // return this.interpreter.getCurrentQuestion();
 
     // Fixed
-    if (!this.scriptPath) { // No file path defined
-      return null
-    }  // initiation has occurred once
+    if (!this.scriptPath) {
+      // No file path defined
+      return null;
+    } // initiation has occurred once
     // if (!this.isReady || this.interpreter === null) {
     //   this.scriptPath = filePath;
     //   this.initialize()
@@ -652,15 +728,19 @@ export class ConversationController {
 
   processUserInput(userInput) {
     if (!this.isReady) {
-      return { success: false, error: 'Controller not ready' };
+      return { success: false, error: "Controller not ready" };
     }
-
 
     const currentQuestion = this.getCurrentQuestion();
     if (!currentQuestion) {
-      return { success: false, error: 'Not at a question' };
+      return { success: false, error: "Not at a question" };
     }
-    console.log('user input: ', userInput, '\ncurrent question: ', currentQuestion);
+    console.log(
+      "user input: ",
+      userInput,
+      "\ncurrent question: ",
+      currentQuestion,
+    );
     // Use NLP parser to understand input
     // let result;
     // if (currentQuestion.type === 'classification') {
@@ -669,17 +749,19 @@ export class ConversationController {
     //   result = this.nlpParser.extractInformation(userInput, currentQuestion);
     // }
     let result = this.nlpParser.classifyInput(userInput, currentQuestion);
-    if (currentQuestion.type !== 'classification') {
-     result = this.nlpParser.extractInformation(userInput, currentQuestion);
+    if (currentQuestion.type !== "classification") {
+      result = this.nlpParser.extractInformation(userInput, currentQuestion);
     }
-    console.log('user Input was classified as ', result);
+    console.log("user Input was classified as ", result);
 
     // Use interpreter to navigate
-    if (result.type === 'classification') {
-      console.log('old current position ', this.interpreter.currentPosition);
-      const navigationResult = this.interpreter.navigateToCategory(result.category);
-      console.log('navigation to ', result.category);
-      console.log('new current position ', this.interpreter.currentPosition);
+    if (result.type === "classification") {
+      console.log("old current position ", this.interpreter.currentPosition);
+      const navigationResult = this.interpreter.navigateToCategory(
+        result.category,
+      );
+      console.log("navigation to ", result.category);
+      console.log("new current position ", this.interpreter.currentPosition);
       if (!navigationResult.success) {
         return { success: false, error: navigationResult.error };
       }
@@ -692,23 +774,23 @@ export class ConversationController {
       isComplete: this.interpreter.isComplete(),
       debugInfo: {
         interpreterInfo: this.interpreter.getStructureInfo(),
-        currentPosition: this.interpreter.currentPosition
-      }
+        currentPosition: this.interpreter.currentPosition,
+      },
     };
   }
 
   // Development helpers
   async reloadFlowchart() {
-    console.log('🔄 Reloading flowchart...');
+    console.log("🔄 Reloading flowchart...");
     this.interpreter = await MermaidInterpreter.createFromFile(this.filePath);
-    console.log('✅ Flowchart reloaded');
+    console.log("✅ Flowchart reloaded");
   }
 
   getDebugInfo() {
     return {
       ready: this.isReady,
       interpreter: this.interpreter?.getStructureInfo(),
-      currentQuestion: this.getCurrentQuestion()
+      currentQuestion: this.getCurrentQuestion(),
     };
   }
 

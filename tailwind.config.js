@@ -1,81 +1,78 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      'xs': '475px',
-      'sm': '640px',
-      'md': '768px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
+      xs: "475px",
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
     },
     extend: {
       spacing: {
-        'safe-top': 'env(safe-area-inset-top)',
-        'safe-bottom': 'env(safe-area-inset-bottom)',
-        'safe-left': 'env(safe-area-inset-left)',
-        'safe-right': 'env(safe-area-inset-right)',
-        '13': '3.25rem', // 52px for intermediate responsive sizing
+        "safe-top": "env(safe-area-inset-top)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
+        "safe-left": "env(safe-area-inset-left)",
+        "safe-right": "env(safe-area-inset-right)",
+        13: "3.25rem", // 52px for intermediate responsive sizing
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)"
+        sm: "calc(var(--radius) - 4px)",
       },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
         card: {
           DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)"
+          foreground: "var(--card-foreground)",
         },
         popover: {
           DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)"
+          foreground: "var(--popover-foreground)",
         },
         primary: {
           DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)"
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
           DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)"
+          foreground: "var(--secondary-foreground)",
         },
         muted: {
           DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)"
+          foreground: "var(--muted-foreground)",
         },
         accent: {
           DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)"
+          foreground: "var(--accent-foreground)",
         },
         destructive: {
           DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)"
+          foreground: "var(--destructive-foreground)",
         },
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
         chart: {
-          "1": "var(--chart-1)",
-          "2": "var(--chart-2)",
-          "3": "var(--chart-3)",
-          "4": "var(--chart-4)",
-          "5": "var(--chart-5)"
-        }
+          1: "var(--chart-1)",
+          2: "var(--chart-2)",
+          3: "var(--chart-3)",
+          4: "var(--chart-4)",
+          5: "var(--chart-5)",
+        },
       },
       minHeight: {
-        'touch': '44px',
+        touch: "44px",
       },
       minWidth: {
-        'touch': '44px',
-      }
-    }
+        touch: "44px",
+      },
+    },
   },
   plugins: [],
-}
+};

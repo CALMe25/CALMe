@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 type CellValue = number | null;
 type Grid = CellValue[][];
-type Difficulty = 'easy' | 'medium' | 'hard';
+type Difficulty = "easy" | "medium" | "hard";
 
 // Multiple solution templates for variety
 const solutionTemplates: Grid[] = [
@@ -41,17 +41,21 @@ const solutionTemplates: Grid[] = [
   ],
 ];
 
-const generatePuzzle = (difficulty: Difficulty): { puzzle: Grid; solution: Grid } => {
+const generatePuzzle = (
+  difficulty: Difficulty,
+): { puzzle: Grid; solution: Grid } => {
   // Pick a random solution template
-  const solution = solutionTemplates[Math.floor(Math.random() * solutionTemplates.length)].map(row => [...row]);
+  const solution = solutionTemplates[
+    Math.floor(Math.random() * solutionTemplates.length)
+  ].map((row) => [...row]);
 
   // Create puzzle by removing cells based on difficulty
-  const puzzle: Grid = solution.map(row => [...row]);
+  const puzzle: Grid = solution.map((row) => [...row]);
 
   const cellsToRemove = {
-    easy: 35,    // 35 removed = 46 given
-    medium: 45,  // 45 removed = 36 given
-    hard: 55,    // 55 removed = 26 given
+    easy: 35, // 35 removed = 46 given
+    medium: 45, // 45 removed = 36 given
+    hard: 55, // 55 removed = 26 given
   }[difficulty];
 
   const removed = new Set<string>();
@@ -75,19 +79,23 @@ interface SudokuGameProps {
 }
 
 export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
-  const [difficulty, setDifficulty] = useState<Difficulty>('easy');
-  const [{ puzzle, solution }, setPuzzleData] = useState(() => generatePuzzle('easy'));
-  const [grid, setGrid] = useState<Grid>(puzzle.map(row => [...row]));
-  const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+  const [{ puzzle, solution }, setPuzzleData] = useState(() =>
+    generatePuzzle("easy"),
+  );
+  const [grid, setGrid] = useState<Grid>(puzzle.map((row) => [...row]));
+  const [selectedCell, setSelectedCell] = useState<[number, number] | null>(
+    null,
+  );
   const [errors, setErrors] = useState<Set<string>>(new Set());
   const [isComplete, setIsComplete] = useState(false);
 
   const checkCompletion = useCallback(() => {
-    const isFilled = grid.every(row => row.every(cell => cell !== null));
+    const isFilled = grid.every((row) => row.every((cell) => cell !== null));
     if (!isFilled) return;
 
     const isCorrect = grid.every((row, i) =>
-      row.every((cell, j) => cell === solution[i][j])
+      row.every((cell, j) => cell === solution[i][j]),
     );
 
     if (isCorrect) {
@@ -110,15 +118,15 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     const [row, col] = selectedCell;
     if (puzzle[row][col] !== null) return;
 
-    const newGrid = grid.map(r => [...r]);
+    const newGrid = grid.map((r) => [...r]);
     newGrid[row][col] = num;
     setGrid(newGrid);
 
     // Check for errors
     if (num !== null && num !== solution[row][col]) {
-      setErrors(prev => new Set(prev).add(`${row},${col}`));
+      setErrors((prev) => new Set(prev).add(`${row},${col}`));
     } else {
-      setErrors(prev => {
+      setErrors((prev) => {
         const newErrors = new Set(prev);
         newErrors.delete(`${row},${col}`);
         return newErrors;
@@ -130,7 +138,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     const diff = newDifficulty || difficulty;
     const newPuzzleData = generatePuzzle(diff);
     setPuzzleData(newPuzzleData);
-    setGrid(newPuzzleData.puzzle.map(row => [...row]));
+    setGrid(newPuzzleData.puzzle.map((row) => [...row]));
     setSelectedCell(null);
     setErrors(new Set());
     setIsComplete(false);
@@ -142,50 +150,61 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     const isSelected = selectedCell?.[0] === row && selectedCell?.[1] === col;
     const hasError = errors.has(`${row},${col}`);
 
-    let className = 'w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-colors ';
+    let className =
+      "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 flex items-center justify-center text-sm sm:text-base md:text-lg font-semibold cursor-pointer transition-colors ";
 
     if (isOriginal) {
-      className += 'bg-secondary text-primary font-bold cursor-not-allowed ';
+      className += "bg-secondary text-primary font-bold cursor-not-allowed ";
     } else if (isSelected) {
-      className += 'bg-primary text-primary-foreground ring-1 sm:ring-2 ring-primary ';
+      className +=
+        "bg-primary text-primary-foreground ring-1 sm:ring-2 ring-primary ";
     } else if (hasError) {
-      className += 'bg-destructive/40 text-destructive-foreground ';
+      className += "bg-destructive/40 text-destructive-foreground ";
     } else {
-      className += 'bg-card text-accent-foreground hover:bg-accent ';
+      className += "bg-card text-accent-foreground hover:bg-accent ";
     }
 
     // Thicker borders for 3x3 boxes with better visibility
-    if (col % 3 === 0) className += 'border-l-2 sm:border-l-3 md:border-l-4 border-border ';
-    else className += 'border-l border-border ';
+    if (col % 3 === 0)
+      className += "border-l-2 sm:border-l-3 md:border-l-4 border-border ";
+    else className += "border-l border-border ";
 
-    if (row % 3 === 0) className += 'border-t-2 sm:border-t-3 md:border-t-4 border-border ';
-    else className += 'border-t border-border ';
+    if (row % 3 === 0)
+      className += "border-t-2 sm:border-t-3 md:border-t-4 border-border ";
+    else className += "border-t border-border ";
 
-    if (col === 8) className += 'border-r-2 sm:border-r-3 md:border-r-4 border-border ';
-    if (row === 8) className += 'border-b-2 sm:border-b-3 md:border-b-4 border-border ';
+    if (col === 8)
+      className += "border-r-2 sm:border-r-3 md:border-r-4 border-border ";
+    if (row === 8)
+      className += "border-b-2 sm:border-b-3 md:border-b-4 border-border ";
 
     return className;
   };
 
   return (
     <div className="flex flex-col items-center p-2 md:p-4 bg-background text-foreground w-full max-w-2xl mx-auto h-full max-h-screen overflow-y-auto">
-      <h2 className="text-xl md:text-2xl font-bold text-primary mb-2">Sudoku</h2>
+      <h2 className="text-xl md:text-2xl font-bold text-primary mb-2">
+        Sudoku
+      </h2>
 
       {/* Difficulty Selector */}
       <div className="mb-2 flex gap-1.5 md:gap-2">
         <button
-          onClick={() => startNewGame('easy')}
-          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'easy' ? 'bg-green-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
+          onClick={() => startNewGame("easy")}
+          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "easy" ? "bg-green-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
+        >
           Easy
         </button>
         <button
-          onClick={() => startNewGame('medium')}
-          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'medium' ? 'bg-yellow-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
+          onClick={() => startNewGame("medium")}
+          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "medium" ? "bg-yellow-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
+        >
           Medium
         </button>
         <button
-          onClick={() => startNewGame('hard')}
-          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === 'hard' ? 'bg-red-500 text-white' : 'bg-secondary text-secondary-foreground hover:bg-accent'}`}>
+          onClick={() => startNewGame("hard")}
+          className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "hard" ? "bg-red-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
+        >
           Hard
         </button>
       </div>
@@ -206,7 +225,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
                 className={getCellClass(rowIndex, colIndex)}
                 onClick={() => handleCellClick(rowIndex, colIndex)}
               >
-                {cell || ''}
+                {cell || ""}
               </div>
             ))}
           </div>
@@ -215,7 +234,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
 
       {/* Number Pad */}
       <div className="grid grid-cols-5 gap-1 sm:gap-1.5 md:gap-2 mb-3">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
           <button
             key={num}
             onClick={() => handleNumberInput(num)}
@@ -254,9 +273,15 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
 
       {/* Legend */}
       <div className="text-xs md:text-sm text-muted-foreground space-y-0.5 text-center px-2 max-w-md">
-        <p><span className="text-primary font-bold">Blue:</span> Original</p>
-        <p><span className="text-accent-foreground">Green:</span> Your inputs</p>
-        <p><span className="text-destructive-foreground">Red:</span> Errors</p>
+        <p>
+          <span className="text-primary font-bold">Blue:</span> Original
+        </p>
+        <p>
+          <span className="text-accent-foreground">Green:</span> Your inputs
+        </p>
+        <p>
+          <span className="text-destructive-foreground">Red:</span> Errors
+        </p>
       </div>
     </div>
   );

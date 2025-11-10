@@ -1,5 +1,5 @@
 // Type definitions for sentiment package
-declare module 'sentiment' {
+declare module "sentiment" {
   interface SentimentResult {
     score: number;
     comparative: number;
