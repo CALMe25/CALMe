@@ -36,9 +36,9 @@ declare module "compromise" {
     toUpperCase(): CompromiseDocument;
     toTitleCase(): CompromiseDocument;
     values(): CompromiseDocument;
-    places(): { text: string }[];
-    people(): { text: string }[];
-    numbers(): { text: string }[];
+    places(): CompromiseDocument;
+    people(): CompromiseDocument;
+    numbers(): CompromiseDocument;
     map(fn: (doc: CompromiseDocument) => string): string[];
     filter(fn: (doc: CompromiseDocument) => boolean): CompromiseDocument;
   }
