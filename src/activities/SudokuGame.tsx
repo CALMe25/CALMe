@@ -237,7 +237,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
                 aria-label={
                   puzzle[rowIndex][colIndex] !== null
                     ? `Cell ${rowIndex + 1}, ${colIndex + 1}: fixed value ${cell}`
-                    : (cell != null)
+                    : cell != null
                       ? `Cell ${rowIndex + 1}, ${colIndex + 1}: ${cell}${errors.has(`${rowIndex},${colIndex}`) ? " (error)" : ""}`
                       : `Cell ${rowIndex + 1}, ${colIndex + 1}: empty`
                 }
