@@ -116,7 +116,7 @@ class UserProfileStorage {
       request.onsuccess = () => {
         const profile = request.result;
         console.log("Active profile retrieved:", profile?.id);
-        resolve(profile || null);
+        resolve(profile !== undefined ? profile : null);
       };
       request.onerror = () => {
         reject(request.error);
@@ -180,7 +180,7 @@ class UserProfileStorage {
     return new Promise((resolve, reject) => {
       const request = store.get("current");
       request.onsuccess = () => {
-        resolve(request.result || null);
+        resolve(request.result !== undefined ? request.result : null);
       };
       request.onerror = () => {
         reject(request.error);
@@ -231,7 +231,7 @@ class UserProfileStorage {
 
       request.onsuccess = (event) => {
         const cursor = (event.target as IDBRequest).result;
-        if (cursor && activities.length < limit) {
+        if (cursor !== null && cursor !== undefined && activities.length < limit) {
           activities.push(cursor.value);
           cursor.continue();
         } else {
