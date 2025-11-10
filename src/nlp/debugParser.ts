@@ -8,7 +8,9 @@ const toStringArray = (value: unknown): string[] =>
     ? value.filter((item): item is string => typeof item === "string")
     : [];
 
-const getTermData = (value: unknown): { text: string; tags: string[] } | null => {
+const getTermData = (
+  value: unknown,
+): { text: string; tags: string[] } | null => {
   if (!isRecord(value)) {
     return null;
   }

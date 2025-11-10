@@ -1,4 +1,8 @@
-import nlp, { type CompromiseDocument, type Sentence, type Term } from "compromise";
+import nlp, {
+  type CompromiseDocument,
+  type Sentence,
+  type Term,
+} from "compromise";
 
 // Extend Compromise with custom crisis language patterns and corrections
 const crisisPlugin = {
@@ -45,12 +49,14 @@ nlp.plugin(crisisPlugin);
 // Apply the patterns to add our custom tags
 function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
-  Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]: [string, string]) => {
-    const matches = doc.match(pattern);
-    if (matches.has("")) {
-      matches.tag(tag);
-    }
-  });
+  Object.entries(crisisPlugin.patterns).forEach(
+    ([pattern, tag]: [string, string]) => {
+      const matches = doc.match(pattern);
+      if (matches.has("")) {
+        matches.tag(tag);
+      }
+    },
+  );
   return doc;
 }
 
@@ -92,7 +98,9 @@ export function analyzeText(text: string): SemanticAnalysis {
   const numbers: string[] = doc.values().out("array");
 
   // Get noun phrases and verb phrases for better understanding
-  const phrases: string[] = doc.match("#Determiner? #Adjective* #Noun+").out("array");
+  const phrases: string[] = doc
+    .match("#Determiner? #Adjective* #Noun+")
+    .out("array");
 
   // Determine overall sentiment
   let sentiment: "positive" | "negative" | "neutral" = "neutral";
@@ -219,10 +227,7 @@ export function classifyStress(text: string): ClassificationResult {
   const intensifiers = doc.match(
     "(very|extremely|really|quite|super|highly|high|severely|deeply|incredibly|terribly)",
   );
-  if (
-    intensifiers.found &&
-    (stressLevel > 0 || doc.has("stress"))
-  ) {
+  if (intensifiers.found && (stressLevel > 0 || doc.has("stress"))) {
     const intensifierWords = intensifiers.out("array");
     stressLevel += intensifierWords.length * 2;
     reasoning.push(`intensified: ${intensifierWords.join(", ")}`);
@@ -244,10 +249,7 @@ export function classifyStress(text: string): ClassificationResult {
     reasoning.push("mortality fears");
   }
 
-  if (
-    doc.has("losing control") ||
-    doc.has("out of control")
-  ) {
+  if (doc.has("losing control") || doc.has("out of control")) {
     stressLevel += 4;
     reasoning.push("loss of control");
   }

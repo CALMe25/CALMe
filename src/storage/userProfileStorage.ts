@@ -46,7 +46,11 @@ const isUserVariablesRecord = (
   isRecord(value) &&
   Object.values(value).every((entry) => {
     const valueType = typeof entry;
-    return valueType === "string" || valueType === "number" || valueType === "boolean";
+    return (
+      valueType === "string" ||
+      valueType === "number" ||
+      valueType === "boolean"
+    );
   });
 
 const isUserProfileRecord = (value: unknown): value is UserProfile => {
@@ -66,7 +70,8 @@ const isUserProfileRecord = (value: unknown): value is UserProfile => {
     typeof value.onboardingCompleted === "boolean" &&
     isStringArray(value.accessibilityNeeds) &&
     isStringArray(value.calmingPreferences) &&
-    (value.backupLocation == null || typeof value.backupLocation === "string") &&
+    (value.backupLocation == null ||
+      typeof value.backupLocation === "string") &&
     (value.emergencyContacts == null || isStringArray(value.emergencyContacts))
   );
 };
