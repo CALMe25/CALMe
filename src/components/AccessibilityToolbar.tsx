@@ -21,9 +21,14 @@ interface MicAccessToolInstance {
   updateState?: () => void;
 }
 
+type MicAccessToolConstructor = {
+  new (config: MicAccessToolConfig): MicAccessToolInstance;
+  prototype: MicAccessToolInstance;
+};
+
 declare global {
   interface Window {
-    MicAccessTool?: new (config: MicAccessToolConfig) => MicAccessToolInstance;
+    MicAccessTool?: MicAccessToolConstructor;
     micAccessTool?: MicAccessToolInstance;
     MICTOOLBOXAPPSTATE?: {
       bodyClassList: Record<string, string>;
@@ -32,6 +37,7 @@ declare global {
       keyboardRoot: boolean;
       initFontSize: boolean;
     };
+    __calmeToolbarPatched?: boolean;
   }
 }
 
@@ -90,22 +96,18 @@ const clearKeyboardTabbing = () => {
 };
 
 const patchToolbarBehavior = () => {
-  interface WindowWithFlag extends Window {
-    [key: string]: unknown;
-  }
-  const win = window as unknown as WindowWithFlag;
-  if (win[TOOLBAR_PATCH_FLAG] === true) {
+  if (window[TOOLBAR_PATCH_FLAG] === true) {
     return;
   }
   const MicAccessToolConstructor = window.MicAccessTool;
   if (MicAccessToolConstructor == null) {
     return;
   }
-  const proto = MicAccessToolConstructor.prototype as MicAccessToolInstance;
+  const proto: MicAccessToolInstance = MicAccessToolConstructor.prototype;
   if (proto == null) {
     return;
   }
-  win[TOOLBAR_PATCH_FLAG] = true;
+  window[TOOLBAR_PATCH_FLAG] = true;
 
   proto.keyboardRootEnable = function keyboardRootEnablePatched(
     this: MicAccessToolInstance,
@@ -165,46 +167,41 @@ const patchToolbarBehavior = () => {
   };
 };
 
-const loadToolbarScript = () =>
-  new Promise<void>((resolve, reject) => {
-    if (window.MicAccessTool) {
-      resolve();
+const loadToolbarScript = async (): Promise<void> => {
+  if (window.MicAccessTool) {
+    return;
+  }
+
+  const foundScript = document.getElementById(SCRIPT_ID);
+  let scriptElement: HTMLScriptElement;
+
+  if (foundScript instanceof HTMLScriptElement) {
+    scriptElement = foundScript;
+    if (scriptElement.getAttribute("data-loaded") === "true") {
       return;
     }
-
-    let script = document.getElementById(SCRIPT_ID) as HTMLScriptElement | null;
-    if (!script) {
-      script = document.createElement("script");
-      script.id = SCRIPT_ID;
-      script.src = "/vendor/acc_toolbar.min.js";
-      script.async = true;
-      document.body.appendChild(script);
-    } else {
-      // If the script already exists, check its state
-      if (script.getAttribute("data-loaded") === "true") {
-        resolve();
-        return;
-      }
-      // If the script has errored, reject
-      if (script.getAttribute("data-error") === "true") {
-        reject(
-          new Error(
-            `Failed to load accessibility toolbar script from ${script.src}. Please check if the file exists.`,
-          ),
-        );
-        return;
-      }
+    if (scriptElement.getAttribute("data-error") === "true") {
+      throw new Error(
+        `Failed to load accessibility toolbar script from ${scriptElement.src}. Please check if the file exists.`,
+      );
     }
+  } else {
+    scriptElement = document.createElement("script");
+    scriptElement.id = SCRIPT_ID;
+    scriptElement.src = "/vendor/acc_toolbar.min.js";
+    scriptElement.async = true;
+    document.body.appendChild(scriptElement);
+  }
 
-    // Store src in a local variable after confirming script is not null
-    const scriptSrc = script.src;
+  const scriptSrc = scriptElement.src;
 
+  await new Promise<void>((resolve, reject) => {
     const handleLoad = () => {
-      script!.setAttribute("data-loaded", "true");
+      scriptElement.setAttribute("data-loaded", "true");
       resolve();
     };
     const handleError = () => {
-      script!.setAttribute("data-error", "true");
+      scriptElement.setAttribute("data-error", "true");
       reject(
         new Error(
           `Failed to load accessibility toolbar script from ${scriptSrc}. Please check if the file exists.`,
@@ -212,9 +209,10 @@ const loadToolbarScript = () =>
       );
     };
 
-    script.addEventListener("load", handleLoad, { once: true });
-    script.addEventListener("error", handleError, { once: true });
+    scriptElement.addEventListener("load", handleLoad, { once: true });
+    scriptElement.addEventListener("error", handleError, { once: true });
   });
+};
 
 const createToolbarInstance = () => {
   if (window.micAccessTool) {

@@ -1,5 +1,22 @@
 import nlp from "compromise";
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const toStringArray = (value: unknown): string[] =>
+  Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === "string")
+    : [];
+
+const getTermData = (value: unknown): { text: string; tags: string[] } | null => {
+  if (!isRecord(value)) {
+    return null;
+  }
+  const text = typeof value.text === "string" ? value.text : "";
+  const tags = toStringArray(value.tags);
+  return { text, tags };
+};
+
 export function debugParse(text: string) {
   console.log(`\n🔍 Debugging: "${text}"`);
 
@@ -12,11 +29,10 @@ export function debugParse(text: string) {
   // Show what Compromise thinks each word is
   console.log("\n🏷️  Tags for each word:");
   doc.terms().forEach((term) => {
-    const data = term.json()[0];
-    if (data !== null && data !== undefined) {
-      const tags = data.tags ?? [];
-      const text = data.text ?? "";
-      console.log(`  "${text}": [${tags.join(", ")}]`);
+    const jsonData = term.json();
+    const data = Array.isArray(jsonData) ? getTermData(jsonData[0]) : null;
+    if (data != null) {
+      console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
     }
   });
 
@@ -34,11 +50,15 @@ export function debugParse(text: string) {
 
   // Check if "stressed" is being recognized
   const stressedTerm = doc.match("stressed");
-  if (stressedTerm.found === true) {
+  if (stressedTerm.found) {
     console.log('\n✅ Found "stressed":');
-    const jsonData = stressedTerm.json()[0];
-    if (jsonData !== null && jsonData !== undefined && jsonData.terms[0] !== null && jsonData.terms[0] !== undefined) {
-      console.log("  Tags:", jsonData.terms[0].tags ?? []);
+    const stressedJson = stressedTerm.json();
+    const stressedData = Array.isArray(stressedJson) ? stressedJson[0] : null;
+    if (isRecord(stressedData) && Array.isArray(stressedData.terms)) {
+      const [firstTerm] = stressedData.terms;
+      if (isRecord(firstTerm)) {
+        console.log("  Tags:", toStringArray(firstTerm.tags));
+      }
     }
   }
 
@@ -50,11 +70,10 @@ export function debugParse(text: string) {
 
   console.log("  After tagging:");
   fixedDoc.terms().forEach((term) => {
-    const data = term.json()[0];
-    if (data !== null && data !== undefined) {
-      const tags = data.tags ?? [];
-      const text = data.text ?? "";
-      console.log(`  "${text}": [${tags.join(", ")}]`);
+    const jsonData = term.json();
+    const data = Array.isArray(jsonData) ? getTermData(jsonData[0]) : null;
+    if (data != null) {
+      console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
     }
   });
 

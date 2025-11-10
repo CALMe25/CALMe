@@ -1,22 +1,31 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useTheme } from "next-themes";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
+const toastStyles = {
+  "--normal-bg": "var(--popover)",
+  "--normal-text": "var(--popover-foreground)",
+  "--normal-border": "var(--border)",
+} satisfies CSSProperties;
+
+const isToasterTheme = (
+  value: string | undefined,
+): value is NonNullable<ToasterProps["theme"]> =>
+  value === "light" || value === "dark" || value === "system";
+
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme();
+  const resolvedTheme: ToasterProps["theme"] = isToasterTheme(theme)
+    ? theme
+    : "system";
 
   return (
     <Sonner
-      theme={(theme as string) as ToasterProps["theme"]}
+      theme={resolvedTheme}
       className="toaster group"
-      style={
-        {
-          "--normal-bg": "var(--popover)",
-          "--normal-text": "var(--popover-foreground)",
-          "--normal-border": "var(--border)",
-        } as React.CSSProperties
-      }
+      style={toastStyles}
       {...props}
     />
   );
