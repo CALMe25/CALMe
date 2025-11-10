@@ -150,7 +150,9 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                 <button
                   key={size}
                   type="button"
-                  onClick={() => setBrushSize(size)}
+                  onClick={() => {
+                    setBrushSize(size);
+                  }}
                   className={`flex h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 items-center justify-center rounded-full border transition active:scale-95 ${brushSize === size ? "border-primary bg-primary/20 scale-105" : "border-border bg-secondary"}`}
                 >
                   <span
@@ -177,7 +179,9 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                   type="button"
                   className={`h-7 w-7 xs:h-8 xs:w-8 sm:h-10 sm:w-10 md:h-11 md:w-11 rounded-full border transition active:scale-95 flex-shrink-0 ${brushColor === color ? "border-primary scale-105 ring-1 ring-primary ring-offset-0" : "border-border"}`}
                   style={{ backgroundColor: color }}
-                  onClick={() => setBrushColor(color)}
+                  onClick={() => {
+                    setBrushColor(color);
+                  }}
                   aria-label={`Select color ${color}`}
                 />
               ))}

@@ -284,7 +284,7 @@ export const onboardingParsers = {
   extractName: (input: string) => {
     // Simple name extraction - takes the first capitalized word or the whole input
     const words = input.split(" ");
-    const name = words.find((word) => /^[A-Z]/.test(word)) || input.trim();
+    const name = words.find((word) => /^[A-Z]/.test(word)) ?? input.trim();
     return {
       type: "extraction" as const,
       extractedValue: name,

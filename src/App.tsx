@@ -94,7 +94,7 @@ function App() {
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: initialNode.content || "Hello! I'm here with you.",
+            content: initialNode.content ?? "Hello! I'm here with you.",
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: initialNode.id,
@@ -120,7 +120,7 @@ function App() {
         setIsInitialized(true);
       }
     };
-    initializeConversation();
+    void initializeConversation();
   }, [conversationController, ACTIVITY_PROMPT_NODES]);
 
   useEffect(() => {
@@ -139,7 +139,7 @@ function App() {
 
     try {
       const parserType = conversationController.getCurrentParserType();
-      if (!parserType) {
+      if (parserType == null) {
         console.warn("No parser type specified for current node");
         return;
       }
@@ -155,7 +155,7 @@ function App() {
       const newMessage: Message = {
         id: Date.now().toString(),
         type: activityPrompt ? "app-buttons" : "message",
-        content: nextNode.content || "How can I help you?",
+        content: nextNode.content ?? "How can I help you?",
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: nextNode.id,
@@ -216,7 +216,7 @@ function App() {
             const continueMsg: Message = {
               id: Date.now().toString() + "_continue",
               type: "message",
-              content: returnNode.content || "Let's continue.",
+              content: returnNode.content ?? "Let's continue.",
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: returnNode.id,
@@ -301,7 +301,7 @@ function App() {
     setShowAppsLauncher(false);
     setShouldAutoLaunchApp(false);
 
-    if (activityReturnNode) {
+    if (activityReturnNode != null) {
       try {
         conversationController.moveToNode(activityReturnNode);
         const returnNode = conversationController.getCurrentNode();
@@ -310,7 +310,7 @@ function App() {
         const returnMessage: Message = {
           id: Date.now().toString(),
           type: activityPrompt ? "app-buttons" : "message",
-          content: returnNode.content || "Welcome back! How was that?",
+          content: returnNode.content ?? "Welcome back! How was that?",
           timestamp: new Date().toISOString(),
           isUser: false,
           nodeId: returnNode.id,
@@ -451,7 +451,7 @@ function App() {
                 {
                   id: Date.now().toString(),
                   type: "message",
-                  content: initialNode.content || "Hello! I'm here with you.",
+                  content: initialNode.content ?? "Hello! I'm here with you.",
                   timestamp: new Date().toISOString(),
                   isUser: false,
                   nodeId: initialNode.id,
@@ -575,7 +575,9 @@ function App() {
                     <Button
                       variant="ghost"
                       className="justify-start h-12 gap-3"
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                      }}
                     >
                       <MoreVertical className="w-5 h-5" />
                       <span>More Options</span>
@@ -607,7 +609,9 @@ function App() {
                         variant="ghost"
                         size="icon"
                         className="h-9 w-9 rounded-full text-muted-foreground hover:text-foreground flex-shrink-0"
-                        onClick={() => setShowQuickPanel((prev) => !prev)}
+                        onClick={() => {
+                          setShowQuickPanel((prev) => !prev);
+                        }}
                         aria-label={
                           showQuickPanel
                             ? "Hide quick activities"
@@ -632,7 +636,9 @@ function App() {
                           .map((app) => (
                             <Button
                               key={app.name}
-                              onClick={() => handleAppLaunch(app)}
+                              onClick={() => {
+                                handleAppLaunch(app);
+                              }}
                               className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
                               size="sm"
                             >
@@ -668,7 +674,12 @@ function App() {
           )}
 
           {showAppsLauncher && (
-            <AppLauncher chosenApp={chosenApp} onClose={closeAppLauncher} />
+            <AppLauncher
+              chosenApp={chosenApp}
+              onClose={() => {
+                void closeAppLauncher();
+              }}
+            />
           )}
 
           {shouldAutoLaunchApp && (
@@ -693,7 +704,9 @@ function App() {
         </div>
         <AccessibilityToolbar
           open={accessibilityOpen}
-          onClose={() => setAccessibilityOpen(false)}
+          onClose={() => {
+            setAccessibilityOpen(false);
+          }}
         />
       </AppsProvider>
     </>

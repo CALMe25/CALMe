@@ -1,19 +1,41 @@
 "use client";
 
 import * as React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
+import {
+  DayPicker,
+  type ClassNames,
+  type CustomComponents,
+} from "react-day-picker";
 
 import { cn } from "./utils";
 import { buttonVariants } from "./button";
 
+type ChevronComponent = NonNullable<CustomComponents["Chevron"]>;
+
+const CustomChevron: ChevronComponent = ({
+  className: iconClassName,
+  orientation = "right",
+  ...iconProps
+}) => {
+  const Icon =
+    orientation === "left"
+      ? ChevronLeft
+      : orientation === "right"
+        ? ChevronRight
+        : orientation === "up"
+          ? ChevronUp
+          : ChevronDown;
+  return <Icon className={cn("size-4", iconClassName)} {...iconProps} />;
+};
+
 function Calendar({
   className,
-  classNames,
+  classNames: classNamesProp,
   showOutsideDays = true,
   ...props
 }: React.ComponentProps<typeof DayPicker>) {
-  const mergedClassNames = {
+  const mergedClassNames: Partial<ClassNames> = {
     months: "flex flex-col sm:flex-row gap-2",
     month: "flex flex-col gap-4",
     caption: "flex justify-center pt-1 relative items-center w-full",
@@ -52,34 +74,19 @@ function Calendar({
     day_range_middle:
       "aria-selected:bg-accent aria-selected:text-accent-foreground",
     day_hidden: "invisible",
-    ...classNames,
-  } as Record<string, unknown>;
+    ...classNamesProp,
+  };
 
-  const calendarComponents = {
-    IconLeft: ({
-      className: iconClassName,
-      ...iconProps
-    }: {
-      className?: string;
-    }) => (
-      <ChevronLeft className={cn("size-4", iconClassName)} {...iconProps} />
-    ),
-    IconRight: ({
-      className: iconClassName,
-      ...iconProps
-    }: {
-      className?: string;
-    }) => (
-      <ChevronRight className={cn("size-4", iconClassName)} {...iconProps} />
-    ),
-  } as Record<string, React.ComponentType<any>>;
+  const calendarComponents: Partial<CustomComponents> = {
+    Chevron: CustomChevron,
+  };
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
-      classNames={mergedClassNames as any}
-      components={calendarComponents as any}
+      classNames={mergedClassNames}
+      components={calendarComponents}
       {...props}
     />
   );

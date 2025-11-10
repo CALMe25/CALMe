@@ -62,6 +62,25 @@ export interface ActivityTrigger {
   returnNode: string;
 }
 
+type ConditionEvaluationContext = {
+  category?: string;
+  extractedValue?: string;
+  confidence?: number;
+};
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const isConversationDecisionLogicValue = (
+  value: ConversationNode["next"],
+): value is ConversationDecisionLogic =>
+  isRecord(value) && Array.isArray(value.conditions);
+
+const isOnboardingParserKey = (
+  parserType: string,
+): parserType is keyof typeof onboardingParsers =>
+  parserType in onboardingParsers;
+
 // Enhanced interface for the conversation controller
 export interface ConversationControllerInterface {
   // Initialize with a conversation map
@@ -117,7 +136,7 @@ export class ConversationController implements ConversationControllerInterface {
       this.currentNodeId = conversationMapV2.startNode;
     }
 
-    this.initializeProfile();
+    void this.initializeProfile();
   }
 
   private async initializeProfile() {
@@ -211,7 +230,7 @@ export class ConversationController implements ConversationControllerInterface {
     console.log("🔧 PROCESS: Current node:", currentNode);
 
     // Handle clarification needs
-    if (result.needsClarification && result.clarificationPrompt) {
+    if (result.needsClarification === true && result.clarificationPrompt != null) {
       console.log("❓ PROCESS: Parser needs clarification");
       // Create a temporary clarification node
       const clarificationNode: ConversationNode = {
@@ -224,12 +243,12 @@ export class ConversationController implements ConversationControllerInterface {
       return { nextNode: clarificationNode, activityTrigger: undefined };
     }
 
-    if (!currentNode.next) {
+    if (currentNode.next == null) {
       // Check if this is an end node or if we're completing onboarding
       if (currentNode.type === "end" && this.isOnboarding) {
         console.log("🎯 PROCESS: Completing onboarding");
         // Complete onboarding with collected data
-        this.completeOnboarding(this.userVariables);
+        void this.completeOnboarding(this.userVariables);
       }
       throw new Error(`Node ${this.currentNodeId} has no next steps defined`);
     }
@@ -240,12 +259,13 @@ export class ConversationController implements ConversationControllerInterface {
     if (typeof currentNode.next === "string") {
       nextNodeId = currentNode.next;
       console.log("🔧 PROCESS: Simple transition to:", nextNodeId);
-    } else {
+    } else if (isConversationDecisionLogicValue(currentNode.next)) {
       // Handle conditional logic
       console.log("🔧 PROCESS: Evaluating conditional logic");
-      const decisionLogic = currentNode.next as ConversationDecisionLogic;
-      nextNodeId = this.evaluateConditions(decisionLogic, result);
+      nextNodeId = this.evaluateConditions(currentNode.next, result);
       console.log("🔧 PROCESS: Conditional result, moving to:", nextNodeId);
+    } else {
+      throw new Error(`Node ${currentNode.id} has invalid next definition.`);
     }
 
     // Move to next node
@@ -254,13 +274,20 @@ export class ConversationController implements ConversationControllerInterface {
 
     // Check if this triggers an activity
     let activityTrigger: ActivityTrigger | undefined;
-    if (nextNode.type === "activity" && nextNode.activity) {
+    if (nextNode.type === "activity" && typeof nextNode.activity === "string") {
       console.log("🎯 PROCESS: Activity node detected, creating trigger");
-      activityTrigger = {
-        activityName: nextNode.activity,
-        returnNode: nextNode.next as string, // Activities should have simple string next
-      };
-      console.log("🎯 PROCESS: Activity trigger created:", activityTrigger);
+      if (typeof nextNode.next === "string") {
+        activityTrigger = {
+          activityName: nextNode.activity,
+          returnNode: nextNode.next,
+        };
+        console.log("🎯 PROCESS: Activity trigger created:", activityTrigger);
+      } else {
+        console.warn(
+          "🎯 PROCESS: Activity node missing string next pointer.",
+          nextNode,
+        );
+      }
     } else {
       console.log(
         "🔧 PROCESS: No activity trigger (node type:",
@@ -280,9 +307,9 @@ export class ConversationController implements ConversationControllerInterface {
   ): string {
     // Evaluate each condition in order
     for (const condition of decisionLogic.conditions) {
-      if (condition.if) {
+      if (condition.if != null) {
         // Create a safe evaluation context
-        const evaluationContext = {
+        const evaluationContext: ConditionEvaluationContext = {
           category:
             result.type === "classification" ? result.category : undefined,
           extractedValue:
@@ -299,7 +326,7 @@ export class ConversationController implements ConversationControllerInterface {
           console.warn(`Error evaluating condition: ${condition.if}`, error);
           continue;
         }
-      } else if (condition.default) {
+      } else if (condition.default === true) {
         return condition.goto; // Use goto for default conditions too
       }
     }
@@ -310,7 +337,7 @@ export class ConversationController implements ConversationControllerInterface {
 
   private evaluateCondition(
     conditionStr: string,
-    context: Record<string, unknown>,
+    context: ConditionEvaluationContext,
   ): boolean {
     // Simple condition evaluation - replace with a proper expression parser for production
     const { category, extractedValue, confidence } = context;
@@ -318,7 +345,7 @@ export class ConversationController implements ConversationControllerInterface {
     // Handle common condition patterns
     if (conditionStr.includes("category ===")) {
       const match = conditionStr.match(/category === ["']([^"']+)["']/);
-      if (match && category) {
+      if (match != null && category != null) {
         return category === match[1];
       }
     }
@@ -328,12 +355,12 @@ export class ConversationController implements ConversationControllerInterface {
       return conditions.some((cond) => this.evaluateCondition(cond, context));
     }
 
-    if (conditionStr.includes("extractedValue") && extractedValue) {
+    if (conditionStr.includes("extractedValue") && extractedValue != null) {
       if (conditionStr.includes(".toLowerCase().includes(")) {
         const match = conditionStr.match(
           /extractedValue\.toLowerCase\(\)\.includes\(["']([^"']+)["']\)/,
         );
-        if (match) {
+        if (match != null) {
           return extractedValue.toLowerCase().includes(match[1]);
         }
       }
@@ -384,7 +411,7 @@ export class ConversationController implements ConversationControllerInterface {
     console.log("✅ NODE: Found node:", node);
 
     // Substitute variables in content
-    if (node.content) {
+    if (node.content != null) {
       let content = node.content;
       console.log("🔍 NODE: Original content:", content);
       console.log("🔍 NODE: Available variables:", this.userVariables);
@@ -421,7 +448,7 @@ export class ConversationController implements ConversationControllerInterface {
 
   getCurrentParserType(): string | null {
     const currentNode = this.getCurrentNode();
-    return currentNode.parser || null;
+    return currentNode.parser ?? null;
   }
 
   // Handle onboarding completion
@@ -429,15 +456,15 @@ export class ConversationController implements ConversationControllerInterface {
     try {
       const profile: UserProfile = {
         id: "primary", // Single profile for now
-        name: profileData.name || "User",
-        safeSpaceType: profileData.safeSpaceType || "other",
-        safeSpaceLocation: profileData.safeSpaceLocation || "",
-        timeToReachSafety: profileData.timeToReachSafety || 60,
+        name: profileData.name ?? "User",
+        safeSpaceType: profileData.safeSpaceType ?? "other",
+        safeSpaceLocation: profileData.safeSpaceLocation ?? "",
+        timeToReachSafety: profileData.timeToReachSafety ?? 60,
         backupLocation: profileData.backupLocation,
-        accessibilityNeeds: profileData.accessibilityNeeds || [],
-        calmingPreferences: profileData.calmingPreferences || [],
+        accessibilityNeeds: profileData.accessibilityNeeds ?? [],
+        calmingPreferences: profileData.calmingPreferences ?? [],
         emergencyContacts: profileData.emergencyContacts,
-        language: profileData.language || "en",
+        language: profileData.language ?? "en",
         createdAt: new Date(),
         lastUpdated: new Date(),
         isActive: true,
@@ -466,9 +493,8 @@ export class ConversationController implements ConversationControllerInterface {
     console.log(`🔧 Running parser: ${parserType} on input: "${input}"`);
 
     // Check onboarding-specific parsers first
-    if (this.isOnboarding && parserType in onboardingParsers) {
-      const parser =
-        onboardingParsers[parserType as keyof typeof onboardingParsers];
+    if (this.isOnboarding && isOnboardingParserKey(parserType)) {
+      const parser = onboardingParsers[parserType];
       const result = parser(input);
 
       // Store extracted values for profile building
@@ -493,7 +519,7 @@ export class ConversationController implements ConversationControllerInterface {
         const result = enhancedParser.parseActivityPreference(input);
         // Track attempted activities
         if (
-          result.category &&
+          result.category != null &&
           result.category !== "no_activity" &&
           result.category !== "unclear_activity"
         ) {

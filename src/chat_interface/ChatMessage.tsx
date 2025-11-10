@@ -195,7 +195,7 @@ export function ChatMessage({
           <span
             className={`text-xs text-muted-foreground mt-1 ${isUser ? "text-right" : "text-left"}`}
           >
-            {nodeId
+            {nodeId != null
               ? `${nodeId} • ${formatTime(timestamp)}`
               : formatTime(timestamp)}
           </span>

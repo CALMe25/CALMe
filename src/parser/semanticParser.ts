@@ -1,5 +1,4 @@
-// @ts-expect-error - Compromise doesn't have TypeScript definitions
-import nlp from "compromise";
+import nlp, { type CompromiseDocument, type Sentence, type Term } from "compromise";
 
 // Extend Compromise with custom crisis language patterns and corrections
 const crisisPlugin = {
@@ -44,12 +43,11 @@ const crisisPlugin = {
 nlp.plugin(crisisPlugin);
 
 // Apply the patterns to add our custom tags
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function applyCrisisPatterns(doc: any) {
+function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
-  Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]) => {
+  Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]: [string, string]) => {
     const matches = doc.match(pattern);
-    if (matches.found) {
+    if (matches.has("")) {
       matches.tag(tag);
     }
   });
@@ -69,21 +67,19 @@ export interface SemanticAnalysis {
 }
 
 export function analyzeText(text: string): SemanticAnalysis {
-  const doc = applyCrisisPatterns(nlp(text));
+  const doc: CompromiseDocument = applyCrisisPatterns(nlp(text));
 
   // Analyze sentiment based on negations and positive/negative terms
-  const negations = doc.match("#Negative").out("array");
+  const negations: string[] = doc.match("#Negative").out("array");
   const hasNegation = negations.length > 0;
 
   // Get all custom tags we've identified
-  const jsonData = doc.json();
+  const jsonData: Sentence[] = doc.json();
   const tags: string[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  jsonData.forEach((sentence: any) => {
-    if (sentence.terms) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sentence.terms.forEach((term: any) => {
-        if (term.tags) {
+  jsonData.forEach((sentence: Sentence) => {
+    if (sentence.terms !== null && sentence.terms !== undefined) {
+      sentence.terms.forEach((term: Term) => {
+        if (term.tags !== null && term.tags !== undefined) {
           tags.push(...term.tags);
         }
       });
@@ -91,12 +87,12 @@ export function analyzeText(text: string): SemanticAnalysis {
   });
 
   // Extract entities
-  const places = doc.places().out("array");
-  const people = doc.people().out("array");
-  const numbers = doc.values().out("array");
+  const places: string[] = doc.places().out("array");
+  const people: string[] = doc.people().out("array");
+  const numbers: string[] = doc.values().out("array");
 
   // Get noun phrases and verb phrases for better understanding
-  const phrases = doc.match("#Determiner? #Adjective* #Noun+").out("array");
+  const phrases: string[] = doc.match("#Determiner? #Adjective* #Noun+").out("array");
 
   // Determine overall sentiment
   let sentiment: "positive" | "negative" | "neutral" = "neutral";
@@ -131,7 +127,7 @@ export interface ClassificationResult {
 }
 
 export function classifySafety(text: string): ClassificationResult {
-  const doc = nlp(text);
+  const doc: CompromiseDocument = nlp(text);
   const analysis = analyzeText(text);
 
   // Check for explicit safety/danger indicators
@@ -174,7 +170,7 @@ export function classifySafety(text: string): ClassificationResult {
 }
 
 export function classifyStress(text: string): ClassificationResult {
-  const doc = applyCrisisPatterns(nlp(text));
+  const doc: CompromiseDocument = applyCrisisPatterns(nlp(text));
   const analysis = analyzeText(text);
 
   let stressLevel = 0;
@@ -223,7 +219,10 @@ export function classifyStress(text: string): ClassificationResult {
   const intensifiers = doc.match(
     "(very|extremely|really|quite|super|highly|high|severely|deeply|incredibly|terribly)",
   );
-  if (intensifiers.found && (stressLevel > 0 || doc.has("stress"))) {
+  if (
+    intensifiers.found &&
+    (stressLevel > 0 || doc.has("stress"))
+  ) {
     const intensifierWords = intensifiers.out("array");
     stressLevel += intensifierWords.length * 2;
     reasoning.push(`intensified: ${intensifierWords.join(", ")}`);
@@ -245,7 +244,10 @@ export function classifyStress(text: string): ClassificationResult {
     reasoning.push("mortality fears");
   }
 
-  if (doc.has("losing control") || doc.has("out of control")) {
+  if (
+    doc.has("losing control") ||
+    doc.has("out of control")
+  ) {
     stressLevel += 4;
     reasoning.push("loss of control");
   }
@@ -319,7 +321,11 @@ export function extractLocation(text: string): ExtractionResult {
       "(home|house|apartment|office|shelter|bunker|building|hospital|school)",
     )
     .out("text");
-  if (commonLocations) {
+  if (
+    commonLocations !== null &&
+    commonLocations !== undefined &&
+    commonLocations !== ""
+  ) {
     return {
       extractedValue: commonLocations,
       confidence: 0.8,

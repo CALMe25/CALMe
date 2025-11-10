@@ -1,5 +1,21 @@
-// @ts-expect-error - Compromise doesn't have TypeScript definitions
 import nlp from "compromise";
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const toStringArray = (value: unknown): string[] =>
+  Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === "string")
+    : [];
+
+const getTermData = (value: unknown): { text: string; tags: string[] } | null => {
+  if (!isRecord(value)) {
+    return null;
+  }
+  const text = typeof value.text === "string" ? value.text : "";
+  const tags = toStringArray(value.tags);
+  return { text, tags };
+};
 
 export function debugParse(text: string) {
   console.log(`\n🔍 Debugging: "${text}"`);
@@ -12,10 +28,12 @@ export function debugParse(text: string) {
 
   // Show what Compromise thinks each word is
   console.log("\n🏷️  Tags for each word:");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  doc.terms().forEach((term: any) => {
-    const data = term.json()[0];
-    console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
+  doc.terms().forEach((term) => {
+    const jsonData = term.json();
+    const data = Array.isArray(jsonData) ? getTermData(jsonData[0]) : null;
+    if (data != null) {
+      console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
+    }
   });
 
   // Try different matching patterns
@@ -34,7 +52,14 @@ export function debugParse(text: string) {
   const stressedTerm = doc.match("stressed");
   if (stressedTerm.found) {
     console.log('\n✅ Found "stressed":');
-    console.log("  Tags:", stressedTerm.json()[0].terms[0].tags);
+    const stressedJson = stressedTerm.json();
+    const stressedData = Array.isArray(stressedJson) ? stressedJson[0] : null;
+    if (isRecord(stressedData) && Array.isArray(stressedData.terms)) {
+      const [firstTerm] = stressedData.terms;
+      if (isRecord(firstTerm)) {
+        console.log("  Tags:", toStringArray(firstTerm.tags));
+      }
+    }
   }
 
   // Try to force correct tagging
@@ -44,10 +69,12 @@ export function debugParse(text: string) {
   fixedDoc.match("very").tag("Adverb");
 
   console.log("  After tagging:");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fixedDoc.terms().forEach((term: any) => {
-    const data = term.json()[0];
-    console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
+  fixedDoc.terms().forEach((term) => {
+    const jsonData = term.json();
+    const data = Array.isArray(jsonData) ? getTermData(jsonData[0]) : null;
+    if (data != null) {
+      console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
+    }
   });
 
   console.log(

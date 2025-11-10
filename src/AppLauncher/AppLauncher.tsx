@@ -12,7 +12,10 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    previouslyFocusedRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     closeButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -71,10 +74,7 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
       );
     }
 
-    return React.cloneElement(
-      chosenApp.main as React.ReactElement<Record<string, unknown>>,
-      { onGameEnd: onClose },
-    );
+    return React.cloneElement(chosenApp.main, { onGameEnd: onClose });
   };
 
   return (

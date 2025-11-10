@@ -26,6 +26,81 @@ export interface ConversationState {
   lastActivity: Date;
 }
 
+interface ActivityHistoryEntry {
+  id?: number;
+  profileId: string;
+  activityName: string;
+  completed: boolean;
+  timestamp: Date;
+}
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const isStringArray = (value: unknown): value is string[] =>
+  Array.isArray(value) && value.every((item) => typeof item === "string");
+
+const isUserVariablesRecord = (
+  value: unknown,
+): value is ConversationState["userVariables"] =>
+  isRecord(value) &&
+  Object.values(value).every((entry) => {
+    const valueType = typeof entry;
+    return valueType === "string" || valueType === "number" || valueType === "boolean";
+  });
+
+const isUserProfileRecord = (value: unknown): value is UserProfile => {
+  if (!isRecord(value)) {
+    return false;
+  }
+  return (
+    typeof value.id === "string" &&
+    typeof value.name === "string" &&
+    typeof value.safeSpaceType === "string" &&
+    typeof value.safeSpaceLocation === "string" &&
+    typeof value.timeToReachSafety === "number" &&
+    typeof value.language === "string" &&
+    value.createdAt instanceof Date &&
+    value.lastUpdated instanceof Date &&
+    typeof value.isActive === "boolean" &&
+    typeof value.onboardingCompleted === "boolean" &&
+    isStringArray(value.accessibilityNeeds) &&
+    isStringArray(value.calmingPreferences) &&
+    (value.backupLocation == null || typeof value.backupLocation === "string") &&
+    (value.emergencyContacts == null || isStringArray(value.emergencyContacts))
+  );
+};
+
+const isConversationStateRecord = (
+  value: unknown,
+): value is ConversationState => {
+  if (!isRecord(value)) {
+    return false;
+  }
+  return (
+    typeof value.currentNodeId === "string" &&
+    isStringArray(value.conversationHistory) &&
+    isStringArray(value.attemptedActivities) &&
+    isUserVariablesRecord(value.userVariables) &&
+    value.lastActivity instanceof Date
+  );
+};
+
+const isActivityHistoryEntryRecord = (
+  value: unknown,
+): value is ActivityHistoryEntry => {
+  if (!isRecord(value)) {
+    return false;
+  }
+  return (
+    typeof value.profileId === "string" &&
+    typeof value.activityName === "string" &&
+    typeof value.completed === "boolean" &&
+    value.timestamp instanceof Date &&
+    (value.id == null || typeof value.id === "number")
+  );
+};
+
 class UserProfileStorage {
   private dbName = "CALMeUserData";
   private version = 1;
@@ -37,7 +112,8 @@ class UserProfileStorage {
 
       request.onerror = () => {
         console.error("Failed to open IndexedDB:", request.error);
-        reject(request.error);
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
 
       request.onsuccess = () => {
@@ -47,7 +123,11 @@ class UserProfileStorage {
       };
 
       request.onupgradeneeded = (event) => {
-        const db = (event.target as IDBOpenDBRequest).result;
+        const target = event.target;
+        if (target == null || !(target instanceof IDBOpenDBRequest)) {
+          return;
+        }
+        const db = target.result;
 
         // User profiles store
         if (!db.objectStoreNames.contains("profiles")) {
@@ -98,7 +178,10 @@ class UserProfileStorage {
         console.log("Profile saved successfully:", profile.id);
         resolve();
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
@@ -112,11 +195,18 @@ class UserProfileStorage {
     return new Promise((resolve, reject) => {
       const request = index.get(IDBKeyRange.only(true));
       request.onsuccess = () => {
-        const profile = request.result;
-        console.log("Active profile retrieved:", profile?.id);
-        resolve(profile || null);
+        const profile: unknown = request.result;
+        if (isUserProfileRecord(profile)) {
+          console.log("Active profile retrieved:", profile.id);
+          resolve(profile);
+          return;
+        }
+        resolve(null);
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
@@ -128,8 +218,13 @@ class UserProfileStorage {
 
     return new Promise((resolve, reject) => {
       const request = store.getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
@@ -157,7 +252,10 @@ class UserProfileStorage {
         console.log("Conversation state saved");
         resolve();
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
@@ -169,8 +267,18 @@ class UserProfileStorage {
 
     return new Promise((resolve, reject) => {
       const request = store.get("current");
-      request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        const state: unknown = request.result;
+        if (isConversationStateRecord(state)) {
+          resolve(state);
+          return;
+        }
+        resolve(null);
+      };
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
@@ -198,11 +306,17 @@ class UserProfileStorage {
         );
         resolve();
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
-  async getRecentActivities(profileId: string, limit = 10): Promise<unknown[]> {
+  async getRecentActivities(
+    profileId: string,
+    limit = 10,
+  ): Promise<ActivityHistoryEntry[]> {
     if (!this.db) await this.init();
 
     const transaction = this.db!.transaction(["activityHistory"], "readonly");
@@ -210,19 +324,29 @@ class UserProfileStorage {
     const index = store.index("profileId");
 
     return new Promise((resolve, reject) => {
-      const activities: unknown[] = [];
+      const activities: ActivityHistoryEntry[] = [];
       const request = index.openCursor(IDBKeyRange.only(profileId), "prev");
 
-      request.onsuccess = (event) => {
-        const cursor = (event.target as IDBRequest).result;
-        if (cursor && activities.length < limit) {
-          activities.push(cursor.value);
+      request.onsuccess = () => {
+        const cursor = request.result;
+        if (
+          cursor !== null &&
+          cursor !== undefined &&
+          activities.length < limit
+        ) {
+          const entry: unknown = cursor.value;
+          if (isActivityHistoryEntryRecord(entry)) {
+            activities.push(entry);
+          }
           cursor.continue();
         } else {
           resolve(activities);
         }
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
     });
   }
 
