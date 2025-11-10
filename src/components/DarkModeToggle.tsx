@@ -31,7 +31,7 @@ export function DarkModeToggle() {
         return <Sun className="w-4 h-4" />;
       case "dark":
         return <Moon className="w-4 h-4" />;
-      default:
+      case "system":
         return <Laptop className="w-4 h-4" />;
     }
   };
