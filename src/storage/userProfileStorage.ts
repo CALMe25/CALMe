@@ -37,7 +37,8 @@ class UserProfileStorage {
 
       request.onerror = () => {
         console.error("Failed to open IndexedDB:", request.error);
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
 
       request.onsuccess = () => {
@@ -47,7 +48,11 @@ class UserProfileStorage {
       };
 
       request.onupgradeneeded = (event) => {
-        const db = (event.target as IDBOpenDBRequest).result;
+        const target = event.target;
+        if (target == null || !(target instanceof IDBOpenDBRequest)) {
+          return;
+        }
+        const db = target.result;
 
         // User profiles store
         if (!db.objectStoreNames.contains("profiles")) {
@@ -99,7 +104,8 @@ class UserProfileStorage {
         resolve();
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
@@ -114,12 +120,13 @@ class UserProfileStorage {
     return new Promise((resolve, reject) => {
       const request = index.get(IDBKeyRange.only(true));
       request.onsuccess = () => {
-        const profile = request.result;
+        const profile = request.result as UserProfile | undefined;
         console.log("Active profile retrieved:", profile?.id);
-        resolve(profile !== undefined ? profile : null);
+        resolve(profile ?? null);
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
@@ -136,7 +143,8 @@ class UserProfileStorage {
         resolve(request.result);
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
@@ -166,7 +174,8 @@ class UserProfileStorage {
         resolve();
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
@@ -180,10 +189,11 @@ class UserProfileStorage {
     return new Promise((resolve, reject) => {
       const request = store.get("current");
       request.onsuccess = () => {
-        resolve(request.result !== undefined ? request.result : null);
+        resolve(request.result ?? null);
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
@@ -213,7 +223,8 @@ class UserProfileStorage {
         resolve();
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
@@ -243,7 +254,8 @@ class UserProfileStorage {
         }
       };
       request.onerror = () => {
-        reject(new Error(String(request.error ?? "Unknown error")));
+        const errorMessage = request.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
       };
     });
   }
