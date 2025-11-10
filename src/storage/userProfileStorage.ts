@@ -231,7 +231,11 @@ class UserProfileStorage {
 
       request.onsuccess = (event) => {
         const cursor = (event.target as IDBRequest).result;
-        if (cursor !== null && cursor !== undefined && activities.length < limit) {
+        if (
+          cursor !== null &&
+          cursor !== undefined &&
+          activities.length < limit
+        ) {
           activities.push(cursor.value);
           cursor.continue();
         } else {

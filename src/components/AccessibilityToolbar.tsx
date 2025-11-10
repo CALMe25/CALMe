@@ -66,11 +66,9 @@ const clearInlineFonts = () => {
 };
 
 const clearImagesTitles = () => {
-  document
-    .querySelectorAll(".mic-toolbox-images-titles")
-    .forEach((node) => {
-      node.remove();
-    });
+  document.querySelectorAll(".mic-toolbox-images-titles").forEach((node) => {
+    node.remove();
+  });
 };
 
 const clearKeyboardTabbing = () => {

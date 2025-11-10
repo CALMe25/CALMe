@@ -223,7 +223,10 @@ export function classifyStress(text: string): ClassificationResult {
   const intensifiers = doc.match(
     "(very|extremely|really|quite|super|highly|high|severely|deeply|incredibly|terribly)",
   );
-  if (intensifiers.found === true && (stressLevel > 0 || doc.has("stress") === true)) {
+  if (
+    intensifiers.found === true &&
+    (stressLevel > 0 || doc.has("stress") === true)
+  ) {
     const intensifierWords = intensifiers.out("array");
     stressLevel += intensifierWords.length * 2;
     reasoning.push(`intensified: ${intensifierWords.join(", ")}`);
@@ -245,7 +248,10 @@ export function classifyStress(text: string): ClassificationResult {
     reasoning.push("mortality fears");
   }
 
-  if (doc.has("losing control") === true || doc.has("out of control") === true) {
+  if (
+    doc.has("losing control") === true ||
+    doc.has("out of control") === true
+  ) {
     stressLevel += 4;
     reasoning.push("loss of control");
   }
@@ -319,7 +325,11 @@ export function extractLocation(text: string): ExtractionResult {
       "(home|house|apartment|office|shelter|bunker|building|hospital|school)",
     )
     .out("text");
-  if (commonLocations !== null && commonLocations !== undefined && commonLocations !== "") {
+  if (
+    commonLocations !== null &&
+    commonLocations !== undefined &&
+    commonLocations !== ""
+  ) {
     return {
       extractedValue: commonLocations,
       confidence: 0.8,
