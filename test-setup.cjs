@@ -1,8 +1,6 @@
 // Test Setup for CALMe - Creates a testable version of the conversation system
 // This bridges the TypeScript modules for Node.js testing
 
-const path = require('path');
-
 // Mock TypeScript modules for testing since Node.js can't directly import TS
 class MockConversationController {
   constructor() {
@@ -221,23 +219,23 @@ class MockConversationController {
   }
 
   evaluateCondition(conditionStr, context) {
-    const { category, extractedValue, confidence } = context;
+    const { category, extractedValue } = context;
     
     if (conditionStr.includes('category ===')) {
-      const match = conditionStr.match(/category === [\"']([^\"']+)[\"']/);
+      const match = conditionStr.match(/category === ["']([^"']+)["']/);
       if (match && category) {
         return category === match[1];
       }
     }
-    
+
     if (conditionStr.includes('||')) {
       const conditions = conditionStr.split('||').map(c => c.trim());
       return conditions.some(cond => this.evaluateCondition(cond, context));
     }
-    
+
     if (conditionStr.includes('extractedValue') && extractedValue) {
       if (conditionStr.includes('.toLowerCase().includes(')) {
-        const match = conditionStr.match(/extractedValue\.toLowerCase\(\)\.includes\([\"']([^\"']+)[\"']\)/);
+        const match = conditionStr.match(/extractedValue\.toLowerCase\(\)\.includes\(["']([^"']+)["']\)/);
         if (match) {
           return extractedValue.toLowerCase().includes(match[1]);
         }

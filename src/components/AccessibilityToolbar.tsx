@@ -84,6 +84,7 @@ const clearKeyboardTabbing = () => {
 };
 
 const patchToolbarBehavior = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if ((window as any)[TOOLBAR_PATCH_FLAG]) {
     return;
   }
@@ -91,6 +92,7 @@ const patchToolbarBehavior = () => {
   if (!proto) {
     return;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (window as any)[TOOLBAR_PATCH_FLAG] = true;
 
   proto.keyboardRootEnable = function keyboardRootEnablePatched(this: MicAccessToolInstance) {

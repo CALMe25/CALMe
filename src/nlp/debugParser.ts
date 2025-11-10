@@ -1,17 +1,18 @@
-// @ts-ignore
+// @ts-expect-error - Compromise doesn't have TypeScript definitions
 import nlp from 'compromise';
 
 export function debugParse(text: string) {
   console.log(`\n🔍 Debugging: "${text}"`);
-  
+
   const doc = nlp(text);
-  
+
   // Show the raw parsing data
   console.log('\n📊 Raw JSON:');
   console.log(JSON.stringify(doc.json(), null, 2));
-  
+
   // Show what Compromise thinks each word is
   console.log('\n🏷️  Tags for each word:');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   doc.terms().forEach((term: any) => {
     const data = term.json()[0];
     console.log(`  "${data.text}": [${data.tags.join(', ')}]`);
@@ -40,6 +41,7 @@ export function debugParse(text: string) {
   fixedDoc.match('very').tag('Adverb');
   
   console.log('  After tagging:');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fixedDoc.terms().forEach((term: any) => {
     const data = term.json()[0];
     console.log(`  "${data.text}": [${data.tags.join(', ')}]`);

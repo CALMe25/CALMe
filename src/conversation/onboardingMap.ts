@@ -8,7 +8,7 @@ const createNode = (
   id: string,
   content: string,
   type: 'question' | 'activity' | 'decision' | 'end' = 'question',
-  next?: any,
+  next?: string | ConversationNode['next'],
   parser?: string,
   activity?: string
 ): [string, ConversationNode] => {

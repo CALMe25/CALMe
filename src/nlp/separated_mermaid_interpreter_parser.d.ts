@@ -2,6 +2,21 @@
 
 import type { PathLike } from "fs";
 
+// Type definition for Compromise.js document (external library without TS types)
+interface CompromiseDoc {
+  json(): unknown[];
+  match(pattern: string): CompromiseDoc;
+  found: boolean;
+  has(pattern: string): boolean;
+  out(format: string): string[];
+  terms(): CompromiseDoc;
+  forEach(callback: (term: unknown) => void): void;
+  places(): CompromiseDoc;
+  nouns(): CompromiseDoc;
+  text(): string;
+  // Add other methods as needed
+}
+
 // ============================================================================
 // CORE INTERFACES
 // ============================================================================
@@ -268,7 +283,7 @@ export declare class NLPParser {
    * @param text - Original text string
    * @returns NLP analysis results
    */
-  performGenericAnalysis(doc: any, text: string): NLPAnalysis;
+  performGenericAnalysis(doc: CompromiseDoc, text: string): NLPAnalysis;
 
   /**
    * Scores categories based on flowchart keywords
@@ -280,7 +295,7 @@ export declare class NLPParser {
    */
   scoreFlowchartCategories(
     text: string,
-    doc: any,
+    doc: CompromiseDoc,
     flowchartCategories: Record<string, CategoryInfo>,
     nlpAnalysis: NLPAnalysis
   ): CategoryScore[];
@@ -293,7 +308,7 @@ export declare class NLPParser {
    * @returns Semantic similarity score
    */
   calculateFlowchartSemanticScore(
-    doc: any,
+    doc: CompromiseDoc,
     flowchartKeywords: string[],
     nlpAnalysis: NLPAnalysis
   ): number;

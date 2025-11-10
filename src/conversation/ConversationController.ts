@@ -89,7 +89,7 @@ export class ConversationController implements ConversationControllerInterface {
   private currentNodeId: string;
   private isOnboarding: boolean = false;
   private userProfile: UserProfile | null = null;
-  private userVariables: Record<string, any> = {};
+  private userVariables: Record<string, string | number | boolean> = {};
   private attemptedActivities: Set<string> = new Set();
   private initializationComplete: boolean = false;
 
@@ -266,7 +266,7 @@ export class ConversationController implements ConversationControllerInterface {
     return decisionLogic.conditions[0]?.goto || 'ongoing_support';
   }
 
-  private evaluateCondition(conditionStr: string, context: any): boolean {
+  private evaluateCondition(conditionStr: string, context: Record<string, unknown>): boolean {
     // Simple condition evaluation - replace with a proper expression parser for production
     const { category, extractedValue, confidence } = context;
     
@@ -426,13 +426,14 @@ export class ConversationController implements ConversationControllerInterface {
         return enhancedParser.extractLocation(input);
       case 'parseYesNo':
         return enhancedParser.parseYesNo(input);
-      case 'parseActivityPreference':
+      case 'parseActivityPreference': {
         const result = enhancedParser.parseActivityPreference(input);
         // Track attempted activities
         if (result.category && result.category !== 'no_activity' && result.category !== 'unclear_activity') {
           this.attemptedActivities.add(result.category);
         }
         return result;
+      }
       default:
         console.warn(`Unknown parser type: ${parserType}`);
         return {

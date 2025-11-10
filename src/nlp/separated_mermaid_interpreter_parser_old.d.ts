@@ -1,23 +1,41 @@
+// Type definition for Compromise.js document (external library without TS types)
+export interface CompromiseDoc {
+  json(): unknown[];
+  match(pattern: string): CompromiseDoc;
+  found: boolean;
+  has(pattern: string): boolean;
+  out(format: string): string[];
+  terms(): CompromiseDoc;
+  // Add other methods as needed
+}
+
+interface QuestionData {
+  id: string;
+  text: string;
+  type: string;
+}
+
 declare class MermaidInterpreterParser {
   constructor();
-  parse(mermaidCode: string): string; // Assuming parse takes a string and returns a string
-  // Declare other methods/properties here with their types
+  parse(mermaidCode: string): string;
 }
+
 declare class NLPParser {
   constructor();
-  // parse(mermaidCode: string): string; // Assuming parse takes a string and returns a string
-  // Declare other methods/properties here with their types
 }
+
 declare class ConversationController {
   constructor();
   createFromFile(filePath: string): object;
   initialize(filePath: string): null;
-  getCurrentQuestion():any;
+  getCurrentQuestion(): QuestionData | null;
   processUserInput(userInput: string): {success: boolean, error: string};
   reloadFlowchart(filePath: string): null;
-  getDebugInfo() :{ready:boolean, 
-      interpreter: object,
-      currentQuestion: object}
+  getDebugInfo(): {
+    ready: boolean,
+    interpreter: object,
+    currentQuestion: object
+  }
 }
 
 // declare function someUtilityFunction(input: any): number; // Declare other functions

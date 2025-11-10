@@ -68,7 +68,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [brushColor, brushSize]);
 
   useEffect(() => {
     if (contextRef.current) {
