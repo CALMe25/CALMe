@@ -14,7 +14,6 @@
     "preview": "vite preview",
     "generate:notice": "tsx generate-notice.ts",
     "postinstall": "tsx generate-notice.ts",
-    "pre-commit": "lint-staged --config lint-staged.config.js",
     "prepare": "husky"
   },
   "dependencies": {
