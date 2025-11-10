@@ -1,23 +1,42 @@
 // Type definitions for compromise.js methods used in this project
 declare module "compromise" {
+  interface Term {
+    text?: string;
+    tags?: string[];
+    normal?: string;
+    implicit?: string;
+    [key: string]: unknown;
+  }
+
+  interface Sentence {
+    terms: Term[];
+    text?: string;
+    [key: string]: unknown;
+  }
+
   interface CompromiseDocument {
     match(pattern: string): CompromiseDocument;
-    out(format: "array" | "text" | "json"): string[] | string | unknown[];
+    out(format: "array"): string[];
+    out(format: "text"): string;
+    out(format: "json"): Sentence[];
+    out(format: string): unknown;
     has(tag: string): boolean;
-    terms(): { text?: string; [key: string]: unknown }[];
-    json(): Array<{
-      terms: Array<{
-        text?: string;
-        tags?: string[];
-        [key: string]: unknown;
-      }>;
-      [key: string]: unknown;
-    }>;
+    terms(): Term[];
+    json(): Sentence[];
     compute(property: string): CompromiseDocument;
     tag(tag: string): CompromiseDocument;
     text(): string;
+    if(condition: string): CompromiseDocument;
+    not(pattern: string): CompromiseDocument;
+    sentences(): CompromiseDocument;
+    forEach(callback: (doc: CompromiseDocument) => void): void;
   }
 
-  function nlp(text: string): CompromiseDocument;
+  interface NlpStatic {
+    (text: string): CompromiseDocument;
+    plugin(plugin: unknown): void;
+  }
+
+  const nlp: NlpStatic;
   export default nlp;
 }

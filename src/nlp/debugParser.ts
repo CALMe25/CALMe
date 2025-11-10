@@ -1,4 +1,3 @@
-// @ts-expect-error - Compromise doesn't have TypeScript definitions
 import nlp from "compromise";
 
 export function debugParse(text: string) {

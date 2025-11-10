@@ -1,5 +1,4 @@
-// @ts-expect-error - Compromise doesn't have TypeScript definitions
-import nlp from "compromise";
+import nlp, { type CompromiseDocument } from "compromise";
 
 // Extend Compromise with custom crisis language patterns and corrections
 const crisisPlugin = {
@@ -44,12 +43,11 @@ const crisisPlugin = {
 nlp.plugin(crisisPlugin);
 
 // Apply the patterns to add our custom tags
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function applyCrisisPatterns(doc: any) {
+function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
   Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]) => {
     const matches = doc.match(pattern);
-    if (matches.found === true) {
+    if (matches.has("")) {
       matches.tag(tag);
     }
   });
