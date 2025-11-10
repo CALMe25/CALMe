@@ -57,8 +57,10 @@ export default function BreathingExercise({
         media.removeEventListener("change", handleChange);
       };
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-deprecated
       media.addListener(handleChange);
       cleanup = () => {
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         media.removeListener(handleChange);
       };
     }
@@ -76,7 +78,7 @@ export default function BreathingExercise({
     <button
       key={keyName}
       onClick={() => {
-        setPresetKey(keyName as keyof typeof TIMING_PRESETS);
+        setPresetKey(keyName);
       }}
       className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all duration-200 min-h-[60px] active:scale-95 ${
         presetKey === keyName

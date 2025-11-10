@@ -94,7 +94,7 @@ function App() {
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: initialNode.content || "Hello! I'm here with you.",
+            content: initialNode.content ?? "Hello! I'm here with you.",
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: initialNode.id,
@@ -139,7 +139,7 @@ function App() {
 
     try {
       const parserType = conversationController.getCurrentParserType();
-      if (!parserType) {
+      if (parserType == null) {
         console.warn("No parser type specified for current node");
         return;
       }
@@ -155,7 +155,7 @@ function App() {
       const newMessage: Message = {
         id: Date.now().toString(),
         type: activityPrompt ? "app-buttons" : "message",
-        content: nextNode.content || "How can I help you?",
+        content: nextNode.content ?? "How can I help you?",
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: nextNode.id,
@@ -216,7 +216,7 @@ function App() {
             const continueMsg: Message = {
               id: Date.now().toString() + "_continue",
               type: "message",
-              content: returnNode.content || "Let's continue.",
+              content: returnNode.content ?? "Let's continue.",
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: returnNode.id,
@@ -301,7 +301,7 @@ function App() {
     setShowAppsLauncher(false);
     setShouldAutoLaunchApp(false);
 
-    if (activityReturnNode) {
+    if (activityReturnNode != null) {
       try {
         conversationController.moveToNode(activityReturnNode);
         const returnNode = conversationController.getCurrentNode();
@@ -310,7 +310,7 @@ function App() {
         const returnMessage: Message = {
           id: Date.now().toString(),
           type: activityPrompt ? "app-buttons" : "message",
-          content: returnNode.content || "Welcome back! How was that?",
+          content: returnNode.content ?? "Welcome back! How was that?",
           timestamp: new Date().toISOString(),
           isUser: false,
           nodeId: returnNode.id,
@@ -451,7 +451,7 @@ function App() {
                 {
                   id: Date.now().toString(),
                   type: "message",
-                  content: initialNode.content || "Hello! I'm here with you.",
+                  content: initialNode.content ?? "Hello! I'm here with you.",
                   timestamp: new Date().toISOString(),
                   isUser: false,
                   nodeId: initialNode.id,
@@ -674,7 +674,12 @@ function App() {
           )}
 
           {showAppsLauncher && (
-            <AppLauncher chosenApp={chosenApp} onClose={closeAppLauncher} />
+            <AppLauncher
+              chosenApp={chosenApp}
+              onClose={() => {
+                void closeAppLauncher();
+              }}
+            />
           )}
 
           {shouldAutoLaunchApp && (
