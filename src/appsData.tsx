@@ -5,6 +5,7 @@ import StretchingRoutine from "./activities/StretchingRoutine";
 import SudokuGame from "./activities/SudokuGame";
 import DigitalCanvas from "./activities/DigitalCanvas";
 import SnakeGame from "./activities/SnakeGame";
+import NumberGuessingGame from "./activities/NumberGuessingGame";
 
 // Define the App interface as provided by the user
 // Using a union type for 'name' for strict type checking
@@ -16,7 +17,8 @@ export interface AppInterface {
     | "sudoku"
     | "puzzle"
     | "paint"
-    | "snake";
+    | "snake"
+    | "number-guessing";
   type: "activities" | "games";
   label: string;
   // icon is a ReactElement that renders an SVG, e.g., <svg>...</svg>
@@ -32,6 +34,7 @@ export const quickActivityOrder = [
   "sudoku",
   "paint",
   "snake",
+  "number-guessing",
 ] as const;
 
 export const InnerApps: AppInterface[] = [
@@ -153,5 +156,18 @@ export const InnerApps: AppInterface[] = [
     ),
     main: <SnakeGame onGameEnd={() => {}} />,
     description: "A classic snake game to test your reflexes.",
+  },
+  {
+    name: "number-guessing",
+    type: "games",
+    label: "Number Guessing",
+    icon: (
+      // SVG icon for number guessing (question mark with numbers)
+      <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14C9.79 6 8 7.79 8 10h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z" />
+      </svg>
+    ),
+    main: <NumberGuessingGame onGameEnd={() => {}} />,
+    description: "Guess the number between 1 and 10. Test your intuition!",
   },
 ];

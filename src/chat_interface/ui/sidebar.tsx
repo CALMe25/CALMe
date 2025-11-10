@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import type { CSSProperties } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { type VariantProps, cva } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
@@ -133,7 +132,10 @@ function SidebarProvider({
     [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar],
   );
 
-  const wrapperStyle: CSSProperties = {
+  const wrapperStyle: React.CSSProperties & {
+    "--sidebar-width"?: string;
+    "--sidebar-width-icon"?: string;
+  } = {
     "--sidebar-width": SIDEBAR_WIDTH,
     "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
   };
@@ -190,7 +192,7 @@ function Sidebar({
   }
 
   if (isMobile) {
-    const sheetStyle: CSSProperties = {
+    const sheetStyle: React.CSSProperties & { "--sidebar-width"?: string } = {
       "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
     };
     return (
@@ -618,7 +620,7 @@ function SidebarMenuSkeleton({
   const width = React.useMemo(() => {
     return `${Math.floor(Math.random() * 40) + 50}%`;
   }, []);
-  const skeletonStyle: CSSProperties = {
+  const skeletonStyle: React.CSSProperties & { "--skeleton-width"?: string } = {
     "--skeleton-width": width,
   };
 

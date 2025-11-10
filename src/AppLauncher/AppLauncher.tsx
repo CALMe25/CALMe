@@ -74,7 +74,9 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
       );
     }
 
-    return React.cloneElement(chosenApp.main, { onGameEnd: onClose });
+    return React.cloneElement(chosenApp.main, {
+      onGameEnd: onClose,
+    } as Partial<{ onGameEnd: () => void }>);
   };
 
   return (
