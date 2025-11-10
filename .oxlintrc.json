@@ -216,5 +216,9 @@
     "builtin": true
   },
   "globals": {},
-  "ignorePatterns": []
+  "ignorePatterns": [
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs"
+  ]
 }
