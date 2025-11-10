@@ -49,6 +49,15 @@ export default tseslint.config(
       '@typescript-eslint/no-require-imports': 'off',
     },
   },
+  // Config for UI library components (third-party/generated code)
+  {
+    files: ['**/ui/**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'react-refresh/only-export-components': 'off',
+      'react-hooks/exhaustive-deps': 'off',
+    },
+  },
   // Config for ESM JavaScript files (like eslint.config.js, generate-notice.js)
   {
     files: ['*.js', '**/*.mjs'],

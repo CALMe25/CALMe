@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 type CellValue = number | null;
 type Grid = CellValue[][];
@@ -82,11 +82,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
   const [errors, setErrors] = useState<Set<string>>(new Set());
   const [isComplete, setIsComplete] = useState(false);
 
-  useEffect(() => {
-    checkCompletion();
-  }, [grid]);
-
-  const checkCompletion = () => {
+  const checkCompletion = useCallback(() => {
     const isFilled = grid.every(row => row.every(cell => cell !== null));
     if (!isFilled) return;
 
@@ -97,7 +93,11 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     if (isCorrect) {
       setIsComplete(true);
     }
-  };
+  }, [grid, solution]);
+
+  useEffect(() => {
+    checkCompletion();
+  }, [grid, checkCompletion]);
 
   const handleCellClick = (row: number, col: number) => {
     if (puzzle[row][col] !== null) return; // Can't edit original numbers

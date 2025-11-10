@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef, useContext, useCallback } from 'react'
 import './App.css'
 import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
@@ -93,7 +93,7 @@ function App() {
       }
     };
     initializeConversation();
-  }, [conversationController]);
+  }, [conversationController, ACTIVITY_PROMPT_NODES]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -104,7 +104,7 @@ function App() {
     }
   }, [conversationHistory]);
 
-  const processUserInput = () => {
+  const processUserInput = useCallback(() => {
     if (!userInput.trim()) return;
 
     try {
@@ -203,7 +203,7 @@ function App() {
     }
 
     setUserInput('');
-  };
+  }, [userInput, conversationController, ACTIVITY_PROMPT_NODES, appsContext, setActivityReturnNode, setConversationHistory, setUserInput, setChosenApp, setShouldAutoLaunchApp, setShowAppsLauncher, setAppsTimeout]);
 
   useEffect(() => {
     if (userInput !== '' && isInitialized) {
@@ -278,7 +278,7 @@ function App() {
       setChosenApp(breathingApp);
       setShowAppsLauncher(true);
     }
-  }, [shouldAutoLaunchApp]);
+  }, [shouldAutoLaunchApp, appsContext]);
 
   const handleAppLaunch = (appToLaunch: AppInterface | undefined) => {
     if (!appToLaunch) {

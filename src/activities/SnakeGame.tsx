@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 interface SnakeGameProps {
   onGameEnd?: () => void;
@@ -26,13 +26,13 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     setDirection(dir);
   };
 
-  const tryChangeDirection = (next: { x: number; y: number }) => {
+  const tryChangeDirection = useCallback((next: { x: number; y: number }) => {
     const current = directionRef.current;
     if ((next.x !== 0 && current.x !== 0) || (next.y !== 0 && current.y !== 0)) {
       return;
     }
     setDirectionImmediate(next);
-  };
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -70,7 +70,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [tryChangeDirection]);
 
   useEffect(() => {
     if (gameOver) return;

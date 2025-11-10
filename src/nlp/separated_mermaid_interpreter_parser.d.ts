@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Type definitions for separated_mermaid_interpreter_parser.js
 
 import type { PathLike } from "fs";

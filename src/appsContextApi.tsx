@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext } from 'react';
 import { InnerApps, quickActivityOrder } from './appsData';
 import type { AppInterface } from './appsData';

@@ -22,7 +22,7 @@ export interface ConversationState {
   currentNodeId: string;
   conversationHistory: string[];
   attemptedActivities: string[];
-  userVariables: Record<string, any>;
+  userVariables: Record<string, string | number | boolean>;
   lastActivity: Date;
 }
 
@@ -187,15 +187,15 @@ class UserProfileStorage {
     });
   }
 
-  async getRecentActivities(profileId: string, limit = 10): Promise<any[]> {
+  async getRecentActivities(profileId: string, limit = 10): Promise<unknown[]> {
     if (!this.db) await this.init();
-    
+
     const transaction = this.db!.transaction(['activityHistory'], 'readonly');
     const store = transaction.objectStore('activityHistory');
     const index = store.index('profileId');
-    
+
     return new Promise((resolve, reject) => {
-      const activities: any[] = [];
+      const activities: unknown[] = [];
       const request = index.openCursor(IDBKeyRange.only(profileId), 'prev');
       
       request.onsuccess = (event) => {

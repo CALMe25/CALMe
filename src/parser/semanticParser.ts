@@ -1,4 +1,4 @@
-// @ts-ignore - Compromise doesn't have TypeScript definitions
+// @ts-expect-error - Compromise doesn't have TypeScript definitions
 import nlp from 'compromise';
 
 // Extend Compromise with custom crisis language patterns and corrections
@@ -44,6 +44,7 @@ const crisisPlugin = {
 nlp.plugin(crisisPlugin);
 
 // Apply the patterns to add our custom tags
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function applyCrisisPatterns(doc: any) {
   // Apply each pattern manually
   Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]) => {
@@ -77,8 +78,10 @@ export function analyzeText(text: string): SemanticAnalysis {
   // Get all custom tags we've identified
   const jsonData = doc.json();
   const tags: string[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   jsonData.forEach((sentence: any) => {
     if (sentence.terms) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sentence.terms.forEach((term: any) => {
         if (term.tags) {
           tags.push(...term.tags);

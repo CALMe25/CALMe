@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare class MermaidInterpreterParser {
   constructor();
   parse(mermaidCode: string): string; // Assuming parse takes a string and returns a string
