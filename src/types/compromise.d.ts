@@ -21,7 +21,9 @@ declare module "compromise" {
     out(format: "json"): Sentence[];
     out(format: string): unknown;
     has(tag: string): boolean;
-    terms(): Term[];
+    found: boolean;
+    length: number;
+    terms(): { text: string; tags?: string[]; normal?: string }[];
     json(): Sentence[];
     compute(property: string): CompromiseDocument;
     tag(tag: string): CompromiseDocument;
@@ -30,6 +32,15 @@ declare module "compromise" {
     not(pattern: string): CompromiseDocument;
     sentences(): CompromiseDocument;
     forEach(callback: (doc: CompromiseDocument) => void): void;
+    toLowerCase(): CompromiseDocument;
+    toUpperCase(): CompromiseDocument;
+    toTitleCase(): CompromiseDocument;
+    values(): CompromiseDocument;
+    places(): { text: string }[];
+    people(): { text: string }[];
+    numbers(): { text: string }[];
+    map(fn: (doc: CompromiseDocument) => string): string[];
+    filter(fn: (doc: CompromiseDocument) => boolean): CompromiseDocument;
   }
 
   interface NlpStatic {
