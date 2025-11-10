@@ -211,7 +211,7 @@ export class ConversationController implements ConversationControllerInterface {
     console.log("🔧 PROCESS: Current node:", currentNode);
 
     // Handle clarification needs
-    if (result.needsClarification && result.clarificationPrompt) {
+    if (result.needsClarification === true && result.clarificationPrompt != null) {
       console.log("❓ PROCESS: Parser needs clarification");
       // Create a temporary clarification node
       const clarificationNode: ConversationNode = {
@@ -224,7 +224,7 @@ export class ConversationController implements ConversationControllerInterface {
       return { nextNode: clarificationNode, activityTrigger: undefined };
     }
 
-    if (!currentNode.next) {
+    if (currentNode.next == null) {
       // Check if this is an end node or if we're completing onboarding
       if (currentNode.type === "end" && this.isOnboarding) {
         console.log("🎯 PROCESS: Completing onboarding");
@@ -243,7 +243,7 @@ export class ConversationController implements ConversationControllerInterface {
     } else {
       // Handle conditional logic
       console.log("🔧 PROCESS: Evaluating conditional logic");
-      const decisionLogic = currentNode.next as ConversationDecisionLogic;
+      const decisionLogic = currentNode.next as unknown as ConversationDecisionLogic;
       nextNodeId = this.evaluateConditions(decisionLogic, result);
       console.log("🔧 PROCESS: Conditional result, moving to:", nextNodeId);
     }
@@ -254,11 +254,11 @@ export class ConversationController implements ConversationControllerInterface {
 
     // Check if this triggers an activity
     let activityTrigger: ActivityTrigger | undefined;
-    if (nextNode.type === "activity" && nextNode.activity) {
+    if (nextNode.type === "activity" && nextNode.activity != null) {
       console.log("🎯 PROCESS: Activity node detected, creating trigger");
       activityTrigger = {
         activityName: nextNode.activity,
-        returnNode: nextNode.next as string, // Activities should have simple string next
+        returnNode: nextNode.next as unknown as string, // Activities should have simple string next
       };
       console.log("🎯 PROCESS: Activity trigger created:", activityTrigger);
     } else {
@@ -280,7 +280,7 @@ export class ConversationController implements ConversationControllerInterface {
   ): string {
     // Evaluate each condition in order
     for (const condition of decisionLogic.conditions) {
-      if (condition.if) {
+      if (condition.if != null) {
         // Create a safe evaluation context
         const evaluationContext = {
           category:
@@ -292,14 +292,14 @@ export class ConversationController implements ConversationControllerInterface {
 
         try {
           // Simple condition evaluation (can be enhanced with a proper expression parser)
-          if (this.evaluateCondition(condition.if, evaluationContext)) {
+          if (this.evaluateCondition(condition.if, evaluationContext) === true) {
             return condition.goto;
           }
         } catch (error) {
           console.warn(`Error evaluating condition: ${condition.if}`, error);
           continue;
         }
-      } else if (condition.default) {
+      } else if (condition.default === true) {
         return condition.goto; // Use goto for default conditions too
       }
     }
@@ -318,7 +318,7 @@ export class ConversationController implements ConversationControllerInterface {
     // Handle common condition patterns
     if (conditionStr.includes("category ===")) {
       const match = conditionStr.match(/category === ["']([^"']+)["']/);
-      if (match && category) {
+      if (match != null && category != null) {
         return category === match[1];
       }
     }
@@ -328,12 +328,12 @@ export class ConversationController implements ConversationControllerInterface {
       return conditions.some((cond) => this.evaluateCondition(cond, context));
     }
 
-    if (conditionStr.includes("extractedValue") && extractedValue) {
+    if (conditionStr.includes("extractedValue") && extractedValue != null) {
       if (conditionStr.includes(".toLowerCase().includes(")) {
         const match = conditionStr.match(
           /extractedValue\.toLowerCase\(\)\.includes\(["']([^"']+)["']\)/,
         );
-        if (match) {
+        if (match != null) {
           return extractedValue.toLowerCase().includes(match[1]);
         }
       }
