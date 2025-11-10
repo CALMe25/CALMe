@@ -426,13 +426,14 @@ export class ConversationController implements ConversationControllerInterface {
         return enhancedParser.extractLocation(input);
       case 'parseYesNo':
         return enhancedParser.parseYesNo(input);
-      case 'parseActivityPreference':
+      case 'parseActivityPreference': {
         const result = enhancedParser.parseActivityPreference(input);
         // Track attempted activities
         if (result.category && result.category !== 'no_activity' && result.category !== 'unclear_activity') {
           this.attemptedActivities.add(result.category);
         }
         return result;
+      }
       default:
         console.warn(`Unknown parser type: ${parserType}`);
         return {

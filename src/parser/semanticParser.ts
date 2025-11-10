@@ -169,7 +169,7 @@ export function classifyStress(text: string): ClassificationResult {
   
   let stressLevel = 0;
   let confidence = 0.7;
-  let reasoning: string[] = [];
+  const reasoning: string[] = [];
   
   console.log('Classifying stress for text:', text);
   console.log('Semantic analysis tags:', analysis.tags);

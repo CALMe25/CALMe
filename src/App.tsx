@@ -104,12 +104,6 @@ function App() {
     }
   }, [conversationHistory]);
 
-  useEffect(() => {
-    if (userInput !== '' && isInitialized) {
-      processUserInput();
-    }
-  }, [userInput, isInitialized]);
-
   const processUserInput = () => {
     if (!userInput.trim()) return;
 
@@ -211,6 +205,12 @@ function App() {
     setUserInput('');
   };
 
+  useEffect(() => {
+    if (userInput !== '' && isInitialized) {
+      processUserInput();
+    }
+  }, [userInput, isInitialized, processUserInput]);
+
   const handleSendMessage = (e: string) => {
     if (!e.trim()) return; 
     const currentNode = conversationController.getCurrentNode();
@@ -288,7 +288,7 @@ function App() {
     setShowAppsLauncher(true);
   };
 
-  const handleAudioPlay = (_messageId: string) => {
+  const handleAudioPlay = () => {
     toast.success('Playing voice message...', {
       description: 'Audio: "I need to take a break and relax"',
     });
