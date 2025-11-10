@@ -30,7 +30,7 @@ export default function BreathingCircle({
     }
 
     // Ensure timings are valid
-    if (!timings || timings.length < 3) {
+    if (timings === null || timings === undefined || timings.length < 3) {
       console.error(
         "Invalid timings prop. It must be an array of at least 3 numbers.",
       );
