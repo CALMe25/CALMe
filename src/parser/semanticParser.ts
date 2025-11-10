@@ -1,4 +1,4 @@
-import nlp, { type CompromiseDocument } from "compromise";
+import nlp, { type CompromiseDocument, type Sentence, type Term } from "compromise";
 
 // Extend Compromise with custom crisis language patterns and corrections
 const crisisPlugin = {
@@ -45,9 +45,9 @@ nlp.plugin(crisisPlugin);
 // Apply the patterns to add our custom tags
 function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
-  Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]) => {
+  Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]: [string, string]) => {
     const matches = doc.match(pattern);
-    if (matches.has("")) {
+    if (matches.has("") === true) {
       matches.tag(tag);
     }
   });
@@ -67,20 +67,18 @@ export interface SemanticAnalysis {
 }
 
 export function analyzeText(text: string): SemanticAnalysis {
-  const doc = applyCrisisPatterns(nlp(text));
+  const doc: CompromiseDocument = applyCrisisPatterns(nlp(text));
 
   // Analyze sentiment based on negations and positive/negative terms
-  const negations = doc.match("#Negative").out("array");
+  const negations: string[] = doc.match("#Negative").out("array");
   const hasNegation = negations.length > 0;
 
   // Get all custom tags we've identified
-  const jsonData = doc.json();
+  const jsonData: Sentence[] = doc.json();
   const tags: string[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  jsonData.forEach((sentence: any) => {
+  jsonData.forEach((sentence: Sentence) => {
     if (sentence.terms !== null && sentence.terms !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      sentence.terms.forEach((term: any) => {
+      sentence.terms.forEach((term: Term) => {
         if (term.tags !== null && term.tags !== undefined) {
           tags.push(...term.tags);
         }
@@ -89,12 +87,12 @@ export function analyzeText(text: string): SemanticAnalysis {
   });
 
   // Extract entities
-  const places = doc.places().out("array");
-  const people = doc.people().out("array");
-  const numbers = doc.values().out("array");
+  const places: string[] = doc.places().out("array");
+  const people: string[] = doc.people().out("array");
+  const numbers: string[] = doc.values().out("array");
 
   // Get noun phrases and verb phrases for better understanding
-  const phrases = doc.match("#Determiner? #Adjective* #Noun+").out("array");
+  const phrases: string[] = doc.match("#Determiner? #Adjective* #Noun+").out("array");
 
   // Determine overall sentiment
   let sentiment: "positive" | "negative" | "neutral" = "neutral";
@@ -129,7 +127,7 @@ export interface ClassificationResult {
 }
 
 export function classifySafety(text: string): ClassificationResult {
-  const doc = nlp(text);
+  const doc: CompromiseDocument = nlp(text);
   const analysis = analyzeText(text);
 
   // Check for explicit safety/danger indicators
@@ -141,12 +139,12 @@ export function classifySafety(text: string): ClassificationResult {
 
   // Semantic understanding of phrases
   const isAskingForHelp =
-    doc.has("(help|save|rescue)") && !doc.has("no #Negative help");
+    doc.has("(help|save|rescue)") === true && doc.has("no #Negative help") === false;
   const isInDanger = hasDangerWords || hasDangerIndicators || isAskingForHelp;
 
   // Handle negations properly
   const negatedSafety = hasSafeWords && hasNegation; // "not safe", "not okay"
-  const confirmedSafety = hasSafeWords && !hasNegation && !isInDanger;
+  const confirmedSafety = hasSafeWords && (hasNegation === false) && (isInDanger === false);
 
   let category = "UNSURE";
   let confidence = 0.5;
@@ -158,11 +156,11 @@ export function classifySafety(text: string): ClassificationResult {
     reasoning = negatedSafety
       ? "Negated safety statement"
       : "Danger indicators present";
-  } else if (confirmedSafety || (hasSafeLocation && !isInDanger)) {
+  } else if (confirmedSafety || (hasSafeLocation && (isInDanger === false))) {
     category = "SAFE";
     confidence = hasSafeLocation ? 0.85 : 0.75;
     reasoning = "Positive safety indicators";
-  } else if (doc.has("(maybe|perhaps|think|unsure|confused)")) {
+  } else if (doc.has("(maybe|perhaps|think|unsure|confused)") === true) {
     category = "UNSURE";
     confidence = 0.6;
     reasoning = "Uncertainty expressed";
@@ -172,7 +170,7 @@ export function classifySafety(text: string): ClassificationResult {
 }
 
 export function classifyStress(text: string): ClassificationResult {
-  const doc = applyCrisisPatterns(nlp(text));
+  const doc: CompromiseDocument = applyCrisisPatterns(nlp(text));
   const analysis = analyzeText(text);
 
   let stressLevel = 0;
