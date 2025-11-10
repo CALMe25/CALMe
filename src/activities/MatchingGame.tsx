@@ -155,8 +155,9 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
         style={{ maxWidth: "100%" }}
       >
         {cards.map((card) => (
-          <div
+          <button
             key={card.id}
+            type="button"
             className={`
               w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36
               flex items-center justify-center
@@ -168,6 +169,14 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
               ${isChecking && !card.isFlipped && !card.isMatched ? "cursor-not-allowed" : "" + " relative"}
             `}
             onClick={() => handleCardClick(card)}
+            disabled={card.isMatched || isChecking}
+            aria-label={
+              card.isMatched
+                ? `Matched card: ${card.value}`
+                : card.isFlipped
+                  ? `Card showing: ${card.value}`
+                  : "Card face down"
+            }
             style={{
               // This transforms the inner content to appear correctly when the card is flipped
               transformStyle: "preserve-3d",
@@ -219,7 +228,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
                   </div>
                 )}
             </div>
-          </div>
+          </button>
         ))}
       </div>
 

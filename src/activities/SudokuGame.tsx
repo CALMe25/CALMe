@@ -220,13 +220,22 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
         {grid.map((row, rowIndex) => (
           <div key={rowIndex} className="flex">
             {row.map((cell, colIndex) => (
-              <div
+              <button
                 key={`${rowIndex}-${colIndex}`}
+                type="button"
                 className={getCellClass(rowIndex, colIndex)}
                 onClick={() => handleCellClick(rowIndex, colIndex)}
+                disabled={puzzle[rowIndex][colIndex] !== null}
+                aria-label={
+                  puzzle[rowIndex][colIndex] !== null
+                    ? `Cell ${rowIndex + 1}, ${colIndex + 1}: fixed value ${cell}`
+                    : cell
+                      ? `Cell ${rowIndex + 1}, ${colIndex + 1}: ${cell}${errors.has(`${rowIndex},${colIndex}`) ? " (error)" : ""}`
+                      : `Cell ${rowIndex + 1}, ${colIndex + 1}: empty`
+                }
               >
                 {cell || ""}
-              </div>
+              </button>
             ))}
           </div>
         ))}
