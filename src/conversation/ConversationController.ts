@@ -292,7 +292,7 @@ export class ConversationController implements ConversationControllerInterface {
 
         try {
           // Simple condition evaluation (can be enhanced with a proper expression parser)
-          if (this.evaluateCondition(condition.if, evaluationContext) === true) {
+          if (this.evaluateCondition(condition.if, evaluationContext)) {
             return condition.goto;
           }
         } catch (error) {
@@ -384,7 +384,7 @@ export class ConversationController implements ConversationControllerInterface {
     console.log("✅ NODE: Found node:", node);
 
     // Substitute variables in content
-    if (node.content) {
+    if (node.content != null) {
       let content = node.content;
       console.log("🔍 NODE: Original content:", content);
       console.log("🔍 NODE: Available variables:", this.userVariables);
@@ -421,7 +421,7 @@ export class ConversationController implements ConversationControllerInterface {
 
   getCurrentParserType(): string | null {
     const currentNode = this.getCurrentNode();
-    return currentNode.parser || null;
+    return currentNode.parser ?? null;
   }
 
   // Handle onboarding completion
@@ -493,7 +493,7 @@ export class ConversationController implements ConversationControllerInterface {
         const result = enhancedParser.parseActivityPreference(input);
         // Track attempted activities
         if (
-          result.category &&
+          result.category != null &&
           result.category !== "no_activity" &&
           result.category !== "unclear_activity"
         ) {

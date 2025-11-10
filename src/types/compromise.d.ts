@@ -1,6 +1,6 @@
 // Type definitions for compromise.js methods used in this project
 declare module "compromise" {
-  interface Term {
+  export interface Term {
     text?: string;
     tags?: string[];
     normal?: string;
@@ -8,18 +8,18 @@ declare module "compromise" {
     [key: string]: unknown;
   }
 
-  interface Sentence {
+  export interface Sentence {
     terms: Term[];
     text?: string;
     [key: string]: unknown;
   }
 
-  interface TermDocument {
+  export interface TermDocument {
     json(): Sentence[];
     text(): string;
   }
 
-  interface CompromiseDocument {
+  export interface CompromiseDocument {
     match(pattern: string): CompromiseDocument;
     out(format: "array"): string[];
     out(format: "text"): string;
@@ -48,7 +48,7 @@ declare module "compromise" {
     filter(fn: (doc: CompromiseDocument) => boolean): CompromiseDocument;
   }
 
-  interface NlpStatic {
+  export interface NlpStatic {
     (text: string): CompromiseDocument;
     plugin(plugin: unknown): void;
   }

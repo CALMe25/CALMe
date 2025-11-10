@@ -47,7 +47,7 @@ function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
   Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]: [string, string]) => {
     const matches = doc.match(pattern);
-    if (matches.has("") === true) {
+    if (matches.has("")) {
       matches.tag(tag);
     }
   });
@@ -139,12 +139,12 @@ export function classifySafety(text: string): ClassificationResult {
 
   // Semantic understanding of phrases
   const isAskingForHelp =
-    doc.has("(help|save|rescue)") === true && doc.has("no #Negative help") === false;
+    doc.has("(help|save|rescue)") && !doc.has("no #Negative help");
   const isInDanger = hasDangerWords || hasDangerIndicators || isAskingForHelp;
 
   // Handle negations properly
   const negatedSafety = hasSafeWords && hasNegation; // "not safe", "not okay"
-  const confirmedSafety = hasSafeWords && (hasNegation === false) && (isInDanger === false);
+  const confirmedSafety = hasSafeWords && !hasNegation && !isInDanger;
 
   let category = "UNSURE";
   let confidence = 0.5;
@@ -156,11 +156,11 @@ export function classifySafety(text: string): ClassificationResult {
     reasoning = negatedSafety
       ? "Negated safety statement"
       : "Danger indicators present";
-  } else if (confirmedSafety || (hasSafeLocation && (isInDanger === false))) {
+  } else if (confirmedSafety || (hasSafeLocation && !isInDanger)) {
     category = "SAFE";
     confidence = hasSafeLocation ? 0.85 : 0.75;
     reasoning = "Positive safety indicators";
-  } else if (doc.has("(maybe|perhaps|think|unsure|confused)") === true) {
+  } else if (doc.has("(maybe|perhaps|think|unsure|confused)")) {
     category = "UNSURE";
     confidence = 0.6;
     reasoning = "Uncertainty expressed";
@@ -220,8 +220,8 @@ export function classifyStress(text: string): ClassificationResult {
     "(very|extremely|really|quite|super|highly|high|severely|deeply|incredibly|terribly)",
   );
   if (
-    intensifiers.found === true &&
-    (stressLevel > 0 || doc.has("stress") === true)
+    intensifiers.found &&
+    (stressLevel > 0 || doc.has("stress"))
   ) {
     const intensifierWords = intensifiers.out("array");
     stressLevel += intensifierWords.length * 2;
@@ -229,24 +229,24 @@ export function classifyStress(text: string): ClassificationResult {
   }
 
   // Special patterns for crisis situations
-  if (doc.has("can't breathe") === true || doc.has("cannot breathe") === true) {
+  if (doc.has("can't breathe") || doc.has("cannot breathe")) {
     stressLevel += 6;
     reasoning.push("breathing difficulty");
   }
 
-  if (doc.has("(heart|pulse) (racing|pounding|fast)") === true) {
+  if (doc.has("(heart|pulse) (racing|pounding|fast)")) {
     stressLevel += 4;
     reasoning.push("cardiac symptoms");
   }
 
-  if (doc.has("(dying|die|death)") === true) {
+  if (doc.has("(dying|die|death)")) {
     stressLevel += 5;
     reasoning.push("mortality fears");
   }
 
   if (
-    doc.has("losing control") === true ||
-    doc.has("out of control") === true
+    doc.has("losing control") ||
+    doc.has("out of control")
   ) {
     stressLevel += 4;
     reasoning.push("loss of control");
