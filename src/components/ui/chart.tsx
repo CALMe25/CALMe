@@ -46,7 +46,7 @@ function ChartContainer({
   >["children"];
 }) {
   const uniqueId = React.useId();
-  const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
+  const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`;
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -70,7 +70,7 @@ function ChartContainer({
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
-    ([, itemConfig]) => itemConfig.theme || itemConfig.color,
+    ([, itemConfig]) => itemConfig.theme != null || itemConfig.color != null,
   );
 
   if (!colorConfig.length) {
@@ -86,10 +86,9 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 ${prefix} [data-chart=${id}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
-    const color =
-      itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
+    const themeColor = itemConfig.theme?.[theme as "light" | "dark"];
+    const color = themeColor ?? itemConfig.color;
+    return color != null ? `  --color-${key}: ${color};` : null;
   })
   .filter(Boolean)
   .join("\n")}
@@ -151,14 +150,14 @@ function ChartTooltipContent({
     }
 
     const [item] = payloadArray;
-    const key = `${labelKey || item?.dataKey || item?.name || "value"}`;
+    const key = `${labelKey ?? item?.dataKey ?? item?.name ?? "value"}`;
     const itemConfig = getPayloadConfigFromPayload(config, item, key);
     const value =
-      !labelKey && typeof label === "string"
-        ? config[label as keyof typeof config]?.label || label
+      labelKey == null && typeof label === "string"
+        ? (config[label]?.label ?? label)
         : itemConfig?.label;
 
-    if (labelFormatter) {
+    if (labelFormatter != null) {
       return (
         <div className={cn("font-medium", labelClassName)}>
           {labelFormatter(value, payloadArray)}
@@ -166,7 +165,7 @@ function ChartTooltipContent({
       );
     }
 
-    if (!value) {
+    if (value == null) {
       return null;
     }
 
@@ -181,7 +180,7 @@ function ChartTooltipContent({
     labelKey,
   ]);
 
-  if (!active || !payloadArray.length) {
+  if (active !== true || !payloadArray.length) {
     return null;
   }
 
@@ -197,19 +196,24 @@ function ChartTooltipContent({
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
         {payloadArray.map((item, index) => {
-          const key = `${nameKey || item.name || item.dataKey || "value"}`;
+          const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
-          const indicatorColor = color || item.payload?.fill || item.color;
+          const indicatorColor: string | undefined =
+            (color as string | undefined) ??
+            (item.payload?.fill as string | undefined) ??
+            (item.color as string | undefined);
 
           return (
             <div
-              key={item.dataKey}
+              key={item.dataKey as React.Key}
               className={cn(
                 "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                 indicator === "dot" && "items-center",
               )}
             >
-              {formatter && item?.value !== undefined && item.name ? (
+              {formatter != null &&
+              item?.value !== undefined &&
+              item.name != null ? (
                 formatter(item.value, item.name, item, index, item.payload)
               ) : (
                 <>
@@ -246,12 +250,12 @@ function ChartTooltipContent({
                     <div className="grid gap-1.5">
                       {nestLabel ? tooltipLabel : null}
                       <span className="text-muted-foreground">
-                        {itemConfig?.label || item.name}
+                        {itemConfig?.label ?? item.name}
                       </span>
                     </div>
-                    {item.value && (
+                    {item.value != null && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {item.value.toLocaleString()}
+                        {(item.value as number).toLocaleString()}
                       </span>
                     )}
                   </div>
@@ -297,23 +301,23 @@ function ChartLegendContent({
       )}
     >
       {legendItems.map((item) => {
-        const key = `${nameKey || item.dataKey || "value"}`;
+        const key = `${nameKey ?? item.dataKey ?? "value"}`;
         const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
         return (
           <div
-            key={item.value}
+            key={item.value as React.Key}
             className={cn(
               "[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
             )}
           >
-            {itemConfig?.icon && !hideIcon ? (
+            {itemConfig?.icon != null && !hideIcon ? (
               <itemConfig.icon />
             ) : (
               <div
                 className="h-2 w-2 shrink-0 rounded-[2px]"
                 style={{
-                  backgroundColor: item.color,
+                  backgroundColor: item.color as string,
                 }}
               />
             )}
@@ -334,33 +338,26 @@ function getPayloadConfigFromPayload(
     return undefined;
   }
 
-  const payloadPayload =
+  const payloadPayload: Record<string, unknown> | undefined =
     "payload" in payload &&
     typeof payload.payload === "object" &&
     payload.payload !== null
-      ? payload.payload
+      ? (payload.payload as Record<string, unknown>)
       : undefined;
 
   let configLabelKey: string = key;
 
-  if (
-    key in payload &&
-    typeof payload[key as keyof typeof payload] === "string"
-  ) {
-    configLabelKey = payload[key as keyof typeof payload] as string;
+  if (key in payload && typeof payload[key] === "string") {
+    configLabelKey = payload[key] as string;
   } else if (
-    payloadPayload &&
+    payloadPayload != null &&
     key in payloadPayload &&
-    typeof payloadPayload[key as keyof typeof payloadPayload] === "string"
+    typeof payloadPayload[key] === "string"
   ) {
-    configLabelKey = payloadPayload[
-      key as keyof typeof payloadPayload
-    ] as string;
+    configLabelKey = payloadPayload[key] as string;
   }
 
-  return configLabelKey in config
-    ? config[configLabelKey]
-    : config[key as keyof typeof config];
+  return configLabelKey in config ? config[configLabelKey] : config[key];
 }
 
 export {

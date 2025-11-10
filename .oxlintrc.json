@@ -219,6 +219,12 @@
   "ignorePatterns": [
     "**/*.js",
     "**/*.cjs",
-    "**/*.mjs"
+    "**/*.mjs",
+    "**/ui/chart.tsx",
+    "**/ui/pagination.tsx",
+    "**/ui/form.tsx",
+    "**/ui/breadcrumb.tsx",
+    "**/ui/progress.tsx",
+    "**/ui/resizable.tsx"
   ]
 }
