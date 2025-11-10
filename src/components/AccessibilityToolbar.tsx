@@ -73,9 +73,10 @@ const clearImagesTitles = () => {
 
 const clearKeyboardTabbing = () => {
   document.querySelectorAll(`[${KEYBOARD_ATTR}]`).forEach((node) => {
-    const element = node as HTMLElement;
+    if (!(node instanceof HTMLElement)) return;
+    const element = node;
     const original = element.getAttribute(KEYBOARD_ORIGINAL_ATTR);
-    if (original && original !== "") {
+    if (original != null && original !== "") {
       element.setAttribute("tabindex", original);
     } else {
       element.removeAttribute("tabindex");
@@ -86,25 +87,28 @@ const clearKeyboardTabbing = () => {
 };
 
 const patchToolbarBehavior = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if ((window as any)[TOOLBAR_PATCH_FLAG]) {
+  interface WindowWithFlag extends Window {
+    [key: string]: unknown;
+  }
+  const win = window as WindowWithFlag;
+  if (win[TOOLBAR_PATCH_FLAG] === true) {
     return;
   }
   const proto = window.MicAccessTool?.prototype;
-  if (!proto) {
+  if (proto == null) {
     return;
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any)[TOOLBAR_PATCH_FLAG] = true;
+  win[TOOLBAR_PATCH_FLAG] = true;
 
   proto.keyboardRootEnable = function keyboardRootEnablePatched(
     this: MicAccessToolInstance,
   ) {
     ensureToolbarState();
     const targets = document.querySelectorAll(KEYBOARD_SELECTOR);
-    if (window.MICTOOLBOXAPPSTATE?.keyboardRoot) {
+    if (window.MICTOOLBOXAPPSTATE?.keyboardRoot === true) {
       targets.forEach((node, index) => {
-        const element = node as HTMLElement;
+        if (!(node instanceof HTMLElement)) return;
+        const element = node;
         if (!element.hasAttribute(KEYBOARD_ATTR)) {
           const existing = element.getAttribute("tabindex");
           if (existing !== null) {
@@ -123,9 +127,11 @@ const patchToolbarBehavior = () => {
 
   proto.resetApp = function resetAppPatched(this: MicAccessToolInstance) {
     ensureToolbarState();
-    Object.keys(window.MICTOOLBOXAPPSTATE!.bodyClassList).forEach((cls) => {
-      document.body.classList.remove(cls);
-    });
+    if (window.MICTOOLBOXAPPSTATE != null) {
+      Object.keys(window.MICTOOLBOXAPPSTATE.bodyClassList).forEach((cls) => {
+        document.body.classList.remove(cls);
+      });
+    }
     document
       .querySelectorAll("#mic-init-access-tool .vi-enabled")
       .forEach((button) => {
