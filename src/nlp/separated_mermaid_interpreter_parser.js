@@ -10,8 +10,8 @@ import {
 // ============================================================================
 
 export class MermaidInterpreter {
-  
-  constructor(filePath) {
+
+  constructor() {
     this.flowchartStructure = null;
     this.currentPosition = null;
     this.navigationHistory = [];
@@ -22,8 +22,8 @@ export class MermaidInterpreter {
     // Load the Mermaid file content
     const response = await fetch(filePath);
     const text = await response.text();
-    return text;
-  }
+    return text;
+  }
 
   // static async createFromFile(filePath = '/conversation-flow.mermaid') {
   async createFromFile(filePath) {
@@ -127,7 +127,7 @@ export class MermaidInterpreter {
   }
 
   buildQuestionCategories(nodes) {
-    for (const [nodeId, node] of nodes) {
+    for (const [, node] of nodes) {
       if (node.type === 'question') {
         for (const edge of node.outgoingEdges) {
           if (edge.type === 'category') {
@@ -554,7 +554,7 @@ export class NLPParser {
     const doc = nlp(userInput);
     
     switch (questionData.informationType) {
-      case 'location':
+      case 'location': {
         const places = doc.places().out('array');
         if (places.length > 0) {
           return {
@@ -565,7 +565,7 @@ export class NLPParser {
             extractionMethod: 'compromise.js places()'
           };
         }
-        
+
         // Fallback to nouns
         const nouns = doc.nouns().out('array');
         return {
@@ -575,6 +575,7 @@ export class NLPParser {
           informationType: 'location',
           extractionMethod: 'compromise.js nouns() fallback'
         };
+      }
         
       default:
         return {
@@ -596,7 +597,7 @@ export class ConversationController {
   constructor(filePath) {
     this.interpreter = null;
     this.nlpParser = new NLPParser();    
-    this.nlpParser.registerPlugin((text, doc) => analyzeText(text));
+    this.nlpParser.registerPlugin((text) => analyzeText(text));
     this.isReady = false;
     this.scriptPath = filePath || null;
     // this.firstNode = null
