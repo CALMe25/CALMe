@@ -7,7 +7,10 @@
     "dev": "vite",
     "dev:firsttime": "echo 'Starting dev server... Add ?firsttime=true to URL in browser' && vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt .",
+    "format:check": "oxfmt . --check",
     "preview": "vite preview",
     "generate:notice": "tsx generate-notice.ts",
     "postinstall": "tsx generate-notice.ts"
@@ -64,21 +67,18 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9.39.1",
-    "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "license-checker-rseidelsohn": "^4.4.2",
+    "oxfmt": "^0.12.0",
+    "oxlint": "^1.27.0",
     "postcss": "^8.5.6",
     "tsx": "^4.20.6",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.3",
     "vite": "^7.2.1"
   }
 }

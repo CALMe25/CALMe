@@ -140,8 +140,10 @@ function ChartTooltipContent({
   labelKey,
 }: TooltipContentProps) {
   const { config } = useChart();
-  const payloadArray =
-    (payload as Array<Record<string, any>> | undefined) ?? [];
+  const payloadArray = React.useMemo(
+    () => (payload as Array<Record<string, any>> | undefined) ?? [],
+    [payload],
+  );
 
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payloadArray.length) {
