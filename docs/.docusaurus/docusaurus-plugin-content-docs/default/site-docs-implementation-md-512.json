@@ -1,0 +1,27 @@
+{
+  "id": "implementation",
+  "title": "Implementation Guide",
+  "description": "This guide provides detailed implementation instructions for developing and extending CALMe's trauma response capabilities.",
+  "source": "@site/docs/implementation.md",
+  "sourceDirName": ".",
+  "slug": "/implementation",
+  "permalink": "/CALMe/docs/implementation",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/CALMe25/CALMe/tree/main/docs/docs/implementation.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_position": 3
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Architecture Overview",
+    "permalink": "/CALMe/docs/architecture"
+  },
+  "next": {
+    "title": "User Guide",
+    "permalink": "/CALMe/docs/user-guide"
+  }
+}

@@ -37,7 +37,7 @@ class UserProfileStorage {
 
       request.onerror = () => {
         console.error("Failed to open IndexedDB:", request.error);
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
 
       request.onsuccess = () => {
@@ -99,7 +99,7 @@ class UserProfileStorage {
         resolve();
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }
@@ -119,7 +119,7 @@ class UserProfileStorage {
         resolve(profile !== undefined ? profile : null);
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }
@@ -136,7 +136,7 @@ class UserProfileStorage {
         resolve(request.result);
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }
@@ -166,7 +166,7 @@ class UserProfileStorage {
         resolve();
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }
@@ -183,7 +183,7 @@ class UserProfileStorage {
         resolve(request.result !== undefined ? request.result : null);
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }
@@ -213,7 +213,7 @@ class UserProfileStorage {
         resolve();
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }
@@ -243,7 +243,7 @@ class UserProfileStorage {
         }
       };
       request.onerror = () => {
-        reject(request.error);
+        reject(new Error(String(request.error ?? "Unknown error")));
       };
     });
   }

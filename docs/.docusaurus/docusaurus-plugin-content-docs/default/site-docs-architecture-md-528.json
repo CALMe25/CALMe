@@ -1,0 +1,27 @@
+{
+  "id": "architecture",
+  "title": "Architecture Overview",
+  "description": "CALMe's architecture is designed with offline-first principles to ensure reliable trauma support during crisis situations when network infrastructure may be compromised.",
+  "source": "@site/docs/architecture.md",
+  "sourceDirName": ".",
+  "slug": "/architecture",
+  "permalink": "/CALMe/docs/architecture",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/CALMe25/CALMe/tree/main/docs/docs/architecture.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "CALMe - Comprehensive Accessible Language Model for Emergency Response",
+    "permalink": "/CALMe/docs/intro"
+  },
+  "next": {
+    "title": "Implementation Guide",
+    "permalink": "/CALMe/docs/implementation"
+  }
+}

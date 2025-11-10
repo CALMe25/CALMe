@@ -1,0 +1,18 @@
+{
+  "id": "test-diagrams",
+  "title": "Diagram Test",
+  "description": "This is a test page to verify Mermaid diagrams are rendering correctly.",
+  "source": "@site/docs/test-diagrams.md",
+  "sourceDirName": ".",
+  "slug": "/test-diagrams",
+  "permalink": "/CALMe/docs/test-diagrams",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/CALMe25/CALMe/tree/main/docs/docs/test-diagrams.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 10,
+  "frontMatter": {
+    "sidebar_position": 10
+  }
+}

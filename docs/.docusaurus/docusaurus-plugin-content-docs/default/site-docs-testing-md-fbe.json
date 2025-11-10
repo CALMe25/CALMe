@@ -1,0 +1,27 @@
+{
+  "id": "testing",
+  "title": "Testing Guide",
+  "description": "Comprehensive testing strategies for CALMe's trauma response functionality, ensuring reliability in crisis situations.",
+  "source": "@site/docs/testing.md",
+  "sourceDirName": ".",
+  "slug": "/testing",
+  "permalink": "/CALMe/docs/testing",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/CALMe25/CALMe/tree/main/docs/docs/testing.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_position": 5
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "User Guide",
+    "permalink": "/CALMe/docs/user-guide"
+  },
+  "next": {
+    "title": "Create a Document",
+    "permalink": "/CALMe/docs/tutorial-basics/create-a-document"
+  }
+}

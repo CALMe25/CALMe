@@ -1,0 +1,23 @@
+{
+  "id": "intro",
+  "title": "CALMe - Comprehensive Accessible Language Model for Emergency Response",
+  "description": "Welcome to CALMe, an innovative trauma response application designed to provide immediate psychological support during crisis situations in Israel and beyond.",
+  "source": "@site/docs/intro.md",
+  "sourceDirName": ".",
+  "slug": "/intro",
+  "permalink": "/CALMe/docs/intro",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/CALMe25/CALMe/tree/main/docs/docs/intro.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1
+  },
+  "sidebar": "tutorialSidebar",
+  "next": {
+    "title": "Architecture Overview",
+    "permalink": "/CALMe/docs/architecture"
+  }
+}

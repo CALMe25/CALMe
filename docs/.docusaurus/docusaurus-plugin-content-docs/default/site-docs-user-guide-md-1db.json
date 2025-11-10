@@ -1,0 +1,27 @@
+{
+  "id": "user-guide",
+  "title": "User Guide",
+  "description": "This guide explains how to use CALMe effectively for crisis support and trauma response.",
+  "source": "@site/docs/user-guide.md",
+  "sourceDirName": ".",
+  "slug": "/user-guide",
+  "permalink": "/CALMe/docs/user-guide",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/CALMe25/CALMe/tree/main/docs/docs/user-guide.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_position": 4
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Implementation Guide",
+    "permalink": "/CALMe/docs/implementation"
+  },
+  "next": {
+    "title": "Testing Guide",
+    "permalink": "/CALMe/docs/testing"
+  }
+}
