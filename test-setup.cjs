@@ -1,8 +1,6 @@
 // Test Setup for CALMe - Creates a testable version of the conversation system
 // This bridges the TypeScript modules for Node.js testing
 
-// const path = require('path');
-
 // Mock TypeScript modules for testing since Node.js can't directly import TS
 class MockConversationController {
   constructor() {

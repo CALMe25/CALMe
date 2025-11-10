@@ -1,11 +1,7 @@
-/* eslint-disable no-unused-vars, no-irregular-whitespace, no-case-declarations */
 import nlp from 'compromise'
 
 import {
   analyzeText
-  // classifySafety,
-  // classifyStress,
-  // extractLocation
 } from './semanticParser.js'
 
 

@@ -1,6 +1,5 @@
 // Quick integration test script
 const fs = require('fs');
-// const path = require('path');
 
 console.log('🔍 CALMe Integration Test\n');
 
