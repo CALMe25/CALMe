@@ -14,6 +14,11 @@ declare module "compromise" {
     [key: string]: unknown;
   }
 
+  interface TermDocument {
+    json(): Sentence[];
+    text(): string;
+  }
+
   interface CompromiseDocument {
     match(pattern: string): CompromiseDocument;
     out(format: "array"): string[];
@@ -23,7 +28,7 @@ declare module "compromise" {
     has(tag: string): boolean;
     found: boolean;
     length: number;
-    terms(): { text: string; tags?: string[]; normal?: string }[];
+    terms(): TermDocument[];
     json(): Sentence[];
     compute(property: string): CompromiseDocument;
     tag(tag: string): CompromiseDocument;

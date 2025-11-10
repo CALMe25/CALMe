@@ -11,10 +11,13 @@ export function debugParse(text: string) {
 
   // Show what Compromise thinks each word is
   console.log("\n🏷️  Tags for each word:");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  doc.terms().forEach((term: any) => {
+  doc.terms().forEach((term) => {
     const data = term.json()[0];
-    console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
+    if (data !== null && data !== undefined) {
+      const tags = data.tags ?? [];
+      const text = data.text ?? "";
+      console.log(`  "${text}": [${tags.join(", ")}]`);
+    }
   });
 
   // Try different matching patterns
@@ -31,9 +34,12 @@ export function debugParse(text: string) {
 
   // Check if "stressed" is being recognized
   const stressedTerm = doc.match("stressed");
-  if (stressedTerm.found) {
+  if (stressedTerm.found === true) {
     console.log('\n✅ Found "stressed":');
-    console.log("  Tags:", stressedTerm.json()[0].terms[0].tags);
+    const jsonData = stressedTerm.json()[0];
+    if (jsonData !== null && jsonData !== undefined && jsonData.terms[0] !== null && jsonData.terms[0] !== undefined) {
+      console.log("  Tags:", jsonData.terms[0].tags ?? []);
+    }
   }
 
   // Try to force correct tagging
@@ -43,10 +49,13 @@ export function debugParse(text: string) {
   fixedDoc.match("very").tag("Adverb");
 
   console.log("  After tagging:");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fixedDoc.terms().forEach((term: any) => {
+  fixedDoc.terms().forEach((term) => {
     const data = term.json()[0];
-    console.log(`  "${data.text}": [${data.tags.join(", ")}]`);
+    if (data !== null && data !== undefined) {
+      const tags = data.tags ?? [];
+      const text = data.text ?? "";
+      console.log(`  "${text}": [${tags.join(", ")}]`);
+    }
   });
 
   console.log(
