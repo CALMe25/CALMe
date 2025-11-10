@@ -44,7 +44,9 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     };
     window.addEventListener("resize", handleResize);
     handleResize();
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -72,7 +74,9 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [tryChangeDirection]);
 
   useEffect(() => {
@@ -118,7 +122,9 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       setSnake(newSnake);
     }, 200);
 
-    return () => clearInterval(gameLoop);
+    return () => {
+      clearInterval(gameLoop);
+    };
   }, [snake, direction, food, gameOver, canvasSize]);
 
   useEffect(() => {
@@ -220,20 +226,26 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       />
       <div className="mt-5">
         <button
-          onClick={() => tryChangeDirection({ x: 0, y: -1 })}
+          onClick={() => {
+            tryChangeDirection({ x: 0, y: -1 });
+          }}
           className="p-3 text-2xl"
         >
           ↑
         </button>
         <div className="flex justify-center gap-5 mt-2.5">
           <button
-            onClick={() => tryChangeDirection({ x: -1, y: 0 })}
+            onClick={() => {
+              tryChangeDirection({ x: -1, y: 0 });
+            }}
             className="p-3 text-2xl"
           >
             ←
           </button>
           <button
-            onClick={() => tryChangeDirection({ x: 1, y: 0 })}
+            onClick={() => {
+              tryChangeDirection({ x: 1, y: 0 });
+            }}
             className="p-3 text-2xl"
           >
             →
@@ -241,7 +253,9 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
         </div>
         <button
           className="mt-2.5 p-3 text-2xl"
-          onClick={() => tryChangeDirection({ x: 0, y: 1 })}
+          onClick={() => {
+            tryChangeDirection({ x: 0, y: 1 });
+          }}
         >
           ↓
         </button>

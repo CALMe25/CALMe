@@ -190,19 +190,25 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       {/* Difficulty Selector */}
       <div className="mb-2 flex gap-1.5 md:gap-2">
         <button
-          onClick={() => startNewGame("easy")}
+          onClick={() => {
+            startNewGame("easy");
+          }}
           className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "easy" ? "bg-green-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
         >
           Easy
         </button>
         <button
-          onClick={() => startNewGame("medium")}
+          onClick={() => {
+            startNewGame("medium");
+          }}
           className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "medium" ? "bg-yellow-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
         >
           Medium
         </button>
         <button
-          onClick={() => startNewGame("hard")}
+          onClick={() => {
+            startNewGame("hard");
+          }}
           className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "hard" ? "bg-red-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
         >
           Hard
@@ -224,7 +230,9 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
                 key={`${rowIndex}-${colIndex}`}
                 type="button"
                 className={getCellClass(rowIndex, colIndex)}
-                onClick={() => handleCellClick(rowIndex, colIndex)}
+                onClick={() => {
+                  handleCellClick(rowIndex, colIndex);
+                }}
                 disabled={puzzle[rowIndex][colIndex] !== null}
                 aria-label={
                   puzzle[rowIndex][colIndex] !== null
@@ -246,7 +254,9 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
           <button
             key={num}
-            onClick={() => handleNumberInput(num)}
+            onClick={() => {
+              handleNumberInput(num);
+            }}
             className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-primary text-primary-foreground hover:bg-primary/80 disabled:opacity-50 disabled:cursor-not-allowed rounded text-base sm:text-lg md:text-xl font-bold transition-colors shadow-sm hover:shadow-md"
             disabled={!selectedCell}
           >
@@ -254,7 +264,9 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           </button>
         ))}
         <button
-          onClick={() => handleNumberInput(null)}
+          onClick={() => {
+            handleNumberInput(null);
+          }}
           className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-destructive text-destructive-foreground hover:bg-destructive/80 disabled:opacity-50 disabled:cursor-not-allowed rounded text-xs sm:text-sm font-semibold transition-colors shadow-sm hover:shadow-md"
           disabled={!selectedCell}
         >
@@ -265,7 +277,9 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
       {/* Control Buttons */}
       <div className="flex gap-2 mb-3">
         <button
-          onClick={() => startNewGame()}
+          onClick={() => {
+            startNewGame();
+          }}
           className="min-h-[44px] px-3 py-2 text-xs sm:text-sm md:text-base bg-primary text-primary-foreground hover:bg-primary/80 rounded font-semibold transition-colors shadow-sm"
         >
           New Game

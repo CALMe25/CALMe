@@ -46,15 +46,21 @@ export default function BreathingExercise({
     )
       return;
     const media = window.matchMedia("(max-height: 600px)");
-    const handleChange = () => setIsCompactLayout(media.matches);
+    const handleChange = () => {
+      setIsCompactLayout(media.matches);
+    };
     handleChange();
     let cleanup: () => void;
     if (typeof media.addEventListener === "function") {
       media.addEventListener("change", handleChange);
-      cleanup = () => media.removeEventListener("change", handleChange);
+      cleanup = () => {
+        media.removeEventListener("change", handleChange);
+      };
     } else {
       media.addListener(handleChange);
-      cleanup = () => media.removeListener(handleChange);
+      cleanup = () => {
+        media.removeListener(handleChange);
+      };
     }
 
     return cleanup;
@@ -69,7 +75,9 @@ export default function BreathingExercise({
   ) => (
     <button
       key={keyName}
-      onClick={() => setPresetKey(keyName as keyof typeof TIMING_PRESETS)}
+      onClick={() => {
+        setPresetKey(keyName as keyof typeof TIMING_PRESETS);
+      }}
       className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all duration-200 min-h-[60px] active:scale-95 ${
         presetKey === keyName
           ? "border-blue-400 bg-blue-50 dark:bg-blue-500/15 dark:border-blue-500/30"
@@ -100,7 +108,9 @@ export default function BreathingExercise({
       <div className="font-semibold text-sm sm:text-base mb-2">Cycles</div>
       <div className="flex items-center gap-2 sm:gap-3">
         <button
-          onClick={() => setRepeatCount((prev) => Math.max(2, prev - 1))}
+          onClick={() => {
+            setRepeatCount((prev) => Math.max(2, prev - 1));
+          }}
           className="w-9 h-9 sm:w-10 sm:h-10 min-w-[44px] min-h-[44px] rounded-md border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-xl leading-none active:scale-95"
         >
           −
@@ -109,7 +119,9 @@ export default function BreathingExercise({
           {repeatCount}
         </span>
         <button
-          onClick={() => setRepeatCount((prev) => Math.min(12, prev + 1))}
+          onClick={() => {
+            setRepeatCount((prev) => Math.min(12, prev + 1));
+          }}
           className="w-9 h-9 sm:w-10 sm:h-10 min-w-[44px] min-h-[44px] rounded-md border border-slate-300 dark:border-slate-600 text-slate-800 dark:text-slate-200 text-xl leading-none active:scale-95"
         >
           +

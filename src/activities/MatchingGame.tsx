@@ -168,7 +168,9 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
 
               ${isChecking && !card.isFlipped && !card.isMatched ? "cursor-not-allowed" : "" + " relative"}
             `}
-            onClick={() => handleCardClick(card)}
+            onClick={() => {
+              handleCardClick(card);
+            }}
             disabled={card.isMatched || isChecking}
             aria-label={
               card.isMatched

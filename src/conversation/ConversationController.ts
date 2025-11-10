@@ -117,7 +117,7 @@ export class ConversationController implements ConversationControllerInterface {
       this.currentNodeId = conversationMapV2.startNode;
     }
 
-    this.initializeProfile();
+    void this.initializeProfile();
   }
 
   private async initializeProfile() {
@@ -229,7 +229,7 @@ export class ConversationController implements ConversationControllerInterface {
       if (currentNode.type === "end" && this.isOnboarding) {
         console.log("🎯 PROCESS: Completing onboarding");
         // Complete onboarding with collected data
-        this.completeOnboarding(this.userVariables);
+        void this.completeOnboarding(this.userVariables);
       }
       throw new Error(`Node ${this.currentNodeId} has no next steps defined`);
     }

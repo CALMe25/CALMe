@@ -41,7 +41,9 @@ export function ChatInput({
         <div className="flex-1 relative">
           <Input
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
             placeholder="Type a message..."
             className="pr-12 h-11 rounded-full bg-muted border-0 focus-visible:ring-1 focus-visible:ring-ring text-base"
           />

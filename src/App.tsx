@@ -120,7 +120,7 @@ function App() {
         setIsInitialized(true);
       }
     };
-    initializeConversation();
+    void initializeConversation();
   }, [conversationController, ACTIVITY_PROMPT_NODES]);
 
   useEffect(() => {
@@ -575,7 +575,9 @@ function App() {
                     <Button
                       variant="ghost"
                       className="justify-start h-12 gap-3"
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                      }}
                     >
                       <MoreVertical className="w-5 h-5" />
                       <span>More Options</span>
@@ -607,7 +609,9 @@ function App() {
                         variant="ghost"
                         size="icon"
                         className="h-9 w-9 rounded-full text-muted-foreground hover:text-foreground flex-shrink-0"
-                        onClick={() => setShowQuickPanel((prev) => !prev)}
+                        onClick={() => {
+                          setShowQuickPanel((prev) => !prev);
+                        }}
                         aria-label={
                           showQuickPanel
                             ? "Hide quick activities"
@@ -632,7 +636,9 @@ function App() {
                           .map((app) => (
                             <Button
                               key={app.name}
-                              onClick={() => handleAppLaunch(app)}
+                              onClick={() => {
+                                handleAppLaunch(app);
+                              }}
                               className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
                               size="sm"
                             >
@@ -693,7 +699,9 @@ function App() {
         </div>
         <AccessibilityToolbar
           open={accessibilityOpen}
-          onClose={() => setAccessibilityOpen(false)}
+          onClose={() => {
+            setAccessibilityOpen(false);
+          }}
         />
       </AppsProvider>
     </>

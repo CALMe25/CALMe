@@ -68,7 +68,9 @@ const clearInlineFonts = () => {
 const clearImagesTitles = () => {
   document
     .querySelectorAll(".mic-toolbox-images-titles")
-    .forEach((node) => node.remove());
+    .forEach((node) => {
+      node.remove();
+    });
 };
 
 const clearKeyboardTabbing = () => {
@@ -128,7 +130,9 @@ const patchToolbarBehavior = () => {
     });
     document
       .querySelectorAll("#mic-init-access-tool .vi-enabled")
-      .forEach((button) => button.classList.remove("vi-enabled"));
+      .forEach((button) => {
+        button.classList.remove("vi-enabled");
+      });
     clearInlineFonts();
     clearImagesTitles();
     clearKeyboardTabbing();
@@ -245,7 +249,7 @@ export function AccessibilityToolbar({
       }
     };
 
-    initToolbar();
+    void initToolbar();
 
     return () => {
       cancelled = true;

@@ -98,7 +98,9 @@ class UserProfileStorage {
         console.log("Profile saved successfully:", profile.id);
         resolve();
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
@@ -116,7 +118,9 @@ class UserProfileStorage {
         console.log("Active profile retrieved:", profile?.id);
         resolve(profile || null);
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
@@ -128,8 +132,12 @@ class UserProfileStorage {
 
     return new Promise((resolve, reject) => {
       const request = store.getAll();
-      request.onsuccess = () => resolve(request.result);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        resolve(request.result);
+      };
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
@@ -157,7 +165,9 @@ class UserProfileStorage {
         console.log("Conversation state saved");
         resolve();
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
@@ -169,8 +179,12 @@ class UserProfileStorage {
 
     return new Promise((resolve, reject) => {
       const request = store.get("current");
-      request.onsuccess = () => resolve(request.result || null);
-      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        resolve(request.result || null);
+      };
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
@@ -198,7 +212,9 @@ class UserProfileStorage {
         );
         resolve();
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
@@ -222,7 +238,9 @@ class UserProfileStorage {
           resolve(activities);
         }
       };
-      request.onerror = () => reject(request.error);
+      request.onerror = () => {
+        reject(request.error);
+      };
     });
   }
 
