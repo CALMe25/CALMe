@@ -1,13 +1,13 @@
 // crisis-analyzer.d.ts
 
 // This is a minimal declaration to satisfy the import statement since 'compromise' doesn't have an official type declaration.
-declare module 'compromise' {
+declare module "compromise" {
   import nlp from "compromise/types/index.d";
   export default nlp;
 }
 
 export interface SemanticAnalysis {
-  sentiment: 'positive' | 'negative' | 'neutral';
+  sentiment: "positive" | "negative" | "neutral";
   negations: string[];
   entities: {
     places: string[];

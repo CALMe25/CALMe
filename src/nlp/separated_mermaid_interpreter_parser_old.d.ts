@@ -29,13 +29,13 @@ declare class ConversationController {
   createFromFile(filePath: string): object;
   initialize(filePath: string): null;
   getCurrentQuestion(): QuestionData | null;
-  processUserInput(userInput: string): {success: boolean, error: string};
+  processUserInput(userInput: string): { success: boolean; error: string };
   reloadFlowchart(filePath: string): null;
   getDebugInfo(): {
-    ready: boolean,
-    interpreter: object,
-    currentQuestion: object
-  }
+    ready: boolean;
+    interpreter: object;
+    currentQuestion: object;
+  };
 }
 
 // declare function someUtilityFunction(input: any): number; // Declare other functions

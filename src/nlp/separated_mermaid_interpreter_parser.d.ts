@@ -23,7 +23,7 @@ interface CompromiseDoc {
 
 export interface FlowchartNode {
   id: string;
-  type: 'question' | 'keywords';
+  type: "question" | "keywords";
   text: string;
   outgoingEdges: FlowchartEdge[];
   keywords?: string[];
@@ -34,7 +34,7 @@ export interface FlowchartEdge {
   from: string;
   to: string;
   label?: string;
-  type: 'category' | 'direct';
+  type: "category" | "direct";
   category?: string;
 }
 
@@ -64,7 +64,7 @@ export interface NavigationHistoryItem {
 
 export interface QuestionData {
   id: string;
-  type: 'classification' | 'extraction';
+  type: "classification" | "extraction";
   question: string;
   categories: Record<string, CategoryInfo>;
   clarificationResponse: string;
@@ -78,7 +78,7 @@ export interface CategoryInfo {
 }
 
 export interface ClassificationResult {
-  type: 'classification';
+  type: "classification";
   category: string;
   confidence: number;
   matchedKeywords: string[];
@@ -88,7 +88,7 @@ export interface ClassificationResult {
 }
 
 export interface ExtractionResult {
-  type: 'extraction';
+  type: "extraction";
   extractedValue: string;
   confidence: number;
   informationType: string;
@@ -103,7 +103,7 @@ export interface CategoryScore {
 
 export interface NLPAnalysis {
   // sentiment: number;
-  sentiment: 'positive' | 'negative' | 'neutral';
+  sentiment: "positive" | "negative" | "neutral";
   entities: {
     people: string[];
     places: string[];
@@ -275,7 +275,10 @@ export declare class NLPParser {
    * @param questionData - Current question data with categories
    * @returns Classification result
    */
-  classifyInput(userInput: string, questionData: QuestionData): ClassificationResult;
+  classifyInput(
+    userInput: string,
+    questionData: QuestionData,
+  ): ClassificationResult;
 
   /**
    * Performs generic NLP analysis on text
@@ -297,7 +300,7 @@ export declare class NLPParser {
     text: string,
     doc: CompromiseDoc,
     flowchartCategories: Record<string, CategoryInfo>,
-    nlpAnalysis: NLPAnalysis
+    nlpAnalysis: NLPAnalysis,
   ): CategoryScore[];
 
   /**
@@ -310,7 +313,7 @@ export declare class NLPParser {
   calculateFlowchartSemanticScore(
     doc: CompromiseDoc,
     flowchartKeywords: string[],
-    nlpAnalysis: NLPAnalysis
+    nlpAnalysis: NLPAnalysis,
   ): number;
 
   /**
@@ -319,7 +322,10 @@ export declare class NLPParser {
    * @param categoryKey - Category being scored
    * @returns Linguistic score
    */
-  calculateGenericLinguisticScore(nlpAnalysis: NLPAnalysis, categoryKey: string): number;
+  calculateGenericLinguisticScore(
+    nlpAnalysis: NLPAnalysis,
+    categoryKey: string,
+  ): number;
 
   /**
    * Selects the best category from scores
@@ -327,7 +333,10 @@ export declare class NLPParser {
    * @param questionData - Question data with defaults
    * @returns Best category match
    */
-  selectBestCategory(scores: CategoryScore[], questionData: QuestionData): {
+  selectBestCategory(
+    scores: CategoryScore[],
+    questionData: QuestionData,
+  ): {
     category: string;
     confidence: number;
     matchedElements: string[];
@@ -340,7 +349,10 @@ export declare class NLPParser {
    * @param questionData - Question configuration
    * @returns Extraction result
    */
-  extractInformation(userInput: string, questionData: QuestionData): ExtractionResult;
+  extractInformation(
+    userInput: string,
+    questionData: QuestionData,
+  ): ExtractionResult;
 }
 
 // ============================================================================

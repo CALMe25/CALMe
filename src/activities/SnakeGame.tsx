@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from "react";
 
 interface SnakeGameProps {
   onGameEnd?: () => void;
@@ -28,7 +28,10 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
 
   const tryChangeDirection = useCallback((next: { x: number; y: number }) => {
     const current = directionRef.current;
-    if ((next.x !== 0 && current.x !== 0) || (next.y !== 0 && current.y !== 0)) {
+    if (
+      (next.x !== 0 && current.x !== 0) ||
+      (next.y !== 0 && current.y !== 0)
+    ) {
       return;
     }
     setDirectionImmediate(next);
@@ -39,9 +42,9 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       const size = Math.min(window.innerWidth * 0.9, 400);
       setCanvasSize(size);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -51,16 +54,16 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
-        case 'ArrowUp':
+        case "ArrowUp":
           tryChangeDirection({ x: 0, y: -1 });
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           tryChangeDirection({ x: 0, y: 1 });
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           tryChangeDirection({ x: -1, y: 0 });
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           tryChangeDirection({ x: 1, y: 0 });
           break;
         default:
@@ -68,8 +71,8 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [tryChangeDirection]);
 
   useEffect(() => {
@@ -82,7 +85,12 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       head.y += direction.y;
 
       // Wall collision
-      if (head.x < 0 || head.x >= canvasSize / snakeSize || head.y < 0 || head.y >= canvasSize / snakeSize) {
+      if (
+        head.x < 0 ||
+        head.x >= canvasSize / snakeSize ||
+        head.y < 0 ||
+        head.y >= canvasSize / snakeSize
+      ) {
         setGameOver(true);
         return;
       }
@@ -116,23 +124,28 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const isDarkMode = document.documentElement.classList.contains('dark');
+    const isDarkMode = document.documentElement.classList.contains("dark");
 
     // Clear canvas
-    ctx.fillStyle = isDarkMode ? '#2d3748' : '#f0f0f0';
+    ctx.fillStyle = isDarkMode ? "#2d3748" : "#f0f0f0";
     ctx.fillRect(0, 0, canvasSize, canvasSize);
 
     // Draw food
-    ctx.fillStyle = isDarkMode ? '#f56565' : '#c53030';
+    ctx.fillStyle = isDarkMode ? "#f56565" : "#c53030";
     ctx.fillRect(food.x * snakeSize, food.y * snakeSize, snakeSize, snakeSize);
 
     // Draw snake
-    ctx.fillStyle = isDarkMode ? '#68d391' : '#4a5568';
-    snake.forEach(segment => {
-      ctx.fillRect(segment.x * snakeSize, segment.y * snakeSize, snakeSize, snakeSize);
+    ctx.fillStyle = isDarkMode ? "#68d391" : "#4a5568";
+    snake.forEach((segment) => {
+      ctx.fillRect(
+        segment.x * snakeSize,
+        segment.y * snakeSize,
+        snakeSize,
+        snakeSize,
+      );
     });
   }, [snake, food, canvasSize]);
 
@@ -144,7 +157,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   };
 
   const handlePointerStart = (event: React.PointerEvent<HTMLCanvasElement>) => {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    if (event.pointerType === "mouse" && event.button !== 0) return;
     pointerStartRef.current = { x: event.clientX, y: event.clientY };
     try {
       event.currentTarget.setPointerCapture(event.pointerId);
@@ -206,18 +219,50 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
         onPointerLeave={handlePointerCancel}
       />
       <div className="mt-5">
-        <button onClick={() => tryChangeDirection({ x: 0, y: -1 })} className="p-3 text-2xl">↑</button>
+        <button
+          onClick={() => tryChangeDirection({ x: 0, y: -1 })}
+          className="p-3 text-2xl"
+        >
+          ↑
+        </button>
         <div className="flex justify-center gap-5 mt-2.5">
-          <button onClick={() => tryChangeDirection({ x: -1, y: 0 })} className="p-3 text-2xl">←</button>
-          <button onClick={() => tryChangeDirection({ x: 1, y: 0 })} className="p-3 text-2xl">→</button>
+          <button
+            onClick={() => tryChangeDirection({ x: -1, y: 0 })}
+            className="p-3 text-2xl"
+          >
+            ←
+          </button>
+          <button
+            onClick={() => tryChangeDirection({ x: 1, y: 0 })}
+            className="p-3 text-2xl"
+          >
+            →
+          </button>
         </div>
-        <button className="mt-2.5 p-3 text-2xl" onClick={() => tryChangeDirection({ x: 0, y: 1 })}>↓</button>
+        <button
+          className="mt-2.5 p-3 text-2xl"
+          onClick={() => tryChangeDirection({ x: 0, y: 1 })}
+        >
+          ↓
+        </button>
       </div>
       {gameOver && (
         <div className="mt-5 text-center">
           <h2 className="text-xl font-bold">Game Over</h2>
-          <button onClick={restartGame} className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md">Restart</button>
-          {onGameEnd && <button onClick={onGameEnd} className="p-3 text-lg bg-secondary text-secondary-foreground rounded-md">Exit</button>}
+          <button
+            onClick={restartGame}
+            className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md"
+          >
+            Restart
+          </button>
+          {onGameEnd && (
+            <button
+              onClick={onGameEnd}
+              className="p-3 text-lg bg-secondary text-secondary-foreground rounded-md"
+            >
+              Exit
+            </button>
+          )}
         </div>
       )}
     </div>

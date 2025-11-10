@@ -113,7 +113,10 @@ type TooltipContentProps = React.ComponentProps<"div"> & {
   hideLabel?: boolean;
   hideIndicator?: boolean;
   label?: React.ReactNode;
-  labelFormatter?: (value: unknown, payload: PrimitivePayload[]) => React.ReactNode;
+  labelFormatter?: (
+    value: unknown,
+    payload: PrimitivePayload[],
+  ) => React.ReactNode;
   labelClassName?: string;
   formatter?: (...args: any[]) => React.ReactNode;
   color?: string;
@@ -137,7 +140,8 @@ function ChartTooltipContent({
   labelKey,
 }: TooltipContentProps) {
   const { config } = useChart();
-  const payloadArray = (payload as Array<Record<string, any>> | undefined) ?? [];
+  const payloadArray =
+    (payload as Array<Record<string, any>> | undefined) ?? [];
 
   const tooltipLabel = React.useMemo(() => {
     if (hideLabel || !payloadArray.length) {
@@ -203,7 +207,7 @@ function ChartTooltipContent({
                 indicator === "dot" && "items-center",
               )}
             >
-                  {formatter && item?.value !== undefined && item.name ? (
+              {formatter && item?.value !== undefined && item.name ? (
                 formatter(item.value, item.name, item, index, item.payload)
               ) : (
                 <>
