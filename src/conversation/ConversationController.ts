@@ -230,7 +230,10 @@ export class ConversationController implements ConversationControllerInterface {
     console.log("🔧 PROCESS: Current node:", currentNode);
 
     // Handle clarification needs
-    if (result.needsClarification === true && result.clarificationPrompt != null) {
+    if (
+      result.needsClarification === true &&
+      result.clarificationPrompt != null
+    ) {
       console.log("❓ PROCESS: Parser needs clarification");
       // Create a temporary clarification node
       const clarificationNode: ConversationNode = {
@@ -418,7 +421,10 @@ export class ConversationController implements ConversationControllerInterface {
 
       // Replace {variable} with actual values
       Object.entries(this.userVariables).forEach(([key, value]) => {
-        content = content.replace(new RegExp(`\\{${key}\\}`, "g"), value);
+        content = content.replace(
+          new RegExp(`\\{${key}\\}`, "g"),
+          String(value),
+        );
       });
 
       console.log("🔍 NODE: Content after substitution:", content);
