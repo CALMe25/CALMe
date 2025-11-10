@@ -16,6 +16,9 @@ interface MicAccessToolConfig {
 interface MicAccessToolInstance {
   openBox?: () => void;
   closeBox?: () => void;
+  keyboardRootEnable?: () => void;
+  resetApp?: () => void;
+  updateState?: () => void;
 }
 
 declare global {
@@ -90,11 +93,15 @@ const patchToolbarBehavior = () => {
   interface WindowWithFlag extends Window {
     [key: string]: unknown;
   }
-  const win = window as WindowWithFlag;
+  const win = window as unknown as WindowWithFlag;
   if (win[TOOLBAR_PATCH_FLAG] === true) {
     return;
   }
-  const proto = window.MicAccessTool?.prototype;
+  const MicAccessToolConstructor = window.MicAccessTool;
+  if (MicAccessToolConstructor == null) {
+    return;
+  }
+  const proto = MicAccessToolConstructor.prototype as MicAccessToolInstance;
   if (proto == null) {
     return;
   }
