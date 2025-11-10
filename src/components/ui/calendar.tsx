@@ -78,8 +78,8 @@ function Calendar({
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
-      classNames={mergedClassNames as any}
-      components={calendarComponents as any}
+      classNames={mergedClassNames as unknown as ClassNames}
+      components={calendarComponents as unknown as Components}
       {...props}
     />
   );
