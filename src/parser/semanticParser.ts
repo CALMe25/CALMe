@@ -49,7 +49,7 @@ function applyCrisisPatterns(doc: any) {
   // Apply each pattern manually
   Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]) => {
     const matches = doc.match(pattern);
-    if (matches.found) {
+    if (matches.found === true) {
       matches.tag(tag);
     }
   });
@@ -80,10 +80,10 @@ export function analyzeText(text: string): SemanticAnalysis {
   const tags: string[] = [];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   jsonData.forEach((sentence: any) => {
-    if (sentence.terms) {
+    if (sentence.terms !== null && sentence.terms !== undefined) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       sentence.terms.forEach((term: any) => {
-        if (term.tags) {
+        if (term.tags !== null && term.tags !== undefined) {
           tags.push(...term.tags);
         }
       });
@@ -223,29 +223,29 @@ export function classifyStress(text: string): ClassificationResult {
   const intensifiers = doc.match(
     "(very|extremely|really|quite|super|highly|high|severely|deeply|incredibly|terribly)",
   );
-  if (intensifiers.found && (stressLevel > 0 || doc.has("stress"))) {
+  if (intensifiers.found === true && (stressLevel > 0 || doc.has("stress") === true)) {
     const intensifierWords = intensifiers.out("array");
     stressLevel += intensifierWords.length * 2;
     reasoning.push(`intensified: ${intensifierWords.join(", ")}`);
   }
 
   // Special patterns for crisis situations
-  if (doc.has("can't breathe") || doc.has("cannot breathe")) {
+  if (doc.has("can't breathe") === true || doc.has("cannot breathe") === true) {
     stressLevel += 6;
     reasoning.push("breathing difficulty");
   }
 
-  if (doc.has("(heart|pulse) (racing|pounding|fast)")) {
+  if (doc.has("(heart|pulse) (racing|pounding|fast)") === true) {
     stressLevel += 4;
     reasoning.push("cardiac symptoms");
   }
 
-  if (doc.has("(dying|die|death)")) {
+  if (doc.has("(dying|die|death)") === true) {
     stressLevel += 5;
     reasoning.push("mortality fears");
   }
 
-  if (doc.has("losing control") || doc.has("out of control")) {
+  if (doc.has("losing control") === true || doc.has("out of control") === true) {
     stressLevel += 4;
     reasoning.push("loss of control");
   }
@@ -319,7 +319,7 @@ export function extractLocation(text: string): ExtractionResult {
       "(home|house|apartment|office|shelter|bunker|building|hospital|school)",
     )
     .out("text");
-  if (commonLocations) {
+  if (commonLocations !== null && commonLocations !== undefined && commonLocations !== "") {
     return {
       extractedValue: commonLocations,
       confidence: 0.8,
