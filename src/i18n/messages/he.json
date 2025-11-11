@@ -60,7 +60,22 @@
     },
     "sudoku": {
       "label": "סודוקו",
-      "description": "משחק חידת מספרים מאתגר לחידוד כישורי ההיגיון שלך."
+      "description": "משחק חידת מספרים מאתגר לחידוד כישורי ההיגיון שלך.",
+      "title": "סודוקו",
+      "easy": "קל",
+      "medium": "בינוני",
+      "hard": "קשה",
+      "congratulations": "🎉 כל הכבוד! פתרת את החידה!",
+      "clear": "נקה",
+      "newGame": "משחק חדש",
+      "exit": "יציאה",
+      "legendOriginal": "כחול: מקורי",
+      "legendYourInputs": "ירוק: הקלדות שלך",
+      "legendErrors": "אדום: שגיאות",
+      "ariaFixed": "תא {row}, {col}: ערך קבוע {value}",
+      "ariaFilled": "תא {row}, {col}: {value}",
+      "ariaError": "תא {row}, {col}: {value} (שגיאה)",
+      "ariaEmpty": "תא {row}, {col}: ריק"
     },
     "puzzle": {
       "label": "פאזל",

@@ -60,7 +60,22 @@
     },
     "sudoku": {
       "label": "Sudoku",
-      "description": "A challenging number puzzle game to sharpen your logic skills."
+      "description": "A challenging number puzzle game to sharpen your logic skills.",
+      "title": "Sudoku",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "congratulations": "🎉 Congratulations! You solved it!",
+      "clear": "Clear",
+      "newGame": "New Game",
+      "exit": "Exit",
+      "legendOriginal": "Blue: Original",
+      "legendYourInputs": "Green: Your inputs",
+      "legendErrors": "Red: Errors",
+      "ariaFixed": "Cell {row}, {col}: fixed value {value}",
+      "ariaFilled": "Cell {row}, {col}: {value}",
+      "ariaError": "Cell {row}, {col}: {value} (error)",
+      "ariaEmpty": "Cell {row}, {col}: empty"
     },
     "puzzle": {
       "label": "Jigsaw Puzzle",
