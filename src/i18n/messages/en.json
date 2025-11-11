@@ -60,11 +60,18 @@
     },
     "paint": {
       "label": "Digital Canvas",
-      "description": "A simple drawing application to unleash your creativity."
+      "description": "A simple drawing application to unleash your creativity.",
+      "brush": "Brush",
+      "colors": "Colors",
+      "clear": "Clear",
+      "done": "Done"
     },
     "snake": {
       "label": "Snake Game",
-      "description": "A classic snake game to test your reflexes."
+      "description": "A classic snake game to test your reflexes.",
+      "gameOver": "Game Over",
+      "restart": "Restart",
+      "exit": "Exit"
     },
     "numberGuessing": {
       "label": "Number Guessing",
