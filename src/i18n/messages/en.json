@@ -85,6 +85,12 @@
     "accessibilityToolbarFailed": "Failed to load accessibility toolbar",
     "accessibilityToolbarFailedDescription": "Could not load /vendor/acc_toolbar.min.js. Please ensure the file exists at the expected path."
   },
+  "chat": {
+    "placeholder": "Type a message...",
+    "sendMessage": "Send message",
+    "voiceInput": "Voice input",
+    "addAttachment": "Add attachment"
+  },
   "common": {
     "close": "Close",
     "open": "Open",
@@ -93,6 +99,12 @@
     "yes": "Yes",
     "no": "No",
     "ok": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Resume",
+    "restart": "Restart",
+    "complete": "Complete",
+    "skip": "Skip"
   }
 }

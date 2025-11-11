@@ -4,10 +4,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Play, Pause, Mic } from "lucide-react";
 import {
   AppsContext,
-  InnerApps,
   type AppInterface,
   quickActivityOrder,
 } from "../appsContextApi";
+import { useLocalizedApps } from "../hooks/useLocalizedApps";
 
 interface ChatMessageProps {
   id: string;
@@ -36,8 +36,9 @@ export function ChatMessage({
 }: ChatMessageProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const localizedApps = useLocalizedApps();
 
-  const apps = useContext(AppsContext) ?? InnerApps;
+  const apps = useContext(AppsContext) ?? localizedApps;
 
   const formatTime = (timeString: string) => {
     return new Date(timeString).toLocaleTimeString([], {

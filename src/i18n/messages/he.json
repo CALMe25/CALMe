@@ -85,6 +85,12 @@
     "accessibilityToolbarFailed": "נכשל בטעינת סרגל הנגישות",
     "accessibilityToolbarFailedDescription": "לא ניתן לטעון את /vendor/acc_toolbar.min.js. אנא וודא שהקובץ קיים בנתיב הצפוי."
   },
+  "chat": {
+    "placeholder": "הקלד הודעה...",
+    "sendMessage": "שלח הודעה",
+    "voiceInput": "קלט קולי",
+    "addAttachment": "הוסף קובץ"
+  },
   "common": {
     "close": "סגור",
     "open": "פתח",
@@ -93,6 +99,12 @@
     "yes": "כן",
     "no": "לא",
     "ok": "אישור",
-    "cancel": "ביטול"
+    "cancel": "ביטול",
+    "start": "התחל",
+    "pause": "השהה",
+    "resume": "המשך",
+    "restart": "התחל מחדש",
+    "complete": "השלם",
+    "skip": "דלג"
   }
 }
