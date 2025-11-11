@@ -51,11 +51,17 @@ const KEYBOARD_ATTR = "data-calme-kb-tabindex";
 const KEYBOARD_ORIGINAL_ATTR = "data-calme-kb-original-tabindex";
 
 function getConfigForLanguage(language: string): MicAccessToolConfig {
+  // acc_toolbar expects full locale codes like "he-IL", "en-US"
+  const localeMap: Record<string, string> = {
+    he: "he-IL",
+    en: "en-US",
+  };
+
   return {
     link: "https://github.com/CALMe25/CALMe/blob/main/accessibility.md",
     contact: "https://github.com/CALMe25/CALMe/issues",
     buttonPosition: language === "he" ? "left" : "right",
-    forceLang: language,
+    forceLang: localeMap[language] || language,
   };
 }
 

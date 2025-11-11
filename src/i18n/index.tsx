@@ -35,6 +35,12 @@ const RTL_LANGUAGES: LanguageTag[] = ["he"];
 
 const STORAGE_KEY = "calme-language";
 
+// Map language tags to full locale codes for HTML lang attribute and external tools
+const LOCALE_MAP: Record<LanguageTag, string> = {
+  en: "en-US",
+  he: "he-IL",
+};
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object";
 }
@@ -85,7 +91,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const setLanguageTag = useCallback((lang: LanguageTag) => {
     setLanguageTagState(lang);
     localStorage.setItem(STORAGE_KEY, lang);
-    document.documentElement.lang = lang;
+    document.documentElement.lang = LOCALE_MAP[lang];
     document.documentElement.dir = RTL_LANGUAGES.includes(lang) ? "rtl" : "ltr";
   }, []);
 
@@ -100,7 +106,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const dir = RTL_LANGUAGES.includes(languageTag) ? "rtl" : "ltr";
 
   useEffect(() => {
-    document.documentElement.lang = languageTag;
+    document.documentElement.lang = LOCALE_MAP[languageTag];
     document.documentElement.dir = dir;
     document.title = messages[languageTag].app.title;
   }, [languageTag, dir]);
