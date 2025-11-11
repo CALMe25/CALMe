@@ -47,11 +47,11 @@ function getNestedValue(obj: unknown, path: string): string {
     if (isRecord(current) && key in current) {
       current = current[key];
     } else {
-      return path; // Return the key if not found
+      return ""; // Return empty string if not found (allows fallback)
     }
   }
 
-  return typeof current === "string" ? current : path;
+  return typeof current === "string" ? current : "";
 }
 
 function interpolate(
