@@ -106,5 +106,20 @@
     "restart": "Restart",
     "complete": "Complete",
     "skip": "Skip"
+  },
+  "parser": {
+    "affirmativeResponses": "yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly",
+    "negativeResponses": "no|nope|not|negative|nah|never|wrong",
+    "uncertainResponses": "maybe|perhaps|possibly|might|could|unsure|not sure",
+    "stressKeywords": {
+      "no_stress": "good|fine|okay|exploring|curious|looking around|just checking",
+      "moderate_stress": "anxious|worried|nervous|uneasy|uncomfortable|tense",
+      "high_stress": "crisis|panic|scared|terrified|overwhelmed|cant breathe|help"
+    },
+    "safetyKeywords": {
+      "safe": "safe|protected|secure|sheltered|im good|all good",
+      "danger": "not safe|unsafe|exposed|danger|at risk|vulnerable",
+      "unsure": "not sure|i think|possibly|sort of|kind of"
+    }
   }
 }

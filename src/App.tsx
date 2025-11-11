@@ -48,7 +48,7 @@ interface Message {
 }
 
 function App() {
-  const { t } = useI18n();
+  const { t, messages, languageTag } = useI18n();
   const localizedApps = useLocalizedApps();
   const [conversationController] = useState(() => new ConversationController());
   const [userInput, setUserInput] = useState("");
@@ -131,6 +131,11 @@ function App() {
     };
     void initializeConversation();
   }, [conversationController, ACTIVITY_PROMPT_NODES, t]);
+
+  // Update parser with current language messages whenever language changes
+  useEffect(() => {
+    conversationController.setParserMessages(messages);
+  }, [conversationController, messages, languageTag]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
