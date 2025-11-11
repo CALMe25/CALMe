@@ -223,7 +223,24 @@ const loadToolbarScript = async (): Promise<void> => {
   });
 };
 
-const createToolbarInstance = (language: string) => {
+const destroyToolbarInstance = () => {
+  if (window.micAccessTool) {
+    // Remove the toolbar DOM element
+    const toolbarElement = document.getElementById("mic-init-access-tool");
+    if (toolbarElement) {
+      toolbarElement.remove();
+    }
+    // Clear the instance
+    window.micAccessTool = undefined;
+  }
+};
+
+const createToolbarInstance = (language: string, forceRecreate = false) => {
+  // If language changed, destroy and recreate
+  if (forceRecreate && window.micAccessTool) {
+    destroyToolbarInstance();
+  }
+
   if (window.micAccessTool) {
     return window.micAccessTool;
   }
@@ -243,6 +260,15 @@ export function AccessibilityToolbar({
 }: AccessibilityToolbarProps) {
   const { languageTag, t } = useI18n();
 
+  // Destroy and recreate toolbar when language changes
+  useEffect(() => {
+    if (window.micAccessTool && window.MicAccessTool) {
+      // Language changed, recreate toolbar
+      destroyToolbarInstance();
+      createToolbarInstance(languageTag, true);
+    }
+  }, [languageTag]);
+
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
@@ -251,7 +277,8 @@ export function AccessibilityToolbar({
       try {
         await loadToolbarScript();
         if (cancelled) return;
-        const toolbar = createToolbarInstance(languageTag);
+        // Force recreate to ensure correct language
+        const toolbar = createToolbarInstance(languageTag, true);
         if (toolbar?.openBox) {
           toolbar.openBox();
         }
