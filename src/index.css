@@ -115,7 +115,7 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   html,
   body {
     @apply bg-background text-foreground;
@@ -128,6 +128,15 @@
     /* Better font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* RTL Support - Mirror UI elements for RTL languages */
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+
+  html[dir="rtl"] body {
+    text-align: right;
   }
   
   #root {

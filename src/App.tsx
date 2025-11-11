@@ -25,6 +25,9 @@ import { AccessibilityToolbar } from "./components/AccessibilityToolbar";
 import { ConversationController } from "./conversation/ConversationController";
 import { AlertTimer } from "./components/AlertTimer";
 import { DarkModeToggle } from "./components/DarkModeToggle";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { useI18n } from "./i18n";
+import { useLocalizedApps } from "./hooks/useLocalizedApps";
 import {
   Sheet,
   SheetContent,
@@ -45,6 +48,8 @@ interface Message {
 }
 
 function App() {
+  const { t } = useI18n();
+  const localizedApps = useLocalizedApps();
   const [conversationController] = useState(() => new ConversationController());
   const [userInput, setUserInput] = useState("");
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);
@@ -68,7 +73,7 @@ function App() {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
   const appsContext = useContext(AppsContext);
-  const resolvedApps = appsContext ?? InnerApps;
+  const resolvedApps = appsContext ?? localizedApps;
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
@@ -94,7 +99,8 @@ function App() {
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: initialNode.content ?? "Hello! I'm here with you.",
+            content:
+              initialNode.content ?? t("conversation.helloImHereWithYou"),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: initialNode.id,
@@ -110,7 +116,7 @@ function App() {
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: "Welcome to CALMe. I'm here to support you.",
+            content: t("conversation.welcomeToCalme"),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: fallbackId,
@@ -121,7 +127,7 @@ function App() {
       }
     };
     void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES]);
+  }, [conversationController, ACTIVITY_PROMPT_NODES, t]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -166,7 +172,7 @@ function App() {
 
       if (activityTrigger) {
         setActivityReturnNode(activityTrigger.returnNode);
-        const targetApp = appsContext?.find(
+        const targetApp = resolvedApps.find(
           (app) => app.name === activityTrigger.activityName,
         );
 
@@ -175,8 +181,7 @@ function App() {
             const transitionMsg: Message = {
               id: Date.now().toString() + "_transition",
               type: "message",
-              content:
-                "You seem like you could use a moment to relax. Let's try some breathing exercises.",
+              content: t("conversation.breathingTransition"),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: nextNode.id,
@@ -203,7 +208,9 @@ function App() {
           const placeholderMsg: Message = {
             id: Date.now().toString() + "_placeholder",
             type: "message",
-            content: `Activity "${activityTrigger.activityName}" would be called, but is still in development.`,
+            content: t("conversation.activityWouldBeCalled", {
+              activityName: activityTrigger.activityName,
+            }),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: nextNode.id,
@@ -216,7 +223,7 @@ function App() {
             const continueMsg: Message = {
               id: Date.now().toString() + "_continue",
               type: "message",
-              content: returnNode.content ?? "Let's continue.",
+              content: returnNode.content ?? t("conversation.letsContinue"),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: returnNode.id,
@@ -227,7 +234,9 @@ function App() {
           const mismatchMsg: Message = {
             id: Date.now().toString() + "_mismatch",
             type: "message",
-            content: `Starting ${activityTrigger.activityName} exercise...`,
+            content: t("conversation.startingExercise", {
+              activityName: activityTrigger.activityName,
+            }),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: nextNode.id,
@@ -240,7 +249,7 @@ function App() {
       const errorMsg: Message = {
         id: Date.now().toString() + "_error",
         type: "message",
-        content: "I didn't quite understand that. Could you rephrase?",
+        content: t("conversation.didntUnderstand"),
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: conversationController.getCurrentNode().id,
@@ -253,14 +262,8 @@ function App() {
     userInput,
     conversationController,
     ACTIVITY_PROMPT_NODES,
-    appsContext,
-    setActivityReturnNode,
-    setConversationHistory,
-    setUserInput,
-    setChosenApp,
-    setShouldAutoLaunchApp,
-    setShowAppsLauncher,
-    setAppsTimeout,
+    resolvedApps,
+    t,
   ]);
 
   useEffect(() => {
@@ -310,7 +313,7 @@ function App() {
         const returnMessage: Message = {
           id: Date.now().toString(),
           type: activityPrompt ? "app-buttons" : "message",
-          content: returnNode.content ?? "Welcome back! How was that?",
+          content: returnNode.content ?? t("conversation.welcomeBack"),
           timestamp: new Date().toISOString(),
           isUser: false,
           nodeId: returnNode.id,
@@ -335,13 +338,13 @@ function App() {
 
   useEffect(() => {
     if (shouldAutoLaunchApp) {
-      const breathingApp = appsContext?.find(
+      const breathingApp = resolvedApps.find(
         (subapps) => subapps.name === "breathing",
       );
       setChosenApp(breathingApp);
       setShowAppsLauncher(true);
     }
-  }, [shouldAutoLaunchApp, appsContext]);
+  }, [shouldAutoLaunchApp, resolvedApps]);
 
   const handleAppLaunch = (appToLaunch: AppInterface | undefined) => {
     if (!appToLaunch) {
@@ -352,13 +355,13 @@ function App() {
   };
 
   const handleAudioPlay = () => {
-    toast.success("Playing voice message...", {
-      description: 'Audio: "I need to take a break and relax"',
+    toast.success(t("toast.playingVoiceMessage"), {
+      description: t("toast.audioMessage"),
     });
   };
 
   const handleVoiceInput = () => {
-    toast.info("Voice input activated");
+    toast.info(t("toast.voiceInputActivated"));
   };
 
   const handleAccessibility = () => {
@@ -366,7 +369,7 @@ function App() {
   };
 
   const handleSettings = () => {
-    toast.info("Opening settings");
+    toast.info(t("toast.openingSettings"));
   };
 
   const handleDemoAlert = () => {
@@ -383,8 +386,7 @@ function App() {
       {
         id: `${Date.now()}_alert_start`,
         type: "message",
-        content:
-          "We've entered alert mode. Stay sheltered—we'll get through the next few minutes together.",
+        content: t("alert.alertStart"),
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: "alert_start",
@@ -405,8 +407,7 @@ function App() {
             {
               id: `${Date.now()}_alert_clear`,
               type: "message",
-              content:
-                "Look at that, we made it! It's safe to step out whenever you feel ready.",
+              content: t("alert.alertClear"),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: "alert_all_clear",
@@ -439,10 +440,10 @@ function App() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Conversation Complete</h2>
-          <p className="text-gray-600 mb-4">
-            Thank you for using CALMe. Take care!
-          </p>
+          <h2 className="text-2xl font-bold mb-4">
+            {t("conversation.conversationComplete")}
+          </h2>
+          <p className="text-gray-600 mb-4">{t("conversation.thankYou")}</p>
           <Button
             onClick={() => {
               conversationController.reset();
@@ -451,7 +452,8 @@ function App() {
                 {
                   id: Date.now().toString(),
                   type: "message",
-                  content: initialNode.content ?? "Hello! I'm here with you.",
+                  content:
+                    initialNode.content ?? t("conversation.helloImHereWithYou"),
                   timestamp: new Date().toISOString(),
                   isUser: false,
                   nodeId: initialNode.id,
@@ -459,7 +461,7 @@ function App() {
               ]);
             }}
           >
-            Start New Conversation
+            {t("conversation.startNewConversation")}
           </Button>
         </div>
       </div>
@@ -482,7 +484,7 @@ function App() {
               <Logo />
               <div className="flex items-center gap-2 sm:gap-4 min-w-0">
                 <h1 className="text-lg sm:text-xl font-large truncate">
-                  CALMe
+                  {t("app.name")}
                 </h1>
                 <AlertTimer timeRemaining={alertTimer} />
               </div>
@@ -497,7 +499,7 @@ function App() {
                   onClick={handleDemoAlert}
                   className="bg-red-600 hover:bg-red-700 whitespace-nowrap"
                 >
-                  Demo - RED ALERT
+                  {t("header.demoAlert")}
                 </Button>
               )}
               <Button
@@ -507,7 +509,9 @@ function App() {
                 onClick={handleAccessibility}
               >
                 <Accessibility className="w-4 h-4" />
+                <span className="sr-only">{t("header.accessibility")}</span>
               </Button>
+              <LanguageSwitcher />
               <DarkModeToggle />
               <Button
                 variant="ghost"
@@ -516,9 +520,11 @@ function App() {
                 onClick={handleSettings}
               >
                 <Settings className="w-4 h-4" />
+                <span className="sr-only">{t("header.settings")}</span>
               </Button>
               <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
                 <MoreVertical className="w-4 h-4" />
+                <span className="sr-only">{t("header.moreOptions")}</span>
               </Button>
             </div>
 
@@ -531,19 +537,19 @@ function App() {
                   onClick={handleDemoAlert}
                   className="bg-red-600 hover:bg-red-700 h-10 px-3 text-xs sm:text-sm whitespace-nowrap"
                 >
-                  ALERT
+                  {t("header.demoAlertMobile")}
                 </Button>
               )}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
                     <Menu className="w-5 h-5" />
-                    <span className="sr-only">Open menu</span>
+                    <span className="sr-only">{t("header.menu")}</span>
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-64 sm:w-80">
                   <SheetHeader>
-                    <SheetTitle>Menu</SheetTitle>
+                    <SheetTitle>{t("header.menu")}</SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col gap-2 mt-6">
                     <Button
@@ -555,10 +561,12 @@ function App() {
                       }}
                     >
                       <Accessibility className="w-5 h-5" />
-                      <span>Accessibility</span>
+                      <span>{t("header.accessibility")}</span>
                     </Button>
                     <div className="flex items-center justify-between px-3 py-2">
-                      <span className="text-sm font-medium">Dark Mode</span>
+                      <span className="text-sm font-medium">
+                        {t("header.darkMode")}
+                      </span>
                       <DarkModeToggle />
                     </div>
                     <Button
@@ -570,7 +578,7 @@ function App() {
                       }}
                     >
                       <Settings className="w-5 h-5" />
-                      <span>Settings</span>
+                      <span>{t("header.settings")}</span>
                     </Button>
                     <Button
                       variant="ghost"
@@ -580,7 +588,7 @@ function App() {
                       }}
                     >
                       <MoreVertical className="w-5 h-5" />
-                      <span>More Options</span>
+                      <span>{t("header.moreOptions")}</span>
                     </Button>
                   </div>
                 </SheetContent>
@@ -599,10 +607,10 @@ function App() {
                     <div className="flex items-center justify-between">
                       <div>
                         <h2 className="text-sm font-medium text-muted-foreground">
-                          Quick Activities
+                          {t("quickActivities.title")}
                         </h2>
                         <p className="text-xs text-muted-foreground/70 hidden xs:block">
-                          Launch an activity any time
+                          {t("quickActivities.subtitle")}
                         </p>
                       </div>
                       <Button
@@ -614,8 +622,8 @@ function App() {
                         }}
                         aria-label={
                           showQuickPanel
-                            ? "Hide quick activities"
-                            : "Show quick activities"
+                            ? t("quickActivities.hide")
+                            : t("quickActivities.show")
                         }
                         aria-expanded={showQuickPanel}
                         aria-controls="quick-activities-panel"
@@ -684,8 +692,8 @@ function App() {
 
           {shouldAutoLaunchApp && (
             <div className="mt-4 mx-4 rounded-lg border border-amber-400 bg-amber-100/70 p-4 text-amber-800">
-              <strong>High stress detected.</strong> A breathing exercise will
-              launch automatically to help you calm down.
+              <strong>{t("conversation.highStressDetected")}</strong>{" "}
+              {t("conversation.breathingAutoLaunch")}
             </div>
           )}
           {!showAppsLauncher && (

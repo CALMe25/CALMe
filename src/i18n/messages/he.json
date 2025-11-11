@@ -1,0 +1,98 @@
+{
+  "app": {
+    "title": "CALMe - רגיעה ועירנות",
+    "name": "CALMe"
+  },
+  "header": {
+    "menu": "תפריט",
+    "accessibility": "נגישות",
+    "darkMode": "מצב כהה",
+    "settings": "הגדרות",
+    "moreOptions": "אפשרויות נוספות",
+    "demoAlert": "הדגמה - אזעקה אדומה",
+    "demoAlertMobile": "אזעקה"
+  },
+  "quickActivities": {
+    "title": "פעילויות מהירות",
+    "subtitle": "הפעל פעילות בכל זמן",
+    "hide": "הסתר פעילויות מהירות",
+    "show": "הצג פעילויות מהירות"
+  },
+  "activities": {
+    "breathing": {
+      "label": "תרגיל נשימה",
+      "description": "תרגיל נשימה מודרך שיעזור לך להירגע ולהתמקד."
+    },
+    "stretching": {
+      "label": "שגרת מתיחות",
+      "description": "עקוב אחר תרגילי מתיחה פשוטים לשיפור הגמישות."
+    },
+    "matchingCards": {
+      "label": "התאמת קלפים",
+      "description": "בדוק את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה."
+    },
+    "sudoku": {
+      "label": "סודוקו",
+      "description": "משחק חידת מספרים מאתגר לחידוד כישורי ההיגיון שלך."
+    },
+    "puzzle": {
+      "label": "פאזל",
+      "description": "הרכב תמונות שונות על ידי גרירה ושחרור של חלקי פאזל."
+    },
+    "paint": {
+      "label": "לוח ציור דיגיטלי",
+      "description": "יישום ציור פשוט לשחרור היצירתיות שלך."
+    },
+    "snake": {
+      "label": "משחק הנחש",
+      "description": "משחק נחש קלאסי לבדיקת רפלקסים."
+    },
+    "numberGuessing": {
+      "label": "ניחוש מספרים",
+      "description": "נחש את המספר בין 1 ל-10. בדוק את האינטואיציה שלך!"
+    }
+  },
+  "conversation": {
+    "start": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך אתה מרגיש עכשיו?",
+    "startClarify": "לא ממש הבנתי. אתה מרגיש רגוע, קצת לחוץ, או מאוד לחוץ?",
+    "noStressFlow": "תודה שנכנסת. אתה יכול לחזור בכל זמן. האם תרצה לעשות פעילות קטנה ביחד?",
+    "endPositive": "נהדר. שיהיה לך יום יפה!",
+    "highStressImmediate": "בוא נתמקד ברגע הזה, ממש עכשיו.",
+    "highStressGrounding": "לחץ את כפות הרגליים שלך בחוזקה לרצפה. הרגש את הקשר הזה.",
+    "conversationComplete": "השיחה הושלמה",
+    "thankYou": "תודה שהשתמשת ב-CALMe. תשמור על עצמך!",
+    "startNewConversation": "התחל שיחה חדשה",
+    "welcomeBack": "ברוך שובך! איך היה?",
+    "didntUnderstand": "לא ממש הבנתי את זה. אתה יכול לנסח מחדש?",
+    "activityWouldBeCalled": "הפעילות \"{activityName}\" הייתה נקראת, אבל היא עדיין בפיתוח.",
+    "letsContinue": "בוא נמשיך.",
+    "startingExercise": "מתחיל תרגיל {activityName}...",
+    "breathingTransition": "נראה שאתה יכול להשתמש ברגע להירגע. בוא ננסה כמה תרגילי נשימה.",
+    "highStressDetected": "זוהה לחץ גבוה.",
+    "breathingAutoLaunch": "תרגיל נשימה יופעל אוטומטית כדי לעזור לך להירגע.",
+    "helloImHereWithYou": "שלום! אני כאן איתך.",
+    "welcomeToCalme": "ברוכים הבאים ל-CALMe. אני כאן כדי לתמוך בך."
+  },
+  "alert": {
+    "alertStart": "נכנסנו למצב אזעקה. הישאר במקלט - נעבור את הדקות הקרובות ביחד.",
+    "alertClear": "תראה את זה, הצלחנו! בטוח לצאת החוצה מתי שתרגיש מוכן."
+  },
+  "toast": {
+    "playingVoiceMessage": "מנגן הודעה קולית...",
+    "audioMessage": "אודיו: \"אני צריך לקחת הפסקה ולהירגע\"",
+    "voiceInputActivated": "קלט קולי הופעל",
+    "openingSettings": "פותח הגדרות",
+    "accessibilityToolbarFailed": "נכשל בטעינת סרגל הנגישות",
+    "accessibilityToolbarFailedDescription": "לא ניתן לטעון את /vendor/acc_toolbar.min.js. אנא וודא שהקובץ קיים בנתיב הצפוי."
+  },
+  "common": {
+    "close": "סגור",
+    "open": "פתח",
+    "back": "חזור",
+    "next": "הבא",
+    "yes": "כן",
+    "no": "לא",
+    "ok": "אישור",
+    "cancel": "ביטול"
+  }
+}

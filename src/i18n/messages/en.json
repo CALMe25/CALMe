@@ -1,0 +1,98 @@
+{
+  "app": {
+    "title": "CALMe - Calm & Alert",
+    "name": "CALMe"
+  },
+  "header": {
+    "menu": "Menu",
+    "accessibility": "Accessibility",
+    "darkMode": "Dark Mode",
+    "settings": "Settings",
+    "moreOptions": "More Options",
+    "demoAlert": "Demo - RED ALERT",
+    "demoAlertMobile": "ALERT"
+  },
+  "quickActivities": {
+    "title": "Quick Activities",
+    "subtitle": "Launch an activity any time",
+    "hide": "Hide quick activities",
+    "show": "Show quick activities"
+  },
+  "activities": {
+    "breathing": {
+      "label": "Breathing Exercise",
+      "description": "A guided breathing exercise to help you relax and focus."
+    },
+    "stretching": {
+      "label": "Stretching Routine",
+      "description": "Follow along with simple stretching exercises to improve flexibility."
+    },
+    "matchingCards": {
+      "label": "Matching Cards",
+      "description": "Test your memory and concentration with this classic matching game."
+    },
+    "sudoku": {
+      "label": "Sudoku",
+      "description": "A challenging number puzzle game to sharpen your logic skills."
+    },
+    "puzzle": {
+      "label": "Jigsaw Puzzle",
+      "description": "Assemble various images by dragging and dropping puzzle pieces."
+    },
+    "paint": {
+      "label": "Digital Canvas",
+      "description": "A simple drawing application to unleash your creativity."
+    },
+    "snake": {
+      "label": "Snake Game",
+      "description": "A classic snake game to test your reflexes."
+    },
+    "numberGuessing": {
+      "label": "Number Guessing",
+      "description": "Guess the number between 1 and 10. Test your intuition!"
+    }
+  },
+  "conversation": {
+    "start": "I see you opened my app. I'm here with you. How do you feel right now?",
+    "startClarify": "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+    "noStressFlow": "Thanks for checking in. You can return anytime. Would you like to do a small activity together?",
+    "endPositive": "Great. Have a beautiful day!",
+    "highStressImmediate": "Let's focus on this moment, right now.",
+    "highStressGrounding": "Press your feet firmly to the floor. Feel that connection.",
+    "conversationComplete": "Conversation Complete",
+    "thankYou": "Thank you for using CALMe. Take care!",
+    "startNewConversation": "Start New Conversation",
+    "welcomeBack": "Welcome back! How was that?",
+    "didntUnderstand": "I didn't quite understand that. Could you rephrase?",
+    "activityWouldBeCalled": "Activity \"{activityName}\" would be called, but is still in development.",
+    "letsContinue": "Let's continue.",
+    "startingExercise": "Starting {activityName} exercise...",
+    "breathingTransition": "You seem like you could use a moment to relax. Let's try some breathing exercises.",
+    "highStressDetected": "High stress detected.",
+    "breathingAutoLaunch": "A breathing exercise will launch automatically to help you calm down.",
+    "helloImHereWithYou": "Hello! I'm here with you.",
+    "welcomeToCalme": "Welcome to CALMe. I'm here to support you."
+  },
+  "alert": {
+    "alertStart": "We've entered alert mode. Stay sheltered—we'll get through the next few minutes together.",
+    "alertClear": "Look at that, we made it! It's safe to step out whenever you feel ready."
+  },
+  "toast": {
+    "playingVoiceMessage": "Playing voice message...",
+    "audioMessage": "Audio: \"I need to take a break and relax\"",
+    "voiceInputActivated": "Voice input activated",
+    "openingSettings": "Opening settings",
+    "accessibilityToolbarFailed": "Failed to load accessibility toolbar",
+    "accessibilityToolbarFailedDescription": "Could not load /vendor/acc_toolbar.min.js. Please ensure the file exists at the expected path."
+  },
+  "common": {
+    "close": "Close",
+    "open": "Open",
+    "back": "Back",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "cancel": "Cancel"
+  }
+}

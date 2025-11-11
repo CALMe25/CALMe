@@ -17,6 +17,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@inlang/paraglide-js": "^2.4.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",

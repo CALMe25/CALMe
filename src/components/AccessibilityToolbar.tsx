@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useI18n } from "../i18n";
 
 interface AccessibilityToolbarProps {
   open: boolean;
@@ -49,12 +50,14 @@ const KEYBOARD_SELECTOR = "h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea";
 const KEYBOARD_ATTR = "data-calme-kb-tabindex";
 const KEYBOARD_ORIGINAL_ATTR = "data-calme-kb-original-tabindex";
 
-const CONFIG: MicAccessToolConfig = {
-  link: "https://github.com/CALMe25/CALMe/blob/main/accessibility.md",
-  contact: "https://github.com/CALMe25/CALMe/issues",
-  buttonPosition: "right",
-  forceLang: typeof navigator !== "undefined" ? navigator.language : "en",
-};
+function getConfigForLanguage(language: string): MicAccessToolConfig {
+  return {
+    link: "https://github.com/CALMe25/CALMe/blob/main/accessibility.md",
+    contact: "https://github.com/CALMe25/CALMe/issues",
+    buttonPosition: language === "he" ? "left" : "right",
+    forceLang: language,
+  };
+}
 
 const ensureToolbarState = () => {
   window.MICTOOLBOXAPPSTATE = window.MICTOOLBOXAPPSTATE || {
@@ -214,7 +217,7 @@ const loadToolbarScript = async (): Promise<void> => {
   });
 };
 
-const createToolbarInstance = () => {
+const createToolbarInstance = (language: string) => {
   if (window.micAccessTool) {
     return window.micAccessTool;
   }
@@ -223,7 +226,8 @@ const createToolbarInstance = () => {
   }
   ensureToolbarState();
   patchToolbarBehavior();
-  window.micAccessTool = new window.MicAccessTool(CONFIG);
+  const config = getConfigForLanguage(language);
+  window.micAccessTool = new window.MicAccessTool(config);
   return window.micAccessTool;
 };
 
@@ -231,6 +235,8 @@ export function AccessibilityToolbar({
   open,
   onClose,
 }: AccessibilityToolbarProps) {
+  const { languageTag, t } = useI18n();
+
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
@@ -239,16 +245,15 @@ export function AccessibilityToolbar({
       try {
         await loadToolbarScript();
         if (cancelled) return;
-        const toolbar = createToolbarInstance();
+        const toolbar = createToolbarInstance(languageTag);
         if (toolbar?.openBox) {
           toolbar.openBox();
         }
       } catch (error) {
         console.error(error);
         if (!cancelled) {
-          toast.error("Failed to load accessibility toolbar", {
-            description:
-              "Could not load /vendor/acc_toolbar.min.js. Please ensure the file exists at the expected path.",
+          toast.error(t("toast.accessibilityToolbarFailed"), {
+            description: t("toast.accessibilityToolbarFailedDescription"),
           });
         }
       } finally {
@@ -263,7 +268,7 @@ export function AccessibilityToolbar({
     return () => {
       cancelled = true;
     };
-  }, [open, onClose]);
+  }, [open, onClose, languageTag, t]);
 
   return null;
 }
