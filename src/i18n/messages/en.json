@@ -120,6 +120,13 @@
       "safe": "safe|protected|secure|sheltered|im good|all good",
       "danger": "not safe|unsafe|exposed|danger|at risk|vulnerable",
       "unsure": "not sure|i think|possibly|sort of|kind of"
+    },
+    "clarifications": {
+      "stress": "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+      "safety": "I need to make sure - are you in a safe, protected space right now?",
+      "location": "Where exactly are you right now? For example: at home, in a shelter, or somewhere else?",
+      "yesNo": "I need a yes or no answer to continue. Can you please clarify?",
+      "activity": "Would you like to try breathing exercises, stretching, or perhaps a matching game?"
     }
   }
 }

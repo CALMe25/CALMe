@@ -20,6 +20,13 @@ export interface ParserMessages {
       danger: string;
       unsure: string;
     };
+    clarifications: {
+      stress: string;
+      safety: string;
+      location: string;
+      yesNo: string;
+      activity: string;
+    };
   };
 }
 
@@ -307,8 +314,9 @@ class EnhancedParser {
       category: "uncertain",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.stress
+        : "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
     };
   }
 
@@ -441,8 +449,9 @@ class EnhancedParser {
       category: "UNSURE",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "I need to make sure - are you in a safe, protected space right now?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.safety
+        : "I need to make sure - are you in a safe, protected space right now?",
     };
   }
 
@@ -499,8 +508,9 @@ class EnhancedParser {
       extractedValue: "",
       confidence: 0.2,
       needsClarification: true,
-      clarificationPrompt:
-        "Where exactly are you right now? For example: at home, in a shelter, or somewhere else?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.location
+        : "Where exactly are you right now? For example: at home, in a shelter, or somewhere else?",
     };
   }
 
@@ -608,8 +618,9 @@ class EnhancedParser {
       category: "unclear",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "I need a yes or no answer to continue. Can you please clarify?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.yesNo
+        : "I need a yes or no answer to continue. Can you please clarify?",
     };
   }
 
@@ -680,8 +691,9 @@ class EnhancedParser {
       category: "unclear_activity",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "Would you like to try breathing exercises, stretching, or perhaps a matching game?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.activity
+        : "Would you like to try breathing exercises, stretching, or perhaps a matching game?",
     };
   }
 }
