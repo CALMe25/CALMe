@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
+import { useI18n } from "../i18n";
 
 interface Exercise {
   id: number;
@@ -8,70 +9,68 @@ interface Exercise {
   instructions: string[];
 }
 
-const exercises: Exercise[] = [
-  {
-    id: 1,
-    name: "Neck Rolls",
-    duration: 30,
-    description: "Gentle neck stretches to release tension",
-    instructions: [
-      "Sit or stand with good posture",
-      "Slowly roll your head in a circular motion",
-      "Complete 5 circles clockwise",
-      "Then 5 circles counterclockwise",
-    ],
-  },
-  {
-    id: 2,
-    name: "Shoulder Shrugs",
-    duration: 30,
-    description: "Release shoulder tension",
-    instructions: [
-      "Stand with arms at your sides",
-      "Lift shoulders up toward ears",
-      "Hold for 3 seconds",
-      "Release and repeat 10 times",
-    ],
-  },
-  {
-    id: 3,
-    name: "Arm Circles",
-    duration: 45,
-    description: "Loosen shoulder joints",
-    instructions: [
-      "Extend arms straight out to sides",
-      "Make small circles forward for 15 seconds",
-      "Make small circles backward for 15 seconds",
-      "Rest for 15 seconds",
-    ],
-  },
-  {
-    id: 4,
-    name: "Side Stretch",
-    duration: 40,
-    description: "Stretch your sides and obliques",
-    instructions: [
-      "Stand with feet shoulder-width apart",
-      "Raise one arm overhead",
-      "Lean to the opposite side",
-      "Hold for 20 seconds each side",
-    ],
-  },
-  {
-    id: 5,
-    name: "Forward Fold",
-    duration: 30,
-    description: "Stretch hamstrings and lower back",
-    instructions: [
-      "Stand with feet hip-width apart",
-      "Slowly fold forward from hips",
-      "Let arms hang or hold opposite elbows",
-      "Breathe deeply for 30 seconds",
-    ],
-  },
-];
+const EXERCISE_KEYS = [
+  "neckRolls",
+  "shoulderShrugs",
+  "armCircles",
+  "sideStretch",
+  "forwardFold",
+] as const;
+
+const EXERCISE_DURATIONS = [30, 30, 45, 40, 30];
+
+interface ExerciseData {
+  name: string;
+  description: string;
+  instructions: string[];
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function isExerciseData(value: unknown): value is ExerciseData {
+  if (!isRecord(value)) return false;
+  return (
+    typeof value.name === "string" &&
+    typeof value.description === "string" &&
+    Array.isArray(value.instructions) &&
+    value.instructions.every((item) => typeof item === "string")
+  );
+}
 
 export default function StretchingRoutine() {
+  const { t, messages } = useI18n();
+
+  const exercises: Exercise[] = useMemo(() => {
+    if (!isRecord(messages)) return [];
+    const activities = messages.activities;
+    if (!isRecord(activities)) return [];
+    const stretching = activities.stretching;
+    if (!isRecord(stretching)) return [];
+    const exercisesData = stretching.exercises;
+    if (!isRecord(exercisesData)) return [];
+
+    return EXERCISE_KEYS.map((key, index) => {
+      const exerciseValue = exercisesData[key];
+      if (!isExerciseData(exerciseValue)) {
+        return {
+          id: index + 1,
+          name: "",
+          duration: EXERCISE_DURATIONS[index],
+          description: "",
+          instructions: [],
+        };
+      }
+      return {
+        id: index + 1,
+        name: exerciseValue.name,
+        duration: EXERCISE_DURATIONS[index],
+        description: exerciseValue.description,
+        instructions: exerciseValue.instructions,
+      };
+    });
+  }, [messages]);
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(exercises[0].duration);
@@ -167,10 +166,13 @@ export default function StretchingRoutine() {
       <div className="w-full max-w-4xl">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary">
-            Stretching Routine
+            {t("activities.stretching.title")}
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground">
-            Exercise {currentExercise + 1} of {exercises.length}
+            {t("activities.stretching.exerciseProgress", {
+              current: (currentExercise + 1).toString(),
+              total: exercises.length.toString(),
+            })}
           </p>
         </div>
 
@@ -199,7 +201,7 @@ export default function StretchingRoutine() {
 
             <div className="flex-1 rounded-xl border border-border/60 bg-muted/30 p-3 sm:p-4">
               <h4 className="text-base sm:text-lg font-semibold mb-3 text-primary">
-                Instructions:
+                {t("activities.stretching.instructions")}
               </h4>
               <ol className="list-decimal list-inside space-y-2">
                 {exercise.instructions.map((instruction, index) => (
@@ -221,14 +223,18 @@ export default function StretchingRoutine() {
                 disabled={currentExercise === 0}
                 className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
               >
-                ← Previous
+                {t("activities.stretching.previous")}
               </button>
 
               <button
                 onClick={isActive ? pauseExercise : startExercise}
                 className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? "bg-destructive text-destructive-foreground hover:bg-destructive/80" : "bg-primary text-primary-foreground hover:bg-primary/80"}`}
               >
-                {isActive ? "Pause" : timeRemaining === 0 ? "Restart" : "Start"}
+                {isActive
+                  ? t("activities.stretching.pause")
+                  : timeRemaining === 0
+                    ? t("activities.stretching.restart")
+                    : t("activities.stretching.start")}
               </button>
 
               <button
@@ -236,7 +242,7 @@ export default function StretchingRoutine() {
                 disabled={currentExercise === exercises.length - 1}
                 className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
               >
-                Next →
+                {t("activities.stretching.next")}
               </button>
             </div>
 
@@ -244,14 +250,13 @@ export default function StretchingRoutine() {
               onClick={resetRoutine}
               className="w-full min-h-[44px] rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground transition-all hover:bg-primary/80 active:scale-95 sm:text-base"
             >
-              Reset Routine
+              {t("activities.stretching.reset")}
             </button>
           </div>
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground sm:text-sm">
-          Take your time with each stretch. Listen to your body and never force
-          a movement.
+          {t("activities.stretching.disclaimer")}
         </p>
       </div>
     </div>
