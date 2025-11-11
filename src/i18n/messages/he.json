@@ -48,7 +48,15 @@
     },
     "matchingCards": {
       "label": "התאמת קלפים",
-      "description": "בדוק את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה."
+      "description": "בדוק את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה.",
+      "progress": "{found} / {total} התאמות הושלמו",
+      "winBanner": "🎉 עבודה מצוינת! ניקית את הלוח.",
+      "playAgain": "שחק שוב",
+      "reset": "אפס משחק",
+      "exit": "צא מהמשחק",
+      "ariaMatched": "קלף מותאם: {value}",
+      "ariaShowing": "קלף מוצג: {value}",
+      "ariaFaceDown": "קלף עם הפנים כלפי מטה"
     },
     "sudoku": {
       "label": "סודוקו",

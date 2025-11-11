@@ -48,7 +48,15 @@
     },
     "matchingCards": {
       "label": "Matching Cards",
-      "description": "Test your memory and concentration with this classic matching game."
+      "description": "Test your memory and concentration with this classic matching game.",
+      "progress": "{found} / {total} matches complete",
+      "winBanner": "🎉 Great work! You cleared the board.",
+      "playAgain": "Play again",
+      "reset": "Reset Game",
+      "exit": "Exit Game",
+      "ariaMatched": "Matched card: {value}",
+      "ariaShowing": "Card showing: {value}",
+      "ariaFaceDown": "Card face down"
     },
     "sudoku": {
       "label": "Sudoku",
