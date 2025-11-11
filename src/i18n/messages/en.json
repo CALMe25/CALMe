@@ -21,7 +21,26 @@
   "activities": {
     "breathing": {
       "label": "Breathing Exercise",
-      "description": "A guided breathing exercise to help you relax and focus."
+      "description": "A guided breathing exercise to help you relax and focus.",
+      "subtitle": "Follow the rhythm to calm your nervous system.",
+      "presets": {
+        "classic": "Classic 4-7-8",
+        "calm": "Calm Starter",
+        "gentle": "Gentle Flow"
+      },
+      "cyclesLabel": "Cycles",
+      "cyclesRecommendation": "Recommended: 4–8 cycles.",
+      "followGuide": "Follow the breathing guide",
+      "paused": "Paused",
+      "restart": "Restart Exercise",
+      "feelBetter": "I Feel Better",
+      "howItHelps": "How it helps",
+      "step1": "Inhale through your nose for 4 seconds",
+      "step2": "Hold your breath gently for 7 seconds — allow your body to soften",
+      "step3": "Exhale slowly through your mouth for 8 seconds, imagining stress leaving your body",
+      "inhale": "Inhale",
+      "hold": "Hold Breath",
+      "exhale": "Exhale"
     },
     "stretching": {
       "label": "Stretching Routine",
