@@ -98,7 +98,29 @@
     },
     "numberGuessing": {
       "label": "ניחוש מספרים",
-      "description": "נחש את המספר בין 1 ל-10. בדוק את האינטואיציה שלך!"
+      "description": "נחש את המספר בין 1 ל-10. בדוק את האינטואיציה שלך!",
+      "title": "משחק ניחוש מספרים",
+      "subtitle": "נחש את המספר בין 1 ל-10",
+      "initialMessage": "אני חושב על מספר בין 1 ל-10. אתה יכול לנחש אותו?",
+      "invalidNumber": "נא להזין מספר תקין בין 1 ל-10!",
+      "congratulations": "🎉 כל הכבוד! ניחשת ב-{attempts} {attemptsWord}!",
+      "attempt": "ניסיון",
+      "attempts": "ניסיונות",
+      "correctHint": "✓ נכון!",
+      "tooLowHint": "📈 נמוך מדי!",
+      "tooHighHint": "📉 גבוה מדי!",
+      "attemptsLabel": "ניסיונות",
+      "rangeLabel": "טווח",
+      "placeholder": "הזן את הניחוש שלך",
+      "guessButton": "נחש",
+      "previousGuesses": "ניחושים קודמים",
+      "playAgain": "שחק שוב",
+      "reset": "אפס",
+      "exitGame": "צא מהמשחק",
+      "ariaGuessInput": "קלט ניחוש מספר",
+      "ariaSubmitGuess": "שלח ניחוש",
+      "ariaStartNew": "התחל משחק חדש",
+      "ariaExitGame": "צא מהמשחק"
     }
   },
   "conversation": {

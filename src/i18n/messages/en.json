@@ -98,7 +98,29 @@
     },
     "numberGuessing": {
       "label": "Number Guessing",
-      "description": "Guess the number between 1 and 10. Test your intuition!"
+      "description": "Guess the number between 1 and 10. Test your intuition!",
+      "title": "Number Guessing Game",
+      "subtitle": "Guess the number between 1 and 10",
+      "initialMessage": "I'm thinking of a number between 1 and 10. Can you guess it?",
+      "invalidNumber": "Please enter a valid number between 1 and 10!",
+      "congratulations": "🎉 Congratulations! You guessed it in {attempts} {attemptsWord}!",
+      "attempt": "attempt",
+      "attempts": "attempts",
+      "correctHint": "✓ Correct!",
+      "tooLowHint": "📈 Too low!",
+      "tooHighHint": "📉 Too high!",
+      "attemptsLabel": "Attempts",
+      "rangeLabel": "Range",
+      "placeholder": "Enter your guess",
+      "guessButton": "Guess",
+      "previousGuesses": "Previous Guesses",
+      "playAgain": "Play Again",
+      "reset": "Reset",
+      "exitGame": "Exit Game",
+      "ariaGuessInput": "Number guess input",
+      "ariaSubmitGuess": "Submit guess",
+      "ariaStartNew": "Start new game",
+      "ariaExitGame": "Exit game"
     }
   },
   "conversation": {
