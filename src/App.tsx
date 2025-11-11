@@ -95,12 +95,15 @@ function App() {
       try {
         const initialNode = conversationController.getCurrentNode();
         const activityPrompt = ACTIVITY_PROMPT_NODES.has(initialNode.id);
+        const content =
+          t(`conversationNodes.${initialNode.id}`) ||
+          (initialNode.content ?? "") ||
+          t("conversation.helloImHereWithYou");
         setConversationHistory([
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content:
-              initialNode.content ?? t("conversation.helloImHereWithYou"),
+            content,
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: initialNode.id,
@@ -158,10 +161,14 @@ function App() {
         conversationController.processParserOutput(stepResult);
 
       const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
+      const content =
+        t(`conversationNodes.${nextNode.id}`) ||
+        (nextNode.content ?? "") ||
+        "How can I help you?";
       const newMessage: Message = {
         id: Date.now().toString(),
         type: activityPrompt ? "app-buttons" : "message",
-        content: nextNode.content ?? "How can I help you?",
+        content,
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: nextNode.id,
@@ -220,10 +227,14 @@ function App() {
           setTimeout(() => {
             conversationController.moveToNode(activityTrigger.returnNode);
             const returnNode = conversationController.getCurrentNode();
+            const content =
+              t(`conversationNodes.${returnNode.id}`) ||
+              (returnNode.content ?? "") ||
+              t("conversation.letsContinue");
             const continueMsg: Message = {
               id: Date.now().toString() + "_continue",
               type: "message",
-              content: returnNode.content ?? t("conversation.letsContinue"),
+              content,
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: returnNode.id,
@@ -310,10 +321,14 @@ function App() {
         const returnNode = conversationController.getCurrentNode();
 
         const activityPrompt = ACTIVITY_PROMPT_NODES.has(returnNode.id);
+        const content =
+          t(`conversationNodes.${returnNode.id}`) ||
+          (returnNode.content ?? "") ||
+          t("conversation.welcomeBack");
         const returnMessage: Message = {
           id: Date.now().toString(),
           type: activityPrompt ? "app-buttons" : "message",
-          content: returnNode.content ?? t("conversation.welcomeBack"),
+          content,
           timestamp: new Date().toISOString(),
           isUser: false,
           nodeId: returnNode.id,
@@ -448,12 +463,15 @@ function App() {
             onClick={() => {
               conversationController.reset();
               const initialNode = conversationController.getCurrentNode();
+              const content =
+                t(`conversationNodes.${initialNode.id}`) ||
+                (initialNode.content ?? "") ||
+                t("conversation.helloImHereWithYou");
               setConversationHistory([
                 {
                   id: Date.now().toString(),
                   type: "message",
-                  content:
-                    initialNode.content ?? t("conversation.helloImHereWithYou"),
+                  content,
                   timestamp: new Date().toISOString(),
                   isUser: false,
                   nodeId: initialNode.id,

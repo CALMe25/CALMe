@@ -1,15 +1,124 @@
 // Conversation string keys mapped to node IDs
-// This allows the conversation map to use keys instead of hardcoded strings
-export const conversationStringKeys: Record<string, string> = {
-  start: "conversation.start",
-  start_clarify: "conversation.startClarify",
-  no_stress_flow: "conversation.noStressFlow",
-  end_positive: "conversation.endPositive",
-  high_stress_immediate: "conversation.highStressImmediate",
-  high_stress_grounding: "conversation.highStressGrounding",
+// This maps conversation node content to translation keys
+export const conversationNodeTranslations: Record<string, string> = {
+  // Entry points
+  start:
+    "I see you opened my app. I'm here with you. How do you feel right now?",
+  start_clarify:
+    "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+
+  // No stress flow
+  no_stress_flow:
+    "Thanks for checking in. You can return anytime. Would you like to do a small activity together?",
+  end_positive: "Great. Have a beautiful day!",
+
+  // High stress flow
+  high_stress_immediate: "Let's focus on this moment, right now.",
+  high_stress_grounding:
+    "Press your feet firmly to the floor. Feel that connection.",
+  high_stress_breathing:
+    "Now let's breathe together. In for 4... hold for 7... out for 8.",
+  high_stress_continue:
+    "Continue breathing for a few more moments. How are you feeling now?",
+
+  // Moderate stress
+  moderate_stress_check: "Let's check your surroundings.",
+
+  // Safety check
+  check_safety: "Are you in a protected space right now?",
+  check_safety_clarify:
+    "I need to make sure - are you in a safe, protected space right now?",
+  check_if_alone: "Are you with someone else?",
+  check_feel_safe_with_them: "Do you feel safe with them?",
+  safe_with_someone:
+    "Good to be with someone you trust. Let's work through what happened.",
+  alone_support: "I'm here with you as long as you need.",
+  check_battery: "Is your phone battery charged?",
+  low_battery_warning: "Let's try something brief to conserve battery.",
+
+  // Unsafe flow
+  unsafe_can_move: "Can you get to a protected space?",
+  unsafe_moving: "No time to waste. I'm with you every step.",
+  unsafe_check_guidelines: "Do you know the safety guidelines?",
+  unsafe_wait_together: "I'll wait with you while we get through this.",
+  provide_guidelines:
+    "Choose the safest nearby space—sealed room, stairwell, or hallway. [Link: Homefront Command Guidelines]",
+
+  // Structure experience
+  structure_experience: "Let's structure what happened—it helps with clarity.",
+  acknowledge_difficulty: "Something hard happened. You're getting through it.",
+  describe_experience: "Can you describe what happened step-by-step?",
+  validate_feelings: "Thanks for sharing. Feelings come and go—like waves.",
+
+  // Activity menu
+  activity_choice: "What activity would you like to try?",
+  activity_choice_clarify:
+    "Would you like to try breathing exercises, grounding techniques, or perhaps listen to something calming?",
+
+  // Activities
+  activity_breathing: "Starting breathing exercise...",
+  activity_grounding: "Starting 5-4-3-2-1 grounding technique...",
+  activity_stretching: "Starting stretching routine...",
+  activity_matching: "Starting card matching game...",
+  activity_sudoku: "Starting sudoku puzzle...",
+  activity_puzzle: "Starting jigsaw puzzle...",
+  activity_paint: "Opening digital canvas...",
+  activity_music:
+    'Activity "Relaxing Music" would be called, but is still in development.',
+  activity_story:
+    'Activity "Calming Story" would be called, but is still in development.',
+
+  // Continue loop
+  continue_loop: "How are you feeling now?",
+  continue_loop_options:
+    "Would you like to try another activity, or are you feeling better?",
+
+  // Emergency support
+  continue_support:
+    "I understand you're still struggling. Would you like to connect with professional support?",
+  emergency_resources:
+    "Here are immediate support options:\n• Emergency: MADA, Fire, Police\n• Mental Health: ERAN, Clalit, Maccabi\n• Chat Support: ERAN Live Chat, WhatsApp Tikva",
+
+  // Special contexts
+  transit_context:
+    "I understand you're in transit. Let me help you stay calm while traveling.",
+  outdoor_context:
+    "Being outdoors can feel vulnerable. Let's focus on what you can control right now.",
+  caregiver_context:
+    "Supporting others is important. Let's make sure you're okay first.",
+
+  // End states
+  end_node: "Thanks for being here. You are welcome any time.",
+  end_stay_safe:
+    "Stay safe. Remember, you can return here anytime you need support.",
+
+  // Alert flow
+  alert_start: "App launched after alert. You're not alone.",
+  alert_focus: "Let's focus on this moment, right now. Where are you?",
+  alert_location_clarify:
+    "Where exactly are you right now? At home, in a shelter, or somewhere else?",
+  alert_transit:
+    "Pull over safely if you can. If not, keep breathing steadily.",
+  alert_home: "Good, you're at home. Get to your safe room immediately.",
+  alert_protected:
+    "Excellent, you're in a protected space. You're doing everything right.",
+  alert_get_safe:
+    "Get to the nearest protected space immediately. Move quickly but safely.",
+  alert_breathing: "Now let's breathe together to stay calm.",
+  alert_wait: "I'm here with you. We'll get through this together.",
+  alert_all_clear:
+    "Look at that, we made it! It's safe to leave the protected space whenever you feel ready.",
 };
 
-// Helper function to check if a string is a translation key
-export function isTranslationKey(str: string): boolean {
-  return str.startsWith("conversation.") || str.includes(".");
+// Get translation key for a node ID
+export function getNodeTranslationKey(nodeId: string): string {
+  return `conversationNodes.${nodeId}`;
+}
+
+// Helper to get translated content for a node
+export function getNodeContent(
+  nodeId: string,
+  t: (key: string) => string,
+): string {
+  return t(getNodeTranslationKey(nodeId));
 }

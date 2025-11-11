@@ -8,6 +8,8 @@ import {
 } from "react";
 import enMessages from "./messages/en.json";
 import heMessages from "./messages/he.json";
+import enConversationNodes from "./messages/conversationNodes-en.json";
+import heConversationNodes from "./messages/conversationNodes-he.json";
 
 export type LanguageTag = "en" | "he";
 
@@ -23,9 +25,10 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
+// Merge conversation nodes into main messages
 const messages: Record<LanguageTag, Messages> = {
-  en: enMessages,
-  he: heMessages,
+  en: { ...enMessages, conversationNodes: enConversationNodes } as Messages,
+  he: { ...heMessages, conversationNodes: heConversationNodes } as Messages,
 };
 
 const RTL_LANGUAGES: LanguageTag[] = ["he"];
