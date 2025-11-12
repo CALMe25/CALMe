@@ -52,38 +52,15 @@ function App() {
   const { currentLanguage } = useLanguage();
   const localizedApps = useLocalizedApps();
 
-  // Helper function to get messages dynamically
-  // Note: Paraglide message functions automatically use the current language
-  const t = useCallback((key: string, params?: Record<string, any>): string => {
-    // Convert dot notation to underscore and numbers for array items
-    const fnName = key.replace(/\./g, "_");
-
-    // Try the main function name
-    const fn = (m as any)[fnName];
-    if (typeof fn === "function") {
-      return fn(params || {});
+  // Helper for dynamic conversation node message lookups
+  // Only used for conversation flow where node ID is dynamic
+  const getConvMessage = useCallback((nodeId: string): string => {
+    const convFn = (m as any)[`conv_${nodeId}`];
+    if (typeof convFn === "function") {
+      return convFn();
     }
-
-    // Try with number suffix (for arrays that were flattened with numbers)
-    for (let i = 1; i <= 10; i++) {
-      const numberedFn = (m as any)[`${fnName}${i}`];
-      if (typeof numberedFn === "function") {
-        return numberedFn(params || {});
-      }
-    }
-
-    // For conversation nodes, try with conv_ prefix
-    if (key.startsWith("conversationNodes.")) {
-      const nodeId = key.replace("conversationNodes.", "");
-      const convFn = (m as any)[`conv_${nodeId}`];
-      if (typeof convFn === "function") {
-        return convFn(params || {});
-      }
-    }
-
-    // Return key if not found
-    console.warn(`Translation key not found: ${key}`);
-    return key;
+    console.warn(`Conversation node not found: conv_${nodeId}`);
+    return "";
   }, []);
   const [conversationController] = useState(() => new ConversationController());
   const [userInput, setUserInput] = useState("");
@@ -131,9 +108,9 @@ function App() {
         const initialNode = conversationController.getCurrentNode();
         const activityPrompt = ACTIVITY_PROMPT_NODES.has(initialNode.id);
         const content =
-          t(`conversationNodes.${initialNode.id}`) ||
+          getConvMessage(initialNode.id) ||
           (initialNode.content ?? "") ||
-          t("conversation.helloImHereWithYou");
+          m.conversation_helloImHereWithYou();
         setConversationHistory([
           {
             id: Date.now().toString(),
@@ -154,7 +131,7 @@ function App() {
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: t("conversation.welcomeToCalme"),
+            content: m.conversation_welcomeToCalme(),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: fallbackId,
@@ -165,7 +142,7 @@ function App() {
       }
     };
     void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES, t, currentLanguage]);
+  }, [conversationController, ACTIVITY_PROMPT_NODES, getConvMessage, currentLanguage]);
 
   // Update parser with current language messages whenever language changes
   useEffect(() => {
@@ -227,7 +204,7 @@ function App() {
 
       const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
       const content =
-        t(`conversationNodes.${nextNode.id}`) ||
+        getConvMessage(nextNode.id) ||
         (nextNode.content ?? "") ||
         "How can I help you?";
       const newMessage: Message = {
@@ -253,7 +230,7 @@ function App() {
             const transitionMsg: Message = {
               id: Date.now().toString() + "_transition",
               type: "message",
-              content: t("conversation.breathingTransition"),
+              content: m.conversation_breathingTransition(),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: nextNode.id,
@@ -280,7 +257,7 @@ function App() {
           const placeholderMsg: Message = {
             id: Date.now().toString() + "_placeholder",
             type: "message",
-            content: t("conversation.activityWouldBeCalled", {
+            content: m.conversation_activityWouldBeCalled({
               activityName: activityTrigger.activityName,
             }),
             timestamp: new Date().toISOString(),
@@ -293,9 +270,9 @@ function App() {
             conversationController.moveToNode(activityTrigger.returnNode);
             const returnNode = conversationController.getCurrentNode();
             const content =
-              t(`conversationNodes.${returnNode.id}`) ||
+              getConvMessage(returnNode.id) ||
               (returnNode.content ?? "") ||
-              t("conversation.letsContinue");
+              m.conversation_letsContinue();
             const continueMsg: Message = {
               id: Date.now().toString() + "_continue",
               type: "message",
@@ -310,7 +287,7 @@ function App() {
           const mismatchMsg: Message = {
             id: Date.now().toString() + "_mismatch",
             type: "message",
-            content: t("conversation.startingExercise", {
+            content: m.conversation_startingExercise({
               activityName: activityTrigger.activityName,
             }),
             timestamp: new Date().toISOString(),
@@ -325,7 +302,7 @@ function App() {
       const errorMsg: Message = {
         id: Date.now().toString() + "_error",
         type: "message",
-        content: t("conversation.didntUnderstand"),
+        content: m.conversation_didntUnderstand(),
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: conversationController.getCurrentNode().id,
@@ -339,7 +316,7 @@ function App() {
     conversationController,
     ACTIVITY_PROMPT_NODES,
     resolvedApps,
-    t,
+    getConvMessage,
   ]);
 
   useEffect(() => {
@@ -387,9 +364,9 @@ function App() {
 
         const activityPrompt = ACTIVITY_PROMPT_NODES.has(returnNode.id);
         const content =
-          t(`conversationNodes.${returnNode.id}`) ||
+          getConvMessage(returnNode.id) ||
           (returnNode.content ?? "") ||
-          t("conversation.welcomeBack");
+          m.conversation_welcomeBack();
         const returnMessage: Message = {
           id: Date.now().toString(),
           type: activityPrompt ? "app-buttons" : "message",
@@ -435,13 +412,13 @@ function App() {
   };
 
   const handleAudioPlay = () => {
-    toast.success(t("toast.playingVoiceMessage"), {
-      description: t("toast.audioMessage"),
+    toast.success(m.toast_playingVoiceMessage(), {
+      description: m.toast_audioMessage(),
     });
   };
 
   const handleVoiceInput = () => {
-    toast.info(t("toast.voiceInputActivated"));
+    toast.info(m.toast_voiceInputActivated());
   };
 
   const handleAccessibility = () => {
@@ -449,7 +426,7 @@ function App() {
   };
 
   const handleSettings = () => {
-    toast.info(t("toast.openingSettings"));
+    toast.info(m.toast_openingSettings());
   };
 
   const handleDemoAlert = () => {
@@ -466,7 +443,7 @@ function App() {
       {
         id: `${Date.now()}_alert_start`,
         type: "message",
-        content: t("alert.alertStart"),
+        content: m.alert_alertStart(),
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: "alert_start",
@@ -487,7 +464,7 @@ function App() {
             {
               id: `${Date.now()}_alert_clear`,
               type: "message",
-              content: t("alert.alertClear"),
+              content: m.alert_alertClear(),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: "alert_all_clear",
@@ -521,17 +498,17 @@ function App() {
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">
-            {t("conversation.conversationComplete")}
+            {m.conversation_conversationComplete()}
           </h2>
-          <p className="text-gray-600 mb-4">{t("conversation.thankYou")}</p>
+          <p className="text-gray-600 mb-4">{m.conversation_thankYou()}</p>
           <Button
             onClick={() => {
               conversationController.reset();
               const initialNode = conversationController.getCurrentNode();
               const content =
-                t(`conversationNodes.${initialNode.id}`) ||
+                getConvMessage(initialNode.id) ||
                 (initialNode.content ?? "") ||
-                t("conversation.helloImHereWithYou");
+                m.conversation_helloImHereWithYou();
               setConversationHistory([
                 {
                   id: Date.now().toString(),
@@ -544,7 +521,7 @@ function App() {
               ]);
             }}
           >
-            {t("conversation.startNewConversation")}
+            {m.conversation_startNewConversation()}
           </Button>
         </div>
       </div>
@@ -567,7 +544,7 @@ function App() {
               <Logo />
               <div className="flex items-center gap-2 sm:gap-4 min-w-0">
                 <h1 className="text-lg sm:text-xl font-large truncate">
-                  {t("app.name")}
+                  {m.app_name()}
                 </h1>
                 <AlertTimer timeRemaining={alertTimer} />
               </div>
@@ -582,7 +559,7 @@ function App() {
                   onClick={handleDemoAlert}
                   className="bg-red-600 hover:bg-red-700 whitespace-nowrap"
                 >
-                  {t("header.demoAlert")}
+                  {m.header_demoAlert()}
                 </Button>
               )}
               <Button
@@ -592,7 +569,7 @@ function App() {
                 onClick={handleAccessibility}
               >
                 <Accessibility className="w-4 h-4" />
-                <span className="sr-only">{t("header.accessibility")}</span>
+                <span className="sr-only">{m.header_accessibility()}</span>
               </Button>
               <LanguageSwitcher />
               <DarkModeToggle />
@@ -603,11 +580,11 @@ function App() {
                 onClick={handleSettings}
               >
                 <Settings className="w-4 h-4" />
-                <span className="sr-only">{t("header.settings")}</span>
+                <span className="sr-only">{m.header_settings()}</span>
               </Button>
               <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
                 <MoreVertical className="w-4 h-4" />
-                <span className="sr-only">{t("header.moreOptions")}</span>
+                <span className="sr-only">{m.header_moreOptions()}</span>
               </Button>
             </div>
 
@@ -620,19 +597,19 @@ function App() {
                   onClick={handleDemoAlert}
                   className="bg-red-600 hover:bg-red-700 h-10 px-3 text-xs sm:text-sm whitespace-nowrap"
                 >
-                  {t("header.demoAlertMobile")}
+                  {m.header_demoAlertMobile()}
                 </Button>
               )}
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
                     <Menu className="w-5 h-5" />
-                    <span className="sr-only">{t("header.menu")}</span>
+                    <span className="sr-only">{m.header_menu()}</span>
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-64 sm:w-80">
                   <SheetHeader>
-                    <SheetTitle>{t("header.menu")}</SheetTitle>
+                    <SheetTitle>{m.header_menu()}</SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col gap-2 mt-6">
                     <Button
@@ -644,11 +621,11 @@ function App() {
                       }}
                     >
                       <Accessibility className="w-5 h-5" />
-                      <span>{t("header.accessibility")}</span>
+                      <span>{m.header_accessibility()}</span>
                     </Button>
                     <div className="flex items-center justify-between px-3 py-2">
                       <span className="text-sm font-medium">
-                        {t("header.darkMode")}
+                        {m.header_darkMode()}
                       </span>
                       <DarkModeToggle />
                     </div>
@@ -661,7 +638,7 @@ function App() {
                       }}
                     >
                       <Settings className="w-5 h-5" />
-                      <span>{t("header.settings")}</span>
+                      <span>{m.header_settings()}</span>
                     </Button>
                     <Button
                       variant="ghost"
@@ -671,7 +648,7 @@ function App() {
                       }}
                     >
                       <MoreVertical className="w-5 h-5" />
-                      <span>{t("header.moreOptions")}</span>
+                      <span>{m.header_moreOptions()}</span>
                     </Button>
                   </div>
                 </SheetContent>
@@ -690,10 +667,10 @@ function App() {
                     <div className="flex items-center justify-between">
                       <div>
                         <h2 className="text-sm font-medium text-muted-foreground">
-                          {t("quickActivities.title")}
+                          {m.quickActivities_title()}
                         </h2>
                         <p className="text-xs text-muted-foreground/70 hidden xs:block">
-                          {t("quickActivities.subtitle")}
+                          {m.quickActivities_subtitle()}
                         </p>
                       </div>
                       <Button
@@ -705,8 +682,8 @@ function App() {
                         }}
                         aria-label={
                           showQuickPanel
-                            ? t("quickActivities.hide")
-                            : t("quickActivities.show")
+                            ? m.quickActivities_hide()
+                            : m.quickActivities_show()
                         }
                         aria-expanded={showQuickPanel}
                         aria-controls="quick-activities-panel"
@@ -775,8 +752,8 @@ function App() {
 
           {shouldAutoLaunchApp && (
             <div className="mt-4 mx-4 rounded-lg border border-amber-400 bg-amber-100/70 p-4 text-amber-800">
-              <strong>{t("conversation.highStressDetected")}</strong>{" "}
-              {t("conversation.breathingAutoLaunch")}
+              <strong>{m.conversation_highStressDetected()}</strong>{" "}
+              {m.conversation_breathingAutoLaunch()}
             </div>
           )}
           {!showAppsLauncher && (

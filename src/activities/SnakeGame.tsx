@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { useI18n } from "../i18n";
+import * as m from "../paraglide/messages.js";
 
 interface SnakeGameProps {
   onGameEnd?: () => void;
 }
 
-const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
-  const { t } = useI18n();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {  const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [canvasSize, setCanvasSize] = useState(400);
@@ -265,20 +263,20 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       {gameOver && (
         <div className="mt-5 text-center">
           <h2 className="text-xl font-bold">
-            {t("activities.snake.gameOver")}
+            {m.activities_snake_gameOver()}
           </h2>
           <button
             onClick={restartGame}
             className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md"
           >
-            {t("activities.snake.restart")}
+            {m.activities_snake_restart()}
           </button>
           {onGameEnd && (
             <button
               onClick={onGameEnd}
               className="p-3 text-lg bg-secondary text-secondary-foreground rounded-md"
             >
-              {t("activities.snake.exit")}
+              {m.activities_snake_exit()}
             </button>
           )}
         </div>

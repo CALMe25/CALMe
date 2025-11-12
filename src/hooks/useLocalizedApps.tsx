@@ -7,33 +7,46 @@ export function useLocalizedApps(): AppInterface[] {
   const { currentLanguage } = useLanguage();
 
   return useMemo(() => {
-    // Helper to get message by key
-    const getMessage = (key: string): string => {
-      const fnName = key.replace(/\./g, "_");
-      const fn = (m as any)[fnName];
-      if (typeof fn === "function") {
-        return fn();
-      }
-      console.warn(`Translation key not found: ${key}`);
-      return key;
+    // Map app names to their localized labels and descriptions
+    const translations: Record<string, { label: string; description: string }> = {
+      breathing: {
+        label: m.activities_breathing_label(),
+        description: m.activities_breathing_description(),
+      },
+      stretching: {
+        label: m.activities_stretching_label(),
+        description: m.activities_stretching_description(),
+      },
+      "matching-cards": {
+        label: m.activities_matchingCards_label(),
+        description: m.activities_matchingCards_description(),
+      },
+      sudoku: {
+        label: m.activities_sudoku_label(),
+        description: m.activities_sudoku_description(),
+      },
+      puzzle: {
+        label: m.activities_puzzle_label(),
+        description: m.activities_puzzle_description(),
+      },
+      paint: {
+        label: m.activities_paint_label(),
+        description: m.activities_paint_description(),
+      },
+      snake: {
+        label: m.activities_snake_label(),
+        description: m.activities_snake_description(),
+      },
+      "number-guessing": {
+        label: m.activities_numberGuessing_label(),
+        description: m.activities_numberGuessing_description(),
+      },
     };
 
-    // Map kebab-case names to camelCase for lookup
-    const nameMap: Record<string, string> = {
-      "matching-cards": "matchingCards",
-      "number-guessing": "numberGuessing",
-    };
-
-    return InnerApps.map((app) => {
-      const lookupName = nameMap[app.name] || app.name;
-
-      return {
-        ...app,
-        label: getMessage(`activities.${lookupName}.label`),
-        description: getMessage(`activities.${lookupName}.description`),
-      };
-    });
-    // currentLanguage intentionally included to trigger re-evaluation on language change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return InnerApps.map((app) => ({
+      ...app,
+      label: translations[app.name]?.label || app.label,
+      description: translations[app.name]?.description || app.description,
+    }));
   }, [currentLanguage]);
 }

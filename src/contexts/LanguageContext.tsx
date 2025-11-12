@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useReducer, type ReactNode } from "react";
 import { languageTag, onSetLanguageTag } from "../paraglide/runtime.js";
 
 interface LanguageContextType {
@@ -7,29 +7,19 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType>({ currentLanguage: "en" });
 
-// Track if we've already set up the callback
-let callbackSet = false;
-let setLanguageState: ((lang: string) => void) | null = null;
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [currentLanguage, setCurrentLanguage] = useState(() => languageTag());
+  // Use a simple counter to force re-renders when language changes
+  const [, forceUpdate] = useReducer((x: number) => x + 1, 0);
 
   useEffect(() => {
-    // Only set up the callback once globally
-    if (!callbackSet) {
-      callbackSet = true;
-      setLanguageState = setCurrentLanguage;
-
-      onSetLanguageTag((newTag) => {
-        if (setLanguageState) {
-          setLanguageState(newTag);
-        }
-      });
-    }
+    // Set up callback to trigger re-render on language change
+    return onSetLanguageTag(() => {
+      forceUpdate();
+    });
   }, []);
 
   return (
-    <LanguageContext.Provider value={{ currentLanguage }}>
+    <LanguageContext.Provider value={{ currentLanguage: languageTag() }}>
       {children}
     </LanguageContext.Provider>
   );

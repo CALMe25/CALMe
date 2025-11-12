@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import calmeLogo from "../assets/calme-logo.svg";
-import { useI18n } from "../i18n";
+import * as m from "../paraglide/messages.js";
 
 // Define the type for a single card
 interface Card {
@@ -15,9 +15,7 @@ interface MatchingGameProps {
   onGameEnd: () => void; // Callback to notify App.tsx when the game is over
 }
 
-const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
-  const { t } = useI18n();
-  // Emojis for the cards (6 pairs for a 3x4 grid = 12 cards)
+const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {  // Emojis for the cards (6 pairs for a 3x4 grid = 12 cards)
   const cardEmojis = ["🍎", "🍌", "🍇", "🍋", "🍊", "🍓"]; // Now 6 unique emojis
 
   // Function to initialize and shuffle the cards for a 3x4 grid
@@ -143,13 +141,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
           className="mb-4 flex w-full items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900 shadow-sm sm:mb-5"
         >
           <div className="text-sm sm:text-base font-semibold">
-            {t("activities.matchingCards.winBanner")}
+            {m.activities_matchingCards_winBanner()}
           </div>
           <button
             onClick={resetGame}
             className="rounded-full border border-amber-400 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-900 transition hover:bg-amber-100"
           >
-            {t("activities.matchingCards.playAgain")}
+            {m.activities_matchingCards_playAgain()}
           </button>
         </div>
       )}
@@ -244,13 +242,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
           onClick={resetGame}
           className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 w-full sm:w-auto"
         >
-          {t("activities.matchingCards.reset")}
+          {m.activities_matchingCards_reset()}
         </button>
         <button
           onClick={onGameEnd}
           className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300 w-full sm:w-auto"
         >
-          {t("activities.matchingCards.exit")}
+          {m.activities_matchingCards_exit()}
         </button>
       </div>
     </div>

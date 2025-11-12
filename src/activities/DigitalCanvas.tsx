@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../chat_interface/ui/button";
-import { useI18n } from "../i18n";
+import * as m from "../paraglide/messages.js";
 
 interface DigitalCanvasProps {
   onGameEnd?: () => void;
@@ -29,9 +29,7 @@ const getCssVariableValue = (variable: string) => {
   return variable;
 };
 
-export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
-  const { t } = useI18n();
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [brushSize, setBrushSize] = useState<(typeof BRUSH_SIZES)[number]>(
@@ -145,7 +143,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
           {/* Brush sizes section */}
           <div className="flex items-center gap-1 sm:gap-1.5">
             <div className="font-semibold text-[10px] xs:text-xs sm:text-sm whitespace-nowrap">
-              {t("activities.paint.brush")}
+              {m.activities_paint_brush()}
             </div>
             <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5">
               {BRUSH_SIZES.map((size) => (
@@ -172,7 +170,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
           {/* Colors section */}
           <div className="flex items-center gap-1 sm:gap-1.5">
             <div className="font-semibold text-[10px] xs:text-xs sm:text-sm whitespace-nowrap">
-              {t("activities.paint.colors")}
+              {m.activities_paint_colors()}
             </div>
             <div className="flex items-center gap-0.5 xs:gap-1 sm:gap-1.5 overflow-x-auto scrollbar-hide pr-1">
               {PALETTE.map((color) => (
@@ -197,7 +195,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
               onClick={handleClear}
               className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
             >
-              {t("activities.paint.clear")}
+              {m.activities_paint_clear()}
             </Button>
             {onGameEnd && (
               <Button
@@ -205,7 +203,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
                 onClick={onGameEnd}
                 className="min-h-[44px] h-10 sm:h-11 px-4 sm:px-5 text-sm sm:text-base"
               >
-                {t("activities.paint.done")}
+                {m.activities_paint_done()}
               </Button>
             )}
           </div>

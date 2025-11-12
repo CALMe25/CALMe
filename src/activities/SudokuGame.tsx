@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useI18n } from "../i18n";
+import * as m from "../paraglide/messages.js";
 
 type CellValue = number | null;
 type Grid = CellValue[][];
@@ -79,9 +79,7 @@ interface SudokuGameProps {
   onGameEnd?: () => void;
 }
 
-export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
-  const { t } = useI18n();
-  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+export default function SudokuGame({ onGameEnd }: SudokuGameProps) {  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [{ puzzle, solution }, setPuzzleData] = useState(() =>
     generatePuzzle("easy"),
   );
@@ -186,7 +184,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
   return (
     <div className="flex flex-col items-center p-2 md:p-4 bg-background text-foreground w-full max-w-2xl mx-auto h-full max-h-screen overflow-y-auto">
       <h2 className="text-xl md:text-2xl font-bold text-primary mb-2">
-        {t("activities.sudoku.title")}
+        {m.activities_sudoku_title()}
       </h2>
 
       {/* Difficulty Selector */}
@@ -197,7 +195,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           }}
           className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "easy" ? "bg-green-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
         >
-          {t("activities.sudoku.easy")}
+          {m.activities_sudoku_easy()}
         </button>
         <button
           onClick={() => {
@@ -205,7 +203,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           }}
           className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "medium" ? "bg-yellow-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
         >
-          {t("activities.sudoku.medium")}
+          {m.activities_sudoku_medium()}
         </button>
         <button
           onClick={() => {
@@ -213,13 +211,13 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           }}
           className={`min-h-[44px] px-3 py-2 text-xs md:text-sm rounded font-semibold transition-colors ${difficulty === "hard" ? "bg-red-500 text-white" : "bg-secondary text-secondary-foreground hover:bg-accent"}`}
         >
-          {t("activities.sudoku.hard")}
+          {m.activities_sudoku_hard()}
         </button>
       </div>
 
       {isComplete && (
         <div className="mb-2 px-3 py-1.5 bg-green-500 text-white rounded text-xs md:text-base font-semibold animate-pulse">
-          {t("activities.sudoku.congratulations")}
+          {m.activities_sudoku_congratulations()}
         </div>
       )}
 
@@ -289,7 +287,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-destructive text-destructive-foreground hover:bg-destructive/80 disabled:opacity-50 disabled:cursor-not-allowed rounded text-xs sm:text-sm font-semibold transition-colors shadow-sm hover:shadow-md"
           disabled={!selectedCell}
         >
-          {t("activities.sudoku.clear")}
+          {m.activities_sudoku_clear()}
         </button>
       </div>
 
@@ -301,23 +299,23 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
           }}
           className="min-h-[44px] px-3 py-2 text-xs sm:text-sm md:text-base bg-primary text-primary-foreground hover:bg-primary/80 rounded font-semibold transition-colors shadow-sm"
         >
-          {t("activities.sudoku.newGame")}
+          {m.activities_sudoku_newGame()}
         </button>
         {onGameEnd && (
           <button
             onClick={onGameEnd}
             className="min-h-[44px] px-3 py-2 text-xs sm:text-sm md:text-base bg-secondary text-secondary-foreground hover:bg-accent rounded font-semibold transition-colors shadow-sm"
           >
-            {t("activities.sudoku.exit")}
+            {m.activities_sudoku_exit()}
           </button>
         )}
       </div>
 
       {/* Legend */}
       <div className="text-xs md:text-sm text-muted-foreground space-y-0.5 text-center px-2 max-w-md">
-        <p>{t("activities.sudoku.legendOriginal")}</p>
-        <p>{t("activities.sudoku.legendYourInputs")}</p>
-        <p>{t("activities.sudoku.legendErrors")}</p>
+        <p>{m.activities_sudoku_legendOriginal()}</p>
+        <p>{m.activities_sudoku_legendYourInputs()}</p>
+        <p>{m.activities_sudoku_legendErrors()}</p>
       </div>
     </div>
   );

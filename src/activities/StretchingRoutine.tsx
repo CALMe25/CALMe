@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useMemo } from "react";
-import { useI18n } from "../i18n";
+import * as m from "../paraglide/messages.js";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface Exercise {
   id: number;
@@ -19,58 +20,75 @@ const EXERCISE_KEYS = [
 
 const EXERCISE_DURATIONS = [30, 30, 45, 40, 30];
 
-interface ExerciseData {
-  name: string;
-  description: string;
-  instructions: string[];
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
-function isExerciseData(value: unknown): value is ExerciseData {
-  if (!isRecord(value)) return false;
-  return (
-    typeof value.name === "string" &&
-    typeof value.description === "string" &&
-    Array.isArray(value.instructions) &&
-    value.instructions.every((item) => typeof item === "string")
-  );
-}
-
 export default function StretchingRoutine() {
-  const { t, messages } = useI18n();
+  const { currentLanguage } = useLanguage();
 
   const exercises: Exercise[] = useMemo(() => {
-    if (!isRecord(messages)) return [];
-    const activities = messages.activities;
-    if (!isRecord(activities)) return [];
-    const stretching = activities.stretching;
-    if (!isRecord(stretching)) return [];
-    const exercisesData = stretching.exercises;
-    if (!isRecord(exercisesData)) return [];
+    const exercisesMap: Record<string, Exercise> = {
+      neckRolls: {
+        id: 1,
+        name: m.activities_stretching_exercises_neckRolls_name(),
+        duration: EXERCISE_DURATIONS[0],
+        description: m.activities_stretching_exercises_neckRolls_description(),
+        instructions: [
+          m.activities_stretching_exercises_neckRolls_instructions1(),
+          m.activities_stretching_exercises_neckRolls_instructions2(),
+          m.activities_stretching_exercises_neckRolls_instructions3(),
+          m.activities_stretching_exercises_neckRolls_instructions4(),
+        ],
+      },
+      shoulderShrugs: {
+        id: 2,
+        name: m.activities_stretching_exercises_shoulderShrugs_name(),
+        duration: EXERCISE_DURATIONS[1],
+        description: m.activities_stretching_exercises_shoulderShrugs_description(),
+        instructions: [
+          m.activities_stretching_exercises_shoulderShrugs_instructions1(),
+          m.activities_stretching_exercises_shoulderShrugs_instructions2(),
+          m.activities_stretching_exercises_shoulderShrugs_instructions3(),
+          m.activities_stretching_exercises_shoulderShrugs_instructions4(),
+        ],
+      },
+      armCircles: {
+        id: 3,
+        name: m.activities_stretching_exercises_armCircles_name(),
+        duration: EXERCISE_DURATIONS[2],
+        description: m.activities_stretching_exercises_armCircles_description(),
+        instructions: [
+          m.activities_stretching_exercises_armCircles_instructions1(),
+          m.activities_stretching_exercises_armCircles_instructions2(),
+          m.activities_stretching_exercises_armCircles_instructions3(),
+          m.activities_stretching_exercises_armCircles_instructions4(),
+        ],
+      },
+      sideStretch: {
+        id: 4,
+        name: m.activities_stretching_exercises_sideStretch_name(),
+        duration: EXERCISE_DURATIONS[3],
+        description: m.activities_stretching_exercises_sideStretch_description(),
+        instructions: [
+          m.activities_stretching_exercises_sideStretch_instructions1(),
+          m.activities_stretching_exercises_sideStretch_instructions2(),
+          m.activities_stretching_exercises_sideStretch_instructions3(),
+          m.activities_stretching_exercises_sideStretch_instructions4(),
+        ],
+      },
+      forwardFold: {
+        id: 5,
+        name: m.activities_stretching_exercises_forwardFold_name(),
+        duration: EXERCISE_DURATIONS[4],
+        description: m.activities_stretching_exercises_forwardFold_description(),
+        instructions: [
+          m.activities_stretching_exercises_forwardFold_instructions1(),
+          m.activities_stretching_exercises_forwardFold_instructions2(),
+          m.activities_stretching_exercises_forwardFold_instructions3(),
+          m.activities_stretching_exercises_forwardFold_instructions4(),
+        ],
+      },
+    };
 
-    return EXERCISE_KEYS.map((key, index) => {
-      const exerciseValue = exercisesData[key];
-      if (!isExerciseData(exerciseValue)) {
-        return {
-          id: index + 1,
-          name: "",
-          duration: EXERCISE_DURATIONS[index],
-          description: "",
-          instructions: [],
-        };
-      }
-      return {
-        id: index + 1,
-        name: exerciseValue.name,
-        duration: EXERCISE_DURATIONS[index],
-        description: exerciseValue.description,
-        instructions: exerciseValue.instructions,
-      };
-    });
-  }, [messages]);
+    return EXERCISE_KEYS.map((key) => exercisesMap[key]);
+  }, [currentLanguage]);
   const [currentExercise, setCurrentExercise] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(exercises[0].duration);
@@ -166,10 +184,10 @@ export default function StretchingRoutine() {
       <div className="w-full max-w-4xl">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary">
-            {t("activities.stretching.title")}
+            {m.activities_stretching_title()}
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground">
-            {t("activities.stretching.exerciseProgress", {
+            {m.activities_stretching_exerciseProgress({
               current: (currentExercise + 1).toString(),
               total: exercises.length.toString(),
             })}
@@ -201,7 +219,7 @@ export default function StretchingRoutine() {
 
             <div className="flex-1 rounded-xl border border-border/60 bg-muted/30 p-3 sm:p-4">
               <h4 className="text-base sm:text-lg font-semibold mb-3 text-primary">
-                {t("activities.stretching.instructions")}
+                {m.activities_stretching_instructions()}
               </h4>
               <ol className="list-decimal list-inside space-y-2">
                 {exercise.instructions.map((instruction, index) => (
@@ -223,7 +241,7 @@ export default function StretchingRoutine() {
                 disabled={currentExercise === 0}
                 className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
               >
-                {t("activities.stretching.previous")}
+                {m.activities_stretching_previous()}
               </button>
 
               <button
@@ -231,10 +249,10 @@ export default function StretchingRoutine() {
                 className={`min-h-[44px] flex-1 rounded-lg px-6 py-2 text-sm font-semibold transition-all active:scale-95 sm:text-base ${isActive ? "bg-destructive text-destructive-foreground hover:bg-destructive/80" : "bg-primary text-primary-foreground hover:bg-primary/80"}`}
               >
                 {isActive
-                  ? t("activities.stretching.pause")
+                  ? m.activities_stretching_pause()
                   : timeRemaining === 0
-                    ? t("activities.stretching.restart")
-                    : t("activities.stretching.start")}
+                    ? m.activities_stretching_restart()
+                    : m.activities_stretching_start()}
               </button>
 
               <button
@@ -242,7 +260,7 @@ export default function StretchingRoutine() {
                 disabled={currentExercise === exercises.length - 1}
                 className="min-h-[44px] flex-1 rounded-lg bg-secondary px-4 py-2 text-sm transition-all hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
               >
-                {t("activities.stretching.next")}
+                {m.activities_stretching_next()}
               </button>
             </div>
 
@@ -250,13 +268,13 @@ export default function StretchingRoutine() {
               onClick={resetRoutine}
               className="w-full min-h-[44px] rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground transition-all hover:bg-primary/80 active:scale-95 sm:text-base"
             >
-              {t("activities.stretching.reset")}
+              {m.activities_stretching_reset()}
             </button>
           </div>
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground sm:text-sm">
-          {t("activities.stretching.disclaimer")}
+          {m.activities_stretching_disclaimer()}
         </p>
       </div>
     </div>
