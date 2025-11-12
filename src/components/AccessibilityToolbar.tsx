@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { useI18n } from "../i18n";
+import { useLanguage } from "../contexts/LanguageContext";
+import { languageTag } from "../paraglide/runtime.js";
+import * as m from "../paraglide/messages.js";
 
 interface AccessibilityToolbarProps {
   open: boolean;
@@ -258,16 +260,16 @@ export function AccessibilityToolbar({
   open,
   onClose,
 }: AccessibilityToolbarProps) {
-  const { languageTag, t } = useI18n();
+  const { currentLanguage } = useLanguage();
 
   // Destroy and recreate toolbar when language changes
   useEffect(() => {
     if (window.micAccessTool && window.MicAccessTool) {
       // Language changed, recreate toolbar
       destroyToolbarInstance();
-      createToolbarInstance(languageTag, true);
+      createToolbarInstance(languageTag(), true);
     }
-  }, [languageTag]);
+  }, [currentLanguage]);
 
   useEffect(() => {
     if (!open) return;
@@ -278,15 +280,15 @@ export function AccessibilityToolbar({
         await loadToolbarScript();
         if (cancelled) return;
         // Force recreate to ensure correct language
-        const toolbar = createToolbarInstance(languageTag, true);
+        const toolbar = createToolbarInstance(languageTag(), true);
         if (toolbar?.openBox) {
           toolbar.openBox();
         }
       } catch (error) {
         console.error(error);
         if (!cancelled) {
-          toast.error(t("toast.accessibilityToolbarFailed"), {
-            description: t("toast.accessibilityToolbarFailedDescription"),
+          toast.error(m.toast_accessibilitytoolbarfailed1(), {
+            description: m.toast_accessibilitytoolbarfaileddescription1(),
           });
         }
       } finally {
@@ -301,7 +303,7 @@ export function AccessibilityToolbar({
     return () => {
       cancelled = true;
     };
-  }, [open, onClose, languageTag, t]);
+  }, [open, onClose, currentLanguage]);
 
   return null;
 }

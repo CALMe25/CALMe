@@ -6,15 +6,34 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../chat_interface/ui/dropdown-menu";
-import { useI18n, type LanguageTag } from "../i18n";
+import {
+  languageTag,
+  setLanguageTag,
+  availableLanguageTags,
+} from "../paraglide/runtime.js";
+import { useState } from "react";
 
-const LANGUAGES: { code: LanguageTag; name: string; nativeName: string }[] = [
-  { code: "en", name: "English", nativeName: "English" },
-  { code: "he", name: "Hebrew", nativeName: "עברית" },
-];
+const LANGUAGE_NAMES: Record<string, string> = {
+  en: "English",
+  he: "עברית",
+};
 
 export function LanguageSwitcher() {
-  const { languageTag, setLanguageTag } = useI18n();
+  const [currentLocale, setCurrentLocale] = useState(languageTag());
+
+  const handleSetLocale = (locale: (typeof availableLanguageTags)[number]) => {
+    setLanguageTag(locale);
+    setCurrentLocale(locale);
+
+    // Apply RTL for Hebrew
+    if (locale === "he") {
+      document.documentElement.setAttribute("dir", "rtl");
+      document.documentElement.setAttribute("lang", "he");
+    } else {
+      document.documentElement.setAttribute("dir", "ltr");
+      document.documentElement.setAttribute("lang", "en");
+    }
+  };
 
   return (
     <DropdownMenu>
@@ -25,19 +44,17 @@ export function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {LANGUAGES.map((lang) => (
+        {availableLanguageTags.map((locale) => (
           <DropdownMenuItem
-            key={lang.code}
-            onClick={() => {
-              setLanguageTag(lang.code);
-            }}
+            key={locale}
+            onClick={() => handleSetLocale(locale)}
             className={
-              languageTag === lang.code ? "bg-accent font-semibold" : ""
+              currentLocale === locale ? "bg-accent font-semibold" : ""
             }
           >
             <span className="flex items-center gap-2">
-              {lang.nativeName}
-              {languageTag === lang.code && <span className="text-xs">✓</span>}
+              {LANGUAGE_NAMES[locale]}
+              {currentLocale === locale && <span className="text-xs">✓</span>}
             </span>
           </DropdownMenuItem>
         ))}

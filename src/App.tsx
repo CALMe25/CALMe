@@ -26,7 +26,8 @@ import { ConversationController } from "./conversation/ConversationController";
 import { AlertTimer } from "./components/AlertTimer";
 import { DarkModeToggle } from "./components/DarkModeToggle";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { useI18n } from "./i18n";
+import { useLanguage } from "./contexts/LanguageContext";
+import * as m from "./paraglide/messages.js";
 import { useLocalizedApps } from "./hooks/useLocalizedApps";
 import {
   Sheet,
@@ -48,8 +49,41 @@ interface Message {
 }
 
 function App() {
-  const { t, messages, languageTag } = useI18n();
+  const { currentLanguage } = useLanguage();
   const localizedApps = useLocalizedApps();
+
+  // Helper function to get messages dynamically
+  const t = useCallback((key: string, params?: Record<string, any>): string => {
+    // Convert dot notation to underscore and numbers for array items
+    const fnName = key.replace(/\./g, "_");
+
+    // Try the main function name
+    const fn = (m as any)[fnName];
+    if (typeof fn === "function") {
+      return fn(params || {});
+    }
+
+    // Try with number suffix (for arrays that were flattened with numbers)
+    for (let i = 1; i <= 10; i++) {
+      const numberedFn = (m as any)[`${fnName}${i}`];
+      if (typeof numberedFn === "function") {
+        return numberedFn(params || {});
+      }
+    }
+
+    // For conversation nodes, try with conv_ prefix
+    if (key.startsWith("conversationNodes.")) {
+      const nodeId = key.replace("conversationNodes.", "");
+      const convFn = (m as any)[`conv_${nodeId}`];
+      if (typeof convFn === "function") {
+        return convFn(params || {});
+      }
+    }
+
+    // Return key if not found
+    console.warn(`Translation key not found: ${key}`);
+    return key;
+  }, [currentLanguage]);
   const [conversationController] = useState(() => new ConversationController());
   const [userInput, setUserInput] = useState("");
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);
@@ -134,8 +168,33 @@ function App() {
 
   // Update parser with current language messages whenever language changes
   useEffect(() => {
-    conversationController.setParserMessages(messages);
-  }, [conversationController, messages, languageTag]);
+    // Create messages object from Paraglide for parser
+    const parserMessages = {
+      parser: {
+        affirmativeResponses: m.parser_affirmativeResponses(),
+        negativeResponses: m.parser_negativeResponses(),
+        uncertainResponses: m.parser_uncertainResponses(),
+        stressKeywords: {
+          no_stress: m.parser_stressKeywords_no_stress(),
+          moderate_stress: m.parser_stressKeywords_moderate_stress(),
+          high_stress: m.parser_stressKeywords_high_stress(),
+        },
+        safetyKeywords: {
+          safe: m.parser_safetyKeywords_safe(),
+          danger: m.parser_safetyKeywords_danger(),
+          unsure: m.parser_safetyKeywords_unsure(),
+        },
+        clarifications: {
+          stress: m.parser_clarifications_stress(),
+          safety: m.parser_clarifications_safety(),
+          location: m.parser_clarifications_location(),
+          yesNo: m.parser_clarifications_yesNo(),
+          activity: m.parser_clarifications_activity(),
+        },
+      },
+    };
+    conversationController.setParserMessages(parserMessages);
+  }, [conversationController, currentLanguage]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {

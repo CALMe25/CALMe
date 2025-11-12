@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { paraglide } from "@inlang/paraglide-js-adapter-vite";
 import { fileURLToPath } from "url"; // Import fileURLToPath
 import { dirname, resolve } from "path"; // Import dirname and resolve from path
 
@@ -10,7 +11,14 @@ const __dirname = dirname(__filename);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    paraglide({
+      project: "./project.inlang",
+      outdir: "./src/paraglide",
+    }),
+  ],
   resolve: {
     alias: {
       // Use resolve from 'path' and the correctly defined __dirname
