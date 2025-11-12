@@ -6,11 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../chat_interface/ui/dropdown-menu";
-import {
-  languageTag,
-  setLanguageTag,
-  availableLanguageTags,
-} from "../paraglide/runtime.js";
+import { setLocale, locales } from "../paraglide/runtime.js";
 import { useState } from "react";
 
 const LANGUAGE_NAMES: Record<string, string> = {
@@ -19,11 +15,10 @@ const LANGUAGE_NAMES: Record<string, string> = {
 };
 
 export function LanguageSwitcher() {
-  const [currentLocale, setCurrentLocale] = useState(languageTag());
+  const [currentLocale] = useState();
 
-  const handleSetLocale = (locale: (typeof availableLanguageTags)[number]) => {
-    setLanguageTag(locale);
-    setCurrentLocale(locale);
+  const handleSetLocale = (locale: (typeof locales)[number]) => {
+    void setLocale(locale, { reload: false });
 
     // Apply RTL for Hebrew
     if (locale === "he") {
@@ -44,7 +39,7 @@ export function LanguageSwitcher() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {availableLanguageTags.map((locale) => (
+        {locales.map((locale) => (
           <DropdownMenuItem
             key={locale}
             onClick={() => {

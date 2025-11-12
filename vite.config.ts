@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { paraglide } from "@inlang/paraglide-js-adapter-vite";
+import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { fileURLToPath } from "url"; // Import fileURLToPath
 import { dirname, resolve } from "path"; // Import dirname and resolve from path
 
@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    paraglide({
+    paraglideVitePlugin({
       project: "./project.inlang",
       outdir: "./src/paraglide",
     }),

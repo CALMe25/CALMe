@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useLanguage } from "../contexts/LanguageContext";
-import { languageTag } from "../paraglide/runtime.js";
+import { getLocale } from "../paraglide/runtime.js";
 import * as m from "../paraglide/messages.js";
 
 interface AccessibilityToolbarProps {
@@ -267,7 +267,7 @@ export function AccessibilityToolbar({
     if (window.micAccessTool && window.MicAccessTool) {
       // Language changed, recreate toolbar
       destroyToolbarInstance();
-      createToolbarInstance(languageTag(), true);
+      createToolbarInstance(getLocale(), true);
     }
   }, [currentLanguage]);
 
@@ -280,7 +280,7 @@ export function AccessibilityToolbar({
         await loadToolbarScript();
         if (cancelled) return;
         // Force recreate to ensure correct language
-        const toolbar = createToolbarInstance(languageTag(), true);
+        const toolbar = createToolbarInstance(getLocale(), true);
         if (toolbar?.openBox) {
           toolbar.openBox();
         }
