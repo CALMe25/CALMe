@@ -7,6 +7,9 @@ export function useLocalizedApps(): AppInterface[] {
   const { currentLanguage } = useLanguage();
 
   return useMemo(() => {
+    // Force recomputation when language changes by referencing currentLanguage
+    void currentLanguage;
+
     // Map app names to their localized labels and descriptions
     const translations: Record<string, { label: string; description: string }> =
       {

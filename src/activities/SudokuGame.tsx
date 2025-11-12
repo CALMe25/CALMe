@@ -237,24 +237,24 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
                 disabled={puzzle[rowIndex][colIndex] !== null}
                 aria-label={
                   puzzle[rowIndex][colIndex] !== null
-                    ? t("activities.sudoku.ariaFixed", {
+                    ? m.activities_sudoku_ariaFixed({
                         row: (rowIndex + 1).toString(),
                         col: (colIndex + 1).toString(),
                         value: cell?.toString() ?? "",
                       })
                     : cell != null
                       ? errors.has(`${rowIndex},${colIndex}`)
-                        ? t("activities.sudoku.ariaError", {
+                        ? m.activities_sudoku_ariaError({
                             row: (rowIndex + 1).toString(),
                             col: (colIndex + 1).toString(),
                             value: cell.toString(),
                           })
-                        : t("activities.sudoku.ariaFilled", {
+                        : m.activities_sudoku_ariaFilled({
                             row: (rowIndex + 1).toString(),
                             col: (colIndex + 1).toString(),
                             value: cell.toString(),
                           })
-                      : t("activities.sudoku.ariaEmpty", {
+                      : m.activities_sudoku_ariaEmpty({
                           row: (rowIndex + 1).toString(),
                           col: (colIndex + 1).toString(),
                         })

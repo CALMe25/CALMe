@@ -47,7 +47,9 @@ export function LanguageSwitcher() {
         {availableLanguageTags.map((locale) => (
           <DropdownMenuItem
             key={locale}
-            onClick={() => handleSetLocale(locale)}
+            onClick={() => {
+              handleSetLocale(locale);
+            }}
             className={
               currentLocale === locale ? "bg-accent font-semibold" : ""
             }

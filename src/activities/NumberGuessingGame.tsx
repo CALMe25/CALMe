@@ -51,7 +51,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
           ? m.activities_numberGuessing_attempt()
           : m.activities_numberGuessing_attempts();
       setMessage(
-        t("activities.numberGuessing.congratulations", {
+        m.activities_numberGuessing_congratulations({
           attempts: newAttempts.toString(),
           attemptsWord,
         }),

@@ -128,7 +128,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
           Matching Game
         </h2>
         <p className="text-sm text-muted-foreground">
-          {t("activities.matchingCards.progress", {
+          {m.activities_matchingCards_progress({
             found: matchesFound.toString(),
             total: totalPairs.toString(),
           })}

@@ -287,8 +287,8 @@ export function AccessibilityToolbar({
       } catch (error) {
         console.error(error);
         if (!cancelled) {
-          toast.error(m.toast_accessibilitytoolbarfailed1(), {
-            description: m.toast_accessibilitytoolbarfaileddescription1(),
+          toast.error(m.toast_accessibilityToolbarFailed(), {
+            description: m.toast_accessibilityToolbarFailedDescription(),
           });
         }
       } finally {

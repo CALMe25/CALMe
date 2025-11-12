@@ -24,6 +24,9 @@ export default function StretchingRoutine() {
   const { currentLanguage } = useLanguage();
 
   const exercises: Exercise[] = useMemo(() => {
+    // Force recomputation when language changes by referencing currentLanguage
+    void currentLanguage;
+
     const exercisesMap: Record<string, Exercise> = {
       neckRolls: {
         id: 1,

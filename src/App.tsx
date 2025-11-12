@@ -55,9 +55,18 @@ function App() {
   // Helper for dynamic conversation node message lookups
   // Only used for conversation flow where node ID is dynamic
   const getConvMessage = useCallback((nodeId: string): string => {
-    const convFn = (m as any)[`conv_${nodeId}`];
-    if (typeof convFn === "function") {
-      return convFn();
+    const messageKey = `conv_${nodeId}`;
+    // Dynamic lookup of conversation messages
+    // Type-safe dynamic property access using 'in' operator
+    const isValidKey = (key: string): key is keyof typeof m => {
+      return key in m;
+    };
+
+    if (isValidKey(messageKey)) {
+      const convFn = m[messageKey];
+      if (typeof convFn === "function") {
+        return convFn();
+      }
     }
     console.warn(`Conversation node not found: conv_${nodeId}`);
     return "";
