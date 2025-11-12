@@ -165,7 +165,7 @@ function App() {
       }
     };
     void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES, t]);
+  }, [conversationController, ACTIVITY_PROMPT_NODES, t, currentLanguage]);
 
   // Update parser with current language messages whenever language changes
   useEffect(() => {
