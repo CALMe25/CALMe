@@ -53,6 +53,7 @@ function App() {
   const localizedApps = useLocalizedApps();
 
   // Helper function to get messages dynamically
+  // Note: Paraglide message functions automatically use the current language
   const t = useCallback((key: string, params?: Record<string, any>): string => {
     // Convert dot notation to underscore and numbers for array items
     const fnName = key.replace(/\./g, "_");
@@ -83,7 +84,7 @@ function App() {
     // Return key if not found
     console.warn(`Translation key not found: ${key}`);
     return key;
-  }, [currentLanguage]);
+  }, []);
   const [conversationController] = useState(() => new ConversationController());
   const [userInput, setUserInput] = useState("");
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);

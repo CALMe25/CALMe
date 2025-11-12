@@ -33,5 +33,7 @@ export function useLocalizedApps(): AppInterface[] {
         description: getMessage(`activities.${lookupName}.description`),
       };
     });
+    // currentLanguage intentionally included to trigger re-evaluation on language change
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLanguage]);
 }
