@@ -29,7 +29,8 @@ const getCssVariableValue = (variable: string) => {
   return variable;
 };
 
-export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [brushSize, setBrushSize] = useState<(typeof BRUSH_SIZES)[number]>(

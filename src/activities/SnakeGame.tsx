@@ -5,7 +5,8 @@ interface SnakeGameProps {
   onGameEnd?: () => void;
 }
 
-const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {  const canvasRef = useRef<HTMLCanvasElement>(null);
+const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [canvasSize, setCanvasSize] = useState(400);
@@ -262,9 +263,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {  const canvasRe
       </div>
       {gameOver && (
         <div className="mt-5 text-center">
-          <h2 className="text-xl font-bold">
-            {m.activities_snake_gameOver()}
-          </h2>
+          <h2 className="text-xl font-bold">{m.activities_snake_gameOver()}</h2>
           <button
             onClick={restartGame}
             className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md"

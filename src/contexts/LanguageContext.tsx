@@ -1,11 +1,19 @@
-import { createContext, useContext, useEffect, useReducer, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  type ReactNode,
+} from "react";
 import { languageTag, onSetLanguageTag } from "../paraglide/runtime.js";
 
 interface LanguageContextType {
   currentLanguage: string;
 }
 
-const LanguageContext = createContext<LanguageContextType>({ currentLanguage: "en" });
+const LanguageContext = createContext<LanguageContextType>({
+  currentLanguage: "en",
+});
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Use a simple counter to force re-renders when language changes

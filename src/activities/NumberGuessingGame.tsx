@@ -7,7 +7,8 @@ interface NumberGuessingGameProps {
 
 const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
   onGameEnd,
-}) => {  const [targetNumber, setTargetNumber] = useState<number>(0);
+}) => {
+  const [targetNumber, setTargetNumber] = useState<number>(0);
   const [guess, setGuess] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [attempts, setAttempts] = useState<number>(0);

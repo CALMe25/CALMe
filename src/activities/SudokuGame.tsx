@@ -79,7 +79,8 @@ interface SudokuGameProps {
   onGameEnd?: () => void;
 }
 
-export default function SudokuGame({ onGameEnd }: SudokuGameProps) {  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
+export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
+  const [difficulty, setDifficulty] = useState<Difficulty>("easy");
   const [{ puzzle, solution }, setPuzzleData] = useState(() =>
     generatePuzzle("easy"),
   );

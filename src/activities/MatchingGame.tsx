@@ -15,7 +15,8 @@ interface MatchingGameProps {
   onGameEnd: () => void; // Callback to notify App.tsx when the game is over
 }
 
-const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {  // Emojis for the cards (6 pairs for a 3x4 grid = 12 cards)
+const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
+  // Emojis for the cards (6 pairs for a 3x4 grid = 12 cards)
   const cardEmojis = ["🍎", "🍌", "🍇", "🍋", "🍊", "🍓"]; // Now 6 unique emojis
 
   // Function to initialize and shuffle the cards for a 3x4 grid

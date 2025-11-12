@@ -41,7 +41,8 @@ export default function StretchingRoutine() {
         id: 2,
         name: m.activities_stretching_exercises_shoulderShrugs_name(),
         duration: EXERCISE_DURATIONS[1],
-        description: m.activities_stretching_exercises_shoulderShrugs_description(),
+        description:
+          m.activities_stretching_exercises_shoulderShrugs_description(),
         instructions: [
           m.activities_stretching_exercises_shoulderShrugs_instructions1(),
           m.activities_stretching_exercises_shoulderShrugs_instructions2(),
@@ -65,7 +66,8 @@ export default function StretchingRoutine() {
         id: 4,
         name: m.activities_stretching_exercises_sideStretch_name(),
         duration: EXERCISE_DURATIONS[3],
-        description: m.activities_stretching_exercises_sideStretch_description(),
+        description:
+          m.activities_stretching_exercises_sideStretch_description(),
         instructions: [
           m.activities_stretching_exercises_sideStretch_instructions1(),
           m.activities_stretching_exercises_sideStretch_instructions2(),
@@ -77,7 +79,8 @@ export default function StretchingRoutine() {
         id: 5,
         name: m.activities_stretching_exercises_forwardFold_name(),
         duration: EXERCISE_DURATIONS[4],
-        description: m.activities_stretching_exercises_forwardFold_description(),
+        description:
+          m.activities_stretching_exercises_forwardFold_description(),
         instructions: [
           m.activities_stretching_exercises_forwardFold_instructions1(),
           m.activities_stretching_exercises_forwardFold_instructions2(),

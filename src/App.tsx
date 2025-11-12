@@ -142,7 +142,12 @@ function App() {
       }
     };
     void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES, getConvMessage, currentLanguage]);
+  }, [
+    conversationController,
+    ACTIVITY_PROMPT_NODES,
+    getConvMessage,
+    currentLanguage,
+  ]);
 
   // Update parser with current language messages whenever language changes
   useEffect(() => {
