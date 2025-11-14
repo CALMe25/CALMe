@@ -8,7 +8,7 @@
 flowchart TD
     Start([App Opens - Emergency/Stress Situation]) --> T1Bank[(Tier 1 Activity Bank:<br/>See T1 Activities Below)]
     
-    T1Bank -->|Intro text| T1_1[Tier 1 Activity 1:<br/>Randomized from T1 Bank<br/>Never repeats in session]
+    T1Bank -->|Intro text| T1_1[Tier 1 Activityz 1:<br/>Randomized from T1 Bank<br/>Never repeats in session]
     
     T1_1 -->|transitional text| T1_2[Tier 1 Activity 2:<br/>Different activity from T1 Bank<br/>Never repeats previous]
     
