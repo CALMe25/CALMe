@@ -4,6 +4,32 @@
 import nlp from "compromise";
 import sentiment from "sentiment";
 
+// Type for i18n messages - will be provided by the caller
+export interface ParserMessages {
+  parser: {
+    affirmativeResponses: string;
+    negativeResponses: string;
+    uncertainResponses: string;
+    stressKeywords: {
+      no_stress: string;
+      moderate_stress: string;
+      high_stress: string;
+    };
+    safetyKeywords: {
+      safe: string;
+      danger: string;
+      unsure: string;
+    };
+    clarifications: {
+      stress: string;
+      safety: string;
+      location: string;
+      yesNo: string;
+      activity: string;
+    };
+  };
+}
+
 export interface ParserResult {
   type: "classification" | "extraction";
   category?: string;
@@ -22,6 +48,31 @@ interface KeywordMapping {
 
 class EnhancedParser {
   private sentimentAnalyzer = new sentiment();
+  private messages: ParserMessages | null = null;
+  private keywordCache = new Map<string, string[]>();
+
+  // Set the current language messages for parsing
+  setMessages(messages: ParserMessages): void {
+    this.messages = messages;
+    // Clear cache when messages change (language switch)
+    this.keywordCache.clear();
+  }
+
+  /**
+   * Converts a pipe-delimited string of keywords into an array of lowercase, trimmed keywords.
+   * Results are cached to avoid redundant string processing.
+   * @param keywordString - Pipe-delimited string of keywords (e.g., "yes|yeah|yep")
+   * @returns Array of lowercase, trimmed keywords
+   */
+  private parseKeywords(keywordString: string): string[] {
+    const cached = this.keywordCache.get(keywordString);
+    if (cached) {
+      return cached;
+    }
+    const parsed = keywordString.split("|").map((k) => k.trim().toLowerCase());
+    this.keywordCache.set(keywordString, parsed);
+    return parsed;
+  }
 
   // Keyword mappings for quick categorization
   private stressKeywords: KeywordMapping[] = [
@@ -170,19 +221,63 @@ class EnhancedParser {
     const doc = nlp(input);
     const lowerInput = input.toLowerCase();
 
-    // First, check for keyword matches
-    for (const mapping of this.stressKeywords) {
-      for (const keyword of mapping.keywords) {
-        if (lowerInput.includes(keyword)) {
-          console.log(
-            `✅ Parser: Found keyword match: "${keyword}" → ${mapping.category}`,
-          );
-          return {
-            type: "classification",
-            category: mapping.category,
-            confidence: mapping.confidence,
-            reasoning: `Keyword match: ${keyword}`,
-          };
+    // Use dynamic keywords from i18n if available
+    if (this.messages) {
+      const stressKeywordMappings = [
+        {
+          keywords: this.parseKeywords(
+            this.messages.parser.stressKeywords.no_stress,
+          ),
+          category: "no_stress",
+          confidence: 0.9,
+        },
+        {
+          keywords: this.parseKeywords(
+            this.messages.parser.stressKeywords.moderate_stress,
+          ),
+          category: "moderate_stress",
+          confidence: 0.85,
+        },
+        {
+          keywords: this.parseKeywords(
+            this.messages.parser.stressKeywords.high_stress,
+          ),
+          category: "high_stress",
+          confidence: 0.95,
+        },
+      ];
+
+      // Check for keyword matches with i18n keywords
+      for (const mapping of stressKeywordMappings) {
+        for (const keyword of mapping.keywords) {
+          if (lowerInput.includes(keyword)) {
+            console.log(
+              `✅ Parser: Found i18n keyword match: "${keyword}" → ${mapping.category}`,
+            );
+            return {
+              type: "classification",
+              category: mapping.category,
+              confidence: mapping.confidence,
+              reasoning: `Keyword match: ${keyword}`,
+            };
+          }
+        }
+      }
+    } else {
+      // Fallback to hardcoded English keywords
+      for (const mapping of this.stressKeywords) {
+        for (const keyword of mapping.keywords) {
+          if (lowerInput.includes(keyword)) {
+            console.log(
+              `✅ Parser: Found keyword match: "${keyword}" → ${mapping.category}`,
+            );
+            return {
+              type: "classification",
+              category: mapping.category,
+              confidence: mapping.confidence,
+              reasoning: `Keyword match: ${keyword}`,
+            };
+          }
         }
       }
     }
@@ -233,8 +328,9 @@ class EnhancedParser {
       category: "uncertain",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.stress
+        : "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
     };
   }
 
@@ -243,43 +339,119 @@ class EnhancedParser {
 
     const lowerInput = input.toLowerCase();
 
-    // Check keywords first
-    for (const mapping of this.safetyKeywords) {
-      for (const keyword of mapping.keywords) {
+    // Use dynamic keywords from i18n if available
+    if (this.messages) {
+      const safetyKeywordMappings = [
+        {
+          keywords: this.parseKeywords(
+            this.messages.parser.safetyKeywords.safe,
+          ),
+          category: "SAFE",
+          confidence: 0.9,
+        },
+        {
+          keywords: this.parseKeywords(
+            this.messages.parser.safetyKeywords.danger,
+          ),
+          category: "DANGER",
+          confidence: 0.95,
+        },
+        {
+          keywords: this.parseKeywords(
+            this.messages.parser.safetyKeywords.unsure,
+          ),
+          category: "UNSURE",
+          confidence: 0.7,
+        },
+      ];
+
+      // Check for keyword matches with i18n keywords
+      for (const mapping of safetyKeywordMappings) {
+        for (const keyword of mapping.keywords) {
+          if (lowerInput.includes(keyword)) {
+            console.log(
+              `✅ Parser: Found i18n safety keyword: "${keyword}" → ${mapping.category}`,
+            );
+            return {
+              type: "classification",
+              category: mapping.category,
+              confidence: mapping.confidence,
+              reasoning: `Keyword match: ${keyword}`,
+            };
+          }
+        }
+      }
+
+      // Check for yes/no responses using i18n keywords
+      const affirmativeKeywords = this.parseKeywords(
+        this.messages.parser.affirmativeResponses,
+      );
+      const negativeKeywords = this.parseKeywords(
+        this.messages.parser.negativeResponses,
+      );
+
+      for (const keyword of affirmativeKeywords) {
         if (lowerInput.includes(keyword)) {
-          console.log(
-            `✅ Parser: Found safety keyword: "${keyword}" → ${mapping.category}`,
-          );
+          console.log("✅ Parser: Affirmative response detected (i18n)");
           return {
             type: "classification",
-            category: mapping.category,
-            confidence: mapping.confidence,
-            reasoning: `Keyword match: ${keyword}`,
+            category: "SAFE",
+            confidence: 0.8,
+            reasoning: "Affirmative response",
           };
         }
       }
-    }
 
-    // Use NLP for yes/no detection
-    const doc = nlp(input);
-    if (doc.has("(yes|yeah|yep|yup|sure|definitely|absolutely)")) {
-      console.log("✅ Parser: Affirmative response detected");
-      return {
-        type: "classification",
-        category: "SAFE",
-        confidence: 0.8,
-        reasoning: "Affirmative response",
-      };
-    }
+      for (const keyword of negativeKeywords) {
+        if (lowerInput.includes(keyword)) {
+          console.log("❌ Parser: Negative response detected (i18n)");
+          return {
+            type: "classification",
+            category: "DANGER",
+            confidence: 0.8,
+            reasoning: "Negative response",
+          };
+        }
+      }
+    } else {
+      // Fallback to hardcoded English keywords
+      for (const mapping of this.safetyKeywords) {
+        for (const keyword of mapping.keywords) {
+          if (lowerInput.includes(keyword)) {
+            console.log(
+              `✅ Parser: Found safety keyword: "${keyword}" → ${mapping.category}`,
+            );
+            return {
+              type: "classification",
+              category: mapping.category,
+              confidence: mapping.confidence,
+              reasoning: `Keyword match: ${keyword}`,
+            };
+          }
+        }
+      }
 
-    if (doc.has("(no|nope|not|negative|nah)")) {
-      console.log("❌ Parser: Negative response detected");
-      return {
-        type: "classification",
-        category: "DANGER",
-        confidence: 0.8,
-        reasoning: "Negative response",
-      };
+      // Use NLP for yes/no detection (English only)
+      const doc = nlp(input);
+      if (doc.has("(yes|yeah|yep|yup|sure|definitely|absolutely)")) {
+        console.log("✅ Parser: Affirmative response detected");
+        return {
+          type: "classification",
+          category: "SAFE",
+          confidence: 0.8,
+          reasoning: "Affirmative response",
+        };
+      }
+
+      if (doc.has("(no|nope|not|negative|nah)")) {
+        console.log("❌ Parser: Negative response detected");
+        return {
+          type: "classification",
+          category: "DANGER",
+          confidence: 0.8,
+          reasoning: "Negative response",
+        };
+      }
     }
 
     // Low confidence fallback
@@ -291,8 +463,9 @@ class EnhancedParser {
       category: "UNSURE",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "I need to make sure - are you in a safe, protected space right now?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.safety
+        : "I need to make sure - are you in a safe, protected space right now?",
     };
   }
 
@@ -349,8 +522,9 @@ class EnhancedParser {
       extractedValue: "",
       confidence: 0.2,
       needsClarification: true,
-      clarificationPrompt:
-        "Where exactly are you right now? For example: at home, in a shelter, or somewhere else?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.location
+        : "Where exactly are you right now? For example: at home, in a shelter, or somewhere else?",
     };
   }
 
@@ -358,47 +532,98 @@ class EnhancedParser {
   parseYesNo(input: string): ParserResult {
     console.log("🔍 Parser: Analyzing yes/no response:", input);
 
-    const doc = nlp(input);
     const lowerInput = input.toLowerCase();
 
-    // Strong yes indicators
-    if (
-      doc.has(
-        "(yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly)",
-      ) ||
-      lowerInput.includes("yes") ||
-      lowerInput.includes("yeah")
-    ) {
-      return {
-        type: "classification",
-        category: "yes",
-        confidence: 0.9,
-        reasoning: "Affirmative response detected",
-      };
-    }
+    // Use i18n keywords if available
+    if (this.messages) {
+      const affirmativeKeywords = this.parseKeywords(
+        this.messages.parser.affirmativeResponses,
+      );
+      const negativeKeywords = this.parseKeywords(
+        this.messages.parser.negativeResponses,
+      );
+      const uncertainKeywords = this.parseKeywords(
+        this.messages.parser.uncertainResponses,
+      );
 
-    // Strong no indicators
-    if (
-      doc.has("(no|nope|not|negative|nah|never|wrong)") ||
-      lowerInput.includes("no") ||
-      lowerInput.includes("nope")
-    ) {
-      return {
-        type: "classification",
-        category: "no",
-        confidence: 0.9,
-        reasoning: "Negative response detected",
-      };
-    }
+      // Check affirmative
+      for (const keyword of affirmativeKeywords) {
+        if (lowerInput.includes(keyword)) {
+          return {
+            type: "classification",
+            category: "yes",
+            confidence: 0.9,
+            reasoning: "Affirmative response detected (i18n)",
+          };
+        }
+      }
 
-    // Maybe/uncertain
-    if (doc.has("(maybe|perhaps|possibly|might|could|unsure|not sure)")) {
-      return {
-        type: "classification",
-        category: "maybe",
-        confidence: 0.7,
-        reasoning: "Uncertain response detected",
-      };
+      // Check negative
+      for (const keyword of negativeKeywords) {
+        if (lowerInput.includes(keyword)) {
+          return {
+            type: "classification",
+            category: "no",
+            confidence: 0.9,
+            reasoning: "Negative response detected (i18n)",
+          };
+        }
+      }
+
+      // Check uncertain
+      for (const keyword of uncertainKeywords) {
+        if (lowerInput.includes(keyword)) {
+          return {
+            type: "classification",
+            category: "maybe",
+            confidence: 0.7,
+            reasoning: "Uncertain response detected (i18n)",
+          };
+        }
+      }
+    } else {
+      // Fallback to English NLP
+      const doc = nlp(input);
+
+      // Strong yes indicators
+      if (
+        doc.has(
+          "(yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly)",
+        ) ||
+        lowerInput.includes("yes") ||
+        lowerInput.includes("yeah")
+      ) {
+        return {
+          type: "classification",
+          category: "yes",
+          confidence: 0.9,
+          reasoning: "Affirmative response detected",
+        };
+      }
+
+      // Strong no indicators
+      if (
+        doc.has("(no|nope|not|negative|nah|never|wrong)") ||
+        lowerInput.includes("no") ||
+        lowerInput.includes("nope")
+      ) {
+        return {
+          type: "classification",
+          category: "no",
+          confidence: 0.9,
+          reasoning: "Negative response detected",
+        };
+      }
+
+      // Maybe/uncertain
+      if (doc.has("(maybe|perhaps|possibly|might|could|unsure|not sure)")) {
+        return {
+          type: "classification",
+          category: "maybe",
+          confidence: 0.7,
+          reasoning: "Uncertain response detected",
+        };
+      }
     }
 
     // Low confidence
@@ -407,8 +632,9 @@ class EnhancedParser {
       category: "unclear",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "I need a yes or no answer to continue. Can you please clarify?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.yesNo
+        : "I need a yes or no answer to continue. Can you please clarify?",
     };
   }
 
@@ -479,8 +705,9 @@ class EnhancedParser {
       category: "unclear_activity",
       confidence: 0.3,
       needsClarification: true,
-      clarificationPrompt:
-        "Would you like to try breathing exercises, stretching, or perhaps a matching game?",
+      clarificationPrompt: this.messages
+        ? this.messages.parser.clarifications.activity
+        : "Would you like to try breathing exercises, stretching, or perhaps a matching game?",
     };
   }
 }

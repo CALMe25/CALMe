@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { m } from "../paraglide/messages.js";
+import { useUserPreferences } from "../contexts/UserPreferencesContext";
 
 interface SnakeGameProps {
   onGameEnd?: () => void;
 }
 
 const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
+  const { userGender } = useUserPreferences();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerStartRef = useRef<{ x: number; y: number } | null>(null);
   const [gameOver, setGameOver] = useState(false);
@@ -213,7 +216,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full p-5 bg-background text-foreground">
-      <h1 className="text-2xl font-bold mb-5">Snake Game</h1>
+      <h1 className="text-2xl font-bold mb-5">{m.activities_snake_label()}</h1>
       <canvas
         ref={canvasRef}
         width={canvasSize}
@@ -262,19 +265,19 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
       </div>
       {gameOver && (
         <div className="mt-5 text-center">
-          <h2 className="text-xl font-bold">Game Over</h2>
+          <h2 className="text-xl font-bold">{m.activities_snake_gameOver()}</h2>
           <button
             onClick={restartGame}
             className="mr-2.5 mt-2.5 p-3 text-lg bg-primary text-primary-foreground rounded-md"
           >
-            Restart
+            {m.activities_snake_restart({ userGender })}
           </button>
           {onGameEnd && (
             <button
               onClick={onGameEnd}
               className="p-3 text-lg bg-secondary text-secondary-foreground rounded-md"
             >
-              Exit
+              {m.activities_snake_exit()}
             </button>
           )}
         </div>

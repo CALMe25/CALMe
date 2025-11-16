@@ -9,6 +9,7 @@ import {
   type UserProfile,
 } from "../storage/userProfileStorage";
 import * as enhancedParser from "../parser/enhancedParser";
+import type { ParserMessages } from "../parser/enhancedParser";
 
 // Import types from parser module
 type ClassificationResult = {
@@ -106,6 +107,9 @@ export interface ConversationControllerInterface {
 
   // Get parser type for current node
   getCurrentParserType(): string | null;
+
+  // Set i18n messages for the parser
+  setParserMessages(messages: ParserMessages): void;
 }
 
 // Complete implementation
@@ -556,6 +560,11 @@ export class ConversationController implements ConversationControllerInterface {
 
     // Add to attempted activities
     this.attemptedActivities.add(activityName);
+  }
+
+  // Set i18n messages for the parser
+  setParserMessages(messages: ParserMessages): void {
+    enhancedParser.enhancedParser.setMessages(messages);
   }
 
   // Get list of activities user hasn't tried yet

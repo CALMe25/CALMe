@@ -1,13 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Play, Pause, Mic } from "lucide-react";
-import {
-  AppsContext,
-  InnerApps,
-  type AppInterface,
-  quickActivityOrder,
-} from "../appsContextApi";
+import { type AppInterface, quickActivityOrder } from "../appsContextApi";
+import { useLocalizedApps } from "../hooks/useLocalizedApps";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface ChatMessageProps {
   id: string;
@@ -36,8 +33,10 @@ export function ChatMessage({
 }: ChatMessageProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-
-  const apps = useContext(AppsContext) ?? InnerApps;
+  const apps = useLocalizedApps();
+  const { currentLocale } = useLanguage();
+  const isRTL = currentLocale === "he";
+  const alignRight = isUser;
 
   const formatTime = (timeString: string) => {
     return new Date(timeString).toLocaleTimeString([], {
@@ -76,9 +75,12 @@ export function ChatMessage({
   };
 
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4`}>
+    <div
+      className={`flex ${alignRight ? "justify-end" : "justify-start"} mb-4`}
+      dir={isRTL ? "rtl" : "ltr"}
+    >
       <div
-        className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[280px] ${isUser ? "flex-row-reverse" : "flex-row"}`}
+        className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[280px] ${alignRight ? "flex-row-reverse" : "flex-row"}`}
       >
         <Avatar className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
           <AvatarImage src={isUser ? undefined : "/api/placeholder/32/32"} />
@@ -193,7 +195,7 @@ export function ChatMessage({
           </div>
 
           <span
-            className={`text-xs text-muted-foreground mt-1 ${isUser ? "text-right" : "text-left"}`}
+            className={`text-xs text-muted-foreground mt-1 ${alignRight ? "text-right" : "text-left"}`}
           >
             {nodeId != null
               ? `${nodeId} • ${formatTime(timestamp)}`

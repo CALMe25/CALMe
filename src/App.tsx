@@ -11,7 +11,7 @@ import { ChatInput } from "./chat_interface/ChatInput";
 import { ScrollArea } from "./chat_interface/ui/scroll-area";
 import { Logo } from "./assets/Logo";
 import { Button } from "./chat_interface/ui/button";
-import { Menu, MoreVertical, Settings, Accessibility } from "lucide-react";
+import { Menu, Moon, Languages, UserRound, Accessibility } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import {
   AppsContext,
@@ -25,6 +25,13 @@ import { AccessibilityToolbar } from "./components/AccessibilityToolbar";
 import { ConversationController } from "./conversation/ConversationController";
 import { AlertTimer } from "./components/AlertTimer";
 import { DarkModeToggle } from "./components/DarkModeToggle";
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { GenderPreferenceSelect } from "./components/GenderPreference";
+import { useLanguage } from "./contexts/LanguageContext";
+import { useUserPreferences } from "./contexts/UserPreferencesContext";
+import { useTheme } from "./contexts/ThemeContext";
+import { m } from "./paraglide/messages.js";
+import { useLocalizedApps } from "./hooks/useLocalizedApps";
 import {
   Sheet,
   SheetContent,
@@ -44,7 +51,44 @@ interface Message {
   nodeId: string;
 }
 
+type AnyMessageFunction = (props?: Record<string, unknown>) => string;
+const isMessageFunction = (value: unknown): value is AnyMessageFunction => {
+  return typeof value === "function";
+};
+
 function App() {
+  const { currentLocale } = useLanguage();
+  const isRTL = currentLocale === "he";
+  const { userGender } = useUserPreferences();
+  const localizedApps = useLocalizedApps();
+  const { cycleTheme } = useTheme();
+
+  // Helper for dynamic conversation node message lookups
+  // Only used for conversation flow where node ID is dynamic
+  const getConvMessage = useCallback(
+    (nodeId: string): string => {
+      const messageKey = `conversation_${nodeId}`;
+      // Dynamic lookup of conversation messages
+      // Type-safe dynamic property access using 'in' operator
+      const isValidKey = (key: string): key is keyof typeof m => {
+        return key in m;
+      };
+
+      if (isValidKey(messageKey)) {
+        const convFn = m[messageKey];
+        if (isMessageFunction(convFn)) {
+          // conversation_start is gender-aware and requires userGender parameter
+          if (messageKey === "conversation_start") {
+            return convFn({ userGender });
+          }
+          return convFn();
+        }
+      }
+      console.warn(`Conversation node not found: conversation_${nodeId}`);
+      return `[Missing: ${nodeId}]`;
+    },
+    [userGender],
+  );
   const [conversationController] = useState(() => new ConversationController());
   const [userInput, setUserInput] = useState("");
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);
@@ -68,7 +112,7 @@ function App() {
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
   const appsContext = useContext(AppsContext);
-  const resolvedApps = appsContext ?? InnerApps;
+  const resolvedApps = appsContext ?? localizedApps;
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
 
@@ -76,6 +120,10 @@ function App() {
     () => new Set(["activity_choice", "activity_choice_clarify"]),
     [],
   );
+
+  const menuRowClasses =
+    "flex w-full items-center justify-between rounded-xl border border-border/60 bg-muted/10 px-3 py-2";
+  const menuLabelClasses = "flex items-center gap-3 text-sm font-medium";
 
   useEffect(() => {
     const initializeConversation = async () => {
@@ -90,11 +138,15 @@ function App() {
       try {
         const initialNode = conversationController.getCurrentNode();
         const activityPrompt = ACTIVITY_PROMPT_NODES.has(initialNode.id);
+        const content =
+          getConvMessage(initialNode.id) ||
+          (initialNode.content ?? "") ||
+          m.conversation_helloImHereWithYou();
         setConversationHistory([
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: initialNode.content ?? "Hello! I'm here with you.",
+            content,
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: initialNode.id,
@@ -110,7 +162,7 @@ function App() {
           {
             id: Date.now().toString(),
             type: activityPrompt ? "app-buttons" : "message",
-            content: "Welcome to CALMe. I'm here to support you.",
+            content: m.conversation_welcomeToCalme(),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: fallbackId,
@@ -121,7 +173,66 @@ function App() {
       }
     };
     void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES]);
+  }, [conversationController, ACTIVITY_PROMPT_NODES, getConvMessage]);
+
+  // Update conversation history translations when language changes
+  useEffect(() => {
+    setConversationHistory((prevHistory) =>
+      prevHistory.map((msg) => {
+        // Keep user messages unchanged
+        if (msg.isUser) return msg;
+
+        // Re-translate bot messages using stored nodeId
+        if (msg.nodeId) {
+          const activityPrompt = ACTIVITY_PROMPT_NODES.has(msg.nodeId);
+          const content =
+            getConvMessage(msg.nodeId) ||
+            msg.content ||
+            m.conversation_letsContinue();
+
+          return {
+            ...msg,
+            content,
+            type: activityPrompt ? "app-buttons" : msg.type,
+            appsTypes: activityPrompt ? "activities" : msg.appsTypes,
+          };
+        }
+
+        // Keep other messages unchanged
+        return msg;
+      }),
+    );
+  }, [currentLocale, getConvMessage, ACTIVITY_PROMPT_NODES]);
+
+  // Update parser with current language messages whenever language changes
+  useEffect(() => {
+    // Create messages object from Paraglide for parser
+    const parserMessages = {
+      parser: {
+        affirmativeResponses: m.parser_affirmativeResponses(),
+        negativeResponses: m.parser_negativeResponses(),
+        uncertainResponses: m.parser_uncertainResponses(),
+        stressKeywords: {
+          no_stress: m.parser_stressKeywords_no_stress(),
+          moderate_stress: m.parser_stressKeywords_moderate_stress(),
+          high_stress: m.parser_stressKeywords_high_stress(),
+        },
+        safetyKeywords: {
+          safe: m.parser_safetyKeywords_safe(),
+          danger: m.parser_safetyKeywords_danger(),
+          unsure: m.parser_safetyKeywords_unsure(),
+        },
+        clarifications: {
+          stress: m.parser_clarifications_stress(),
+          safety: m.parser_clarifications_safety(),
+          location: m.parser_clarifications_location(),
+          yesNo: m.parser_clarifications_yesNo(),
+          activity: m.parser_clarifications_activity(),
+        },
+      },
+    };
+    conversationController.setParserMessages(parserMessages);
+  }, [conversationController, currentLocale]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -133,6 +244,51 @@ function App() {
       }
     }
   }, [conversationHistory]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let startX: number | null = null;
+    let startY: number | null = null;
+
+    const handleTouchStart = (event: TouchEvent) => {
+      if (window.innerWidth >= 1024) return;
+      const touch = event.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+    };
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      if (startX == null || startY == null) return;
+      const touch = event.changedTouches[0];
+      const diffX = touch.clientX - startX;
+      const diffY = touch.clientY - startY;
+      const horizontalSwipe = Math.abs(diffX) > Math.abs(diffY);
+      const threshold = 60;
+      const edgeThreshold = 40;
+
+      if (horizontalSwipe && Math.abs(diffX) > threshold) {
+        if (!isRTL && startX < edgeThreshold && diffX > 0 && !mobileMenuOpen) {
+          setMobileMenuOpen(true);
+        } else if (
+          isRTL &&
+          startX > window.innerWidth - edgeThreshold &&
+          diffX < 0 &&
+          !mobileMenuOpen
+        ) {
+          setMobileMenuOpen(true);
+        }
+      }
+      startX = null;
+      startY = null;
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isRTL, mobileMenuOpen]);
 
   const processUserInput = useCallback(() => {
     if (!userInput.trim()) return;
@@ -152,10 +308,14 @@ function App() {
         conversationController.processParserOutput(stepResult);
 
       const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
+      const content =
+        getConvMessage(nextNode.id) ||
+        (nextNode.content ?? "") ||
+        "How can I help you?";
       const newMessage: Message = {
         id: Date.now().toString(),
         type: activityPrompt ? "app-buttons" : "message",
-        content: nextNode.content ?? "How can I help you?",
+        content,
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: nextNode.id,
@@ -166,7 +326,7 @@ function App() {
 
       if (activityTrigger) {
         setActivityReturnNode(activityTrigger.returnNode);
-        const targetApp = appsContext?.find(
+        const targetApp = resolvedApps.find(
           (app) => app.name === activityTrigger.activityName,
         );
 
@@ -175,8 +335,7 @@ function App() {
             const transitionMsg: Message = {
               id: Date.now().toString() + "_transition",
               type: "message",
-              content:
-                "You seem like you could use a moment to relax. Let's try some breathing exercises.",
+              content: m.conversation_breathingTransition(),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: nextNode.id,
@@ -200,10 +359,19 @@ function App() {
             "paint",
           ].includes(activityTrigger.activityName)
         ) {
+          // Get localized activity name
+          const targetApp = localizedApps.find(
+            (app) => app.name === activityTrigger.activityName,
+          );
+          const localizedName =
+            (targetApp?.label ?? "") || activityTrigger.activityName;
+
           const placeholderMsg: Message = {
             id: Date.now().toString() + "_placeholder",
             type: "message",
-            content: `Activity "${activityTrigger.activityName}" would be called, but is still in development.`,
+            content: m.conversation_activityWouldBeCalled({
+              activityName: localizedName,
+            }),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: nextNode.id,
@@ -213,10 +381,14 @@ function App() {
           setTimeout(() => {
             conversationController.moveToNode(activityTrigger.returnNode);
             const returnNode = conversationController.getCurrentNode();
+            const content =
+              getConvMessage(returnNode.id) ||
+              (returnNode.content ?? "") ||
+              m.conversation_letsContinue();
             const continueMsg: Message = {
               id: Date.now().toString() + "_continue",
               type: "message",
-              content: returnNode.content ?? "Let's continue.",
+              content,
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: returnNode.id,
@@ -224,10 +396,19 @@ function App() {
             setConversationHistory((prev) => [...prev, continueMsg]);
           }, 1500);
         } else {
+          // Get localized activity name
+          const targetApp = localizedApps.find(
+            (app) => app.name === activityTrigger.activityName,
+          );
+          const localizedName =
+            (targetApp?.label ?? "") || activityTrigger.activityName;
+
           const mismatchMsg: Message = {
             id: Date.now().toString() + "_mismatch",
             type: "message",
-            content: `Starting ${activityTrigger.activityName} exercise...`,
+            content: m.conversation_startingExercise({
+              activityName: localizedName,
+            }),
             timestamp: new Date().toISOString(),
             isUser: false,
             nodeId: nextNode.id,
@@ -240,7 +421,7 @@ function App() {
       const errorMsg: Message = {
         id: Date.now().toString() + "_error",
         type: "message",
-        content: "I didn't quite understand that. Could you rephrase?",
+        content: m.conversation_didntUnderstand(),
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: conversationController.getCurrentNode().id,
@@ -253,14 +434,9 @@ function App() {
     userInput,
     conversationController,
     ACTIVITY_PROMPT_NODES,
-    appsContext,
-    setActivityReturnNode,
-    setConversationHistory,
-    setUserInput,
-    setChosenApp,
-    setShouldAutoLaunchApp,
-    setShowAppsLauncher,
-    setAppsTimeout,
+    resolvedApps,
+    getConvMessage,
+    localizedApps,
   ]);
 
   useEffect(() => {
@@ -307,10 +483,14 @@ function App() {
         const returnNode = conversationController.getCurrentNode();
 
         const activityPrompt = ACTIVITY_PROMPT_NODES.has(returnNode.id);
+        const content =
+          getConvMessage(returnNode.id) ||
+          (returnNode.content ?? "") ||
+          m.conversation_welcomeBack();
         const returnMessage: Message = {
           id: Date.now().toString(),
           type: activityPrompt ? "app-buttons" : "message",
-          content: returnNode.content ?? "Welcome back! How was that?",
+          content,
           timestamp: new Date().toISOString(),
           isUser: false,
           nodeId: returnNode.id,
@@ -335,13 +515,13 @@ function App() {
 
   useEffect(() => {
     if (shouldAutoLaunchApp) {
-      const breathingApp = appsContext?.find(
+      const breathingApp = resolvedApps.find(
         (subapps) => subapps.name === "breathing",
       );
       setChosenApp(breathingApp);
       setShowAppsLauncher(true);
     }
-  }, [shouldAutoLaunchApp, appsContext]);
+  }, [shouldAutoLaunchApp, resolvedApps]);
 
   const handleAppLaunch = (appToLaunch: AppInterface | undefined) => {
     if (!appToLaunch) {
@@ -352,21 +532,17 @@ function App() {
   };
 
   const handleAudioPlay = () => {
-    toast.success("Playing voice message...", {
-      description: 'Audio: "I need to take a break and relax"',
+    toast.success(m.toast_playingVoiceMessage(), {
+      description: m.toast_audioMessage(),
     });
   };
 
   const handleVoiceInput = () => {
-    toast.info("Voice input activated");
+    toast.info(m.toast_voiceInputActivated());
   };
 
   const handleAccessibility = () => {
     setAccessibilityOpen(true);
-  };
-
-  const handleSettings = () => {
-    toast.info("Opening settings");
   };
 
   const handleDemoAlert = () => {
@@ -383,8 +559,7 @@ function App() {
       {
         id: `${Date.now()}_alert_start`,
         type: "message",
-        content:
-          "We've entered alert mode. Stay sheltered—we'll get through the next few minutes together.",
+        content: m.alert_alertStart(),
         timestamp: new Date().toISOString(),
         isUser: false,
         nodeId: "alert_start",
@@ -405,8 +580,7 @@ function App() {
             {
               id: `${Date.now()}_alert_clear`,
               type: "message",
-              content:
-                "Look at that, we made it! It's safe to step out whenever you feel ready.",
+              content: m.alert_alertClear(),
               timestamp: new Date().toISOString(),
               isUser: false,
               nodeId: "alert_all_clear",
@@ -439,19 +613,23 @@ function App() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">Conversation Complete</h2>
-          <p className="text-gray-600 mb-4">
-            Thank you for using CALMe. Take care!
-          </p>
+          <h2 className="text-2xl font-bold mb-4">
+            {m.conversation_conversationComplete()}
+          </h2>
+          <p className="text-gray-600 mb-4">{m.conversation_thankYou()}</p>
           <Button
             onClick={() => {
               conversationController.reset();
               const initialNode = conversationController.getCurrentNode();
+              const content =
+                getConvMessage(initialNode.id) ||
+                (initialNode.content ?? "") ||
+                m.conversation_helloImHereWithYou();
               setConversationHistory([
                 {
                   id: Date.now().toString(),
                   type: "message",
-                  content: initialNode.content ?? "Hello! I'm here with you.",
+                  content,
                   timestamp: new Date().toISOString(),
                   isUser: false,
                   nodeId: initialNode.id,
@@ -459,7 +637,7 @@ function App() {
               ]);
             }}
           >
-            Start New Conversation
+            {m.conversation_startNewConversation()}
           </Button>
         </div>
       </div>
@@ -478,114 +656,136 @@ function App() {
               paddingRight: "max(0.75rem, env(safe-area-inset-right))",
             }}
           >
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <Logo />
-              <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-                <h1 className="text-lg sm:text-xl font-large truncate">
-                  CALMe
-                </h1>
-                <AlertTimer timeRemaining={alertTimer} />
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <div className="flex w-full items-center justify-between">
+                <div
+                  className="flex items-center gap-2 sm:gap-3 min-w-0"
+                  style={{ flexDirection: isRTL ? "row-reverse" : "row" }}
+                >
+                  {isRTL ? (
+                    <>
+                      <Logo />
+                      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                        <h1 className="text-lg sm:text-xl font-large truncate">
+                          {m.app_name()}
+                        </h1>
+                        <AlertTimer timeRemaining={alertTimer} />
+                      </div>
+                      <SheetTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-10 w-10 p-0"
+                        >
+                          <Menu className="w-5 h-5" />
+                          <span className="sr-only">{m.header_menu()}</span>
+                        </Button>
+                      </SheetTrigger>
+                    </>
+                  ) : (
+                    <>
+                      <SheetTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-10 w-10 p-0"
+                        >
+                          <Menu className="w-5 h-5" />
+                          <span className="sr-only">{m.header_menu()}</span>
+                        </Button>
+                      </SheetTrigger>
+                      <Logo />
+                      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+                        <h1 className="text-lg sm:text-xl font-large truncate">
+                          {m.app_name()}
+                        </h1>
+                        <AlertTimer timeRemaining={alertTimer} />
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-1" />
               </div>
-            </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-2">
-              {showAlertButton && (
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={handleDemoAlert}
-                  className="bg-red-600 hover:bg-red-700 whitespace-nowrap"
-                >
-                  Demo - RED ALERT
-                </Button>
-              )}
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-10 w-10 p-0"
-                onClick={handleAccessibility}
+              <SheetContent
+                side={isRTL ? "right" : "left"}
+                className="w-64 sm:w-80"
               >
-                <Accessibility className="w-4 h-4" />
-              </Button>
-              <DarkModeToggle />
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-10 w-10 p-0"
-                onClick={handleSettings}
-              >
-                <Settings className="w-4 h-4" />
-              </Button>
-              <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
-                <MoreVertical className="w-4 h-4" />
-              </Button>
-            </div>
-
-            {/* Mobile Menu */}
-            <div className="flex md:hidden items-center gap-1">
-              {showAlertButton && (
-                <Button
-                  variant="destructive"
-                  size="sm"
-                  onClick={handleDemoAlert}
-                  className="bg-red-600 hover:bg-red-700 h-10 px-3 text-xs sm:text-sm whitespace-nowrap"
-                >
-                  ALERT
-                </Button>
-              )}
-              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
-                    <Menu className="w-5 h-5" />
-                    <span className="sr-only">Open menu</span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-64 sm:w-80">
-                  <SheetHeader>
-                    <SheetTitle>Menu</SheetTitle>
-                  </SheetHeader>
-                  <div className="flex flex-col gap-2 mt-6">
-                    <Button
-                      variant="ghost"
-                      className="justify-start h-12 gap-3"
-                      onClick={() => {
-                        handleAccessibility();
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <Accessibility className="w-5 h-5" />
-                      <span>Accessibility</span>
-                    </Button>
-                    <div className="flex items-center justify-between px-3 py-2">
-                      <span className="text-sm font-medium">Dark Mode</span>
-                      <DarkModeToggle />
+                <SheetHeader>
+                  <SheetTitle>{m.header_menu()}</SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-3 mt-6">
+                  <button
+                    type="button"
+                    className={`${menuRowClasses} text-left`}
+                    onClick={() => {
+                      handleAccessibility();
+                      setMobileMenuOpen(false);
+                    }}
+                  >
+                    <div className={menuLabelClasses}>
+                      <Accessibility className="w-4 h-4" />
+                      <span>{m.header_accessibility()}</span>
                     </div>
-                    <Button
-                      variant="ghost"
-                      className="justify-start h-12 gap-3"
-                      onClick={() => {
-                        handleSettings();
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <Settings className="w-5 h-5" />
-                      <span>Settings</span>
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="justify-start h-12 gap-3"
-                      onClick={() => {
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <MoreVertical className="w-5 h-5" />
-                      <span>More Options</span>
-                    </Button>
+                    <span className="text-xs text-muted-foreground">
+                      {m.common_open()}
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={menuRowClasses}
+                    onClick={() => {
+                      cycleTheme();
+                    }}
+                  >
+                    <div className={menuLabelClasses}>
+                      <Moon className="w-4 h-4" />
+                      <span>{m.header_darkMode()}</span>
+                    </div>
+                    <DarkModeToggle />
+                  </button>
+
+                  <div
+                    className={`${menuRowClasses} flex-col items-start gap-2`}
+                  >
+                    <div className={menuLabelClasses}>
+                      <UserRound className="w-4 h-4" />
+                      <span>{m.preferences_gender_switcher()}</span>
+                    </div>
+                    <GenderPreferenceSelect
+                      showLabel={false}
+                      className="w-full px-0 gap-0"
+                    />
                   </div>
-                </SheetContent>
-              </Sheet>
-            </div>
+
+                  <div className={menuRowClasses}>
+                    <div className={menuLabelClasses}>
+                      <Languages className="w-4 h-4" />
+                      <span>{m.common_switchLanguage()}</span>
+                    </div>
+                    <LanguageSwitcher variant="menu" />
+                  </div>
+
+                  {showAlertButton && (
+                    <button
+                      type="button"
+                      className={`${menuRowClasses} bg-destructive/10 text-destructive border-destructive/50`}
+                      onClick={() => {
+                        handleDemoAlert();
+                        setMobileMenuOpen(false);
+                      }}
+                    >
+                      <div className={`${menuLabelClasses} font-semibold`}>
+                        <span>{m.header_demoAlert()}</span>
+                      </div>
+                      <span className="text-xs">{m.common_start()}</span>
+                    </button>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
           </header>
 
           {!showAppsLauncher && (
@@ -599,10 +799,10 @@ function App() {
                     <div className="flex items-center justify-between">
                       <div>
                         <h2 className="text-sm font-medium text-muted-foreground">
-                          Quick Activities
+                          {m.quickActivities_title()}
                         </h2>
                         <p className="text-xs text-muted-foreground/70 hidden xs:block">
-                          Launch an activity any time
+                          {m.quickActivities_subtitle()}
                         </p>
                       </div>
                       <Button
@@ -614,8 +814,8 @@ function App() {
                         }}
                         aria-label={
                           showQuickPanel
-                            ? "Hide quick activities"
-                            : "Show quick activities"
+                            ? m.quickActivities_hide()
+                            : m.quickActivities_show()
                         }
                         aria-expanded={showQuickPanel}
                         aria-controls="quick-activities-panel"
@@ -684,8 +884,8 @@ function App() {
 
           {shouldAutoLaunchApp && (
             <div className="mt-4 mx-4 rounded-lg border border-amber-400 bg-amber-100/70 p-4 text-amber-800">
-              <strong>High stress detected.</strong> A breathing exercise will
-              launch automatically to help you calm down.
+              <strong>{m.conversation_highStressDetected()}</strong>{" "}
+              {m.conversation_breathingAutoLaunch()}
             </div>
           )}
           {!showAppsLauncher && (
