@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Send, Mic, Plus } from "lucide-react";
+import { m } from "../paraglide/messages.js";
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -33,7 +34,7 @@ export function ChatInput({
           size="sm"
           className="h-11 w-11 min-w-[44px] min-h-[44px] rounded-full flex-shrink-0 p-0"
           onClick={onAddAttachment}
-          aria-label="Add attachment"
+          aria-label={m.chat_addAttachment()}
         >
           <Plus className="w-5 h-5" />
         </Button>
@@ -44,7 +45,7 @@ export function ChatInput({
             onChange={(e) => {
               setMessage(e.target.value);
             }}
-            placeholder="Type a message..."
+            placeholder={m.chat_placeholder()}
             className="pr-12 h-11 rounded-full bg-muted border-0 focus-visible:ring-1 focus-visible:ring-ring text-base"
           />
 
@@ -54,7 +55,7 @@ export function ChatInput({
             size="sm"
             className="absolute right-1 top-1/2 -translate-y-1/2 h-9 w-9 min-w-[44px] min-h-[44px] rounded-full p-0"
             onClick={onVoiceInput}
-            aria-label="Voice input"
+            aria-label={m.chat_voiceInput()}
           >
             <Mic className="w-4 h-4" />
           </Button>
@@ -65,7 +66,7 @@ export function ChatInput({
           size="sm"
           className="h-11 w-11 min-w-[44px] min-h-[44px] rounded-full flex-shrink-0 p-0"
           disabled={!message.trim()}
-          aria-label="Send message"
+          aria-label={m.chat_sendMessage()}
         >
           <Send className="w-4 h-4" />
         </Button>

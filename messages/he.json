@@ -1,0 +1,858 @@
+{
+  "app_title": "CALMe - רגיעה ועירנות",
+  "app_name": "CALMe",
+  "header_menu": "תפריט",
+  "header_accessibility": "נגישות",
+  "header_darkMode": "מצב כהה",
+  "header_settings": "הגדרות",
+  "header_moreOptions": "אפשרויות נוספות",
+  "header_demoAlert": "הדגמה - צבע אדום",
+  "header_demoAlertMobile": "אזעקה",
+  "quickActivities_title": "פעילויות מהירות",
+  "quickActivities_subtitle": "הפעל פעילות בכל זמן",
+  "quickActivities_hide": "הסתר פעילויות מהירות",
+  "quickActivities_show": "הצג פעילויות מהירות",
+  "activities_breathing_label": "תרגילי נשימה",
+  "activities_breathing_description": "תרגיל נשימה מודרך שיעזור לך להירגע ולהתמקד.",
+  "activities_breathing_subtitle": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "עקוב אחר הקצב כדי להרגיע את מערכת העצבים שלך.",
+        "userGender=female": "עקבי אחר הקצב כדי להרגיע את מערכת העצבים שלך.",
+        "userGender=*": "עקוב/י אחר הקצב כדי להרגיע את מערכת העצבים שלך."
+      }
+    }
+  ],
+  "activities_breathing_presets_classic": "קלאסי 4-7-8",
+  "activities_breathing_presets_calm": "התחלה רגועה",
+  "activities_breathing_presets_gentle": "זרימה עדינה",
+  "activities_breathing_cyclesLabel": "מחזורים",
+  "activities_breathing_cyclesRecommendation": "מומלץ: 4-8 מחזורים.",
+  "activities_breathing_followGuide": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "עקוב אחר מדריך הנשימה",
+        "userGender=female": "עקבי אחר מדריך הנשימה",
+        "userGender=*": "עקוב/י אחר מדריך הנשימה"
+      }
+    }
+  ],
+  "activities_breathing_paused": "מושהה",
+  "activities_breathing_restart": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "התחל מחדש את התרגיל",
+        "userGender=female": "התחילי מחדש את התרגיל",
+        "userGender=*": "התחל/י מחדש את התרגיל"
+      }
+    }
+  ],
+  "activities_breathing_feelBetter": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "אני מרגיש יותר טוב",
+        "userGender=female": "אני מרגישה יותר טוב",
+        "userGender=*": "אני מרגיש/ה יותר טוב"
+      }
+    }
+  ],
+  "activities_breathing_howItHelps": "איך זה עוזר",
+  "activities_breathing_step": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "שאף דרך האף למשך 4 שניות",
+        "step=1, userGender=female": "שאפי דרך האף למשך 4 שניות",
+        "step=1, userGender=*": "שאף/י דרך האף למשך 4 שניות",
+        "step=2, userGender=male": "החזק את נשימתך בעדינות למשך 7 שניות - אפשר לגוף שלך להתרכך",
+        "step=2, userGender=female": "החזיקי את נשימתך בעדינות למשך 7 שניות - אפשר לגוף שלך להתרכך",
+        "step=2, userGender=*": "החזק/י את נשימתך בעדינות למשך 7 שניות - אפשר לגוף שלך להתרכך",
+        "step=3, userGender=male": "נשוף לאט דרך הפה למשך 8 שניות, דמיין שהלחץ עוזב את הגוף שלך",
+        "step=3, userGender=female": "נשפי לאט דרך הפה למשך 8 שניות, דמייני שהלחץ עוזב את הגוף שלך",
+        "step=3, userGender=*": "נשוף/י לאט דרך הפה למשך 8 שניות, דמיין/י שהלחץ עוזב את הגוף שלך"
+      }
+    }
+  ],
+  "activities_breathing_inhale": "שאיפה",
+  "activities_breathing_hold": "החזק נשימה",
+  "activities_breathing_exhale": "נשיפה",
+  "activities_stretching_label": "תרגילי מתיחות",
+  "activities_stretching_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "עקוב אחר תרגילי מתיחה פשוטים לשיפור הגמישות.",
+        "userGender=female": "עקבי אחר תרגילי מתיחה פשוטים לשיפור הגמישות.",
+        "userGender=*": "עקוב/י אחר תרגילי מתיחה פשוטים לשיפור הגמישות."
+      }
+    }
+  ],
+  "activities_stretching_exerciseProgress": "תרגיל {current} מתוך {total}",
+  "activities_stretching_instructions": "הוראות:",
+  "activities_stretching_previous": "→ קודם",
+  "activities_stretching_pause": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "השהה",
+        "userGender=female": "השהי",
+        "userGender=*": "השהה/י"
+      }
+    }
+  ],
+  "activities_stretching_start": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "התחל",
+        "userGender=female": "התחילי",
+        "userGender=*": "התחל/י"
+      }
+    }
+  ],
+  "activities_stretching_restart": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "התחל מחדש",
+        "userGender=female": "התחילי מחדש",
+        "userGender=*": "התחל/י מחדש"
+      }
+    }
+  ],
+  "activities_stretching_next": "← הבא",
+  "activities_stretching_reset": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "אפס שגרה",
+        "userGender=female": "אפסי שגרה",
+        "userGender=*": "אפס/י שגרה"
+      }
+    }
+  ],
+  "activities_stretching_disclaimer": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "קח את הזמן שלך עם כל מתיחה. הקשב לגוף שלך ולעולם אל תכריח תנועה.",
+        "userGender=female": "קחי את הזמן שלך עם כל מתיחה. הקשיבי לגוף שלך ולעולם אל תכריחי תנועה.",
+        "userGender=*": "קח/י את הזמן שלך עם כל מתיחה. הקשב/י לגוף שלך ולעולם אל תכריח/י תנועה."
+      }
+    }
+  ],
+  "activities_stretching_exercises_neckRolls_name": "סיבוב צוואר",
+  "activities_stretching_exercises_neckRolls_description": "מתיחות צוואר עדינות לשחרור מתח",
+  "activities_stretching_exercises_neckRolls_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "שב או עמוד עם יציבה טובה",
+        "step=1, userGender=female": "שבי או עמדי עם יציבה טובה",
+        "step=1, userGender=*": "שב/י או עמוד/י עם יציבה טובה",
+        "step=2, userGender=male": "סובב את ראשך לאט בתנועה מעגלית",
+        "step=2, userGender=female": "סובבי את ראשך לאט בתנועה מעגלית",
+        "step=2, userGender=*": "סובב/י את ראשך לאט בתנועה מעגלית",
+        "step=3, userGender=male": "השלם 5 סיבובים עם כיוון השעון",
+        "step=3, userGender=female": "השלימי 5 סיבובים עם כיוון השעון",
+        "step=3, userGender=*": "השלם/י 5 סיבובים עם כיוון השעון",
+        "step=4, userGender=male": "לאחר מכן 5 סיבובים נגד כיוון השעון",
+        "step=4, userGender=female": "לאחר מכן 5 סיבובים נגד כיוון השעון",
+        "step=4, userGender=*": "לאחר מכן 5 סיבובים נגד כיוון השעון"
+      }
+    }
+  ],
+  "activities_stretching_exercises_shoulderShrugs_name": "משיכת כתפיים",
+  "activities_stretching_exercises_shoulderShrugs_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "שחרר מתח בכתפיים",
+        "userGender=female": "שחררי מתח בכתפיים",
+        "userGender=*": "שחרר/י מתח בכתפיים"
+      }
+    }
+  ],
+  "activities_stretching_exercises_shoulderShrugs_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "עמוד עם הזרועות לצד",
+        "step=1, userGender=female": "עמדי עם הזרועות לצד",
+        "step=1, userGender=*": "עמוד/י עם הזרועות לצד",
+        "step=2, userGender=male": "הרם את הכתפיים כלפי האוזניים",
+        "step=2, userGender=female": "הרימי את הכתפיים כלפי האוזניים",
+        "step=2, userGender=*": "הרם/י את הכתפיים כלפי האוזניים",
+        "step=3, userGender=male": "החזק למשך 3 שניות",
+        "step=3, userGender=female": "החזיקי למשך 3 שניות",
+        "step=3, userGender=*": "החזק/י למשך 3 שניות",
+        "step=4, userGender=male": "שחרר וחזור 10 פעמים",
+        "step=4, userGender=female": "שחררי וחזרי 10 פעמים",
+        "step=4, userGender=*": "שחרר/י וחזור/י 10 פעמים"
+      }
+    }
+  ],
+  "activities_stretching_exercises_armCircles_name": "סיבובי זרועות",
+  "activities_stretching_exercises_armCircles_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "שחרר מפרקי כתפיים",
+        "userGender=female": "שחררי מפרקי כתפיים",
+        "userGender=*": "שחרר/י מפרקי כתפיים"
+      }
+    }
+  ],
+  "activities_stretching_exercises_armCircles_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "הושט זרועות ישרות לצדדים",
+        "step=1, userGender=female": "הושיטי זרועות ישרות לצדדים",
+        "step=1, userGender=*": "הושט/י זרועות ישרות לצדדים",
+        "step=2, userGender=male": "צור עיגולים קטנים קדימה למשך 15 שניות",
+        "step=2, userGender=female": "צרי עיגולים קטנים קדימה למשך 15 שניות",
+        "step=2, userGender=*": "צור/י עיגולים קטנים קדימה למשך 15 שניות",
+        "step=3, userGender=male": "צור עיגולים קטנים אחורה למשך 15 שניות",
+        "step=3, userGender=female": "צרי עיגולים קטנים אחורה למשך 15 שניות",
+        "step=3, userGender=*": "צור/י עיגולים קטנים אחורה למשך 15 שניות",
+        "step=4, userGender=male": "נוח למשך 15 שניות",
+        "step=4, userGender=female": "נוחי למשך 15 שניות",
+        "step=4, userGender=*": "נוח/י למשך 15 שניות"
+      }
+    }
+  ],
+  "activities_stretching_exercises_sideStretch_name": "מתיחה לצד",
+  "activities_stretching_exercises_sideStretch_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "מתח את הצדדים והאלכסונים שלך",
+        "userGender=female": "מתחי את הצדדים והאלכסונים שלך",
+        "userGender=*": "מתח/י את הצדדים והאלכסונים שלך"
+      }
+    }
+  ],
+  "activities_stretching_exercises_sideStretch_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "עמוד עם רגליים ברוחב הכתפיים",
+        "step=1, userGender=female": "עמדי עם רגליים ברוחב הכתפיים",
+        "step=1, userGender=*": "עמוד/י עם רגליים ברוחב הכתפיים",
+        "step=2, userGender=male": "הרם זרוע אחת מעל הראש",
+        "step=2, userGender=female": "הרימי זרוע אחת מעל הראש",
+        "step=2, userGender=*": "הרם/י זרוע אחת מעל הראש",
+        "step=3, userGender=male": "נטה לצד הנגדי",
+        "step=3, userGender=female": "נטי לצד הנגדי",
+        "step=3, userGender=*": "נטה/י לצד הנגדי",
+        "step=4, userGender=male": "החזק למשך 20 שניות בכל צד",
+        "step=4, userGender=female": "החזיקי למשך 20 שניות בכל צד",
+        "step=4, userGender=*": "החזק/י למשך 20 שניות בכל צד"
+      }
+    }
+  ],
+  "activities_stretching_exercises_forwardFold_name": "כיפוף קדימה",
+  "activities_stretching_exercises_forwardFold_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "מתח את שרירי הירך האחוריים והגב התחתון",
+        "userGender=female": "מתחי את שרירי הירך האחוריים והגב התחתון",
+        "userGender=*": "מתח/י את שרירי הירך האחוריים והגב התחתון"
+      }
+    }
+  ],
+  "activities_stretching_exercises_forwardFold_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "עמוד עם רגליים ברוחב הירכיים",
+        "step=1, userGender=female": "עמדי עם רגליים ברוחב הירכיים",
+        "step=1, userGender=*": "עמוד/י עם רגליים ברוחב הירכיים",
+        "step=2, userGender=male": "התכופף לאט קדימה מהירכיים",
+        "step=2, userGender=female": "התכופפי לאט קדימה מהירכיים",
+        "step=2, userGender=*": "התכופף/י לאט קדימה מהירכיים",
+        "step=3, userGender=male": "תן לזרועות לתלות או להחזיק במרפקים מנוגדים",
+        "step=3, userGender=female": "תני לזרועות לתלות או להחזיק במרפקים מנוגדים",
+        "step=3, userGender=*": "תן/י לזרועות לתלות או להחזיק במרפקים מנוגדים",
+        "step=4, userGender=male": "נשום עמוק למשך 30 שניות",
+        "step=4, userGender=female": "נשמי עמוק למשך 30 שניות",
+        "step=4, userGender=*": "נשום/י עמוק למשך 30 שניות"
+      }
+    }
+  ],
+  "activities_matchingCards_label": "משחק הזיכרון",
+  "activities_matchingCards_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "בדוק את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה.",
+        "userGender=female": "בדקי את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה.",
+        "userGender=*": "בדוק/י את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה."
+      }
+    }
+  ],
+  "activities_matchingCards_progress": "{found} / {total} התאמות הושלמו",
+  "activities_matchingCards_winBanner": "🎉 עבודה מצוינת! ניקית את הלוח.",
+  "activities_matchingCards_playAgain": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "שחק שוב",
+        "userGender=female": "שחקי שוב",
+        "userGender=*": "שחק/י שוב"
+      }
+    }
+  ],
+  "activities_matchingCards_reset": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "אפס משחק",
+        "userGender=female": "אפסי משחק",
+        "userGender=*": "אפס/י משחק"
+      }
+    }
+  ],
+  "activities_matchingCards_exit": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "צא מהמשחק",
+        "userGender=female": "צאי מהמשחק",
+        "userGender=*": "צא/י מהמשחק"
+      }
+    }
+  ],
+  "activities_matchingCards_ariaMatched": "קלף מותאם: {value}",
+  "activities_matchingCards_ariaShowing": "קלף מוצג: {value}",
+  "activities_matchingCards_ariaFaceDown": "קלף עם הפנים כלפי מטה",
+  "activities_sudoku_label": "סודוקו",
+  "activities_sudoku_description": "משחק חידת מספרים מאתגר לחידוד כישורי ההיגיון שלך.",
+  "activities_sudoku_easy": "קל",
+  "activities_sudoku_medium": "בינוני",
+  "activities_sudoku_hard": "קשה",
+  "activities_sudoku_congratulations": "🎉 כל הכבוד! פתרת את החידה!",
+  "activities_sudoku_clear": "נקה",
+  "activities_sudoku_newGame": "משחק חדש",
+  "activities_sudoku_exit": "יציאה",
+  "activities_sudoku_legendOriginal": "כחול: מקורי",
+  "activities_sudoku_legendYourInputs": "ירוק: הקלדות שלך",
+  "activities_sudoku_legendErrors": "אדום: שגיאות",
+  "activities_sudoku_ariaFixed": "תא {row}, {col}: ערך קבוע {value}",
+  "activities_sudoku_ariaFilled": "תא {row}, {col}: {value}",
+  "activities_sudoku_ariaError": "תא {row}, {col}: {value} (שגיאה)",
+  "activities_sudoku_ariaEmpty": "תא {row}, {col}: ריק",
+  "activities_puzzle_label": "פאזל",
+  "activities_puzzle_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "הרכב תמונות שונות על ידי גרירה ושחרור של חלקי פאזל.",
+        "userGender=female": "הרכיבי תמונות שונות על ידי גרירה ושחרור של חלקי פאזל.",
+        "userGender=*": "הרכב/י תמונות שונות על ידי גרירה ושחרור של חלקי פאזל."
+      }
+    }
+  ],
+  "activities_paint_label": "לוח ציור דיגיטלי",
+  "activities_paint_description": "יישום ציור פשוט לשחרור היצירתיות שלך.",
+  "activities_paint_brush": "מברשת",
+  "activities_paint_colors": "צבעים",
+  "activities_paint_clear": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "נקה",
+        "userGender=female": "נקי",
+        "userGender=*": "נקה/י"
+      }
+    }
+  ],
+  "activities_paint_done": "סיום",
+  "activities_snake_label": "משחק הנחש",
+  "activities_snake_description": "משחק נחש קלאסי לבדיקת רפלקסים.",
+  "activities_snake_gameOver": "משחק נגמר",
+  "activities_snake_restart": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "התחל מחדש",
+        "userGender=female": "התחילי מחדש",
+        "userGender=*": "התחל/י מחדש"
+      }
+    }
+  ],
+  "activities_snake_exit": "יציאה",
+  "activities_numberGuessing_label": "ניחוש מספרים",
+  "activities_numberGuessing_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "נחש את המספר בין 1 ל-10. בדוק את האינטואיציה שלך!",
+        "userGender=female": "נחשי את המספר בין 1 ל-10. בדקי את האינטואיציה שלך!",
+        "userGender=*": "נחש/י את המספר בין 1 ל-10. בדוק/י את האינטואיציה שלך!"
+      }
+    }
+  ],
+  "activities_numberGuessing_subtitle": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "נחש את המספר בין 1 ל-10",
+        "userGender=female": "נחשי את המספר בין 1 ל-10",
+        "userGender=*": "נחש/י את המספר בין 1 ל-10"
+      }
+    }
+  ],
+  "activities_numberGuessing_initialMessage": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "אני חושב על מספר בין 1 ל-10. אתה יכול לנחש אותו?",
+        "userGender=female": "אני חושב על מספר בין 1 ל-10. את יכולה לנחש אותו?",
+        "userGender=*": "אני חושב על מספר בין 1 ל-10. את/ה יכול/ה לנחש אותו?"
+      }
+    }
+  ],
+  "activities_numberGuessing_invalidNumber": "נא להזין מספר תקין בין 1 ל-10!",
+  "activities_numberGuessing_congratulations": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "🎉 כל הכבוד! הצלחת תוך {attempts} {attemptsWord}!",
+        "userGender=female": "🎉 כל הכבוד! הצלחת תוך {attempts} {attemptsWord}!",
+        "userGender=*": "🎉 כל הכבוד! הצלחת תוך {attempts} {attemptsWord}!"
+      }
+    }
+  ],
+  "activities_numberGuessing_attempt": "ניסיון",
+  "activities_numberGuessing_attempts": "ניסיונות",
+  "activities_numberGuessing_correctHint": "✓ נכון!",
+  "activities_numberGuessing_tooLowHint": "📈 נמוך מדי!",
+  "activities_numberGuessing_tooHighHint": "📉 גבוה מדי!",
+  "activities_numberGuessing_attemptsLabel": "ניסיונות",
+  "activities_numberGuessing_rangeLabel": "טווח",
+  "activities_numberGuessing_placeholder": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "הזן את הניחוש שלך",
+        "userGender=female": "הזיני את הניחוש שלך",
+        "userGender=*": "הזן/י את הניחוש שלך"
+      }
+    }
+  ],
+  "activities_numberGuessing_guessButton": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "נחש",
+        "userGender=female": "נחשי",
+        "userGender=*": "נחש/י"
+      }
+    }
+  ],
+  "activities_numberGuessing_previousGuesses": "ניחושים קודמים",
+  "activities_numberGuessing_playAgain": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "שחק שוב",
+        "userGender=female": "שחקי שוב",
+        "userGender=*": "שחק/י שוב"
+      }
+    }
+  ],
+  "activities_numberGuessing_reset": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "אפס",
+        "userGender=female": "אפסי",
+        "userGender=*": "אפס/י"
+      }
+    }
+  ],
+  "activities_numberGuessing_exitGame": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "צא מהמשחק",
+        "userGender=female": "צאי מהמשחק",
+        "userGender=*": "צא/י מהמשחק"
+      }
+    }
+  ],
+  "activities_numberGuessing_ariaGuessInput": "קלט ניחוש מספר",
+  "activities_numberGuessing_ariaSubmitGuess": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "שלח ניחוש",
+        "userGender=female": "שלחי ניחוש",
+        "userGender=*": "שלח/י ניחוש"
+      }
+    }
+  ],
+  "activities_numberGuessing_ariaStartNew": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "התחל משחק חדש",
+        "userGender=female": "התחילי משחק חדש",
+        "userGender=*": "התחל/י משחק חדש"
+      }
+    }
+  ],
+  "activities_numberGuessing_ariaExitGame": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "צא מהמשחק",
+        "userGender=female": "צאי מהמשחק",
+        "userGender=*": "צא/י מהמשחק"
+      }
+    }
+  ],
+  "conversation_start": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך אתה מרגיש עכשיו?",
+        "userGender=female": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך את מרגישה עכשיו?",
+        "userGender=*": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך את/ה מרגיש/ה עכשיו?"
+      }
+    }
+  ],
+  "conversation_conversationComplete": "השיחה הושלמה",
+  "conversation_thankYou": "תודה שהשתמשת ב-CALMe. תשמור/י על עצמך!",
+  "conversation_startNewConversation": "התחל/י שיחה חדשה",
+  "conversation_welcomeBack": "ברוך/ה שובך! איך היה?",
+  "conversation_didntUnderstand": "לא ממש הבנתי את זה. את/ה יכול/ה לנסח מחדש?",
+  "conversation_activityWouldBeCalled": "הפעילות \"{activityName}\" הייתה נקראת, אבל היא עדיין בפיתוח.",
+  "conversation_letsContinue": "בוא/י נמשיך.",
+  "conversation_startingExercise": "מתחיל תרגיל {activityName}...",
+  "conversation_breathingTransition": "נראה שאת/ה יכול/ה להשתמש ברגע להירגע. בוא ננסה כמה תרגילי נשימה.",
+  "conversation_highStressDetected": "זוהה לחץ גבוה.",
+  "conversation_breathingAutoLaunch": "תרגיל נשימה יופעל אוטומטית כדי לעזור לך להירגע.",
+  "conversation_helloImHereWithYou": "שלום! אני כאן איתך.",
+  "conversation_welcomeToCalme": "ברוכים הבאים ל-CALMe. אני כאן כדי לתמוך בך.",
+  "alert_alertStart": "נכנסנו למצב אזעקה. הישאר במקלט - נעבור את הדקות הקרובות ביחד.",
+  "alert_alertClear": "תראה/י את זה, הצלחנו! בטוח לצאת החוצה מתי שתרגיש/י מוכן/ה.",
+  "toast_playingVoiceMessage": "מנגן הודעה קולית...",
+  "toast_audioMessage": "אודיו: \"אני צריך לקחת הפסקה ולהירגע\"",
+  "toast_voiceInputActivated": "קלט קולי הופעל",
+  "toast_openingSettings": "פותח הגדרות",
+  "toast_accessibilityToolbarFailed": "נכשל בטעינת סרגל הנגישות",
+  "toast_accessibilityToolbarFailedDescription": "לא ניתן לטעון את /vendor/acc_toolbar.min.js. אנא וודא שהקובץ קיים בנתיב הצפוי.",
+  "chat_placeholder": "הקלד הודעה...",
+  "chat_sendMessage": "שלח הודעה",
+  "chat_voiceInput": "קלט קולי",
+  "chat_addAttachment": "הוסף קובץ",
+  "common_close": "סגור",
+  "common_open": "פתח",
+  "common_back": "חזור",
+  "common_next": "הבא",
+  "common_yes": "כן",
+  "common_no": "לא",
+  "common_ok": "אישור",
+  "common_cancel": "ביטול",
+  "common_start": "התחל",
+  "common_pause": "השהה",
+  "common_resume": "המשך",
+  "common_restart": "התחל מחדש",
+  "common_complete": "השלם",
+  "common_skip": "דלג",
+  "common_switchLanguage": "החלף שפה",
+  "preferences_gender_switcher": "אופן הפנייה",
+  "preferences_gender_option_unspecified": "לשון ניטרלית (את/ה)",
+  "preferences_gender_option_female": "פנה אליי בלשון נקבה",
+  "preferences_gender_option_male": "פנה אליי בלשון זכר",
+  "common_activity": "פעילות",
+  "parser_affirmativeResponses": "כן|בטח|בוודאי|נכון|בסדר|אוקיי|כמובן|בהחלט|נכון מאוד|בדיוק",
+  "parser_negativeResponses": "לא|אף פעם|לעולם לא|שגוי|בשום אופן|ממש לא|לא נכון",
+  "parser_uncertainResponses": "אולי|יכול להיות|ייתכן|לא בטוח|לא ממש בטוח|כנראה|אפשרי",
+  "parser_stressKeywords_no_stress": "טוב|בסדר|מצוין|סקרן|מסתכל|סתם בודק|רק בודק|בודק מה קורה",
+  "parser_stressKeywords_moderate_stress": "חרד|מודאג|עצבני|לא בנוח|מתוח|דואג",
+  "parser_stressKeywords_high_stress": "משבר|פאניקה|מפחד|מבועת|המום|לא יכול לנשום|עזרה|נורא|קשה לנשום",
+  "parser_safetyKeywords_safe": "בטוח|מוגן|מאובטח|במקלט|אני בסדר|הכל בסדר|טוב",
+  "parser_safetyKeywords_danger": "לא בטוח|בסכנה|חשוף|מסוכן|בסיכון|פגיע",
+  "parser_safetyKeywords_unsure": "לא בטוח|אני חושב|יכול להיות|קצת|במידה מסוימת",
+  "parser_clarifications_stress": "לא ממש הבנתי. את/ה מרגיש/ה רגוע/ה, קצת לחוץ/ה, או מאוד לחוץ/ה?",
+  "parser_clarifications_safety": "אני צריך לוודא - את/ה במרחב מוגן ובטוח כרגע?",
+  "parser_clarifications_location": "איפה בדיוק את/ה כרגע? לדוגמה: בבית, במקלט, או במקום אחר?",
+  "parser_clarifications_yesNo": "אני צריך תשובה של כן או לא כדי להמשיך. את/ה יכול/ה להבהיר?",
+  "parser_clarifications_activity": "תרצה/י לנסות תרגילי נשימה, מתיחות, או אולי משחק התאמה?",
+  "conversation_start_clarify": "לא ממש הבנתי. את/ה מרגיש/ה רגוע/ה, קצת לחוץ/ה, או מאוד לחוץ/ה?",
+  "conversation_no_stress_flow": "תודה שנכנסת. את/ה יכול/ה לחזור בכל זמן. האם תרצה/י לעשות פעילות קטנה ביחד?",
+  "conversation_end_positive": "נהדר. שיהיה לך יום יפה!",
+  "conversation_high_stress_immediate": "בוא/י נתמקד ברגע הזה, ממש עכשיו.",
+  "conversation_high_stress_grounding": "לחץ/י את כפות הרגליים שלך בחוזקה לרצפה. הרגש/י את הקשר הזה.",
+  "conversation_high_stress_breathing": "עכשיו בוא ננשום ביחד. שאף/י ל-4... החזק/י ל-7... נשוף/י ל-8.",
+  "conversation_high_stress_continue": "המשך/י לנשום עוד כמה רגעים. איך את/ה מרגיש/ה עכשיו?",
+  "conversation_moderate_stress_check": "בוא/י נבדוק את הסביבה שלך.",
+  "conversation_check_safety": "את/ה במרחב מוגן כרגע?",
+  "conversation_check_safety_clarify": "אני צריך לוודא - את/ה במרחב מוגן ובטוח כרגע?",
+  "conversation_check_if_alone": "את/ה עם מישהו אחר?",
+  "conversation_check_feel_safe_with_them": "את/ה מרגיש/ה בטוח/ה איתם?",
+  "conversation_safe_with_someone": "טוב להיות עם מישהו שאת/ה סומך/ת עליו. בוא נעבוד דרך מה שקרה.",
+  "conversation_alone_support": "אני כאן איתך כל עוד את/ה צריך/ה.",
+  "conversation_check_battery": "הסוללה של הטלפון שלך טעונה?",
+  "conversation_low_battery_warning": "בוא/י ננסה משהו קצר כדי לחסוך בסוללה.",
+  "conversation_unsafe_can_move": "את/ה יכול/ה להגיע למרחב מוגן?",
+  "conversation_unsafe_moving": "אין זמן לבזבז. אני איתך בכל צעד.",
+  "conversation_unsafe_check_guidelines": "את/ה מכיר/ה את הנחיות הבטיחות?",
+  "conversation_unsafe_wait_together": "אני אחכה איתך בזמן שנעבור את זה.",
+  "conversation_provide_guidelines": "בחר/י את המרחב הבטוח הקרוב ביותר - חדר ממד, חדר מדרגות, או מסדרון. [קישור: הנחיות פיקוד העורף]",
+  "conversation_structure_experience": "בוא/י נבנה מבנה למה שקרה - זה עוזר עם בהירות.",
+  "conversation_acknowledge_difficulty": "משהו קשה קרה. את/ה עובר/ת את זה.",
+  "conversation_describe_experience": "את/ה יכול/ה לתאר מה קרה צעד אחר צעד?",
+  "conversation_validate_feelings": "תודה על השיתוף. רגשות באים והולכים - כמו גלים.",
+  "conversation_activity_choice": "איזו פעילות תרצה/י לנסות?",
+  "conversation_activity_choice_clarify": "תרצה/י לנסות תרגילי נשימה, טכניקות הארקה, או אולי להאזין למשהו מרגיע?",
+  "conversation_activity_breathing": "מתחיל תרגיל נשימה...",
+  "conversation_activity_grounding": "מתחיל טכניקת הארקה 5-4-3-2-1...",
+  "conversation_activity_stretching": "מתחיל שגרת מתיחות...",
+  "conversation_activity_matching": "מתחיל משחק משחק הזיכרון...",
+  "conversation_activity_sudoku": "מתחיל חידת סודוקו...",
+  "conversation_activity_puzzle": "מתחיל פאזל...",
+  "conversation_activity_paint": "פותח לוח ציור דיגיטלי...",
+  "conversation_activity_music": "הפעילות \"מוזיקה מרגיעה\" הייתה נקראת, אבל היא עדיין בפיתוח.",
+  "conversation_activity_story": "הפעילות \"סיפור מרגיע\" הייתה נקראת, אבל היא עדיין בפיתוח.",
+  "conversation_continue_loop": "איך את/ה מרגיש/ה עכשיו?",
+  "conversation_continue_loop_options": "תרצה/י לנסות פעילות נוספת, או שאת/ה מרגיש/ה יותר טוב?",
+  "conversation_continue_support": "אני מבין שאת/ה עדיין נאבק/ת. תרצה/י להתחבר לתמיכה מקצועית?",
+  "conversation_emergency_resources": "הנה אפשרויות תמיכה מיידיות:\n• חירום: מד\"א, כיבוי אש, משטרה\n• בריאות נפש: ער\"ן, כללית, מכבי\n• תמיכה בצ'אט: ער\"ן צ'אט חי, ווטסאפ תקווה",
+  "conversation_transit_context": "אני מבין שאת/ה בדרכים. תן/י לי לעזור לך להישאר רגוע/ה בזמן הנסיעה.",
+  "conversation_outdoor_context": "להיות בחוץ יכול להרגיש פגיע. בוא נתמקד במה שאת/ה יכול/ה לשלוט בו עכשיו.",
+  "conversation_caregiver_context": "תמיכה באחרים חשובה. בוא נוודא שאת/ה בסדר קודם.",
+  "conversation_end_node": "תודה שהיית כאן. את/ה מוזמן/ת בכל זמן.",
+  "conversation_end_stay_safe": "שמור/י על עצמך. זכור/י, את/ה יכול/ה לחזור לכאן בכל זמן שתצטרך/י תמיכה.",
+  "conversation_alert_start": "האפליקציה הופעלה אחרי אזעקה. את/ה לא לבד.",
+  "conversation_alert_focus": "בוא נתמקד ברגע הזה, ממש עכשיו. איפה את/ה?",
+  "conversation_alert_location_clarify": "איפה בדיוק את/ה כרגע? בבית, במקלט, או במקום אחר?",
+  "conversation_alert_transit": "עצור/י בצד בבטחה אם את/ה יכול/ה. אם לא, המשך/י לנשום בקצב.",
+  "conversation_alert_home": "טוב, את/ה בבית. לך/י לחדר המוגן שלך מיד.",
+  "conversation_alert_protected": "מצוין, את/ה במרחב מוגן. את/ה עושה הכל נכון.",
+  "conversation_alert_get_safe": "לך/י למרחב המוגן הקרוב ביותר מיד. זוז/י מהר אבל בבטחה.",
+  "conversation_alert_breathing": "עכשיו בוא ננשום ביחד כדי להישאר רגועים.",
+  "conversation_alert_wait": "אני כאן איתך. נעבור את זה ביחד.",
+  "conversation_alert_all_clear": "תראה/י את זה, הצלחנו! בטוח לעזוב את המרחב המוגן מתי שתרגיש/י מוכן/ה."
+}

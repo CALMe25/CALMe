@@ -15,6 +15,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Allow JavaScript imports (for Paraglide generated files) */
+    "allowJs": true,
+    "checkJs": false,
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

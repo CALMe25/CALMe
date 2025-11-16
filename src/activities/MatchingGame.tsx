@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import calmeLogo from "../assets/calme-logo.svg";
+import { m } from "../paraglide/messages.js";
+import { useUserPreferences } from "../contexts/UserPreferencesContext";
 
 // Define the type for a single card
 interface Card {
@@ -15,6 +17,8 @@ interface MatchingGameProps {
 }
 
 const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
+  const { userGender } = useUserPreferences();
+  const genderInput = { userGender } as const;
   // Emojis for the cards (6 pairs for a 3x4 grid = 12 cards)
   const cardEmojis = ["🍎", "🍌", "🍇", "🍋", "🍊", "🍓"]; // Now 6 unique emojis
 
@@ -124,10 +128,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
     <div className="flex flex-col items-center justify-start h-full max-h-screen bg-background p-2 sm:p-4 font-inter overflow-y-auto">
       <div className="mb-3 w-full rounded-lg bg-card p-3 text-center shadow-md sm:mb-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-primary">
-          Matching Game
+          {m.activities_matchingCards_label()}
         </h2>
         <p className="text-sm text-muted-foreground">
-          {matchesFound} / {totalPairs} matches complete
+          {m.activities_matchingCards_progress({
+            found: matchesFound.toString(),
+            total: totalPairs.toString(),
+          })}
         </p>
       </div>
 
@@ -138,13 +145,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
           className="mb-4 flex w-full items-center justify-between gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-900 shadow-sm sm:mb-5"
         >
           <div className="text-sm sm:text-base font-semibold">
-            🎉 Great work! You cleared the board.
+            {m.activities_matchingCards_winBanner()}
           </div>
           <button
             onClick={resetGame}
             className="rounded-full border border-amber-400 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-amber-900 transition hover:bg-amber-100"
           >
-            Play again
+            {m.activities_matchingCards_playAgain(genderInput)}
           </button>
         </div>
       )}
@@ -239,13 +246,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
           onClick={resetGame}
           className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 w-full sm:w-auto"
         >
-          Reset Game
+          {m.activities_matchingCards_reset(genderInput)}
         </button>
         <button
           onClick={onGameEnd}
           className="min-h-[48px] px-4 sm:px-6 py-2 sm:py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition-colors duration-300 w-full sm:w-auto"
         >
-          Exit Game
+          {m.activities_matchingCards_exit(genderInput)}
         </button>
       </div>
     </div>

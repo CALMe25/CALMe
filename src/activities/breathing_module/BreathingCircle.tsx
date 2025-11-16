@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { m } from "../../paraglide/messages.js";
 
 // Define the types for the component's props
 interface BreathingCircleProps {
@@ -47,7 +48,7 @@ export default function BreathingCircle({
     setTransitionDuration(`${enlargeTime}ms`);
     const enlargeTimer = setTimeout(() => {
       setScale(scaleTo);
-      setStage("Inhale");
+      setStage(m.activities_breathing_inhale());
     }, 20); // Small delay to ensure CSS transition is applied
 
     // 2. Hold
@@ -55,7 +56,7 @@ export default function BreathingCircle({
     const holdTimer = setTimeout(() => {
       if (pauseTime < 2000) return;
       setTransitionDuration(`${pauseTime}ms`);
-      setStage("Hold Breath");
+      setStage(m.activities_breathing_hold());
     }, enlargeTime);
 
     // 3. Shrink
@@ -63,7 +64,7 @@ export default function BreathingCircle({
     const shrinkTimer = setTimeout(() => {
       setTransitionDuration(`${shrinkTime}ms`);
       setScale(1);
-      setStage("Exhale");
+      setStage(m.activities_breathing_exhale());
     }, enlargeTime + pauseTime);
 
     // 4. Trigger Next Cycle

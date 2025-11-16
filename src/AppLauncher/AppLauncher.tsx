@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import type { AppInterface } from "../appsContextApi";
+import { useLocalizedApps } from "../hooks/useLocalizedApps";
+import { m } from "../paraglide/messages.js";
 
 interface AppLauncherProps {
   chosenApp: AppInterface | undefined;
@@ -7,6 +9,14 @@ interface AppLauncherProps {
 }
 
 export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
+  const localizedApps = useLocalizedApps();
+
+  // Get localized label for the chosen app
+  const localizedApp = chosenApp
+    ? localizedApps.find((app) => app.name === chosenApp.name)
+    : undefined;
+  const appLabel =
+    localizedApp?.label ?? chosenApp?.label ?? m.common_complete();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
@@ -84,7 +94,7 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label={`${chosenApp?.label ?? "Activity"} dialog`}
+      aria-label={`${appLabel} dialog`}
       className="flex h-full w-full items-center justify-center bg-slate-950/70 px-3 py-4 backdrop-blur-sm sm:px-6"
       style={{
         paddingTop: `calc(env(safe-area-inset-top, 0px) + 1rem)`,
@@ -95,11 +105,9 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
         <header className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 sm:px-6">
           <div className="flex flex-col">
             <span className="text-xs font-semibold uppercase tracking-widest text-white/60">
-              Activity
+              {m.common_activity()}
             </span>
-            <p className="text-base font-semibold text-white">
-              {chosenApp?.label ?? "Calming exercise"}
-            </p>
+            <p className="text-base font-semibold text-white">{appLabel}</p>
           </div>
           <button
             ref={closeButtonRef}

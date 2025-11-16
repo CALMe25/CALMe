@@ -1,0 +1,858 @@
+{
+  "app_title": "CALMe - Calm & Alert",
+  "app_name": "CALMe",
+  "header_menu": "Menu",
+  "header_accessibility": "Accessibility",
+  "header_darkMode": "Dark Mode",
+  "header_settings": "Settings",
+  "header_moreOptions": "More Options",
+  "header_demoAlert": "Demo - RED ALERT",
+  "header_demoAlertMobile": "ALERT",
+  "quickActivities_title": "Quick Activities",
+  "quickActivities_subtitle": "Launch an activity any time",
+  "quickActivities_hide": "Hide quick activities",
+  "quickActivities_show": "Show quick activities",
+  "activities_breathing_label": "Breathing Exercise",
+  "activities_breathing_description": "A guided breathing exercise to help you relax and focus.",
+  "activities_breathing_subtitle": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Follow the rhythm to calm your nervous system.",
+        "userGender=female": "Follow the rhythm to calm your nervous system.",
+        "userGender=*": "Follow the rhythm to calm your nervous system."
+      }
+    }
+  ],
+  "activities_breathing_presets_classic": "Classic 4-7-8",
+  "activities_breathing_presets_calm": "Calm Starter",
+  "activities_breathing_presets_gentle": "Gentle Flow",
+  "activities_breathing_cyclesLabel": "Cycles",
+  "activities_breathing_cyclesRecommendation": "Recommended: 4–8 cycles.",
+  "activities_breathing_followGuide": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Follow the breathing guide",
+        "userGender=female": "Follow the breathing guide",
+        "userGender=*": "Follow the breathing guide"
+      }
+    }
+  ],
+  "activities_breathing_paused": "Paused",
+  "activities_breathing_restart": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Restart Exercise",
+        "userGender=female": "Restart Exercise",
+        "userGender=*": "Restart Exercise"
+      }
+    }
+  ],
+  "activities_breathing_feelBetter": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "I Feel Better",
+        "userGender=female": "I Feel Better",
+        "userGender=*": "I Feel Better"
+      }
+    }
+  ],
+  "activities_breathing_howItHelps": "How it helps",
+  "activities_breathing_step": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "Inhale through your nose for 4 seconds",
+        "step=1, userGender=female": "Inhale through your nose for 4 seconds",
+        "step=1, userGender=*": "Inhale through your nose for 4 seconds",
+        "step=2, userGender=male": "Hold your breath gently for 7 seconds — allow your body to soften",
+        "step=2, userGender=female": "Hold your breath gently for 7 seconds — allow your body to soften",
+        "step=2, userGender=*": "Hold your breath gently for 7 seconds — allow your body to soften",
+        "step=3, userGender=male": "Exhale slowly through your mouth for 8 seconds, imagining stress leaving your body",
+        "step=3, userGender=female": "Exhale slowly through your mouth for 8 seconds, imagining stress leaving your body",
+        "step=3, userGender=*": "Exhale slowly through your mouth for 8 seconds, imagining stress leaving your body"
+      }
+    }
+  ],
+  "activities_breathing_inhale": "Inhale",
+  "activities_breathing_hold": "Hold Breath",
+  "activities_breathing_exhale": "Exhale",
+  "activities_stretching_label": "Stretching Routine",
+  "activities_stretching_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Follow along with simple stretching exercises to improve flexibility.",
+        "userGender=female": "Follow along with simple stretching exercises to improve flexibility.",
+        "userGender=*": "Follow along with simple stretching exercises to improve flexibility."
+      }
+    }
+  ],
+  "activities_stretching_exerciseProgress": "Exercise {current} of {total}",
+  "activities_stretching_instructions": "Instructions:",
+  "activities_stretching_previous": "← Previous",
+  "activities_stretching_pause": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Pause",
+        "userGender=female": "Pause",
+        "userGender=*": "Pause"
+      }
+    }
+  ],
+  "activities_stretching_start": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Start",
+        "userGender=female": "Start",
+        "userGender=*": "Start"
+      }
+    }
+  ],
+  "activities_stretching_restart": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Restart",
+        "userGender=female": "Restart",
+        "userGender=*": "Restart"
+      }
+    }
+  ],
+  "activities_stretching_next": "Next →",
+  "activities_stretching_reset": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Reset Routine",
+        "userGender=female": "Reset Routine",
+        "userGender=*": "Reset Routine"
+      }
+    }
+  ],
+  "activities_stretching_disclaimer": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Take your time with each stretch. Listen to your body and never force a movement.",
+        "userGender=female": "Take your time with each stretch. Listen to your body and never force a movement.",
+        "userGender=*": "Take your time with each stretch. Listen to your body and never force a movement."
+      }
+    }
+  ],
+  "activities_stretching_exercises_neckRolls_name": "Neck Rolls",
+  "activities_stretching_exercises_neckRolls_description": "Gentle neck stretches to release tension",
+  "activities_stretching_exercises_neckRolls_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "Sit or stand with good posture",
+        "step=1, userGender=female": "Sit or stand with good posture",
+        "step=1, userGender=*": "Sit or stand with good posture",
+        "step=2, userGender=male": "Slowly roll your head in a circular motion",
+        "step=2, userGender=female": "Slowly roll your head in a circular motion",
+        "step=2, userGender=*": "Slowly roll your head in a circular motion",
+        "step=3, userGender=male": "Complete 5 circles clockwise",
+        "step=3, userGender=female": "Complete 5 circles clockwise",
+        "step=3, userGender=*": "Complete 5 circles clockwise",
+        "step=4, userGender=male": "Then 5 circles counterclockwise",
+        "step=4, userGender=female": "Then 5 circles counterclockwise",
+        "step=4, userGender=*": "Then 5 circles counterclockwise"
+      }
+    }
+  ],
+  "activities_stretching_exercises_shoulderShrugs_name": "Shoulder Shrugs",
+  "activities_stretching_exercises_shoulderShrugs_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Release shoulder tension",
+        "userGender=female": "Release shoulder tension",
+        "userGender=*": "Release shoulder tension"
+      }
+    }
+  ],
+  "activities_stretching_exercises_shoulderShrugs_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "Stand with arms at your sides",
+        "step=1, userGender=female": "Stand with arms at your sides",
+        "step=1, userGender=*": "Stand with arms at your sides",
+        "step=2, userGender=male": "Lift shoulders up toward ears",
+        "step=2, userGender=female": "Lift shoulders up toward ears",
+        "step=2, userGender=*": "Lift shoulders up toward ears",
+        "step=3, userGender=male": "Hold for 3 seconds",
+        "step=3, userGender=female": "Hold for 3 seconds",
+        "step=3, userGender=*": "Hold for 3 seconds",
+        "step=4, userGender=male": "Release and repeat 10 times",
+        "step=4, userGender=female": "Release and repeat 10 times",
+        "step=4, userGender=*": "Release and repeat 10 times"
+      }
+    }
+  ],
+  "activities_stretching_exercises_armCircles_name": "Arm Circles",
+  "activities_stretching_exercises_armCircles_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Loosen shoulder joints",
+        "userGender=female": "Loosen shoulder joints",
+        "userGender=*": "Loosen shoulder joints"
+      }
+    }
+  ],
+  "activities_stretching_exercises_armCircles_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "Extend arms straight out to sides",
+        "step=1, userGender=female": "Extend arms straight out to sides",
+        "step=1, userGender=*": "Extend arms straight out to sides",
+        "step=2, userGender=male": "Make small circles forward for 15 seconds",
+        "step=2, userGender=female": "Make small circles forward for 15 seconds",
+        "step=2, userGender=*": "Make small circles forward for 15 seconds",
+        "step=3, userGender=male": "Make small circles backward for 15 seconds",
+        "step=3, userGender=female": "Make small circles backward for 15 seconds",
+        "step=3, userGender=*": "Make small circles backward for 15 seconds",
+        "step=4, userGender=male": "Rest for 15 seconds",
+        "step=4, userGender=female": "Rest for 15 seconds",
+        "step=4, userGender=*": "Rest for 15 seconds"
+      }
+    }
+  ],
+  "activities_stretching_exercises_sideStretch_name": "Side Stretch",
+  "activities_stretching_exercises_sideStretch_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Stretch your sides and obliques",
+        "userGender=female": "Stretch your sides and obliques",
+        "userGender=*": "Stretch your sides and obliques"
+      }
+    }
+  ],
+  "activities_stretching_exercises_sideStretch_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "Stand with feet shoulder-width apart",
+        "step=1, userGender=female": "Stand with feet shoulder-width apart",
+        "step=1, userGender=*": "Stand with feet shoulder-width apart",
+        "step=2, userGender=male": "Raise one arm overhead",
+        "step=2, userGender=female": "Raise one arm overhead",
+        "step=2, userGender=*": "Raise one arm overhead",
+        "step=3, userGender=male": "Lean to the opposite side",
+        "step=3, userGender=female": "Lean to the opposite side",
+        "step=3, userGender=*": "Lean to the opposite side",
+        "step=4, userGender=male": "Hold for 20 seconds each side",
+        "step=4, userGender=female": "Hold for 20 seconds each side",
+        "step=4, userGender=*": "Hold for 20 seconds each side"
+      }
+    }
+  ],
+  "activities_stretching_exercises_forwardFold_name": "Forward Fold",
+  "activities_stretching_exercises_forwardFold_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Stretch hamstrings and lower back",
+        "userGender=female": "Stretch hamstrings and lower back",
+        "userGender=*": "Stretch hamstrings and lower back"
+      }
+    }
+  ],
+  "activities_stretching_exercises_forwardFold_instructions": [
+    {
+      "declarations": [
+        "input step",
+        "input userGender"
+      ],
+      "selectors": [
+        "step",
+        "userGender"
+      ],
+      "match": {
+        "step=1, userGender=male": "Stand with feet hip-width apart",
+        "step=1, userGender=female": "Stand with feet hip-width apart",
+        "step=1, userGender=*": "Stand with feet hip-width apart",
+        "step=2, userGender=male": "Slowly fold forward from hips",
+        "step=2, userGender=female": "Slowly fold forward from hips",
+        "step=2, userGender=*": "Slowly fold forward from hips",
+        "step=3, userGender=male": "Let arms hang or hold opposite elbows",
+        "step=3, userGender=female": "Let arms hang or hold opposite elbows",
+        "step=3, userGender=*": "Let arms hang or hold opposite elbows",
+        "step=4, userGender=male": "Breathe deeply for 30 seconds",
+        "step=4, userGender=female": "Breathe deeply for 30 seconds",
+        "step=4, userGender=*": "Breathe deeply for 30 seconds"
+      }
+    }
+  ],
+  "activities_matchingCards_label": "Matching Cards",
+  "activities_matchingCards_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Test your memory and concentration with this classic matching game.",
+        "userGender=female": "Test your memory and concentration with this classic matching game.",
+        "userGender=*": "Test your memory and concentration with this classic matching game."
+      }
+    }
+  ],
+  "activities_matchingCards_progress": "{found} / {total} matches complete",
+  "activities_matchingCards_winBanner": "🎉 Great work! You cleared the board.",
+  "activities_matchingCards_playAgain": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Play again",
+        "userGender=female": "Play again",
+        "userGender=*": "Play again"
+      }
+    }
+  ],
+  "activities_matchingCards_reset": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Reset Game",
+        "userGender=female": "Reset Game",
+        "userGender=*": "Reset Game"
+      }
+    }
+  ],
+  "activities_matchingCards_exit": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Exit Game",
+        "userGender=female": "Exit Game",
+        "userGender=*": "Exit Game"
+      }
+    }
+  ],
+  "activities_matchingCards_ariaMatched": "Matched card: {value}",
+  "activities_matchingCards_ariaShowing": "Card showing: {value}",
+  "activities_matchingCards_ariaFaceDown": "Card face down",
+  "activities_sudoku_label": "Sudoku",
+  "activities_sudoku_description": "A challenging number puzzle game to sharpen your logic skills.",
+  "activities_sudoku_easy": "Easy",
+  "activities_sudoku_medium": "Medium",
+  "activities_sudoku_hard": "Hard",
+  "activities_sudoku_congratulations": "🎉 Congratulations! You solved it!",
+  "activities_sudoku_clear": "Clear",
+  "activities_sudoku_newGame": "New Game",
+  "activities_sudoku_exit": "Exit",
+  "activities_sudoku_legendOriginal": "Blue: Original",
+  "activities_sudoku_legendYourInputs": "Green: Your inputs",
+  "activities_sudoku_legendErrors": "Red: Errors",
+  "activities_sudoku_ariaFixed": "Cell {row}, {col}: fixed value {value}",
+  "activities_sudoku_ariaFilled": "Cell {row}, {col}: {value}",
+  "activities_sudoku_ariaError": "Cell {row}, {col}: {value} (error)",
+  "activities_sudoku_ariaEmpty": "Cell {row}, {col}: empty",
+  "activities_puzzle_label": "Jigsaw Puzzle",
+  "activities_puzzle_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Assemble various images by dragging and dropping puzzle pieces.",
+        "userGender=female": "Assemble various images by dragging and dropping puzzle pieces.",
+        "userGender=*": "Assemble various images by dragging and dropping puzzle pieces."
+      }
+    }
+  ],
+  "activities_paint_label": "Digital Canvas",
+  "activities_paint_description": "A simple drawing application to unleash your creativity.",
+  "activities_paint_brush": "Brush",
+  "activities_paint_colors": "Colors",
+  "activities_paint_clear": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Clear",
+        "userGender=female": "Clear",
+        "userGender=*": "Clear"
+      }
+    }
+  ],
+  "activities_paint_done": "Done",
+  "activities_snake_label": "Snake Game",
+  "activities_snake_description": "A classic snake game to test your reflexes.",
+  "activities_snake_gameOver": "Game Over",
+  "activities_snake_restart": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Restart",
+        "userGender=female": "Restart",
+        "userGender=*": "Restart"
+      }
+    }
+  ],
+  "activities_snake_exit": "Exit",
+  "activities_numberGuessing_label": "Number Guessing",
+  "activities_numberGuessing_description": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Guess the number between 1 and 10. Test your intuition!",
+        "userGender=female": "Guess the number between 1 and 10. Test your intuition!",
+        "userGender=*": "Guess the number between 1 and 10. Test your intuition!"
+      }
+    }
+  ],
+  "activities_numberGuessing_subtitle": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Guess the number between 1 and 10",
+        "userGender=female": "Guess the number between 1 and 10",
+        "userGender=*": "Guess the number between 1 and 10"
+      }
+    }
+  ],
+  "activities_numberGuessing_initialMessage": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "I'm thinking of a number between 1 and 10. Can you guess it?",
+        "userGender=female": "I'm thinking of a number between 1 and 10. Can you guess it?",
+        "userGender=*": "I'm thinking of a number between 1 and 10. Can you guess it?"
+      }
+    }
+  ],
+  "activities_numberGuessing_invalidNumber": "Please enter a valid number between 1 and 10!",
+  "activities_numberGuessing_congratulations": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "🎉 Congratulations! You guessed it in {attempts} {attemptsWord}!",
+        "userGender=female": "🎉 Congratulations! You guessed it in {attempts} {attemptsWord}!",
+        "userGender=*": "🎉 Congratulations! You guessed it in {attempts} {attemptsWord}!"
+      }
+    }
+  ],
+  "activities_numberGuessing_attempt": "attempt",
+  "activities_numberGuessing_attempts": "attempts",
+  "activities_numberGuessing_correctHint": "✓ Correct!",
+  "activities_numberGuessing_tooLowHint": "📈 Too low!",
+  "activities_numberGuessing_tooHighHint": "📉 Too high!",
+  "activities_numberGuessing_attemptsLabel": "Attempts",
+  "activities_numberGuessing_rangeLabel": "Range",
+  "activities_numberGuessing_placeholder": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Enter your guess",
+        "userGender=female": "Enter your guess",
+        "userGender=*": "Enter your guess"
+      }
+    }
+  ],
+  "activities_numberGuessing_guessButton": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Guess",
+        "userGender=female": "Guess",
+        "userGender=*": "Guess"
+      }
+    }
+  ],
+  "activities_numberGuessing_previousGuesses": "Previous Guesses",
+  "activities_numberGuessing_playAgain": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Play Again",
+        "userGender=female": "Play Again",
+        "userGender=*": "Play Again"
+      }
+    }
+  ],
+  "activities_numberGuessing_reset": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Reset",
+        "userGender=female": "Reset",
+        "userGender=*": "Reset"
+      }
+    }
+  ],
+  "activities_numberGuessing_exitGame": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Exit Game",
+        "userGender=female": "Exit Game",
+        "userGender=*": "Exit Game"
+      }
+    }
+  ],
+  "activities_numberGuessing_ariaGuessInput": "Number guess input",
+  "activities_numberGuessing_ariaSubmitGuess": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Submit guess",
+        "userGender=female": "Submit guess",
+        "userGender=*": "Submit guess"
+      }
+    }
+  ],
+  "activities_numberGuessing_ariaStartNew": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Start new game",
+        "userGender=female": "Start new game",
+        "userGender=*": "Start new game"
+      }
+    }
+  ],
+  "activities_numberGuessing_ariaExitGame": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "Exit game",
+        "userGender=female": "Exit game",
+        "userGender=*": "Exit game"
+      }
+    }
+  ],
+  "conversation_start": [
+    {
+      "declarations": [
+        "input userGender"
+      ],
+      "selectors": [
+        "userGender"
+      ],
+      "match": {
+        "userGender=male": "I see you opened my app. I'm here with you. How do you feel right now?",
+        "userGender=female": "I see you opened my app. I'm here with you. How do you feel right now?",
+        "userGender=*": "I see you opened my app. I'm here with you. How do you feel right now?"
+      }
+    }
+  ],
+  "conversation_conversationComplete": "Conversation Complete",
+  "conversation_thankYou": "Thank you for using CALMe. Take care!",
+  "conversation_startNewConversation": "Start New Conversation",
+  "conversation_welcomeBack": "Welcome back! How was that?",
+  "conversation_didntUnderstand": "I didn't quite understand that. Could you rephrase?",
+  "conversation_activityWouldBeCalled": "Activity \"{activityName}\" would be called, but is still in development.",
+  "conversation_letsContinue": "Let's continue.",
+  "conversation_startingExercise": "Starting {activityName} exercise...",
+  "conversation_breathingTransition": "You seem like you could use a moment to relax. Let's try some breathing exercises.",
+  "conversation_highStressDetected": "High stress detected.",
+  "conversation_breathingAutoLaunch": "A breathing exercise will launch automatically to help you calm down.",
+  "conversation_helloImHereWithYou": "Hello! I'm here with you.",
+  "conversation_welcomeToCalme": "Welcome to CALMe. I'm here to support you.",
+  "alert_alertStart": "We've entered alert mode. Stay sheltered—we'll get through the next few minutes together.",
+  "alert_alertClear": "Look at that, we made it! It's safe to step out whenever you feel ready.",
+  "toast_playingVoiceMessage": "Playing voice message...",
+  "toast_audioMessage": "Audio: \"I need to take a break and relax\"",
+  "toast_voiceInputActivated": "Voice input activated",
+  "toast_openingSettings": "Opening settings",
+  "toast_accessibilityToolbarFailed": "Failed to load accessibility toolbar",
+  "toast_accessibilityToolbarFailedDescription": "Could not load /vendor/acc_toolbar.min.js. Please ensure the file exists at the expected path.",
+  "chat_placeholder": "Type a message...",
+  "chat_sendMessage": "Send message",
+  "chat_voiceInput": "Voice input",
+  "chat_addAttachment": "Add attachment",
+  "common_close": "Close",
+  "common_open": "Open",
+  "common_back": "Back",
+  "common_next": "Next",
+  "common_yes": "Yes",
+  "common_no": "No",
+  "common_ok": "OK",
+  "common_cancel": "Cancel",
+  "common_start": "Start",
+  "common_pause": "Pause",
+  "common_resume": "Resume",
+  "common_restart": "Restart",
+  "common_complete": "Complete",
+  "common_skip": "Skip",
+  "common_switchLanguage": "Switch language",
+  "preferences_gender_switcher": "Conversation tone",
+  "preferences_gender_option_unspecified": "Neutral (they/them)",
+  "preferences_gender_option_female": "Address me as female",
+  "preferences_gender_option_male": "Address me as male",
+  "common_activity": "Activity",
+  "parser_affirmativeResponses": "yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly",
+  "parser_negativeResponses": "no|nope|not|negative|nah|never|wrong",
+  "parser_uncertainResponses": "maybe|perhaps|possibly|might|could|unsure|not sure",
+  "parser_stressKeywords_no_stress": "good|fine|okay|exploring|curious|looking around|just checking",
+  "parser_stressKeywords_moderate_stress": "anxious|worried|nervous|uneasy|uncomfortable|tense",
+  "parser_stressKeywords_high_stress": "crisis|panic|scared|terrified|overwhelmed|cant breathe|help",
+  "parser_safetyKeywords_safe": "safe|protected|secure|sheltered|im good|all good",
+  "parser_safetyKeywords_danger": "not safe|unsafe|exposed|danger|at risk|vulnerable",
+  "parser_safetyKeywords_unsure": "not sure|i think|possibly|sort of|kind of",
+  "parser_clarifications_stress": "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+  "parser_clarifications_safety": "I need to make sure - are you in a safe, protected space right now?",
+  "parser_clarifications_location": "Where exactly are you right now? For example: at home, in a shelter, or somewhere else?",
+  "parser_clarifications_yesNo": "I need a yes or no answer to continue. Can you please clarify?",
+  "parser_clarifications_activity": "Would you like to try breathing exercises, stretching, or perhaps a matching game?",
+  "conversation_start_clarify": "I didn't quite understand. Are you feeling relaxed, somewhat stressed, or very stressed?",
+  "conversation_no_stress_flow": "Thanks for checking in. You can return anytime. Would you like to do a small activity together?",
+  "conversation_end_positive": "Great. Have a beautiful day!",
+  "conversation_high_stress_immediate": "Let's focus on this moment, right now.",
+  "conversation_high_stress_grounding": "Press your feet firmly to the floor. Feel that connection.",
+  "conversation_high_stress_breathing": "Now let's breathe together. In for 4... hold for 7... out for 8.",
+  "conversation_high_stress_continue": "Continue breathing for a few more moments. How are you feeling now?",
+  "conversation_moderate_stress_check": "Let's check your surroundings.",
+  "conversation_check_safety": "Are you in a protected space right now?",
+  "conversation_check_safety_clarify": "I need to make sure - are you in a safe, protected space right now?",
+  "conversation_check_if_alone": "Are you with someone else?",
+  "conversation_check_feel_safe_with_them": "Do you feel safe with them?",
+  "conversation_safe_with_someone": "Good to be with someone you trust. Let's work through what happened.",
+  "conversation_alone_support": "I'm here with you as long as you need.",
+  "conversation_check_battery": "Is your phone battery charged?",
+  "conversation_low_battery_warning": "Let's try something brief to conserve battery.",
+  "conversation_unsafe_can_move": "Can you get to a protected space?",
+  "conversation_unsafe_moving": "No time to waste. I'm with you every step.",
+  "conversation_unsafe_check_guidelines": "Do you know the safety guidelines?",
+  "conversation_unsafe_wait_together": "I'll wait with you while we get through this.",
+  "conversation_provide_guidelines": "Choose the safest nearby space—sealed room, stairwell, or hallway. [Link: Homefront Command Guidelines]",
+  "conversation_structure_experience": "Let's structure what happened—it helps with clarity.",
+  "conversation_acknowledge_difficulty": "Something hard happened. You're getting through it.",
+  "conversation_describe_experience": "Can you describe what happened step-by-step?",
+  "conversation_validate_feelings": "Thanks for sharing. Feelings come and go—like waves.",
+  "conversation_activity_choice": "What activity would you like to try?",
+  "conversation_activity_choice_clarify": "Would you like to try breathing exercises, grounding techniques, or perhaps listen to something calming?",
+  "conversation_activity_breathing": "Starting breathing exercise...",
+  "conversation_activity_grounding": "Starting 5-4-3-2-1 grounding technique...",
+  "conversation_activity_stretching": "Starting stretching routine...",
+  "conversation_activity_matching": "Starting card matching game...",
+  "conversation_activity_sudoku": "Starting sudoku puzzle...",
+  "conversation_activity_puzzle": "Starting jigsaw puzzle...",
+  "conversation_activity_paint": "Opening digital canvas...",
+  "conversation_activity_music": "Activity \"Relaxing Music\" would be called, but is still in development.",
+  "conversation_activity_story": "Activity \"Calming Story\" would be called, but is still in development.",
+  "conversation_continue_loop": "How are you feeling now?",
+  "conversation_continue_loop_options": "Would you like to try another activity, or are you feeling better?",
+  "conversation_continue_support": "I understand you're still struggling. Would you like to connect with professional support?",
+  "conversation_emergency_resources": "Here are immediate support options:\n• Emergency: MADA, Fire, Police\n• Mental Health: ERAN, Clalit, Maccabi\n• Chat Support: ERAN Live Chat, WhatsApp Tikva",
+  "conversation_transit_context": "I understand you're in transit. Let me help you stay calm while traveling.",
+  "conversation_outdoor_context": "Being outdoors can feel vulnerable. Let's focus on what you can control right now.",
+  "conversation_caregiver_context": "Supporting others is important. Let's make sure you're okay first.",
+  "conversation_end_node": "Thanks for being here. You are welcome any time.",
+  "conversation_end_stay_safe": "Stay safe. Remember, you can return here anytime you need support.",
+  "conversation_alert_start": "App launched after alert. You're not alone.",
+  "conversation_alert_focus": "Let's focus on this moment, right now. Where are you?",
+  "conversation_alert_location_clarify": "Where exactly are you right now? At home, in a shelter, or somewhere else?",
+  "conversation_alert_transit": "Pull over safely if you can. If not, keep breathing steadily.",
+  "conversation_alert_home": "Good, you're at home. Get to your safe room immediately.",
+  "conversation_alert_protected": "Excellent, you're in a protected space. You're doing everything right.",
+  "conversation_alert_get_safe": "Get to the nearest protected space immediately. Move quickly but safely.",
+  "conversation_alert_breathing": "Now let's breathe together to stay calm.",
+  "conversation_alert_wait": "I'm here with you. We'll get through this together.",
+  "conversation_alert_all_clear": "Look at that, we made it! It's safe to leave the protected space whenever you feel ready."
+}

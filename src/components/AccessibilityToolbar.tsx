@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useLanguage } from "../contexts/LanguageContext";
+import { getLocale } from "../paraglide/runtime.js";
+import { m } from "../paraglide/messages.js";
 
 interface AccessibilityToolbarProps {
   open: boolean;
@@ -49,12 +52,20 @@ const KEYBOARD_SELECTOR = "h1,h2,h3,h4,h5,h6,p,a,button,input,select,textarea";
 const KEYBOARD_ATTR = "data-calme-kb-tabindex";
 const KEYBOARD_ORIGINAL_ATTR = "data-calme-kb-original-tabindex";
 
-const CONFIG: MicAccessToolConfig = {
-  link: "https://github.com/CALMe25/CALMe/blob/main/accessibility.md",
-  contact: "https://github.com/CALMe25/CALMe/issues",
-  buttonPosition: "right",
-  forceLang: typeof navigator !== "undefined" ? navigator.language : "en",
-};
+function getConfigForLanguage(language: string): MicAccessToolConfig {
+  // acc_toolbar expects full locale codes like "he-IL", "en-US"
+  const localeMap: Record<string, string> = {
+    he: "he-IL",
+    en: "en-US",
+  };
+
+  return {
+    link: "https://github.com/CALMe25/CALMe/blob/main/accessibility.md",
+    contact: "https://github.com/CALMe25/CALMe/issues",
+    buttonPosition: language === "he" ? "left" : "right",
+    forceLang: localeMap[language] || language,
+  };
+}
 
 const ensureToolbarState = () => {
   window.MICTOOLBOXAPPSTATE = window.MICTOOLBOXAPPSTATE || {
@@ -214,7 +225,24 @@ const loadToolbarScript = async (): Promise<void> => {
   });
 };
 
-const createToolbarInstance = () => {
+const destroyToolbarInstance = () => {
+  if (window.micAccessTool) {
+    // Remove the toolbar DOM element
+    const toolbarElement = document.getElementById("mic-init-access-tool");
+    if (toolbarElement) {
+      toolbarElement.remove();
+    }
+    // Clear the instance
+    window.micAccessTool = undefined;
+  }
+};
+
+const createToolbarInstance = (language: string, forceRecreate = false) => {
+  // If language changed, destroy and recreate
+  if (forceRecreate && window.micAccessTool) {
+    destroyToolbarInstance();
+  }
+
   if (window.micAccessTool) {
     return window.micAccessTool;
   }
@@ -223,7 +251,8 @@ const createToolbarInstance = () => {
   }
   ensureToolbarState();
   patchToolbarBehavior();
-  window.micAccessTool = new window.MicAccessTool(CONFIG);
+  const config = getConfigForLanguage(language);
+  window.micAccessTool = new window.MicAccessTool(config);
   return window.micAccessTool;
 };
 
@@ -231,6 +260,17 @@ export function AccessibilityToolbar({
   open,
   onClose,
 }: AccessibilityToolbarProps) {
+  const { currentLocale } = useLanguage();
+
+  // Destroy and recreate toolbar when language changes
+  useEffect(() => {
+    if (window.micAccessTool && window.MicAccessTool) {
+      // Language changed, recreate toolbar
+      destroyToolbarInstance();
+      createToolbarInstance(getLocale(), true);
+    }
+  }, [currentLocale]);
+
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
@@ -239,16 +279,16 @@ export function AccessibilityToolbar({
       try {
         await loadToolbarScript();
         if (cancelled) return;
-        const toolbar = createToolbarInstance();
+        // Force recreate to ensure correct language
+        const toolbar = createToolbarInstance(getLocale(), true);
         if (toolbar?.openBox) {
           toolbar.openBox();
         }
       } catch (error) {
         console.error(error);
         if (!cancelled) {
-          toast.error("Failed to load accessibility toolbar", {
-            description:
-              "Could not load /vendor/acc_toolbar.min.js. Please ensure the file exists at the expected path.",
+          toast.error(m.toast_accessibilityToolbarFailed(), {
+            description: m.toast_accessibilityToolbarFailedDescription(),
           });
         }
       } finally {
@@ -263,7 +303,7 @@ export function AccessibilityToolbar({
     return () => {
       cancelled = true;
     };
-  }, [open, onClose]);
+  }, [open, onClose, currentLocale]);
 
   return null;
 }

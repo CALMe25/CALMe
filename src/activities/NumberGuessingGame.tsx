@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { m } from "../paraglide/messages.js";
+import { useLanguage } from "../contexts/LanguageContext";
+import { useUserPreferences } from "../contexts/UserPreferencesContext";
 
 interface NumberGuessingGameProps {
   onGameEnd?: () => void;
@@ -7,6 +10,9 @@ interface NumberGuessingGameProps {
 const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
   onGameEnd,
 }) => {
+  const { currentLocale } = useLanguage();
+  const { userGender } = useUserPreferences();
+  const genderInput = useMemo(() => ({ userGender }) as const, [userGender]);
   const [targetNumber, setTargetNumber] = useState<number>(0);
   const [guess, setGuess] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -19,13 +25,20 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
   // Initialize game
   useEffect(() => {
     startNewGame();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Reset game when language changes
+  useEffect(() => {
+    setMessage(m.activities_numberGuessing_initialMessage(genderInput));
+    setGuessHistory([]);
+  }, [currentLocale, genderInput]);
 
   const startNewGame = () => {
     const randomNum = Math.floor(Math.random() * 10) + 1;
     setTargetNumber(randomNum);
     setGuess("");
-    setMessage("I'm thinking of a number between 1 and 10. Can you guess it?");
+    setMessage(m.activities_numberGuessing_initialMessage(genderInput));
     setAttempts(0);
     setGameWon(false);
     setGuessHistory([]);
@@ -35,7 +48,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
     const guessNum = Number.parseInt(guess, 10);
 
     if (Number.isNaN(guessNum) || guessNum < 1 || guessNum > 10) {
-      setMessage("Please enter a valid number between 1 and 10!");
+      setMessage(m.activities_numberGuessing_invalidNumber());
       return;
     }
 
@@ -44,15 +57,26 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
 
     if (guessNum === targetNumber) {
       setGameWon(true);
+      const attemptsWord =
+        newAttempts === 1
+          ? m.activities_numberGuessing_attempt()
+          : m.activities_numberGuessing_attempts();
       setMessage(
-        `🎉 Congratulations! You guessed it in ${newAttempts} ${newAttempts === 1 ? "attempt" : "attempts"}!`,
+        m.activities_numberGuessing_congratulations({
+          attempts: newAttempts.toString(),
+          attemptsWord,
+          userGender,
+        }),
       );
       setGuessHistory([
         ...guessHistory,
-        { guess: guessNum, hint: "✓ Correct!" },
+        { guess: guessNum, hint: m.activities_numberGuessing_correctHint() },
       ]);
     } else {
-      const hint = guessNum < targetNumber ? "📈 Too low!" : "📉 Too high!";
+      const hint =
+        guessNum < targetNumber
+          ? m.activities_numberGuessing_tooLowHint()
+          : m.activities_numberGuessing_tooHighHint();
       setMessage(hint);
       setGuessHistory([...guessHistory, { guess: guessNum, hint }]);
       setGuess("");
@@ -71,10 +95,10 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-3xl sm:text-4xl font-bold text-primary">
-            Number Guessing Game
+            {m.activities_numberGuessing_label()}
           </h1>
           <p className="text-sm sm:text-base text-muted-foreground">
-            Guess the number between 1 and 10
+            {m.activities_numberGuessing_subtitle(genderInput)}
           </p>
         </div>
 
@@ -82,11 +106,15 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
         <div className="flex justify-around items-center bg-card p-4 rounded-lg shadow-md">
           <div className="text-center">
             <p className="text-2xl font-bold text-primary">{attempts}</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Attempts</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              {m.activities_numberGuessing_attemptsLabel()}
+            </p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-primary">1-10</p>
-            <p className="text-xs sm:text-sm text-muted-foreground">Range</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              {m.activities_numberGuessing_rangeLabel()}
+            </p>
           </div>
         </div>
 
@@ -119,19 +147,21 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
                 setGuess(e.target.value);
               }}
               onKeyDown={handleKeyDown}
-              placeholder="Enter your guess"
+              placeholder={m.activities_numberGuessing_placeholder(genderInput)}
               className="w-full px-4 py-3 text-lg text-center bg-card border-2 border-muted rounded-lg focus:outline-none focus:border-primary transition-colors"
               disabled={gameWon}
-              aria-label="Number guess input"
+              aria-label={m.activities_numberGuessing_ariaGuessInput()}
             />
             <button
               type="button"
               onClick={handleGuess}
               className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
               disabled={gameWon || !guess}
-              aria-label="Submit guess"
+              aria-label={m.activities_numberGuessing_ariaSubmitGuess(
+                genderInput,
+              )}
             >
-              Guess
+              {m.activities_numberGuessing_guessButton(genderInput)}
             </button>
           </div>
         )}
@@ -140,7 +170,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
         {guessHistory.length > 0 && (
           <div className="space-y-2">
             <h3 className="text-sm font-semibold text-muted-foreground text-center">
-              Previous Guesses
+              {m.activities_numberGuessing_previousGuesses()}
             </h3>
             <div className="bg-card rounded-lg p-3 max-h-48 overflow-y-auto">
               <div className="space-y-2">
@@ -165,18 +195,20 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
             type="button"
             onClick={startNewGame}
             className="flex-1 px-6 py-3 bg-card border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
-            aria-label="Start new game"
+            aria-label={m.activities_numberGuessing_ariaStartNew(genderInput)}
           >
-            {gameWon ? "Play Again" : "Reset"}
+            {gameWon
+              ? m.activities_numberGuessing_playAgain(genderInput)
+              : m.activities_numberGuessing_reset(genderInput)}
           </button>
           {gameWon && onGameEnd && (
             <button
               type="button"
               onClick={onGameEnd}
               className="flex-1 px-6 py-3 bg-secondary text-secondary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
-              aria-label="Exit game"
+              aria-label={m.activities_numberGuessing_ariaExitGame(genderInput)}
             >
-              Exit Game
+              {m.activities_numberGuessing_exitGame(genderInput)}
             </button>
           )}
         </div>
