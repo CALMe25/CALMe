@@ -263,15 +263,6 @@ export function AccessibilityToolbar({
 }: AccessibilityToolbarProps) {
   const { currentLocale } = useLanguage();
 
-  // Destroy and recreate toolbar when language changes
-  useEffect(() => {
-    if (window.micAccessTool && window.MicAccessTool) {
-      // Language changed, recreate toolbar
-      destroyToolbarInstance();
-      createToolbarInstance(getLocale(), true);
-    }
-  }, [currentLocale]);
-
   useEffect(() => {
     if (!open) return;
     let cancelled = false;

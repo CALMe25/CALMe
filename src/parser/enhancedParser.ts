@@ -49,19 +49,29 @@ interface KeywordMapping {
 class EnhancedParser {
   private sentimentAnalyzer = new sentiment();
   private messages: ParserMessages | null = null;
+  private keywordCache = new Map<string, string[]>();
 
   // Set the current language messages for parsing
   setMessages(messages: ParserMessages): void {
     this.messages = messages;
+    // Clear cache when messages change (language switch)
+    this.keywordCache.clear();
   }
 
   /**
    * Converts a pipe-delimited string of keywords into an array of lowercase, trimmed keywords.
+   * Results are cached to avoid redundant string processing.
    * @param keywordString - Pipe-delimited string of keywords (e.g., "yes|yeah|yep")
    * @returns Array of lowercase, trimmed keywords
    */
   private parseKeywords(keywordString: string): string[] {
-    return keywordString.split("|").map((k) => k.trim().toLowerCase());
+    const cached = this.keywordCache.get(keywordString);
+    if (cached) {
+      return cached;
+    }
+    const parsed = keywordString.split("|").map((k) => k.trim().toLowerCase());
+    this.keywordCache.set(keywordString, parsed);
+    return parsed;
   }
 
   // Keyword mappings for quick categorization

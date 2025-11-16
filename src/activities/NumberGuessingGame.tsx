@@ -37,11 +37,10 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
     startNewGame();
   }, [startNewGame]);
 
-  // Reset game when language changes
+  // Reset full game state when language changes to avoid inconsistencies
   useEffect(() => {
-    setMessage(m.activities_numberGuessing_initialMessage(genderInput));
-    setGuessHistory([]);
-  }, [currentLocale, genderInput]);
+    startNewGame();
+  }, [currentLocale, startNewGame]);
 
   const handleGuess = () => {
     const guessNum = Number.parseInt(guess, 10);

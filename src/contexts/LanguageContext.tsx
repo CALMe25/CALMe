@@ -26,17 +26,19 @@ const isSupportedLocale = (
   return (locales as readonly string[]).includes(value);
 };
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [currentLocale, setCurrentLocale] = useState(getLocale());
+function getStoredLocale(): string {
+  if (typeof window === "undefined") return getLocale();
+  const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
+  if (isSupportedLocale(stored)) {
+    // Sync paraglide's locale with stored value
+    void setLocale(stored, { reload: false });
+    return stored;
+  }
+  return getLocale();
+}
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-    if (isSupportedLocale(stored)) {
-      void setLocale(stored, { reload: false });
-      setCurrentLocale(stored);
-    }
-  }, []);
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [currentLocale, setCurrentLocale] = useState(() => getStoredLocale());
 
   useEffect(() => {
     if (typeof window === "undefined") return;
