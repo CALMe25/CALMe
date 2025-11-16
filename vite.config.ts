@@ -19,6 +19,7 @@ export default defineConfig({
     paraglideVitePlugin({
       project: "./project.inlang",
       outdir: "./src/paraglide",
+      strategy: ["localStorage", "preferredLanguage", "baseLocale"],
     }),
   ],
   resolve: {
@@ -32,13 +33,19 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("react")) {
+            if (id.includes("node_modules/react")) {
               return "vendor-react";
             }
-            if (id.includes("@inlang") || id.includes("paraglide")) {
+            if (
+              id.includes("node_modules/@inlang") ||
+              id.includes("node_modules/paraglide")
+            ) {
               return "vendor-i18n";
             }
-            if (id.includes("lucide-react") || id.includes("sonner")) {
+            if (
+              id.includes("node_modules/lucide-react") ||
+              id.includes("node_modules/sonner")
+            ) {
               return "vendor-ui";
             }
             return "vendor";
