@@ -45,6 +45,7 @@ declare global {
 }
 
 const SCRIPT_ID = "calme-acc-toolbar-script";
+const TOOLBAR_ELEMENT_ID = "mic-init-access-tool";
 const TOOLBAR_PATCH_FLAG = "__calmeToolbarPatched";
 const FONT_SELECTOR =
   "body,h1,h2,h3,h4,h5,h6,p,a,button,input,textarea,li,td,th,strong,span,blockquote,div";
@@ -153,7 +154,7 @@ const patchToolbarBehavior = () => {
       });
     }
     document
-      .querySelectorAll("#mic-init-access-tool .vi-enabled")
+      .querySelectorAll(`#${TOOLBAR_ELEMENT_ID} .vi-enabled`)
       .forEach((button) => {
         button.classList.remove("vi-enabled");
       });
@@ -228,7 +229,7 @@ const loadToolbarScript = async (): Promise<void> => {
 const destroyToolbarInstance = () => {
   if (window.micAccessTool) {
     // Remove the toolbar DOM element
-    const toolbarElement = document.getElementById("mic-init-access-tool");
+    const toolbarElement = document.getElementById(TOOLBAR_ELEMENT_ID);
     if (toolbarElement) {
       toolbarElement.remove();
     }

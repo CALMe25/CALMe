@@ -55,7 +55,11 @@ class EnhancedParser {
     this.messages = messages;
   }
 
-  // Helper to convert pipe-separated string to array
+  /**
+   * Converts a pipe-delimited string of keywords into an array of lowercase, trimmed keywords.
+   * @param keywordString - Pipe-delimited string of keywords (e.g., "yes|yeah|yep")
+   * @returns Array of lowercase, trimmed keywords
+   */
   private parseKeywords(keywordString: string): string[] {
     return keywordString.split("|").map((k) => k.trim().toLowerCase());
   }

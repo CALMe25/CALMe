@@ -25,6 +25,13 @@ export default function StretchingRoutine() {
   const { currentLocale } = useLanguage();
   const { userGender } = useUserPreferences();
 
+  /**
+   * Builds an array of localized instruction strings by calling the getter function
+   * with sequential step numbers (1-indexed) and the current user gender.
+   * @param getter - Message function that accepts step number and userGender
+   * @param count - Number of instruction steps to generate (default: 4)
+   * @returns Array of localized instruction strings
+   */
   const buildInstructions = useCallback(
     (
       getter: (args: { step: string; userGender: string }) => string,
@@ -37,6 +44,9 @@ export default function StretchingRoutine() {
   );
 
   const exercises: Exercise[] = useMemo(() => {
+    // Reference currentLocale to force recomputation when it changes
+    // Paraglide message functions use getLocale() internally
+    void currentLocale;
     const genderInput = { userGender } as const;
 
     const exercisesMap: Record<string, Exercise> = {
