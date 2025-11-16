@@ -9,8 +9,6 @@ export function useLocalizedApps(): AppInterface[] {
   const { userGender } = useUserPreferences();
 
   return useMemo(() => {
-    // Force recomputation when language changes by referencing currentLocale
-    void currentLocale;
     const genderInput = { userGender } as const;
 
     // Map app names to their localized labels and descriptions

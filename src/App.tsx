@@ -51,7 +51,6 @@ interface Message {
   nodeId: string;
 }
 
-const GENDER_AWARE_MESSAGES = new Set(["conversation_start"]);
 type AnyMessageFunction = (props?: Record<string, unknown>) => string;
 const isMessageFunction = (value: unknown): value is AnyMessageFunction => {
   return typeof value === "function";
@@ -78,7 +77,8 @@ function App() {
       if (isValidKey(messageKey)) {
         const convFn = m[messageKey];
         if (isMessageFunction(convFn)) {
-          if (GENDER_AWARE_MESSAGES.has(messageKey)) {
+          // conversation_start is gender-aware and requires userGender parameter
+          if (messageKey === "conversation_start") {
             return convFn({ userGender });
           }
           return convFn();

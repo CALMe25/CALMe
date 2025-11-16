@@ -37,8 +37,7 @@ export default function StretchingRoutine() {
   );
 
   const exercises: Exercise[] = useMemo(() => {
-    // Force recomputation when language changes by referencing currentLocale
-    void currentLocale;
+    const genderInput = { userGender } as const;
 
     const exercisesMap: Record<string, Exercise> = {
       neckRolls: {
@@ -55,9 +54,9 @@ export default function StretchingRoutine() {
         name: m.activities_stretching_exercises_shoulderShrugs_name(),
         duration: EXERCISE_DURATIONS[1],
         description:
-          m.activities_stretching_exercises_shoulderShrugs_description({
-            userGender,
-          }),
+          m.activities_stretching_exercises_shoulderShrugs_description(
+            genderInput,
+          ),
         instructions: buildInstructions(
           m.activities_stretching_exercises_shoulderShrugs_instructions,
         ),
@@ -66,9 +65,8 @@ export default function StretchingRoutine() {
         id: 3,
         name: m.activities_stretching_exercises_armCircles_name(),
         duration: EXERCISE_DURATIONS[2],
-        description: m.activities_stretching_exercises_armCircles_description({
-          userGender,
-        }),
+        description:
+          m.activities_stretching_exercises_armCircles_description(genderInput),
         instructions: buildInstructions(
           m.activities_stretching_exercises_armCircles_instructions,
         ),
@@ -77,9 +75,10 @@ export default function StretchingRoutine() {
         id: 4,
         name: m.activities_stretching_exercises_sideStretch_name(),
         duration: EXERCISE_DURATIONS[3],
-        description: m.activities_stretching_exercises_sideStretch_description({
-          userGender,
-        }),
+        description:
+          m.activities_stretching_exercises_sideStretch_description(
+            genderInput,
+          ),
         instructions: buildInstructions(
           m.activities_stretching_exercises_sideStretch_instructions,
         ),
@@ -88,9 +87,10 @@ export default function StretchingRoutine() {
         id: 5,
         name: m.activities_stretching_exercises_forwardFold_name(),
         duration: EXERCISE_DURATIONS[4],
-        description: m.activities_stretching_exercises_forwardFold_description({
-          userGender,
-        }),
+        description:
+          m.activities_stretching_exercises_forwardFold_description(
+            genderInput,
+          ),
         instructions: buildInstructions(
           m.activities_stretching_exercises_forwardFold_instructions,
         ),
