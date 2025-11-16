@@ -9,8 +9,9 @@ export function useLocalizedApps(): AppInterface[] {
   const { userGender } = useUserPreferences();
 
   return useMemo(() => {
-    // Reference currentLocale to force recomputation when it changes
-    // Paraglide message functions use getLocale() internally
+    // Paraglide message functions use getLocale() internally rather than accepting
+    // locale as a parameter. We reference currentLocale here to satisfy the linter
+    // and ensure the memoized value recomputes when locale changes.
     void currentLocale;
     const genderInput = { userGender } as const;
 

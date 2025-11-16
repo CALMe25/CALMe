@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { m } from "../paraglide/messages.js";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useUserPreferences } from "../contexts/UserPreferencesContext";
@@ -22,19 +22,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
     Array<{ guess: number; hint: string }>
   >([]);
 
-  // Initialize game
-  useEffect(() => {
-    startNewGame();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Reset game when language changes
-  useEffect(() => {
-    setMessage(m.activities_numberGuessing_initialMessage(genderInput));
-    setGuessHistory([]);
-  }, [currentLocale, genderInput]);
-
-  const startNewGame = () => {
+  const startNewGame = useCallback(() => {
     const randomNum = Math.floor(Math.random() * 10) + 1;
     setTargetNumber(randomNum);
     setGuess("");
@@ -42,7 +30,18 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
     setAttempts(0);
     setGameWon(false);
     setGuessHistory([]);
-  };
+  }, [genderInput]);
+
+  // Initialize game
+  useEffect(() => {
+    startNewGame();
+  }, [startNewGame]);
+
+  // Reset game when language changes
+  useEffect(() => {
+    setMessage(m.activities_numberGuessing_initialMessage(genderInput));
+    setGuessHistory([]);
+  }, [currentLocale, genderInput]);
 
   const handleGuess = () => {
     const guessNum = Number.parseInt(guess, 10);
