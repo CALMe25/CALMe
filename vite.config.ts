@@ -33,20 +33,17 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("node_modules/react")) {
+            if (id.includes("react")) {
               return "vendor-react";
             }
-            if (
-              id.includes("node_modules/@inlang") ||
-              id.includes("node_modules/paraglide")
-            ) {
+            if (id.includes("@inlang") || id.includes("paraglide")) {
               return "vendor-i18n";
             }
-            if (
-              id.includes("node_modules/lucide-react") ||
-              id.includes("node_modules/sonner")
-            ) {
+            if (id.includes("lucide-react") || id.includes("sonner")) {
               return "vendor-ui";
+            }
+            if (id.includes("compromise") || id.includes("sentiment")) {
+              return "vendor-nlp";
             }
             return "vendor";
           }
