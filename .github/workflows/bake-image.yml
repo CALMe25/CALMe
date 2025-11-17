@@ -1,8 +1,10 @@
 ---
 name: Bake Container Image
 'on':
-  push:
+  workflow_run:
+    workflows: ["CI"]
     branches: [main]
+    types: [completed]
   workflow_dispatch:
 env:
   REGISTRY: ghcr.io
@@ -24,9 +26,12 @@ permissions:
 jobs:
   build-and-sign:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
       # 0) Checkout repo for local build context
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       # 1) Generate tags, labels and annotations
       - name: Docker metadata
         id: meta

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:firsttime": "echo 'Starting dev server... Add ?firsttime=true to URL in browser' && vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build && tsc -b",
     "lint": "oxlint --type-aware .",
     "lint:fix": "oxlint --type-aware . --fix",
     "format": "oxfmt .",

@@ -11,12 +11,31 @@ env:
 permissions:
   contents: read
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build application
+        run: npm run build
+      - name: Check formatting
+        run: npm run format:check
+      - name: Lint
+        run: npm run lint
   build-and-test:
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       # 1) Checkout repo for local build context
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       # 2) Docker Buildx prerequisites
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
