@@ -114,3 +114,8 @@ validate_*.mjs
 # Backup directories
 *_backup/
 backup_*/
+
+# Paraglide JS generated files
+project.inlang/cache
+project.inlang/project_id*
+src/paraglide/*
