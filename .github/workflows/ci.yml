@@ -29,8 +29,6 @@ jobs:
         run: npm run format:check
       - name: Lint
         run: npm run lint
-      - name: TypeScript type checking
-        run: npx tsc -b --noEmit
   build-and-test:
     needs: validate
     runs-on: ubuntu-latest

@@ -30,6 +30,8 @@ jobs:
     steps:
       # 0) Checkout repo for local build context
       - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       # 1) Generate tags, labels and annotations
       - name: Docker metadata
         id: meta
