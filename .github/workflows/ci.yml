@@ -23,14 +23,14 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm ci
+      - name: Generate Paraglide files
+        run: npm run build
       - name: Check formatting
         run: npm run format:check
       - name: Lint
         run: npm run lint
       - name: TypeScript type checking
         run: npx tsc -b --noEmit
-      - name: Build application
-        run: npm run build
   build-and-test:
     needs: validate
     runs-on: ubuntu-latest
