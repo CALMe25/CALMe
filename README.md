@@ -101,7 +101,7 @@ A proven model for increasing individual resilience during the experience itself
 
 ## Public Accessibility
 
-- Use without communications required
+- Use without network required
 - User adaptation: by age, gender, language, and caregiver status
 - Varied scenarios according to user needs
 - Use of AI enabling multilingual translation
