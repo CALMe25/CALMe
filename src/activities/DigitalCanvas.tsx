@@ -39,6 +39,8 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     BRUSH_SIZES[1],
   );
   const [brushColor, setBrushColor] = useState<string>(PALETTE[0]);
+  const brushSizeRef = useRef(brushSize);
+  const brushColorRef = useRef(brushColor);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -62,8 +64,8 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
       context.scale(dpr, dpr);
       context.lineCap = "round";
       context.lineJoin = "round";
-      context.lineWidth = brushSize;
-      context.strokeStyle = getCssVariableValue(brushColor);
+      context.lineWidth = brushSizeRef.current;
+      context.strokeStyle = getCssVariableValue(brushColorRef.current);
       context.fillStyle = getComputedStyle(
         document.documentElement,
       ).getPropertyValue("--background");
@@ -77,15 +79,17 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     return () => {
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, [brushColor, brushSize]);
+  }, []);
 
   useEffect(() => {
+    brushSizeRef.current = brushSize;
     if (contextRef.current) {
       contextRef.current.lineWidth = brushSize;
     }
   }, [brushSize]);
 
   useEffect(() => {
+    brushColorRef.current = brushColor;
     if (contextRef.current) {
       contextRef.current.strokeStyle = getCssVariableValue(brushColor);
     }
