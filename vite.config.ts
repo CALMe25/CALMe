@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { VitePWA } from "vite-plugin-pwa";
+import { pwaConfig } from "./pwa.config";
 import { fileURLToPath } from "url"; // Import fileURLToPath
 import { dirname, resolve } from "path"; // Import dirname and resolve from path
 
@@ -21,6 +23,7 @@ export default defineConfig({
       outdir: "./src/paraglide",
       strategy: ["localStorage", "preferredLanguage", "baseLocale"],
     }),
+    VitePWA(pwaConfig),
   ],
   resolve: {
     alias: {
