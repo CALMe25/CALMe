@@ -23,12 +23,7 @@ export const pwaConfig: Partial<VitePWAOptions> = {
         src: "/pwa-512x512.png",
         sizes: "512x512",
         type: "image/png",
-      },
-      {
-        src: "/pwa-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "maskable",
+        purpose: "any maskable",
       },
     ],
   },
