@@ -611,7 +611,7 @@ function App() {
     !conversationController.isInOnboarding()
   ) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-full">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">
             {m.conversation_conversationComplete()}
@@ -648,7 +648,7 @@ function App() {
     <>
       <AppsProvider value={InnerApps}>
         <Toaster />
-        <div className="flex flex-col h-screen w-full mx-0 bg-background border-x border-border">
+        <div className="flex flex-col h-full w-full mx-0 bg-background border-x border-border">
           <header
             className="flex-shrink-0 flex z-1000 items-center justify-between px-3 py-2.5 sm:px-4 sm:py-3 border-b border-border bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/80"
             style={{

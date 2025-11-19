@@ -141,8 +141,20 @@
   
   #root {
     /* Ensure root takes full height */
+    /* Use 100svh (small viewport height) for mobile browsers where address bar affects height */
+    /* This ensures the page fits within the visible area when address bar is shown */
     min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 100svh;
+    /* Fallback for browsers that don't support svh: use dvh with fixed positioning */
+    @supports not (min-height: 100svh) {
+      min-height: 100dvh;
+    }
+  }
+
+  html, body, #root {
+    /* Ensure the app fills the viewport correctly on mobile */
+    height: 100%;
+    overflow: hidden;
   }
   
   /* Touch target sizes for mobile - only apply to actual buttons */
