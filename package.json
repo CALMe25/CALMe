@@ -68,6 +68,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.15.0",
     "@inlang/paraglide-js": "^2.5.0",
     "@types/node": "^24.10.0",
     "@types/react": "^19.2.2",
@@ -84,6 +85,7 @@
     "postcss": "^8.5.6",
     "tsx": "^4.20.6",
     "typescript": "~5.9.3",
-    "vite": "^7.2.1"
+    "vite": "^7.2.2",
+    "wrangler": "^4.49.0"
   }
 }

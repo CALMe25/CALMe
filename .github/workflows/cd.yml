@@ -1,0 +1,74 @@
+---
+name: Deployment to Cloudflare Workers
+'on':
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose an environment to deploy to"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+      ref:
+        description: "Git ref to deploy (branch, tag, or SHA). Leave empty for current branch."
+        required: false
+        type: string
+  pull_request:
+    branches: [main]
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: >-
+      ${{
+        github.event_name == 'workflow_dispatch' ||
+        github.event_name == 'pull_request' ||
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+      }}
+    environment: >-
+      ${{
+        format('calme-app-{0}',
+          github.event.inputs.environment ||
+          (github.event_name == 'pull_request' && 'staging') ||
+          (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && 'prod')
+        )
+      }}
+    env:
+      CLOUDFLARE_ENV: >-
+        ${{
+          github.event.inputs.environment ||
+          (github.event_name == 'pull_request' && 'staging') ||
+          (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && 'prod')
+        }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.ref || github.ref }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build application
+        run: npm run build
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: >-
+            deploy --env=""
+            ${{ env.CLOUDFLARE_ENV == 'dev' && format('--domain=dev.{0}', secrets.FQDN) || '' }}
+            ${{ env.CLOUDFLARE_ENV == 'staging' && format('--domain=staging.{0}', secrets.FQDN) || '' }}
+            ${{ env.CLOUDFLARE_ENV == 'prod' && format('--domain=www.{0} --domain=app.{0} --domain={0}', secrets.FQDN) || '' }}
+          environment: ${{ env.CLOUDFLARE_ENV }}

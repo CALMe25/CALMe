@@ -119,3 +119,7 @@ backup_*/
 project.inlang/cache
 project.inlang/project_id*
 src/paraglide/*
+
+# Cloudflare Wrangler: https://developers.cloudflare.com/workers/vite-plugin/tutorial/#update-the-gitignore-file
+.wrangler
+.dev.vars*
