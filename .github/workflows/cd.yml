@@ -30,7 +30,7 @@ jobs:
     if: >-
       ${{
         github.event_name == 'workflow_dispatch' ||
-        github.event_name == 'pull_request' ||
+        (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
         (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
       }}
     environment: >-
@@ -38,7 +38,7 @@ jobs:
         format('calme-app-{0}',
           github.event.inputs.environment ||
           (github.event_name == 'pull_request' && 'staging') ||
-          (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && 'prod')
+          (github.event_name == 'workflow_run' && 'prod')
         )
       }}
     env:
@@ -46,7 +46,7 @@ jobs:
         ${{
           github.event.inputs.environment ||
           (github.event_name == 'pull_request' && 'staging') ||
-          (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && 'prod')
+          (github.event_name == 'workflow_run' && 'prod')
         }}
     steps:
       - uses: actions/checkout@v5
