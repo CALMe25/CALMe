@@ -35,9 +35,11 @@ jobs:
       }}
     environment: >-
       ${{
-        github.event.inputs.environment ||
-        (github.event_name == 'pull_request' && 'staging') ||
-        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && 'prod')
+        format('calme-app-{0}',
+          github.event.inputs.environment ||
+          (github.event_name == 'pull_request' && 'staging') ||
+          (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && 'prod')
+        )
       }}
     env:
       CLOUDFLARE_ENV: >-
