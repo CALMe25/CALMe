@@ -119,3 +119,7 @@ backup_*/
 project.inlang/cache
 project.inlang/project_id*
 src/paraglide/*
+
+# Cloudflare Wrangler
+.wrangler
+.dev.vars*

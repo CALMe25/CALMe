@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import { cloudflare } from "@cloudflare/vite-plugin";
 import { fileURLToPath } from "url"; // Import fileURLToPath
 import { dirname, resolve } from "path"; // Import dirname and resolve from path
 
@@ -12,6 +13,7 @@ const __dirname = dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    cloudflare(),
     react(),
     tailwindcss(),
     paraglideVitePlugin({

@@ -1,0 +1,13 @@
+name = "calme-app"
+compatibility_date = "2025-11-18"
+workers_dev = false
+preview_urls = false
+send_metrics = false
+
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
+
+[env.dev]
+[env.staging]
+[env.prod]
