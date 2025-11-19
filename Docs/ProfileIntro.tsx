@@ -6,8 +6,7 @@
 //what is your preferred language? - hebrew, arabic, english
 //what are your accessibility needs? - large text, high contrast, screen reader
 
-
-import React from 'react';
+import React from "react";
 
 // Assuming UserProfile type is still needed within this component
 interface UserProfile {
@@ -15,7 +14,7 @@ interface UserProfile {
   age: number;
   primaryConcerns: string[];
   gender: string;
-  language: 'hebrew' | 'arabic' | 'english';
+  language: "hebrew" | "arabic" | "english";
   accessibilityPreferences: string[];
 }
 
@@ -23,12 +22,14 @@ interface UserProfile {
 // let's make it a simple component that renders something.
 const ProfileIntro: React.FC = () => {
   return (
-    <div style={{ 
-        border: '1px solid #ccc', 
-        padding: '20px', 
-        margin: '20px' ,
-        backgroundColor: '#910b76ff' // <--- ADDED THIS LINE HERE
-        }}>
+    <div
+      style={{
+        border: "1px solid #ccc",
+        padding: "20px",
+        margin: "20px",
+        backgroundColor: "#910b76ff", // <--- ADDED THIS LINE HERE
+      }}
+    >
       <h2>Welcome to Profile Setup!</h2>
       <p>This is where the user profile introduction will go.</p>
       {/* You will add your actual profile setup UI here */}
