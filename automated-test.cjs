@@ -19,11 +19,7 @@ class TestRunner {
   // Simulate parser functions for testing
   simulateClassifySafety(text) {
     const lowerText = text.toLowerCase();
-    if (
-      lowerText.includes("safe") ||
-      lowerText.includes("home") ||
-      lowerText.includes("shelter")
-    ) {
+    if (lowerText.includes("safe") || lowerText.includes("home") || lowerText.includes("shelter")) {
       return {
         category: "SAFE",
         confidence: 0.85,
@@ -176,8 +172,7 @@ class TestRunner {
         };
       }
 
-      const { nextNode, activityTrigger } =
-        controller.processParserOutput(parserResult);
+      const { nextNode, activityTrigger } = controller.processParserOutput(parserResult);
 
       return {
         success: true,
@@ -222,18 +217,12 @@ class TestRunner {
       const result = this.processInput(controller, input, expectedParserType);
 
       if (result.success) {
-        console.log(
-          `    ✅ Parser Result: ${JSON.stringify(result.parserResult)}`,
-        );
+        console.log(`    ✅ Parser Result: ${JSON.stringify(result.parserResult)}`);
         console.log(`    ➡️  Next Node: ${result.nextNode.id}`);
 
         if (result.activityTrigger) {
-          console.log(
-            `    🎯 Activity Triggered: ${result.activityTrigger.activityName}`,
-          );
-          console.log(
-            `    🔄 Return Node: ${result.activityTrigger.returnNode}`,
-          );
+          console.log(`    🎯 Activity Triggered: ${result.activityTrigger.activityName}`);
+          console.log(`    🔄 Return Node: ${result.activityTrigger.returnNode}`);
 
           // Simulate activity completion and return
           try {
@@ -243,9 +232,7 @@ class TestRunner {
             flowPath.push(`${result.activityTrigger.activityName}_activity`);
             flowPath.push(returnNode.id);
           } catch (error) {
-            console.log(
-              `    ❌ Error returning from activity: ${error.message}`,
-            );
+            console.log(`    ❌ Error returning from activity: ${error.message}`);
           }
         } else {
           flowPath.push(result.currentNodeId);
@@ -281,9 +268,7 @@ class TestRunner {
       console.log(`  ✅ Flow Test: PASSED`);
       this.passedTests++;
     } else {
-      console.log(
-        `  ❌ Flow Test: FAILED - Flow doesn't match expected pattern`,
-      );
+      console.log(`  ❌ Flow Test: FAILED - Flow doesn't match expected pattern`);
       this.failedTests++;
     }
 
@@ -339,9 +324,7 @@ class TestRunner {
 
     console.log(`\n🔍 Analysis:`);
     if (this.failedTests === 0) {
-      console.log(
-        "   🎉 All tests passed! The conversation flow system is working correctly.",
-      );
+      console.log("   🎉 All tests passed! The conversation flow system is working correctly.");
     } else {
       console.log(
         `   ⚠️  ${this.failedTests} test(s) failed. Review the flow logic and parser accuracy.`,
@@ -352,9 +335,7 @@ class TestRunner {
     console.log("   - Review failed scenarios for parser accuracy");
     console.log("   - Check conversation flow conditions");
     console.log("   - Verify activity trigger logic");
-    console.log(
-      "   - Test with real semantic parser for production validation",
-    );
+    console.log("   - Test with real semantic parser for production validation");
   }
 }
 
@@ -368,8 +349,7 @@ const testScenarios = [
       "I can't catch my breath and my heart is pounding so fast",
       "That helped a little bit, I feel slightly calmer now",
     ],
-    expectedFlow:
-      "safety_check → stress_level → breathing_activity → breathing_return",
+    expectedFlow: "safety_check → stress_level → breathing_activity → breathing_return",
   },
   {
     name: "Emergency Situation",

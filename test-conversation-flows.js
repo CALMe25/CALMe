@@ -181,13 +181,9 @@ testScenarios.forEach((scenario, index) => {
 });
 
 console.log("AUTOMATED TESTING NOTES:");
-console.log(
-  "- These inputs avoid keywords and test natural language understanding",
-);
+console.log("- These inputs avoid keywords and test natural language understanding");
 console.log("- Each scenario tests different emotional states and situations");
-console.log(
-  "- Pay attention to activity triggers (breathing, grounding exercises)",
-);
+console.log("- Pay attention to activity triggers (breathing, grounding exercises)");
 console.log("- Verify emergency protocols activate for dangerous situations");
 console.log("- Check that social/family context affects conversation flow");
 console.log("- Ensure return paths from activities work correctly");

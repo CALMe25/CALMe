@@ -66,9 +66,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
       if (card1 && card2 && card1.value === card2.value) {
         setCards((prevCards) =>
           prevCards.map((card) =>
-            card.id === id1 || card.id === id2
-              ? { ...card, isMatched: true }
-              : card,
+            card.id === id1 || card.id === id2 ? { ...card, isMatched: true } : card,
           ),
         );
         setMatchesFound((prev) => prev + 1);
@@ -79,9 +77,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
           setCards((prevCards) =>
             // Wait for the flip animation to finish before hiding the emoji
             prevCards.map((card) =>
-              card.id === id1 || card.id === id2
-                ? { ...card, isFlipped: false }
-                : card,
+              card.id === id1 || card.id === id2 ? { ...card, isFlipped: false } : card,
             ),
           );
           setFlippedCards([]);
@@ -106,9 +102,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
 
     // Flip the clicked card
     setCards((prevCards) =>
-      prevCards.map((card) =>
-        card.id === clickedCard.id ? { ...card, isFlipped: true } : card,
-      ),
+      prevCards.map((card) => (card.id === clickedCard.id ? { ...card, isFlipped: true } : card)),
     );
 
     // Add to flipped cards list
@@ -219,23 +213,14 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
                 WebkitBackfaceVisibility: "hidden", // For Safari
               }}
             >
-              {!card.isFlipped &&
-                !card.isMatched &&
-                !flippedCards.includes(card.id) && (
-                  <div className="flex flex-col items-center justify-center w-full h-full">
-                    <img
-                      src={calmeLogo}
-                      alt="CALMe Logo"
-                      className="w-20 h-20 mx-auto mb-2"
-                    />
-                    <span
-                      className="text-xl font-bold text-primary"
-                      style={{ letterSpacing: "2px" }}
-                    >
-                      CALMe
-                    </span>
-                  </div>
-                )}
+              {!card.isFlipped && !card.isMatched && !flippedCards.includes(card.id) && (
+                <div className="flex flex-col items-center justify-center w-full h-full">
+                  <img src={calmeLogo} alt="CALMe Logo" className="w-20 h-20 mx-auto mb-2" />
+                  <span className="text-xl font-bold text-primary" style={{ letterSpacing: "2px" }}>
+                    CALMe
+                  </span>
+                </div>
+              )}
             </div>
           </button>
         ))}

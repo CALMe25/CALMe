@@ -23,9 +23,7 @@ function displayHeader() {
 
 function displayScenario(scenarioIndex) {
   const scenario = testScenarios[scenarioIndex];
-  console.log(
-    `📋 TEST ${scenarioIndex + 1}/${testScenarios.length}: ${scenario.name}`,
-  );
+  console.log(`📋 TEST ${scenarioIndex + 1}/${testScenarios.length}: ${scenario.name}`);
   console.log(`📖 ${scenario.description}`);
   console.log(`🗺️  Expected: ${scenario.expectedFlow}`);
   console.log("");
@@ -80,12 +78,8 @@ function promptNext() {
           console.log("🎉 All test scenarios completed!");
           console.log("");
           console.log("📊 Testing Summary:");
-          console.log(
-            `- Tested ${testScenarios.length} conversation flow scenarios`,
-          );
-          console.log(
-            "- Covered safety, stress, location, and social assessments",
-          );
+          console.log(`- Tested ${testScenarios.length} conversation flow scenarios`);
+          console.log("- Covered safety, stress, location, and social assessments");
           console.log("- Verified activity triggers and return flows");
           console.log("- Tested emergency protocols and ongoing support");
           console.log("");

@@ -275,10 +275,7 @@ export declare class NLPParser {
    * @param questionData - Current question data with categories
    * @returns Classification result
    */
-  classifyInput(
-    userInput: string,
-    questionData: QuestionData,
-  ): ClassificationResult;
+  classifyInput(userInput: string, questionData: QuestionData): ClassificationResult;
 
   /**
    * Performs generic NLP analysis on text
@@ -322,10 +319,7 @@ export declare class NLPParser {
    * @param categoryKey - Category being scored
    * @returns Linguistic score
    */
-  calculateGenericLinguisticScore(
-    nlpAnalysis: NLPAnalysis,
-    categoryKey: string,
-  ): number;
+  calculateGenericLinguisticScore(nlpAnalysis: NLPAnalysis, categoryKey: string): number;
 
   /**
    * Selects the best category from scores
@@ -349,10 +343,7 @@ export declare class NLPParser {
    * @param questionData - Question configuration
    * @returns Extraction result
    */
-  extractInformation(
-    userInput: string,
-    questionData: QuestionData,
-  ): ExtractionResult;
+  extractInformation(userInput: string, questionData: QuestionData): ExtractionResult;
 }
 
 // ============================================================================

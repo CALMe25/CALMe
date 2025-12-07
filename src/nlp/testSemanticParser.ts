@@ -1,9 +1,4 @@
-import {
-  classifySafety,
-  classifyStress,
-  extractLocation,
-  analyzeText,
-} from "./semanticParser";
+import { classifySafety, classifyStress, extractLocation, analyzeText } from "./semanticParser";
 
 // Test cases for semantic parsing
 export const testCases = {

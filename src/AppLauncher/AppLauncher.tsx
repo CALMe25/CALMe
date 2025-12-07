@@ -15,17 +15,14 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
   const localizedApp = chosenApp
     ? localizedApps.find((app) => app.name === chosenApp.name)
     : undefined;
-  const appLabel =
-    localizedApp?.label ?? chosenApp?.label ?? m.common_complete();
+  const appLabel = localizedApp?.label ?? chosenApp?.label ?? m.common_complete();
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     previouslyFocusedRef.current =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
     closeButtonRef.current?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -35,10 +32,9 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
       }
 
       if (event.key === "Tab" && dialogRef.current) {
-        const focusableElements =
-          dialogRef.current.querySelectorAll<HTMLElement>(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-          );
+        const focusableElements = dialogRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
         if (focusableElements.length === 0) return;
         if (focusableElements.length === 1) {
           event.preventDefault();
@@ -123,11 +119,7 @@ export default function AppLauncher({ chosenApp, onClose }: AppLauncherProps) {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </header>

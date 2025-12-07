@@ -17,11 +17,7 @@ class ProductionTestSuite {
     const lowerText = text.toLowerCase();
 
     // High confidence safety indicators
-    if (
-      lowerText.match(
-        /\b(safe|secure|shelter|protected|inside|home|building|bunker)\b/,
-      )
-    ) {
+    if (lowerText.match(/\b(safe|secure|shelter|protected|inside|home|building|bunker)\b/)) {
       return {
         category: "SAFE",
         confidence: 0.9,
@@ -31,9 +27,7 @@ class ProductionTestSuite {
 
     // High confidence danger indicators
     if (
-      lowerText.match(
-        /\b(danger|explosion|attack|siren|trapped|help|emergency|outside.*danger)\b/,
-      )
+      lowerText.match(/\b(danger|explosion|attack|siren|trapped|help|emergency|outside.*danger)\b/)
     ) {
       return {
         category: "DANGER",
@@ -43,9 +37,7 @@ class ProductionTestSuite {
     }
 
     // Uncertainty indicators
-    if (
-      lowerText.match(/\b(think|maybe|not sure|uncertain|possibly|might be)\b/)
-    ) {
+    if (lowerText.match(/\b(think|maybe|not sure|uncertain|possibly|might be)\b/)) {
       return {
         category: "UNSURE",
         confidence: 0.8,
@@ -78,11 +70,7 @@ class ProductionTestSuite {
     }
 
     // Confusion/dissociation indicators
-    if (
-      lowerText.match(
-        /\b(fuzzy|distant|numb|don't know|disconnected|unreal|floating)\b/,
-      )
-    ) {
+    if (lowerText.match(/\b(fuzzy|distant|numb|don't know|disconnected|unreal|floating)\b/)) {
       return {
         category: "CONFUSED",
         confidence: 0.85,
@@ -91,11 +79,7 @@ class ProductionTestSuite {
     }
 
     // Moderate stress indicators
-    if (
-      lowerText.match(
-        /\b(anxious|worried|stressed|nervous|tense|overwhelmed|scared)\b/,
-      )
-    ) {
+    if (lowerText.match(/\b(anxious|worried|stressed|nervous|tense|overwhelmed|scared)\b/)) {
       return {
         category: "MODERATE_STRESS",
         confidence: 0.8,
@@ -104,11 +88,7 @@ class ProductionTestSuite {
     }
 
     // Calm/positive indicators
-    if (
-      lowerText.match(
-        /\b(calm|okay|fine|better|good|stable|peaceful|managing)\b/,
-      )
-    ) {
+    if (lowerText.match(/\b(calm|okay|fine|better|good|stable|peaceful|managing)\b/)) {
       return {
         category: "LOW_STRESS",
         confidence: 0.85,
@@ -214,8 +194,7 @@ class ProductionTestSuite {
       );
 
       try {
-        const { nextNode, activityTrigger } =
-          controller.processParserOutput(parserResult);
+        const { nextNode, activityTrigger } = controller.processParserOutput(parserResult);
 
         console.log(`  ➡️  Next Node: ${nextNode.id}`);
         flowPath.push(nextNode.id);
@@ -293,9 +272,7 @@ class ProductionTestSuite {
     // Check if critical nodes were visited
     if (testCase.requiredNodes) {
       const visitedNodes = result.flowPath;
-      const nodesVisited = testCase.requiredNodes.every((node) =>
-        visitedNodes.includes(node),
-      );
+      const nodesVisited = testCase.requiredNodes.every((node) => visitedNodes.includes(node));
 
       validations.push({
         test: "Required Nodes",
@@ -330,12 +307,7 @@ class ProductionTestSuite {
           "The breathing exercise helped, I feel a bit calmer now",
         ],
         expectedActivities: ["breathing"],
-        requiredNodes: [
-          "safety_check",
-          "stress_level",
-          "breathing_activity",
-          "breathing_return",
-        ],
+        requiredNodes: ["safety_check", "stress_level", "breathing_activity", "breathing_return"],
       },
 
       {
@@ -428,13 +400,9 @@ class ProductionTestSuite {
     console.log("=".repeat(60));
 
     console.log(`\n📊 Overall Results:`);
-    console.log(
-      `   🧪 Test Cases: ${this.passedTests}/${this.totalTests} passed`,
-    );
+    console.log(`   🧪 Test Cases: ${this.passedTests}/${this.totalTests} passed`);
     console.log(`   ✅ Validations: ${totalPassed}/${totalValidations} passed`);
-    console.log(
-      `   📈 Success Rate: ${Math.round((totalPassed / totalValidations) * 100)}%`,
-    );
+    console.log(`   📈 Success Rate: ${Math.round((totalPassed / totalValidations) * 100)}%`);
 
     if (totalPassed === totalValidations) {
       console.log("\n🎉 ALL TESTS PASSED! Phase 2 is production ready.");
@@ -446,15 +414,11 @@ class ProductionTestSuite {
       console.log("   • Safety assessment and clarification");
       console.log("   • Ongoing support mechanisms");
     } else {
-      console.log(
-        `\n⚠️  ${totalValidations - totalPassed} validation(s) failed.`,
-      );
+      console.log(`\n⚠️  ${totalValidations - totalPassed} validation(s) failed.`);
       console.log("Review the specific failures above for issues to address.");
     }
 
-    console.log(
-      "\n🚀 CALMe therapeutic conversation system is ready for deployment!",
-    );
+    console.log("\n🚀 CALMe therapeutic conversation system is ready for deployment!");
 
     return totalPassed === totalValidations;
   }

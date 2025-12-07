@@ -31,10 +31,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
 
   const tryChangeDirection = useCallback((next: { x: number; y: number }) => {
     const current = directionRef.current;
-    if (
-      (next.x !== 0 && current.x !== 0) ||
-      (next.y !== 0 && current.y !== 0)
-    ) {
+    if ((next.x !== 0 && current.x !== 0) || (next.y !== 0 && current.y !== 0)) {
       return;
     }
     setDirectionImmediate(next);
@@ -149,12 +146,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     // Draw snake
     ctx.fillStyle = isDarkMode ? "#68d391" : "#4a5568";
     snake.forEach((segment) => {
-      ctx.fillRect(
-        segment.x * snakeSize,
-        segment.y * snakeSize,
-        snakeSize,
-        snakeSize,
-      );
+      ctx.fillRect(segment.x * snakeSize, segment.y * snakeSize, snakeSize, snakeSize);
     });
   }, [snake, food, canvasSize]);
 

@@ -28,31 +28,17 @@ requiredFiles.forEach((file) => {
 
 console.log("\n📦 Checking dependencies:");
 const packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
-const requiredDeps = [
-  "react",
-  "compromise",
-  "lucide-react",
-  "sonner",
-  "tailwindcss",
-];
+const requiredDeps = ["react", "compromise", "lucide-react", "sonner", "tailwindcss"];
 requiredDeps.forEach((dep) => {
-  const hasDep =
-    packageJson.dependencies[dep] || packageJson.devDependencies[dep];
+  const hasDep = packageJson.dependencies[dep] || packageJson.devDependencies[dep];
   console.log(`  ${hasDep ? "✅" : "❌"} ${dep}`);
 });
 
 console.log("\n🏗️  Architecture structure:");
-const dirs = [
-  "src/parser",
-  "src/components",
-  "src/activities",
-  "src/conversation",
-];
+const dirs = ["src/parser", "src/components", "src/activities", "src/conversation"];
 dirs.forEach((dir) => {
   const exists = fs.existsSync(dir);
   console.log(`  ${exists ? "✅" : "❌"} ${dir}/`);
 });
 
-console.log(
-  "\n" + (allFilesExist ? "✅ All files present!" : "❌ Some files missing!"),
-);
+console.log("\n" + (allFilesExist ? "✅ All files present!" : "❌ Some files missing!"));

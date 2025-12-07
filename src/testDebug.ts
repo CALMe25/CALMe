@@ -18,8 +18,6 @@ const testCases = [
 testCases.forEach((text) => {
   const result = classifyStress(text);
   console.log(`"${text}":`);
-  console.log(
-    `  Category: ${result.category} (${Math.round(result.confidence * 100)}%)`,
-  );
+  console.log(`  Category: ${result.category} (${Math.round(result.confidence * 100)}%)`);
   console.log(`  Reasoning: ${result.reasoning}\n`);
 });

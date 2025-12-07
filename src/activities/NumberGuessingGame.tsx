@@ -7,9 +7,7 @@ interface NumberGuessingGameProps {
   onGameEnd?: () => void;
 }
 
-const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
-  onGameEnd,
-}) => {
+const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({ onGameEnd }) => {
   const { currentLocale } = useLanguage();
   const { userGender } = useUserPreferences();
   const genderInput = useMemo(() => ({ userGender }) as const, [userGender]);
@@ -18,9 +16,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
   const [message, setMessage] = useState<string>("");
   const [attempts, setAttempts] = useState<number>(0);
   const [gameWon, setGameWon] = useState<boolean>(false);
-  const [guessHistory, setGuessHistory] = useState<
-    Array<{ guess: number; hint: string }>
-  >([]);
+  const [guessHistory, setGuessHistory] = useState<Array<{ guess: number; hint: string }>>([]);
 
   const startNewGame = useCallback(() => {
     const randomNum = Math.floor(Math.random() * 10) + 1;
@@ -119,9 +115,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
         {/* Message Display */}
         <div
           className={`text-center p-4 rounded-lg ${
-            gameWon
-              ? "bg-green-500/20 border-2 border-green-500"
-              : "bg-card border-2 border-muted"
+            gameWon ? "bg-green-500/20 border-2 border-green-500" : "bg-card border-2 border-muted"
           }`}
         >
           <p
@@ -155,9 +149,7 @@ const NumberGuessingGame: React.FC<NumberGuessingGameProps> = ({
               onClick={handleGuess}
               className="w-full px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
               disabled={gameWon || !guess}
-              aria-label={m.activities_numberGuessing_ariaSubmitGuess(
-                genderInput,
-              )}
+              aria-label={m.activities_numberGuessing_ariaSubmitGuess(genderInput)}
             >
               {m.activities_numberGuessing_guessButton(genderInput)}
             </button>

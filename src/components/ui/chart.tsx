@@ -41,9 +41,7 @@ function ChartContainer({
   ...props
 }: React.ComponentProps<"div"> & {
   config: ChartConfig;
-  children: React.ComponentProps<
-    typeof RechartsPrimitive.ResponsiveContainer
-  >["children"];
+  children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
 }) {
   const uniqueId = React.useId();
   const chartId = `chart-${id ?? uniqueId.replace(/:/g, "")}`;
@@ -60,9 +58,7 @@ function ChartContainer({
         {...props}
       >
         <ChartStyle id={chartId} config={config} />
-        <RechartsPrimitive.ResponsiveContainer>
-          {children}
-        </RechartsPrimitive.ResponsiveContainer>
+        <RechartsPrimitive.ResponsiveContainer>{children}</RechartsPrimitive.ResponsiveContainer>
       </div>
     </ChartContext.Provider>
   );
@@ -112,10 +108,7 @@ type TooltipContentProps = React.ComponentProps<"div"> & {
   hideLabel?: boolean;
   hideIndicator?: boolean;
   label?: React.ReactNode;
-  labelFormatter?: (
-    value: unknown,
-    payload: PrimitivePayload[],
-  ) => React.ReactNode;
+  labelFormatter?: (value: unknown, payload: PrimitivePayload[]) => React.ReactNode;
   labelClassName?: string;
   formatter?: (...args: any[]) => React.ReactNode;
   color?: string;
@@ -170,15 +163,7 @@ function ChartTooltipContent({
     }
 
     return <div className={cn("font-medium", labelClassName)}>{value}</div>;
-  }, [
-    label,
-    labelFormatter,
-    payloadArray,
-    hideLabel,
-    labelClassName,
-    config,
-    labelKey,
-  ]);
+  }, [label, labelFormatter, payloadArray, hideLabel, labelClassName, config, labelKey]);
 
   if (active !== true || !payloadArray.length) {
     return null;
@@ -211,9 +196,7 @@ function ChartTooltipContent({
                 indicator === "dot" && "items-center",
               )}
             >
-              {formatter != null &&
-              item?.value !== undefined &&
-              item.name != null ? (
+              {formatter != null && item?.value !== undefined && item.name != null ? (
                 formatter(item.value, item.name, item, index, item.payload)
               ) : (
                 <>
@@ -329,19 +312,13 @@ function ChartLegendContent({
   );
 }
 
-function getPayloadConfigFromPayload(
-  config: ChartConfig,
-  payload: PrimitivePayload,
-  key: string,
-) {
+function getPayloadConfigFromPayload(config: ChartConfig, payload: PrimitivePayload, key: string) {
   if (typeof payload !== "object" || payload === null) {
     return undefined;
   }
 
   const payloadPayload: Record<string, unknown> | undefined =
-    "payload" in payload &&
-    typeof payload.payload === "object" &&
-    payload.payload !== null
+    "payload" in payload && typeof payload.payload === "object" && payload.payload !== null
       ? (payload.payload as Record<string, unknown>)
       : undefined;
 

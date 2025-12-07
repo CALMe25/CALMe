@@ -168,8 +168,7 @@ export function classifySafety(text) {
   const hasNegation = analysis.negations.length > 0;
 
   // Semantic understanding of phrases
-  const isAskingForHelp =
-    doc.has("(help|save|rescue)") && !doc.has("no #Negative help");
+  const isAskingForHelp = doc.has("(help|save|rescue)") && !doc.has("no #Negative help");
   const isInDanger = hasDangerWords || hasDangerIndicators || isAskingForHelp;
 
   // Handle negations properly
@@ -183,9 +182,7 @@ export function classifySafety(text) {
   if (negatedSafety || isInDanger) {
     category = "DANGER";
     confidence = isAskingForHelp || hasDangerIndicators ? 0.9 : 0.8;
-    reasoning = negatedSafety
-      ? "Negated safety statement"
-      : "Danger indicators present";
+    reasoning = negatedSafety ? "Negated safety statement" : "Danger indicators present";
   } else if (confirmedSafety || (hasSafeLocation && !isInDanger)) {
     category = "SAFE";
     confidence = hasSafeLocation ? 0.85 : 0.75;
@@ -212,10 +209,7 @@ export function classifyStress(text) {
   let reasoning = [];
 
   // Use semantic tags from the NLP plugin
-  if (
-    analysis.tags.includes("PanicSymptom") ||
-    analysis.tags.includes("PanicState")
-  ) {
+  if (analysis.tags.includes("PanicSymptom") || analysis.tags.includes("PanicState")) {
     stressLevel += 6;
     reasoning.push("panic indicators detected");
   }
@@ -292,8 +286,7 @@ export function classifyStress(text) {
   return {
     category,
     confidence,
-    reasoning:
-      reasoning.length > 0 ? reasoning.join("; ") : "General assessment",
+    reasoning: reasoning.length > 0 ? reasoning.join("; ") : "General assessment",
   };
 }
 
@@ -324,9 +317,7 @@ export function extractLocation(text) {
   }
 
   // 2. Look for location patterns with prepositions
-  const locationPhrases = doc
-    .match("(at|in|from) #Determiner? #Adjective* #Noun+")
-    .out("array");
+  const locationPhrases = doc.match("(at|in|from) #Determiner? #Adjective* #Noun+").out("array");
   if (locationPhrases.length > 0) {
     // Remove the preposition from the extracted value
     const location = locationPhrases[0].replace(/^(at|in|from)\s+/i, "");
@@ -339,9 +330,7 @@ export function extractLocation(text) {
 
   // 3. Look for common location words
   const commonLocations = doc
-    .match(
-      "(home|house|apartment|office|shelter|bunker|building|hospital|school)",
-    )
+    .match("(home|house|apartment|office|shelter|bunker|building|hospital|school)")
     .out("text");
   if (commonLocations) {
     return {

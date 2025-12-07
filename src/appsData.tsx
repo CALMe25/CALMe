@@ -45,10 +45,10 @@ export const InnerApps: AppInterface[] = [
     icon: (
       // Example SVG icon for breathing (heart/lung related)
       <div>🫁</div> // TODO: change into SVG icon (better than below)
-      // <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      //   <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      // </svg>
     ),
+    // <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+    //   <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    // </svg>
     main: <BreathingExercise />,
     description: "A guided breathing exercise to help you relax and focus.",
   },
@@ -63,8 +63,7 @@ export const InnerApps: AppInterface[] = [
       </svg>
     ),
     main: <StretchingRoutine />,
-    description:
-      "Follow along with simple stretching exercises to improve flexibility.",
+    description: "Follow along with simple stretching exercises to improve flexibility.",
   },
   {
     name: "matching-cards",
@@ -87,8 +86,7 @@ export const InnerApps: AppInterface[] = [
     ),
     // pass the JSX element directly - AppLauncher will clone it with onGameEnd prop
     main: <MatchingGame onGameEnd={() => {}} />,
-    description:
-      "Test your memory and concentration with this classic matching game.",
+    description: "Test your memory and concentration with this classic matching game.",
   },
   {
     name: "sudoku",
@@ -109,8 +107,7 @@ export const InnerApps: AppInterface[] = [
       </div>
     ),
     main: <SudokuGame onGameEnd={() => {}} />,
-    description:
-      "A challenging number puzzle game to sharpen your logic skills.",
+    description: "A challenging number puzzle game to sharpen your logic skills.",
   },
   {
     name: "puzzle",
@@ -128,8 +125,7 @@ export const InnerApps: AppInterface[] = [
         <p>Drag and drop pieces to complete the puzzle.</p>
       </div>
     ),
-    description:
-      "Assemble various images by dragging and dropping puzzle pieces.",
+    description: "Assemble various images by dragging and dropping puzzle pieces.",
   },
   {
     name: "paint",

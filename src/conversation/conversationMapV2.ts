@@ -1,10 +1,7 @@
 // Conversation Map V2 - Based on provided Mermaid diagram
 // This map defines the complete conversation flow for CALMe
 
-import type {
-  ConversationMap,
-  ConversationNode,
-} from "./ConversationController";
+import type { ConversationMap, ConversationNode } from "./ConversationController";
 
 // Helper to create conversation nodes
 const createNode = (
@@ -124,12 +121,7 @@ const nodes = new Map<string, ConversationNode>([
   ),
 
   // === MODERATE STRESS FLOW ===
-  createNode(
-    "moderate_stress_check",
-    "Let's check your surroundings.",
-    "question",
-    "check_safety",
-  ),
+  createNode("moderate_stress_check", "Let's check your surroundings.", "question", "check_safety"),
 
   // === SAFETY CHECK (Shared across flows) ===
   createNode(
@@ -526,11 +518,7 @@ const nodes = new Map<string, ConversationNode>([
   ),
 
   // === END STATES ===
-  createNode(
-    "end_node",
-    "Thanks for being here. You are welcome any time.",
-    "end",
-  ),
+  createNode("end_node", "Thanks for being here. You are welcome any time.", "end"),
 
   createNode(
     "end_stay_safe",

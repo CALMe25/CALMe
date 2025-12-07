@@ -42,13 +42,11 @@ const solutionTemplates: Grid[] = [
   ],
 ];
 
-const generatePuzzle = (
-  difficulty: Difficulty,
-): { puzzle: Grid; solution: Grid } => {
+const generatePuzzle = (difficulty: Difficulty): { puzzle: Grid; solution: Grid } => {
   // Pick a random solution template
-  const solution = solutionTemplates[
-    Math.floor(Math.random() * solutionTemplates.length)
-  ].map((row) => [...row]);
+  const solution = solutionTemplates[Math.floor(Math.random() * solutionTemplates.length)].map(
+    (row) => [...row],
+  );
 
   // Create puzzle by removing cells based on difficulty
   const puzzle: Grid = solution.map((row) => [...row]);
@@ -81,13 +79,9 @@ interface SudokuGameProps {
 
 export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
   const [difficulty, setDifficulty] = useState<Difficulty>("easy");
-  const [{ puzzle, solution }, setPuzzleData] = useState(() =>
-    generatePuzzle("easy"),
-  );
+  const [{ puzzle, solution }, setPuzzleData] = useState(() => generatePuzzle("easy"));
   const [grid, setGrid] = useState<Grid>(puzzle.map((row) => [...row]));
-  const [selectedCell, setSelectedCell] = useState<[number, number] | null>(
-    null,
-  );
+  const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
   const [errors, setErrors] = useState<Set<string>>(new Set());
   const [isComplete, setIsComplete] = useState(false);
 
@@ -95,9 +89,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     const isFilled = grid.every((row) => row.every((cell) => cell !== null));
     if (!isFilled) return;
 
-    const isCorrect = grid.every((row, i) =>
-      row.every((cell, j) => cell === solution[i][j]),
-    );
+    const isCorrect = grid.every((row, i) => row.every((cell, j) => cell === solution[i][j]));
 
     if (isCorrect) {
       setIsComplete(true);
@@ -157,8 +149,7 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     if (isOriginal) {
       className += "bg-secondary text-primary font-bold cursor-not-allowed ";
     } else if (isSelected) {
-      className +=
-        "bg-primary text-primary-foreground ring-1 sm:ring-2 ring-primary ";
+      className += "bg-primary text-primary-foreground ring-1 sm:ring-2 ring-primary ";
     } else if (hasError) {
       className += "bg-destructive/40 text-destructive-foreground ";
     } else {
@@ -166,18 +157,14 @@ export default function SudokuGame({ onGameEnd }: SudokuGameProps) {
     }
 
     // Thicker borders for 3x3 boxes with better visibility
-    if (col % 3 === 0)
-      className += "border-l-2 sm:border-l-3 md:border-l-4 border-border ";
+    if (col % 3 === 0) className += "border-l-2 sm:border-l-3 md:border-l-4 border-border ";
     else className += "border-l border-border ";
 
-    if (row % 3 === 0)
-      className += "border-t-2 sm:border-t-3 md:border-t-4 border-border ";
+    if (row % 3 === 0) className += "border-t-2 sm:border-t-3 md:border-t-4 border-border ";
     else className += "border-t border-border ";
 
-    if (col === 8)
-      className += "border-r-2 sm:border-r-3 md:border-r-4 border-border ";
-    if (row === 8)
-      className += "border-b-2 sm:border-b-3 md:border-b-4 border-border ";
+    if (col === 8) className += "border-r-2 sm:border-r-3 md:border-r-4 border-border ";
+    if (row === 8) className += "border-b-2 sm:border-b-3 md:border-b-4 border-border ";
 
     return className;
   };

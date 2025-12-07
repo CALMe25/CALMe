@@ -9,10 +9,7 @@ interface BreathingExerciseProps {
   onGameEnd?: () => void;
 }
 
-const TIMING_PRESETS_DATA: Record<
-  string,
-  { timings: BreathingTimings; labelKey: string }
-> = {
+const TIMING_PRESETS_DATA: Record<string, { timings: BreathingTimings; labelKey: string }> = {
   classic: {
     timings: [4000, 7000, 8000],
     labelKey: "classic",
@@ -27,13 +24,10 @@ const TIMING_PRESETS_DATA: Record<
   },
 };
 
-export default function BreathingExercise({
-  onGameEnd,
-}: BreathingExerciseProps) {
+export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps) {
   const { userGender } = useUserPreferences();
   const genderInput = { userGender } as const;
-  const [presetKey, setPresetKey] =
-    useState<keyof typeof TIMING_PRESETS_DATA>("classic");
+  const [presetKey, setPresetKey] = useState<keyof typeof TIMING_PRESETS_DATA>("classic");
   const [key, setKey] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [repeatCount, setRepeatCount] = useState(4);
@@ -44,11 +38,7 @@ export default function BreathingExercise({
   }, [presetKey, repeatCount]);
 
   useEffect(() => {
-    if (
-      typeof window === "undefined" ||
-      typeof window.matchMedia === "undefined"
-    )
-      return;
+    if (typeof window === "undefined" || typeof window.matchMedia === "undefined") return;
     const media = window.matchMedia("(max-height: 600px)");
     const handleChange = () => {
       setIsCompactLayout(media.matches);
@@ -80,11 +70,7 @@ export default function BreathingExercise({
   };
   const label = presetLabels[labelKey] || labelKey;
 
-  const renderPresetButton = (
-    keyName: string,
-    label: string,
-    timing: BreathingTimings,
-  ) => (
+  const renderPresetButton = (keyName: string, label: string, timing: BreathingTimings) => (
     <button
       key={keyName}
       onClick={() => {
@@ -105,16 +91,14 @@ export default function BreathingExercise({
     </button>
   );
 
-  const presetCards = Object.entries(TIMING_PRESETS_DATA).map(
-    ([keyName, preset]) => ({
-      key: keyName,
-      node: renderPresetButton(
-        keyName,
-        presetLabels[preset.labelKey] || preset.labelKey,
-        preset.timings,
-      ),
-    }),
-  );
+  const presetCards = Object.entries(TIMING_PRESETS_DATA).map(([keyName, preset]) => ({
+    key: keyName,
+    node: renderPresetButton(
+      keyName,
+      presetLabels[preset.labelKey] || preset.labelKey,
+      preset.timings,
+    ),
+  }));
 
   const cyclesCard = (
     <div
@@ -233,9 +217,7 @@ export default function BreathingExercise({
           </h3>
           <ul className="list-disc list-inside space-y-1.5">
             {["1", "2", "3"].map((step) => (
-              <li key={step}>
-                {m.activities_breathing_step({ step, userGender })}
-              </li>
+              <li key={step}>{m.activities_breathing_step({ step, userGender })}</li>
             ))}
           </ul>
         </div>

@@ -13,10 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../chat_interface/ui/select";
-import {
-  useUserPreferences,
-  type UserGender,
-} from "../contexts/UserPreferencesContext";
+import { useUserPreferences, type UserGender } from "../contexts/UserPreferencesContext";
 import { m } from "../paraglide/messages.js";
 
 function useGenderOptions() {
@@ -55,15 +52,11 @@ export function GenderPreferenceSwitcher() {
             onSelect={() => {
               setUserGender(option.value);
             }}
-            className={
-              userGender === option.value ? "bg-accent font-semibold" : ""
-            }
+            className={userGender === option.value ? "bg-accent font-semibold" : ""}
           >
             <span className="flex w-full items-center justify-between gap-2">
               {option.label}
-              {userGender === option.value && (
-                <span className="text-xs">✓</span>
-              )}
+              {userGender === option.value && <span className="text-xs">✓</span>}
             </span>
           </DropdownMenuItem>
         ))}
@@ -85,9 +78,7 @@ export function GenderPreferenceSelect({
   const options = useGenderOptions();
 
   return (
-    <div
-      className={`flex flex-col gap-1 ${showLabel ? "px-3" : ""} ${className}`}
-    >
+    <div className={`flex flex-col gap-1 ${showLabel ? "px-3" : ""} ${className}`}>
       {showLabel && (
         <span className="text-sm font-medium text-muted-foreground">
           {m.preferences_gender_switcher()}

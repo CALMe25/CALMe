@@ -4,10 +4,7 @@
 import { conversationMapV2 } from "./conversationMapV2";
 import { therapeuticConversationMap } from "./conversationMap";
 import { onboardingConversationMap, onboardingParsers } from "./onboardingMap";
-import {
-  userProfileStorage,
-  type UserProfile,
-} from "../storage/userProfileStorage";
+import { userProfileStorage, type UserProfile } from "../storage/userProfileStorage";
 import * as enhancedParser from "../parser/enhancedParser";
 import type { ParserMessages } from "../parser/enhancedParser";
 
@@ -74,12 +71,9 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 const isConversationDecisionLogicValue = (
   value: ConversationNode["next"],
-): value is ConversationDecisionLogic =>
-  isRecord(value) && Array.isArray(value.conditions);
+): value is ConversationDecisionLogic => isRecord(value) && Array.isArray(value.conditions);
 
-const isOnboardingParserKey = (
-  parserType: string,
-): parserType is keyof typeof onboardingParsers =>
+const isOnboardingParserKey = (parserType: string): parserType is keyof typeof onboardingParsers =>
   parserType in onboardingParsers;
 
 // Enhanced interface for the conversation controller
@@ -128,9 +122,7 @@ export class ConversationController implements ConversationControllerInterface {
     const isFirstTime = urlParams.get("firsttime") === "true";
 
     if (isFirstTime) {
-      console.log(
-        "🧪 CONSTRUCTOR: First-time flag detected, starting with onboarding",
-      );
+      console.log("🧪 CONSTRUCTOR: First-time flag detected, starting with onboarding");
       this.isOnboarding = true;
       this.conversationMap = onboardingConversationMap;
       this.currentNodeId = onboardingConversationMap.startNode;
@@ -154,22 +146,14 @@ export class ConversationController implements ConversationControllerInterface {
       const hasFirstTimeFlag = urlParams.get("firsttime") === "true";
 
       if (hasFirstTimeFlag) {
-        console.log(
-          "🧪 INIT: First-time flag detected, clearing all data for testing",
-        );
+        console.log("🧪 INIT: First-time flag detected, clearing all data for testing");
         await userProfileStorage.clearAllData();
         // Remove the parameter from URL to avoid repeated clearing
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname,
-        );
+        window.history.replaceState({}, document.title, window.location.pathname);
         console.log("🧪 INIT: Data cleared, URL cleaned");
         // Don't check profile - we already set onboarding in constructor
         this.initializationComplete = true;
-        console.log(
-          "🚀 INIT: Profile initialization complete (firsttime mode)",
-        );
+        console.log("🚀 INIT: Profile initialization complete (firsttime mode)");
         return;
       }
 
@@ -180,23 +164,14 @@ export class ConversationController implements ConversationControllerInterface {
       if (!this.userProfile || !this.userProfile.onboardingCompleted) {
         console.log("🎯 INIT: No valid profile found, starting onboarding");
         console.log("🎯 INIT: Profile null?", this.userProfile === null);
-        console.log(
-          "🎯 INIT: Onboarding completed?",
-          this.userProfile?.onboardingCompleted,
-        );
+        console.log("🎯 INIT: Onboarding completed?", this.userProfile?.onboardingCompleted);
         this.isOnboarding = true;
         this.conversationMap = onboardingConversationMap;
         this.currentNodeId = onboardingConversationMap.startNode;
-        console.log(
-          "🎯 INIT: Switched to onboarding map, starting node:",
-          this.currentNodeId,
-        );
+        console.log("🎯 INIT: Switched to onboarding map, starting node:", this.currentNodeId);
         console.log("🎯 INIT: isOnboarding flag set to:", this.isOnboarding);
       } else {
-        console.log(
-          "✅ INIT: Profile loaded successfully:",
-          this.userProfile.name,
-        );
+        console.log("✅ INIT: Profile loaded successfully:", this.userProfile.name);
         console.log("✅ INIT: Using main conversation map");
         this.userVariables.name = this.userProfile.name;
         this.isOnboarding = false;
@@ -205,10 +180,7 @@ export class ConversationController implements ConversationControllerInterface {
       }
 
       console.log("🚀 INIT: Profile initialization complete");
-      console.log(
-        "🚀 INIT: Current map start node:",
-        this.conversationMap.startNode,
-      );
+      console.log("🚀 INIT: Current map start node:", this.conversationMap.startNode);
       console.log("🚀 INIT: Current node ID:", this.currentNodeId);
       console.log("🚀 INIT: Is onboarding:", this.isOnboarding);
 
@@ -234,10 +206,7 @@ export class ConversationController implements ConversationControllerInterface {
     console.log("🔧 PROCESS: Current node:", currentNode);
 
     // Handle clarification needs
-    if (
-      result.needsClarification === true &&
-      result.clarificationPrompt != null
-    ) {
+    if (result.needsClarification === true && result.clarificationPrompt != null) {
       console.log("❓ PROCESS: Parser needs clarification");
       // Create a temporary clarification node
       const clarificationNode: ConversationNode = {
@@ -290,10 +259,7 @@ export class ConversationController implements ConversationControllerInterface {
         };
         console.log("🎯 PROCESS: Activity trigger created:", activityTrigger);
       } else {
-        console.warn(
-          "🎯 PROCESS: Activity node missing string next pointer.",
-          nextNode,
-        );
+        console.warn("🎯 PROCESS: Activity node missing string next pointer.", nextNode);
       }
     } else {
       console.log(
@@ -317,10 +283,8 @@ export class ConversationController implements ConversationControllerInterface {
       if (condition.if != null) {
         // Create a safe evaluation context
         const evaluationContext: ConditionEvaluationContext = {
-          category:
-            result.type === "classification" ? result.category : undefined,
-          extractedValue:
-            result.type === "extraction" ? result.extractedValue : undefined,
+          category: result.type === "classification" ? result.category : undefined,
+          extractedValue: result.type === "extraction" ? result.extractedValue : undefined,
           confidence: result.confidence,
         };
 
@@ -342,10 +306,7 @@ export class ConversationController implements ConversationControllerInterface {
     return decisionLogic.conditions[0]?.goto || "ongoing_support";
   }
 
-  private evaluateCondition(
-    conditionStr: string,
-    context: ConditionEvaluationContext,
-  ): boolean {
+  private evaluateCondition(conditionStr: string, context: ConditionEvaluationContext): boolean {
     // Simple condition evaluation - replace with a proper expression parser for production
     const { category, extractedValue, confidence } = context;
 
@@ -398,20 +359,13 @@ export class ConversationController implements ConversationControllerInterface {
 
   getCurrentNode(): ConversationNode {
     console.log("🔍 NODE: Getting current node with ID:", this.currentNodeId);
-    console.log(
-      "🔍 NODE: Current map has",
-      this.conversationMap.nodes.size,
-      "nodes",
-    );
+    console.log("🔍 NODE: Current map has", this.conversationMap.nodes.size, "nodes");
     console.log("🔍 NODE: Is onboarding:", this.isOnboarding);
 
     const node = this.conversationMap.nodes.get(this.currentNodeId);
     if (!node) {
       console.error("❌ NODE: Node not found!", this.currentNodeId);
-      console.error(
-        "❌ NODE: Available nodes:",
-        Array.from(this.conversationMap.nodes.keys()),
-      );
+      console.error("❌ NODE: Available nodes:", Array.from(this.conversationMap.nodes.keys()));
       throw new Error(`Node ${this.currentNodeId} not found`);
     }
 
@@ -425,10 +379,7 @@ export class ConversationController implements ConversationControllerInterface {
 
       // Replace {variable} with actual values
       Object.entries(this.userVariables).forEach(([key, value]) => {
-        content = content.replace(
-          new RegExp(`\\{${key}\\}`, "g"),
-          String(value),
-        );
+        content = content.replace(new RegExp(`\\{${key}\\}`, "g"), String(value));
       });
 
       console.log("🔍 NODE: Content after substitution:", content);
@@ -496,10 +447,7 @@ export class ConversationController implements ConversationControllerInterface {
   }
 
   // Enhanced parser that routes to appropriate parser
-  runParser(
-    parserType: string,
-    input: string,
-  ): ClassificationResult | ExtractionResult {
+  runParser(parserType: string, input: string): ClassificationResult | ExtractionResult {
     console.log(`🔧 Running parser: ${parserType} on input: "${input}"`);
 
     // Check onboarding-specific parsers first
@@ -551,11 +499,7 @@ export class ConversationController implements ConversationControllerInterface {
   // Record activity completion
   async recordActivityCompletion(activityName: string, completed: boolean) {
     if (this.userProfile) {
-      await userProfileStorage.recordActivity(
-        this.userProfile.id,
-        activityName,
-        completed,
-      );
+      await userProfileStorage.recordActivity(this.userProfile.id, activityName, completed);
     }
 
     // Add to attempted activities
@@ -580,9 +524,7 @@ export class ConversationController implements ConversationControllerInterface {
       "music",
       "story",
     ];
-    return allActivities.filter(
-      (activity) => !this.attemptedActivities.has(activity),
-    );
+    return allActivities.filter((activity) => !this.attemptedActivities.has(activity));
   }
 
   // Switch to alert mode

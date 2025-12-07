@@ -68,14 +68,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setThemeState(nextTheme);
   }, [theme]);
 
-  const value = useMemo(
-    () => ({ theme, setTheme, cycleTheme }),
-    [theme, setTheme, cycleTheme],
-  );
+  const value = useMemo(() => ({ theme, setTheme, cycleTheme }), [theme, setTheme, cycleTheme]);
 
-  return (
-    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
