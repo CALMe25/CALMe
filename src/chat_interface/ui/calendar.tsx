@@ -1,17 +1,8 @@
 "use client";
 
 import * as React from "react";
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-} from "lucide-react";
-import {
-  DayPicker,
-  type ClassNames,
-  type CustomComponents,
-} from "react-day-picker";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
+import { DayPicker, type ClassNames, type CustomComponents } from "react-day-picker";
 
 import { cn } from "./utils";
 import { buttonVariants } from "./button";
@@ -68,16 +59,13 @@ function Calendar({
     ),
     day_range_start:
       "day-range-start aria-selected:bg-primary aria-selected:text-primary-foreground",
-    day_range_end:
-      "day-range-end aria-selected:bg-primary aria-selected:text-primary-foreground",
+    day_range_end: "day-range-end aria-selected:bg-primary aria-selected:text-primary-foreground",
     day_selected:
       "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
     day_today: "bg-accent text-accent-foreground",
-    day_outside:
-      "day-outside text-muted-foreground aria-selected:text-muted-foreground",
+    day_outside: "day-outside text-muted-foreground aria-selected:text-muted-foreground",
     day_disabled: "text-muted-foreground opacity-50",
-    day_range_middle:
-      "aria-selected:bg-accent aria-selected:text-accent-foreground",
+    day_range_middle: "aria-selected:bg-accent aria-selected:text-accent-foreground",
     day_hidden: "invisible",
     ...classNamesProp,
   };

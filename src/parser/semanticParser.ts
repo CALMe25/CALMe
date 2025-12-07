@@ -1,8 +1,4 @@
-import nlp, {
-  type CompromiseDocument,
-  type Sentence,
-  type Term,
-} from "compromise";
+import nlp, { type CompromiseDocument, type Sentence, type Term } from "compromise";
 
 // Extend Compromise with custom crisis language patterns and corrections
 const crisisPlugin = {
@@ -49,14 +45,12 @@ nlp.plugin(crisisPlugin);
 // Apply the patterns to add our custom tags
 function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
-  Object.entries(crisisPlugin.patterns).forEach(
-    ([pattern, tag]: [string, string]) => {
-      const matches = doc.match(pattern);
-      if (matches.has("")) {
-        matches.tag(tag);
-      }
-    },
-  );
+  Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]: [string, string]) => {
+    const matches = doc.match(pattern);
+    if (matches.has("")) {
+      matches.tag(tag);
+    }
+  });
   return doc;
 }
 
@@ -98,9 +92,7 @@ export function analyzeText(text: string): SemanticAnalysis {
   const numbers: string[] = doc.values().out("array");
 
   // Get noun phrases and verb phrases for better understanding
-  const phrases: string[] = doc
-    .match("#Determiner? #Adjective* #Noun+")
-    .out("array");
+  const phrases: string[] = doc.match("#Determiner? #Adjective* #Noun+").out("array");
 
   // Determine overall sentiment
   let sentiment: "positive" | "negative" | "neutral" = "neutral";
@@ -146,8 +138,7 @@ export function classifySafety(text: string): ClassificationResult {
   const hasNegation = analysis.negations.length > 0;
 
   // Semantic understanding of phrases
-  const isAskingForHelp =
-    doc.has("(help|save|rescue)") && !doc.has("no #Negative help");
+  const isAskingForHelp = doc.has("(help|save|rescue)") && !doc.has("no #Negative help");
   const isInDanger = hasDangerWords || hasDangerIndicators || isAskingForHelp;
 
   // Handle negations properly
@@ -161,9 +152,7 @@ export function classifySafety(text: string): ClassificationResult {
   if (negatedSafety || isInDanger) {
     category = "DANGER";
     confidence = isAskingForHelp || hasDangerIndicators ? 0.9 : 0.8;
-    reasoning = negatedSafety
-      ? "Negated safety statement"
-      : "Danger indicators present";
+    reasoning = negatedSafety ? "Negated safety statement" : "Danger indicators present";
   } else if (confirmedSafety || (hasSafeLocation && !isInDanger)) {
     category = "SAFE";
     confidence = hasSafeLocation ? 0.85 : 0.75;
@@ -190,10 +179,7 @@ export function classifyStress(text: string): ClassificationResult {
   console.log("Sentiment:", analysis.sentiment);
 
   // Use semantic tags from the NLP plugin
-  if (
-    analysis.tags.includes("PanicSymptom") ||
-    analysis.tags.includes("PanicState")
-  ) {
+  if (analysis.tags.includes("PanicSymptom") || analysis.tags.includes("PanicState")) {
     stressLevel += 6;
     reasoning.push("panic indicators detected");
   }
@@ -277,8 +263,7 @@ export function classifyStress(text: string): ClassificationResult {
   return {
     category,
     confidence,
-    reasoning:
-      reasoning.length > 0 ? reasoning.join("; ") : "General assessment",
+    reasoning: reasoning.length > 0 ? reasoning.join("; ") : "General assessment",
   };
 }
 
@@ -304,9 +289,7 @@ export function extractLocation(text: string): ExtractionResult {
   }
 
   // 2. Look for location patterns with prepositions
-  const locationPhrases = doc
-    .match("(at|in|from) #Determiner? #Adjective* #Noun+")
-    .out("array");
+  const locationPhrases = doc.match("(at|in|from) #Determiner? #Adjective* #Noun+").out("array");
   if (locationPhrases.length > 0) {
     // Remove the preposition from the extracted value
     const location = locationPhrases[0].replace(/^(at|in|from)\s+/i, "");
@@ -319,15 +302,9 @@ export function extractLocation(text: string): ExtractionResult {
 
   // 3. Look for common location words
   const commonLocations = doc
-    .match(
-      "(home|house|apartment|office|shelter|bunker|building|hospital|school)",
-    )
+    .match("(home|house|apartment|office|shelter|bunker|building|hospital|school)")
     .out("text");
-  if (
-    commonLocations !== null &&
-    commonLocations !== undefined &&
-    commonLocations !== ""
-  ) {
+  if (commonLocations !== null && commonLocations !== undefined && commonLocations !== "") {
     return {
       extractedValue: commonLocations,
       confidence: 0.8,

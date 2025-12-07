@@ -41,10 +41,7 @@ export default defineConfig({
               return "vendor-icons";
             }
             // Recharts and D3 - standalone charting
-            if (
-              id.includes("/node_modules/recharts/") ||
-              id.includes("/node_modules/d3-")
-            ) {
+            if (id.includes("/node_modules/recharts/") || id.includes("/node_modules/d3-")) {
               return "vendor-charts";
             }
             // NLP libraries - compromise and its dependencies must stay together

@@ -23,9 +23,7 @@ const PALETTE = [
 const getCssVariableValue = (variable: string) => {
   if (variable.startsWith("var(")) {
     const varName = variable.substring(4, variable.length - 1);
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue(varName)
-      .trim();
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
   }
   return variable;
 };
@@ -35,9 +33,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [brushSize, setBrushSize] = useState<(typeof BRUSH_SIZES)[number]>(
-    BRUSH_SIZES[1],
-  );
+  const [brushSize, setBrushSize] = useState<(typeof BRUSH_SIZES)[number]>(BRUSH_SIZES[1]);
   const [brushColor, setBrushColor] = useState<string>(PALETTE[0]);
   const brushSizeRef = useRef(brushSize);
   const brushColorRef = useRef(brushColor);
@@ -66,9 +62,9 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
       context.lineJoin = "round";
       context.lineWidth = brushSizeRef.current;
       context.strokeStyle = getCssVariableValue(brushColorRef.current);
-      context.fillStyle = getComputedStyle(
-        document.documentElement,
-      ).getPropertyValue("--background");
+      context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(
+        "--background",
+      );
       context.fillRect(0, 0, rect.width, rect.height);
 
       contextRef.current = context;
@@ -95,9 +91,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     }
   }, [brushColor]);
 
-  const getCanvasCoordinates = (
-    event: React.PointerEvent<HTMLCanvasElement>,
-  ) => {
+  const getCanvasCoordinates = (event: React.PointerEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
     const rect = canvas.getBoundingClientRect();
@@ -136,9 +130,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     const canvas = canvasRef.current;
     const context = contextRef.current;
     if (!canvas || !context) return;
-    context.fillStyle = getComputedStyle(
-      document.documentElement,
-    ).getPropertyValue("--background");
+    context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--background");
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
   };
 

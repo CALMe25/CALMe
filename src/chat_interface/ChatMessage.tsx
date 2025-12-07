@@ -85,11 +85,7 @@ export function ChatMessage({
         <Avatar className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
           <AvatarImage src={isUser ? undefined : "/api/placeholder/32/32"} />
           <AvatarFallback
-            className={
-              isUser
-                ? "bg-primary text-primary-foreground text-xs"
-                : "bg-muted text-xs"
-            }
+            className={isUser ? "bg-primary text-primary-foreground text-xs" : "bg-muted text-xs"}
           >
             {isUser ? "U" : "AI"}
           </AvatarFallback>
@@ -121,26 +117,18 @@ export function ChatMessage({
                     }`}
                     onClick={handleAudioPlay}
                   >
-                    {isPlaying ? (
-                      <Pause className="w-4 h-4" />
-                    ) : (
-                      <Play className="w-4 h-4" />
-                    )}
+                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                   </Button>
 
                   <div className="flex-1">
                     <div
                       className={`h-1 rounded-full ${
-                        isUser
-                          ? "bg-primary-foreground/20"
-                          : "bg-muted-foreground/20"
+                        isUser ? "bg-primary-foreground/20" : "bg-muted-foreground/20"
                       }`}
                     >
                       <div
                         className={`h-full rounded-full transition-all duration-100 ${
-                          isUser
-                            ? "bg-primary-foreground/60"
-                            : "bg-muted-foreground/60"
+                          isUser ? "bg-primary-foreground/60" : "bg-muted-foreground/60"
                         }`}
                         style={{
                           width: `${(currentTime / audioDuration) * 100}%`,
@@ -151,14 +139,10 @@ export function ChatMessage({
 
                   <span
                     className={`text-xs ${
-                      isUser
-                        ? "text-primary-foreground/70"
-                        : "text-muted-foreground/70"
+                      isUser ? "text-primary-foreground/70" : "text-muted-foreground/70"
                     }`}
                   >
-                    {isPlaying
-                      ? formatAudioTime(currentTime)
-                      : formatAudioTime(audioDuration)}
+                    {isPlaying ? formatAudioTime(currentTime) : formatAudioTime(audioDuration)}
                   </span>
                 </div>
               </>
@@ -169,12 +153,8 @@ export function ChatMessage({
             {type === "app-buttons" && (
               <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
                 {(appsTypes === "activities"
-                  ? quickActivityOrder.map((name) =>
-                      apps.find((app) => app.name === name),
-                    )
-                  : apps.filter((app) =>
-                      appsTypes ? app.type === appsTypes : true,
-                    )
+                  ? quickActivityOrder.map((name) => apps.find((app) => app.name === name))
+                  : apps.filter((app) => (appsTypes ? app.type === appsTypes : true))
                 )
                   .filter((app): app is AppInterface => Boolean(app))
                   .map((app) => (
@@ -185,9 +165,7 @@ export function ChatMessage({
                       size="sm"
                     >
                       <div className="scale-110">{app.icon}</div>
-                      <span className="leading-tight text-center">
-                        {app.label}
-                      </span>
+                      <span className="leading-tight text-center">{app.label}</span>
                     </Button>
                   ))}
               </div>
@@ -197,9 +175,7 @@ export function ChatMessage({
           <span
             className={`text-xs text-muted-foreground mt-1 ${alignRight ? "text-right" : "text-left"}`}
           >
-            {nodeId != null
-              ? `${nodeId} • ${formatTime(timestamp)}`
-              : formatTime(timestamp)}
+            {nodeId != null ? `${nodeId} • ${formatTime(timestamp)}` : formatTime(timestamp)}
           </span>
         </div>
       </div>

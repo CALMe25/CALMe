@@ -21,8 +21,6 @@ execSync('npx license-checker-rseidelsohn --markdown --out="NOTICE"', {
 });
 
 const lines = readFileSync("NOTICE", "utf8").trim().split("\n");
-customPackages.forEach((p) =>
-  lines.push(`- [${p.name}](${p.url}) - ${p.license}`),
-);
+customPackages.forEach((p) => lines.push(`- [${p.name}](${p.url}) - ${p.license}`));
 lines.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 writeFileSync("NOTICE", lines.join("\n") + "\n");

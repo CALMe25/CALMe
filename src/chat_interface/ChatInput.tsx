@@ -10,11 +10,7 @@ interface ChatInputProps {
   onAddAttachment?: () => void;
 }
 
-export function ChatInput({
-  onSendMessage,
-  onVoiceInput,
-  onAddAttachment,
-}: ChatInputProps) {
+export function ChatInput({ onSendMessage, onVoiceInput, onAddAttachment }: ChatInputProps) {
   const [message, setMessage] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {

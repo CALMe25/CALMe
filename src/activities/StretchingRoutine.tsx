@@ -33,10 +33,7 @@ export default function StretchingRoutine() {
    * @returns Array of localized instruction strings
    */
   const buildInstructions = useCallback(
-    (
-      getter: (args: { step: string; userGender: string }) => string,
-      count = 4,
-    ) =>
+    (getter: (args: { step: string; userGender: string }) => string, count = 4) =>
       Array.from({ length: count }, (_, index) =>
         getter({ step: (index + 1).toString(), userGender }),
       ),
@@ -56,18 +53,13 @@ export default function StretchingRoutine() {
         name: m.activities_stretching_exercises_neckRolls_name(),
         duration: EXERCISE_DURATIONS[0],
         description: m.activities_stretching_exercises_neckRolls_description(),
-        instructions: buildInstructions(
-          m.activities_stretching_exercises_neckRolls_instructions,
-        ),
+        instructions: buildInstructions(m.activities_stretching_exercises_neckRolls_instructions),
       },
       shoulderShrugs: {
         id: 2,
         name: m.activities_stretching_exercises_shoulderShrugs_name(),
         duration: EXERCISE_DURATIONS[1],
-        description:
-          m.activities_stretching_exercises_shoulderShrugs_description(
-            genderInput,
-          ),
+        description: m.activities_stretching_exercises_shoulderShrugs_description(genderInput),
         instructions: buildInstructions(
           m.activities_stretching_exercises_shoulderShrugs_instructions,
         ),
@@ -76,35 +68,22 @@ export default function StretchingRoutine() {
         id: 3,
         name: m.activities_stretching_exercises_armCircles_name(),
         duration: EXERCISE_DURATIONS[2],
-        description:
-          m.activities_stretching_exercises_armCircles_description(genderInput),
-        instructions: buildInstructions(
-          m.activities_stretching_exercises_armCircles_instructions,
-        ),
+        description: m.activities_stretching_exercises_armCircles_description(genderInput),
+        instructions: buildInstructions(m.activities_stretching_exercises_armCircles_instructions),
       },
       sideStretch: {
         id: 4,
         name: m.activities_stretching_exercises_sideStretch_name(),
         duration: EXERCISE_DURATIONS[3],
-        description:
-          m.activities_stretching_exercises_sideStretch_description(
-            genderInput,
-          ),
-        instructions: buildInstructions(
-          m.activities_stretching_exercises_sideStretch_instructions,
-        ),
+        description: m.activities_stretching_exercises_sideStretch_description(genderInput),
+        instructions: buildInstructions(m.activities_stretching_exercises_sideStretch_instructions),
       },
       forwardFold: {
         id: 5,
         name: m.activities_stretching_exercises_forwardFold_name(),
         duration: EXERCISE_DURATIONS[4],
-        description:
-          m.activities_stretching_exercises_forwardFold_description(
-            genderInput,
-          ),
-        instructions: buildInstructions(
-          m.activities_stretching_exercises_forwardFold_instructions,
-        ),
+        description: m.activities_stretching_exercises_forwardFold_description(genderInput),
+        instructions: buildInstructions(m.activities_stretching_exercises_forwardFold_instructions),
       },
     };
 
@@ -197,8 +176,7 @@ export default function StretchingRoutine() {
   };
 
   const exercise = exercises[currentExercise];
-  const progress =
-    ((exercise.duration - timeRemaining) / exercise.duration) * 100;
+  const progress = ((exercise.duration - timeRemaining) / exercise.duration) * 100;
 
   return (
     <div className="flex h-full w-full flex-col items-center overflow-y-auto bg-background p-3 text-foreground sm:p-4 md:p-6">
@@ -244,10 +222,7 @@ export default function StretchingRoutine() {
               </h4>
               <ol className="list-decimal list-inside space-y-2">
                 {exercise.instructions.map((instruction, index) => (
-                  <li
-                    key={index}
-                    className="text-sm sm:text-base text-muted-foreground"
-                  >
+                  <li key={index} className="text-sm sm:text-base text-muted-foreground">
                     {instruction}
                   </li>
                 ))}

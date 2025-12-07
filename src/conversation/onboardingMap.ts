@@ -1,10 +1,7 @@
 // Onboarding Conversation Map - Based on profile-intro-questions.md
 // Handles first-time user setup and profile creation
 
-import type {
-  ConversationMap,
-  ConversationNode,
-} from "./ConversationController";
+import type { ConversationMap, ConversationNode } from "./ConversationController";
 
 // Helper to create conversation nodes
 const createNode = (

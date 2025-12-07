@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 
 export type UserGender = "female" | "male" | "unspecified";
 
@@ -21,8 +14,7 @@ const defaultValue: UserPreferencesContextType = {
 
 const STORAGE_KEY = "calme-user-gender";
 
-const UserPreferencesContext =
-  createContext<UserPreferencesContextType>(defaultValue);
+const UserPreferencesContext = createContext<UserPreferencesContextType>(defaultValue);
 
 function getStoredPreferenceValue(): UserGender {
   if (typeof window === "undefined") return "unspecified";
@@ -47,9 +39,7 @@ function setStoredPreferenceValue(value: UserGender): void {
 }
 
 export function UserPreferencesProvider({ children }: { children: ReactNode }) {
-  const [userGender, setUserGenderState] = useState<UserGender>(() =>
-    getStoredPreferenceValue(),
-  );
+  const [userGender, setUserGenderState] = useState<UserGender>(() => getStoredPreferenceValue());
 
   const setUserGender = useCallback((value: UserGender) => {
     setUserGenderState(value);

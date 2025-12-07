@@ -4,13 +4,9 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null;
 
 const toStringArray = (value: unknown): string[] =>
-  Array.isArray(value)
-    ? value.filter((item): item is string => typeof item === "string")
-    : [];
+  Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
 
-const getTermData = (
-  value: unknown,
-): { text: string; tags: string[] } | null => {
+const getTermData = (value: unknown): { text: string; tags: string[] } | null => {
   if (!isRecord(value)) {
     return null;
   }
@@ -43,10 +39,7 @@ export function debugParse(text: string) {
   console.log("  #Adjective:", doc.match("#Adjective").out("array"));
   console.log("  #Adverb:", doc.match("#Adverb").out("array"));
   console.log("  #Adverb+:", doc.match("#Adverb+").out("array"));
-  console.log(
-    "  #Adverb+ #Adjective:",
-    doc.match("#Adverb+ #Adjective").out("array"),
-  );
+  console.log("  #Adverb+ #Adjective:", doc.match("#Adverb+ #Adjective").out("array"));
   console.log("  stressed:", doc.has("stressed"));
   console.log("  very:", doc.has("very"));
 
@@ -79,10 +72,7 @@ export function debugParse(text: string) {
     }
   });
 
-  console.log(
-    "\n  #Adverb+ #Adjective:",
-    fixedDoc.match("#Adverb+ #Adjective").out("array"),
-  );
+  console.log("\n  #Adverb+ #Adjective:", fixedDoc.match("#Adverb+ #Adjective").out("array"));
 }
 
 // Run debug on problem case

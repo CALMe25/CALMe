@@ -1,10 +1,7 @@
 // Conversation Map Definition for CALMe Therapeutic Flow
 // Based on the mermaid flowchart specification
 
-import type {
-  ConversationMap,
-  ConversationNode,
-} from "./ConversationController";
+import type { ConversationMap, ConversationNode } from "./ConversationController";
 
 export const therapeuticConversationMap: ConversationMap = {
   startNode: "safety_check",
@@ -81,8 +78,7 @@ export const therapeuticConversationMap: ConversationMap = {
       {
         id: "breathing_activity",
         type: "activity",
-        content:
-          "🫁 I'm going to start a breathing exercise to help calm your nervous system.",
+        content: "🫁 I'm going to start a breathing exercise to help calm your nervous system.",
         activity: "breathing",
         next: "breathing_return",
       },
@@ -282,8 +278,7 @@ export const therapeuticConversationMap: ConversationMap = {
       {
         id: "isolation_support",
         type: "question",
-        content:
-          "Being alone during this must be really hard. How are you managing?",
+        content: "Being alone during this must be really hard. How are you managing?",
         parser: "classifyStress",
         next: {
           conditions: [
@@ -350,8 +345,7 @@ export const therapeuticConversationMap: ConversationMap = {
       {
         id: "helper_role",
         type: "question",
-        content:
-          "You're taking care of others. How can we help you stay strong?",
+        content: "You're taking care of others. How can we help you stay strong?",
         parser: "classifyStress",
         next: {
           conditions: [
@@ -395,8 +389,7 @@ export const therapeuticConversationMap: ConversationMap = {
       {
         id: "communication_check",
         type: "question",
-        content:
-          "Have you been able to contact your missing family or friends?",
+        content: "Have you been able to contact your missing family or friends?",
         parser: "classifyStress",
         next: {
           conditions: [
@@ -528,8 +521,7 @@ export const therapeuticConversationMap: ConversationMap = {
       {
         id: "continued_conversation",
         type: "question",
-        content:
-          "We can keep talking as long as you need. What's on your mind?",
+        content: "We can keep talking as long as you need. What's on your mind?",
         parser: "classifyStress",
         next: "stress_level",
       },

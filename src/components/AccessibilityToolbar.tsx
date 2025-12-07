@@ -121,9 +121,7 @@ const patchToolbarBehavior = () => {
   }
   window[TOOLBAR_PATCH_FLAG] = true;
 
-  proto.keyboardRootEnable = function keyboardRootEnablePatched(
-    this: MicAccessToolInstance,
-  ) {
+  proto.keyboardRootEnable = function keyboardRootEnablePatched(this: MicAccessToolInstance) {
     ensureToolbarState();
     const targets = document.querySelectorAll(KEYBOARD_SELECTOR);
     if (window.MICTOOLBOXAPPSTATE?.keyboardRoot === true) {
@@ -153,11 +151,9 @@ const patchToolbarBehavior = () => {
         document.body.classList.remove(cls);
       });
     }
-    document
-      .querySelectorAll(`#${TOOLBAR_ELEMENT_ID} .vi-enabled`)
-      .forEach((button) => {
-        button.classList.remove("vi-enabled");
-      });
+    document.querySelectorAll(`#${TOOLBAR_ELEMENT_ID} .vi-enabled`).forEach((button) => {
+      button.classList.remove("vi-enabled");
+    });
     clearInlineFonts();
     clearImagesTitles();
     clearKeyboardTabbing();
@@ -257,10 +253,7 @@ const createToolbarInstance = (language: string, forceRecreate = false) => {
   return window.micAccessTool;
 };
 
-export function AccessibilityToolbar({
-  open,
-  onClose,
-}: AccessibilityToolbarProps) {
+export function AccessibilityToolbar({ open, onClose }: AccessibilityToolbarProps) {
   const { currentLocale } = useLanguage();
 
   useEffect(() => {

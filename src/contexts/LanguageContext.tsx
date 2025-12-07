@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { getLocale, setLocale, locales } from "../paraglide/runtime.js";
 
 interface LanguageContextType {
@@ -19,9 +13,7 @@ const LanguageContext = createContext<LanguageContextType>({
 
 const LOCALE_STORAGE_KEY = "calme-locale";
 
-const isSupportedLocale = (
-  value: string | null,
-): value is (typeof locales)[number] => {
+const isSupportedLocale = (value: string | null): value is (typeof locales)[number] => {
   if (value == null || value === "") return false;
   return (locales as readonly string[]).includes(value);
 };

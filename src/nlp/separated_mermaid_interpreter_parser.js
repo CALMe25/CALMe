@@ -58,10 +58,7 @@ export class MermaidInterpreter {
 
       .map((line) => line.trim())
 
-      .filter(
-        (line) =>
-          line && !line.startsWith("flowchart") && !line.startsWith("%%"),
-      );
+      .filter((line) => line && !line.startsWith("flowchart") && !line.startsWith("%%"));
 
     // Phase 1: Extract all nodes
     for (const line of lines) {
@@ -151,9 +148,7 @@ export class MermaidInterpreter {
   }
 
   findNextNodeFromKeywords(keywordNode) {
-    const nextEdge = keywordNode.outgoingEdges.find(
-      (edge) => edge.type === "direct",
-    );
+    const nextEdge = keywordNode.outgoingEdges.find((edge) => edge.type === "direct");
     return nextEdge ? nextEdge.to : null;
   }
 
@@ -196,8 +191,7 @@ export class MermaidInterpreter {
       question: currentNode.text.slice(1, -1),
       categories: categories,
       clarificationResponse: `Could you tell me more about: ${currentNode.text.toLowerCase()}`,
-      defaultCategory:
-        Array.from(currentNode.categories.keys())[0] || "UNKNOWN",
+      defaultCategory: Array.from(currentNode.categories.keys())[0] || "UNKNOWN",
     };
   }
 
@@ -236,10 +230,7 @@ export class MermaidInterpreter {
   }
 
   isAtQuestion() {
-    return (
-      this.currentPosition.nodeType === "question" &&
-      this.currentPosition.waitingForResponse
-    );
+    return this.currentPosition.nodeType === "question" && this.currentPosition.waitingForResponse;
   }
 
   isComplete() {
@@ -318,33 +309,9 @@ export class NLPParser {
     // All keywords come from the flowchart
     nlp.extend({
       // Only general linguistic patterns, no domain-specific keywords
-      intensifiers: [
-        "very",
-        "really",
-        "extremely",
-        "totally",
-        "completely",
-        "absolutely",
-      ],
-      negations: [
-        "not",
-        "no",
-        "never",
-        "none",
-        "nothing",
-        "cant",
-        "wont",
-        "dont",
-      ],
-      uncertainty: [
-        "maybe",
-        "perhaps",
-        "possibly",
-        "might",
-        "could",
-        "think",
-        "guess",
-      ],
+      intensifiers: ["very", "really", "extremely", "totally", "completely", "absolutely"],
+      negations: ["not", "no", "never", "none", "nothing", "cant", "wont", "dont"],
+      uncertainty: ["maybe", "perhaps", "possibly", "might", "could", "think", "guess"],
     });
   }
 
@@ -362,12 +329,7 @@ export class NLPParser {
     const nlpAnalysis = this.performGenericAnalysis(doc, text);
 
     // Score categories using ONLY keywords from the flowchart
-    const scores = this.scoreFlowchartCategories(
-      text,
-      doc,
-      questionData.categories,
-      nlpAnalysis,
-    );
+    const scores = this.scoreFlowchartCategories(text, doc, questionData.categories, nlpAnalysis);
 
     // Select best match
     const bestMatch = this.selectBestCategory(scores, questionData);
@@ -379,9 +341,7 @@ export class NLPParser {
       matchedKeywords: bestMatch.matchedElements,
       nlpAnalysis: nlpAnalysis,
       reasoning: bestMatch.reasoning,
-      alternativeScores: scores.filter(
-        (s) => s.category !== bestMatch.category,
-      ),
+      alternativeScores: scores.filter((s) => s.category !== bestMatch.category),
     };
   }
 
@@ -413,9 +373,7 @@ export class NLPParser {
           .match("(very|really|extremely|totally|completely|absolutely)")
           .out("array"),
         negations: doc.has("#Negative"),
-        uncertainties: doc
-          .match("(maybe|perhaps|possibly|might|could|think|guess)")
-          .out("array"),
+        uncertainties: doc.match("(maybe|perhaps|possibly|might|could|think|guess)").out("array"),
         questions: doc.questions().out("array"),
         verbs: doc.verbs().out("array"),
         adjectives: doc.adjectives().out("array"),
@@ -429,9 +387,7 @@ export class NLPParser {
     const scores = [];
 
     // Score each category using ONLY the keywords from the flowchart
-    for (const [categoryKey, categoryData] of Object.entries(
-      flowchartCategories,
-    )) {
+    for (const [categoryKey, categoryData] of Object.entries(flowchartCategories)) {
       let score = 0;
       let matchedElements = [];
 
@@ -451,11 +407,7 @@ export class NLPParser {
           keywordDoc.nouns().toSingular().text() ||
           keyword;
 
-        if (
-          doc.has(lemma) &&
-          lemma !== keyword &&
-          !text.includes(keyword.toLowerCase())
-        ) {
+        if (doc.has(lemma) && lemma !== keyword && !text.includes(keyword.toLowerCase())) {
           score += 0.3;
           matchedElements.push(`flowchart-lemma: ${lemma}`);
         }
@@ -469,16 +421,11 @@ export class NLPParser {
       );
       score += semanticScore * 0.2;
       if (semanticScore > 0.1) {
-        matchedElements.push(
-          `semantic-similarity: ${semanticScore.toFixed(2)}`,
-        );
+        matchedElements.push(`semantic-similarity: ${semanticScore.toFixed(2)}`);
       }
 
       // 4. Generic linguistic patterns (10% weight)
-      const linguisticScore = this.calculateGenericLinguisticScore(
-        nlpAnalysis,
-        categoryKey,
-      );
+      const linguisticScore = this.calculateGenericLinguisticScore(nlpAnalysis, categoryKey);
       score += linguisticScore * 0.1;
       if (linguisticScore > 0.1) {
         matchedElements.push(`linguistic: ${linguisticScore.toFixed(2)}`);
@@ -502,10 +449,7 @@ export class NLPParser {
       const keywordDoc = nlp(keyword);
 
       // Check for synonyms or related words using compromise.js
-      if (
-        keywordDoc.has("#Emotion") &&
-        nlpAnalysis.linguistic.emotions.length > 0
-      ) {
+      if (keywordDoc.has("#Emotion") && nlpAnalysis.linguistic.emotions.length > 0) {
         score += 0.2;
       }
 
@@ -735,12 +679,7 @@ export class ConversationController {
     if (!currentQuestion) {
       return { success: false, error: "Not at a question" };
     }
-    console.log(
-      "user input: ",
-      userInput,
-      "\ncurrent question: ",
-      currentQuestion,
-    );
+    console.log("user input: ", userInput, "\ncurrent question: ", currentQuestion);
     // Use NLP parser to understand input
     // let result;
     // if (currentQuestion.type === 'classification') {
@@ -757,9 +696,7 @@ export class ConversationController {
     // Use interpreter to navigate
     if (result.type === "classification") {
       console.log("old current position ", this.interpreter.currentPosition);
-      const navigationResult = this.interpreter.navigateToCategory(
-        result.category,
-      );
+      const navigationResult = this.interpreter.navigateToCategory(result.category);
       console.log("navigation to ", result.category);
       console.log("new current position ", this.interpreter.currentPosition);
       if (!navigationResult.success) {

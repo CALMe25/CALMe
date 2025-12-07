@@ -77,75 +77,32 @@ class EnhancedParser {
   // Keyword mappings for quick categorization
   private stressKeywords: KeywordMapping[] = [
     {
-      keywords: [
-        "good",
-        "fine",
-        "okay",
-        "exploring",
-        "curious",
-        "looking around",
-        "just checking",
-      ],
+      keywords: ["good", "fine", "okay", "exploring", "curious", "looking around", "just checking"],
       category: "no_stress",
       confidence: 0.9,
     },
     {
-      keywords: [
-        "anxious",
-        "worried",
-        "nervous",
-        "uneasy",
-        "uncomfortable",
-        "tense",
-      ],
+      keywords: ["anxious", "worried", "nervous", "uneasy", "uncomfortable", "tense"],
       category: "moderate_stress",
       confidence: 0.85,
     },
     {
-      keywords: [
-        "crisis",
-        "panic",
-        "scared",
-        "terrified",
-        "overwhelmed",
-        "cant breathe",
-        "help",
-      ],
+      keywords: ["crisis", "panic", "scared", "terrified", "overwhelmed", "cant breathe", "help"],
       category: "high_stress",
       confidence: 0.95,
     },
     {
-      keywords: [
-        "car",
-        "train",
-        "bus",
-        "vehicle",
-        "driving",
-        "transit",
-        "transportation",
-      ],
+      keywords: ["car", "train", "bus", "vehicle", "driving", "transit", "transportation"],
       category: "in_transit",
       confidence: 0.9,
     },
     {
-      keywords: [
-        "outside",
-        "outdoors",
-        "construction",
-        "working",
-        "open space",
-      ],
+      keywords: ["outside", "outdoors", "construction", "working", "open space"],
       category: "outdoor_worker",
       confidence: 0.85,
     },
     {
-      keywords: [
-        "caregiver",
-        "helping someone",
-        "supporting",
-        "care facility",
-        "nursing",
-      ],
+      keywords: ["caregiver", "helping someone", "supporting", "care facility", "nursing"],
       category: "caregiver",
       confidence: 0.85,
     },
@@ -153,40 +110,17 @@ class EnhancedParser {
 
   private safetyKeywords: KeywordMapping[] = [
     {
-      keywords: [
-        "yes",
-        "safe",
-        "protected",
-        "secure",
-        "sheltered",
-        "im good",
-        "all good",
-      ],
+      keywords: ["yes", "safe", "protected", "secure", "sheltered", "im good", "all good"],
       category: "SAFE",
       confidence: 0.9,
     },
     {
-      keywords: [
-        "no",
-        "not safe",
-        "unsafe",
-        "exposed",
-        "danger",
-        "at risk",
-        "vulnerable",
-      ],
+      keywords: ["no", "not safe", "unsafe", "exposed", "danger", "at risk", "vulnerable"],
       category: "DANGER",
       confidence: 0.95,
     },
     {
-      keywords: [
-        "maybe",
-        "not sure",
-        "i think",
-        "possibly",
-        "sort of",
-        "kind of",
-      ],
+      keywords: ["maybe", "not sure", "i think", "possibly", "sort of", "kind of"],
       category: "UNSURE",
       confidence: 0.7,
     },
@@ -225,23 +159,17 @@ class EnhancedParser {
     if (this.messages) {
       const stressKeywordMappings = [
         {
-          keywords: this.parseKeywords(
-            this.messages.parser.stressKeywords.no_stress,
-          ),
+          keywords: this.parseKeywords(this.messages.parser.stressKeywords.no_stress),
           category: "no_stress",
           confidence: 0.9,
         },
         {
-          keywords: this.parseKeywords(
-            this.messages.parser.stressKeywords.moderate_stress,
-          ),
+          keywords: this.parseKeywords(this.messages.parser.stressKeywords.moderate_stress),
           category: "moderate_stress",
           confidence: 0.85,
         },
         {
-          keywords: this.parseKeywords(
-            this.messages.parser.stressKeywords.high_stress,
-          ),
+          keywords: this.parseKeywords(this.messages.parser.stressKeywords.high_stress),
           category: "high_stress",
           confidence: 0.95,
         },
@@ -251,9 +179,7 @@ class EnhancedParser {
       for (const mapping of stressKeywordMappings) {
         for (const keyword of mapping.keywords) {
           if (lowerInput.includes(keyword)) {
-            console.log(
-              `✅ Parser: Found i18n keyword match: "${keyword}" → ${mapping.category}`,
-            );
+            console.log(`✅ Parser: Found i18n keyword match: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
               category: mapping.category,
@@ -268,9 +194,7 @@ class EnhancedParser {
       for (const mapping of this.stressKeywords) {
         for (const keyword of mapping.keywords) {
           if (lowerInput.includes(keyword)) {
-            console.log(
-              `✅ Parser: Found keyword match: "${keyword}" → ${mapping.category}`,
-            );
+            console.log(`✅ Parser: Found keyword match: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
               category: mapping.category,
@@ -288,11 +212,9 @@ class EnhancedParser {
 
     // Also check for emotional terms
     const hasNegativeEmotion =
-      doc.match("#Negative").found ||
-      doc.match("(sad|angry|frustrated|upset)").found;
+      doc.match("#Negative").found || doc.match("(sad|angry|frustrated|upset)").found;
     const hasPositiveEmotion =
-      doc.match("#Positive").found ||
-      doc.match("(happy|calm|relaxed|peaceful)").found;
+      doc.match("#Positive").found || doc.match("(happy|calm|relaxed|peaceful)").found;
 
     // Determine stress level from sentiment
     if (sentimentResult.score < -3 || hasNegativeEmotion) {
@@ -343,23 +265,17 @@ class EnhancedParser {
     if (this.messages) {
       const safetyKeywordMappings = [
         {
-          keywords: this.parseKeywords(
-            this.messages.parser.safetyKeywords.safe,
-          ),
+          keywords: this.parseKeywords(this.messages.parser.safetyKeywords.safe),
           category: "SAFE",
           confidence: 0.9,
         },
         {
-          keywords: this.parseKeywords(
-            this.messages.parser.safetyKeywords.danger,
-          ),
+          keywords: this.parseKeywords(this.messages.parser.safetyKeywords.danger),
           category: "DANGER",
           confidence: 0.95,
         },
         {
-          keywords: this.parseKeywords(
-            this.messages.parser.safetyKeywords.unsure,
-          ),
+          keywords: this.parseKeywords(this.messages.parser.safetyKeywords.unsure),
           category: "UNSURE",
           confidence: 0.7,
         },
@@ -369,9 +285,7 @@ class EnhancedParser {
       for (const mapping of safetyKeywordMappings) {
         for (const keyword of mapping.keywords) {
           if (lowerInput.includes(keyword)) {
-            console.log(
-              `✅ Parser: Found i18n safety keyword: "${keyword}" → ${mapping.category}`,
-            );
+            console.log(`✅ Parser: Found i18n safety keyword: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
               category: mapping.category,
@@ -383,12 +297,8 @@ class EnhancedParser {
       }
 
       // Check for yes/no responses using i18n keywords
-      const affirmativeKeywords = this.parseKeywords(
-        this.messages.parser.affirmativeResponses,
-      );
-      const negativeKeywords = this.parseKeywords(
-        this.messages.parser.negativeResponses,
-      );
+      const affirmativeKeywords = this.parseKeywords(this.messages.parser.affirmativeResponses);
+      const negativeKeywords = this.parseKeywords(this.messages.parser.negativeResponses);
 
       for (const keyword of affirmativeKeywords) {
         if (lowerInput.includes(keyword)) {
@@ -418,9 +328,7 @@ class EnhancedParser {
       for (const mapping of this.safetyKeywords) {
         for (const keyword of mapping.keywords) {
           if (lowerInput.includes(keyword)) {
-            console.log(
-              `✅ Parser: Found safety keyword: "${keyword}" → ${mapping.category}`,
-            );
+            console.log(`✅ Parser: Found safety keyword: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
               category: mapping.category,
@@ -455,9 +363,7 @@ class EnhancedParser {
     }
 
     // Low confidence fallback
-    console.log(
-      "⚠️ Parser: Cannot determine safety status, needs clarification",
-    );
+    console.log("⚠️ Parser: Cannot determine safety status, needs clarification");
     return {
       type: "classification",
       category: "UNSURE",
@@ -536,15 +442,9 @@ class EnhancedParser {
 
     // Use i18n keywords if available
     if (this.messages) {
-      const affirmativeKeywords = this.parseKeywords(
-        this.messages.parser.affirmativeResponses,
-      );
-      const negativeKeywords = this.parseKeywords(
-        this.messages.parser.negativeResponses,
-      );
-      const uncertainKeywords = this.parseKeywords(
-        this.messages.parser.uncertainResponses,
-      );
+      const affirmativeKeywords = this.parseKeywords(this.messages.parser.affirmativeResponses);
+      const negativeKeywords = this.parseKeywords(this.messages.parser.negativeResponses);
+      const uncertainKeywords = this.parseKeywords(this.messages.parser.uncertainResponses);
 
       // Check affirmative
       for (const keyword of affirmativeKeywords) {
@@ -587,9 +487,7 @@ class EnhancedParser {
 
       // Strong yes indicators
       if (
-        doc.has(
-          "(yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly)",
-        ) ||
+        doc.has("(yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly)") ||
         lowerInput.includes("yes") ||
         lowerInput.includes("yeah")
       ) {
@@ -672,9 +570,7 @@ class EnhancedParser {
     for (const mapping of activityKeywords) {
       for (const keyword of mapping.keywords) {
         if (lowerInput.includes(keyword)) {
-          console.log(
-            `🎯 Parser: Activity preference detected: ${mapping.activity}`,
-          );
+          console.log(`🎯 Parser: Activity preference detected: ${mapping.activity}`);
           return {
             type: "classification",
             category: mapping.activity,
@@ -716,12 +612,9 @@ class EnhancedParser {
 export const enhancedParser = new EnhancedParser();
 
 // Export individual parser functions for backward compatibility
-export const classifyStress = (input: string) =>
-  enhancedParser.classifyStress(input);
-export const classifySafety = (input: string) =>
-  enhancedParser.classifySafety(input);
-export const extractLocation = (input: string) =>
-  enhancedParser.extractLocation(input);
+export const classifyStress = (input: string) => enhancedParser.classifyStress(input);
+export const classifySafety = (input: string) => enhancedParser.classifySafety(input);
+export const extractLocation = (input: string) => enhancedParser.extractLocation(input);
 export const parseYesNo = (input: string) => enhancedParser.parseYesNo(input);
 export const parseActivityPreference = (input: string) =>
   enhancedParser.parseActivityPreference(input);

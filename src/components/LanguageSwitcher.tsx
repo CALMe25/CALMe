@@ -33,17 +33,13 @@ export function LanguageSwitcher({ variant = "icon" }: LanguageSwitcherProps) {
       {variant === "icon" ? (
         <span className="sr-only">{m.common_switchLanguage()}</span>
       ) : (
-        <span className="text-sm font-medium">
-          {LANGUAGE_NAMES[currentLocale]}
-        </span>
+        <span className="text-sm font-medium">{LANGUAGE_NAMES[currentLocale]}</span>
       )}
     </>
   );
 
   const triggerClassName =
-    variant === "icon"
-      ? "h-10 w-10 p-0"
-      : "h-10 px-3 gap-2 border border-border rounded-lg";
+    variant === "icon" ? "h-10 w-10 p-0" : "h-10 px-3 gap-2 border border-border rounded-lg";
 
   return (
     <DropdownMenu>
@@ -59,9 +55,7 @@ export function LanguageSwitcher({ variant = "icon" }: LanguageSwitcherProps) {
             onClick={() => {
               handleSetLocale(locale);
             }}
-            className={
-              currentLocale === locale ? "bg-accent font-semibold" : ""
-            }
+            className={currentLocale === locale ? "bg-accent font-semibold" : ""}
           >
             <span className="flex items-center gap-2">
               {LANGUAGE_NAMES[locale]}

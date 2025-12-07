@@ -76,8 +76,7 @@ class MockConversationController {
         {
           id: "breathing_activity",
           type: "activity",
-          content:
-            "🫁 I'm going to start a breathing exercise to help calm your nervous system.",
+          content: "🫁 I'm going to start a breathing exercise to help calm your nervous system.",
           activity: "breathing",
           next: "breathing_return",
         },
@@ -171,9 +170,7 @@ class MockConversationController {
           content: "Are you alone or with others?",
           parser: "classifyStress",
           next: {
-            conditions: [
-              { default: "ongoing_support", goto: "ongoing_support" },
-            ],
+            conditions: [{ default: "ongoing_support", goto: "ongoing_support" }],
           },
         },
       ],
@@ -182,8 +179,7 @@ class MockConversationController {
         {
           id: "positive_coping",
           type: "question",
-          content:
-            "✅ FAMILY SAFE TOGETHER\nYou're doing great keeping everyone safe.",
+          content: "✅ FAMILY SAFE TOGETHER\nYou're doing great keeping everyone safe.",
           parser: "classifyStress",
           next: "ongoing_support",
         },
@@ -222,8 +218,7 @@ class MockConversationController {
         {
           id: "positive_ending",
           type: "end",
-          content:
-            "🌟 YOU'VE SHOWN INCREDIBLE STRENGTH\nRemember: You survived today.",
+          content: "🌟 YOU'VE SHOWN INCREDIBLE STRENGTH\nRemember: You survived today.",
         },
       ],
     ]);
@@ -260,10 +255,8 @@ class MockConversationController {
     for (const condition of decisionLogic.conditions) {
       if (condition.if) {
         const evaluationContext = {
-          category:
-            result.type === "classification" ? result.category : undefined,
-          extractedValue:
-            result.type === "extraction" ? result.extractedValue : undefined,
+          category: result.type === "classification" ? result.category : undefined,
+          extractedValue: result.type === "extraction" ? result.extractedValue : undefined,
           confidence: result.confidence,
         };
 

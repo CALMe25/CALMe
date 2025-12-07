@@ -40,17 +40,11 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const isStringArray = (value: unknown): value is string[] =>
   Array.isArray(value) && value.every((item) => typeof item === "string");
 
-const isUserVariablesRecord = (
-  value: unknown,
-): value is ConversationState["userVariables"] =>
+const isUserVariablesRecord = (value: unknown): value is ConversationState["userVariables"] =>
   isRecord(value) &&
   Object.values(value).every((entry) => {
     const valueType = typeof entry;
-    return (
-      valueType === "string" ||
-      valueType === "number" ||
-      valueType === "boolean"
-    );
+    return valueType === "string" || valueType === "number" || valueType === "boolean";
   });
 
 const isUserProfileRecord = (value: unknown): value is UserProfile => {
@@ -70,15 +64,12 @@ const isUserProfileRecord = (value: unknown): value is UserProfile => {
     typeof value.onboardingCompleted === "boolean" &&
     isStringArray(value.accessibilityNeeds) &&
     isStringArray(value.calmingPreferences) &&
-    (value.backupLocation == null ||
-      typeof value.backupLocation === "string") &&
+    (value.backupLocation == null || typeof value.backupLocation === "string") &&
     (value.emergencyContacts == null || isStringArray(value.emergencyContacts))
   );
 };
 
-const isConversationStateRecord = (
-  value: unknown,
-): value is ConversationState => {
+const isConversationStateRecord = (value: unknown): value is ConversationState => {
   if (!isRecord(value)) {
     return false;
   }
@@ -91,9 +82,7 @@ const isConversationStateRecord = (
   );
 };
 
-const isActivityHistoryEntryRecord = (
-  value: unknown,
-): value is ActivityHistoryEntry => {
+const isActivityHistoryEntryRecord = (value: unknown): value is ActivityHistoryEntry => {
   if (!isRecord(value)) {
     return false;
   }
@@ -245,10 +234,7 @@ class UserProfileStorage {
   async saveConversationState(state: ConversationState): Promise<void> {
     if (!this.db) await this.init();
 
-    const transaction = this.db!.transaction(
-      ["conversationState"],
-      "readwrite",
-    );
+    const transaction = this.db!.transaction(["conversationState"], "readwrite");
     const store = transaction.objectStore("conversationState");
 
     return new Promise((resolve, reject) => {
@@ -288,11 +274,7 @@ class UserProfileStorage {
   }
 
   // Activity tracking
-  async recordActivity(
-    profileId: string,
-    activityName: string,
-    completed: boolean,
-  ): Promise<void> {
+  async recordActivity(profileId: string, activityName: string, completed: boolean): Promise<void> {
     if (!this.db) await this.init();
 
     const transaction = this.db!.transaction(["activityHistory"], "readwrite");
@@ -306,9 +288,7 @@ class UserProfileStorage {
         timestamp: new Date(),
       });
       request.onsuccess = () => {
-        console.log(
-          `Activity recorded: ${activityName} (completed: ${completed})`,
-        );
+        console.log(`Activity recorded: ${activityName} (completed: ${completed})`);
         resolve();
       };
       request.onerror = () => {
@@ -318,10 +298,7 @@ class UserProfileStorage {
     });
   }
 
-  async getRecentActivities(
-    profileId: string,
-    limit = 10,
-  ): Promise<ActivityHistoryEntry[]> {
+  async getRecentActivities(profileId: string, limit = 10): Promise<ActivityHistoryEntry[]> {
     if (!this.db) await this.init();
 
     const transaction = this.db!.transaction(["activityHistory"], "readonly");
@@ -334,11 +311,7 @@ class UserProfileStorage {
 
       request.onsuccess = () => {
         const cursor = request.result;
-        if (
-          cursor !== null &&
-          cursor !== undefined &&
-          activities.length < limit
-        ) {
+        if (cursor !== null && cursor !== undefined && activities.length < limit) {
           const entry: unknown = cursor.value;
           if (isActivityHistoryEntryRecord(entry)) {
             activities.push(entry);

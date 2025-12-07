@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useState, useEffect, useRef, useContext, useCallback } from "react";
 import "./App.css";
 import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
@@ -95,18 +89,12 @@ function App() {
   const [isInitialized, setIsInitialized] = useState(false);
   const [showAlertButton, setShowAlertButton] = useState(true);
   const [alertTimer, setAlertTimer] = useState<number | null>(null);
-  const [alertInterval, setAlertInterval] = useState<ReturnType<
-    typeof setInterval
-  > | null>(null);
+  const [alertInterval, setAlertInterval] = useState<ReturnType<typeof setInterval> | null>(null);
   const [showAppsLauncher, setShowAppsLauncher] = useState(false);
   const [shouldAutoLaunchApp, setShouldAutoLaunchApp] = useState(false);
   const [chosenApp, setChosenApp] = useState<AppInterface | undefined>();
-  const [appsTimeout, setAppsTimeout] = useState<ReturnType<
-    typeof setTimeout
-  > | null>(null);
-  const [activityReturnNode, setActivityReturnNode] = useState<string | null>(
-    null,
-  );
+  const [appsTimeout, setAppsTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
+  const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
   const [showQuickPanel, setShowQuickPanel] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
@@ -186,9 +174,7 @@ function App() {
         if (msg.nodeId) {
           const activityPrompt = ACTIVITY_PROMPT_NODES.has(msg.nodeId);
           const content =
-            getConvMessage(msg.nodeId) ||
-            msg.content ||
-            m.conversation_letsContinue();
+            getConvMessage(msg.nodeId) || msg.content || m.conversation_letsContinue();
 
           return {
             ...msg,
@@ -300,18 +286,12 @@ function App() {
         return;
       }
 
-      const stepResult = conversationController.runParser(
-        parserType,
-        userInput,
-      );
-      const { nextNode, activityTrigger } =
-        conversationController.processParserOutput(stepResult);
+      const stepResult = conversationController.runParser(parserType, userInput);
+      const { nextNode, activityTrigger } = conversationController.processParserOutput(stepResult);
 
       const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
       const content =
-        getConvMessage(nextNode.id) ||
-        (nextNode.content ?? "") ||
-        "How can I help you?";
+        getConvMessage(nextNode.id) || (nextNode.content ?? "") || "How can I help you?";
       const newMessage: Message = {
         id: Date.now().toString(),
         type: activityPrompt ? "app-buttons" : "message",
@@ -326,9 +306,7 @@ function App() {
 
       if (activityTrigger) {
         setActivityReturnNode(activityTrigger.returnNode);
-        const targetApp = resolvedApps.find(
-          (app) => app.name === activityTrigger.activityName,
-        );
+        const targetApp = resolvedApps.find((app) => app.name === activityTrigger.activityName);
 
         if (targetApp) {
           if (activityTrigger.activityName === "breathing") {
@@ -350,21 +328,13 @@ function App() {
           }, 2000);
           setAppsTimeout(timer);
         } else if (
-          ![
-            "breathing",
-            "stretching",
-            "matching-cards",
-            "sudoku",
-            "puzzle",
-            "paint",
-          ].includes(activityTrigger.activityName)
+          !["breathing", "stretching", "matching-cards", "sudoku", "puzzle", "paint"].includes(
+            activityTrigger.activityName,
+          )
         ) {
           // Get localized activity name
-          const targetApp = localizedApps.find(
-            (app) => app.name === activityTrigger.activityName,
-          );
-          const localizedName =
-            (targetApp?.label ?? "") || activityTrigger.activityName;
+          const targetApp = localizedApps.find((app) => app.name === activityTrigger.activityName);
+          const localizedName = (targetApp?.label ?? "") || activityTrigger.activityName;
 
           const placeholderMsg: Message = {
             id: Date.now().toString() + "_placeholder",
@@ -397,11 +367,8 @@ function App() {
           }, 1500);
         } else {
           // Get localized activity name
-          const targetApp = localizedApps.find(
-            (app) => app.name === activityTrigger.activityName,
-          );
-          const localizedName =
-            (targetApp?.label ?? "") || activityTrigger.activityName;
+          const targetApp = localizedApps.find((app) => app.name === activityTrigger.activityName);
+          const localizedName = (targetApp?.label ?? "") || activityTrigger.activityName;
 
           const mismatchMsg: Message = {
             id: Date.now().toString() + "_mismatch",
@@ -467,10 +434,7 @@ function App() {
     }
 
     if (chosenApp) {
-      await conversationController.recordActivityCompletion(
-        chosenApp.name,
-        true,
-      );
+      await conversationController.recordActivityCompletion(chosenApp.name, true);
     }
 
     setChosenApp(undefined);
@@ -515,9 +479,7 @@ function App() {
 
   useEffect(() => {
     if (shouldAutoLaunchApp) {
-      const breathingApp = resolvedApps.find(
-        (subapps) => subapps.name === "breathing",
-      );
+      const breathingApp = resolvedApps.find((subapps) => subapps.name === "breathing");
       setChosenApp(breathingApp);
       setShowAppsLauncher(true);
     }
@@ -605,17 +567,11 @@ function App() {
 
   const isConversationComplete = conversationController.isComplete();
 
-  if (
-    isConversationComplete &&
-    !showAppsLauncher &&
-    !conversationController.isInOnboarding()
-  ) {
+  if (isConversationComplete && !showAppsLauncher && !conversationController.isInOnboarding()) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">
-            {m.conversation_conversationComplete()}
-          </h2>
+          <h2 className="text-2xl font-bold mb-4">{m.conversation_conversationComplete()}</h2>
           <p className="text-gray-600 mb-4">{m.conversation_thankYou()}</p>
           <Button
             onClick={() => {
@@ -666,17 +622,11 @@ function App() {
                     <>
                       <Logo />
                       <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-                        <h1 className="text-lg sm:text-xl font-large truncate">
-                          {m.app_name()}
-                        </h1>
+                        <h1 className="text-lg sm:text-xl font-large truncate">{m.app_name()}</h1>
                         <AlertTimer timeRemaining={alertTimer} />
                       </div>
                       <SheetTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-10 w-10 p-0"
-                        >
+                        <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
                           <Menu className="w-5 h-5" />
                           <span className="sr-only">{m.header_menu()}</span>
                         </Button>
@@ -685,20 +635,14 @@ function App() {
                   ) : (
                     <>
                       <SheetTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="h-10 w-10 p-0"
-                        >
+                        <Button variant="ghost" size="sm" className="h-10 w-10 p-0">
                           <Menu className="w-5 h-5" />
                           <span className="sr-only">{m.header_menu()}</span>
                         </Button>
                       </SheetTrigger>
                       <Logo />
                       <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-                        <h1 className="text-lg sm:text-xl font-large truncate">
-                          {m.app_name()}
-                        </h1>
+                        <h1 className="text-lg sm:text-xl font-large truncate">{m.app_name()}</h1>
                         <AlertTimer timeRemaining={alertTimer} />
                       </div>
                     </>
@@ -708,10 +652,7 @@ function App() {
                 <div className="flex items-center gap-1" />
               </div>
 
-              <SheetContent
-                side={isRTL ? "right" : "left"}
-                className="w-64 sm:w-80"
-              >
+              <SheetContent side={isRTL ? "right" : "left"} className="w-64 sm:w-80">
                 <SheetHeader>
                   <SheetTitle>{m.header_menu()}</SheetTitle>
                 </SheetHeader>
@@ -728,9 +669,7 @@ function App() {
                       <Accessibility className="w-4 h-4" />
                       <span>{m.header_accessibility()}</span>
                     </div>
-                    <span className="text-xs text-muted-foreground">
-                      {m.common_open()}
-                    </span>
+                    <span className="text-xs text-muted-foreground">{m.common_open()}</span>
                   </button>
 
                   <button
@@ -747,17 +686,12 @@ function App() {
                     <DarkModeToggle />
                   </button>
 
-                  <div
-                    className={`${menuRowClasses} flex-col items-start gap-2`}
-                  >
+                  <div className={`${menuRowClasses} flex-col items-start gap-2`}>
                     <div className={menuLabelClasses}>
                       <UserRound className="w-4 h-4" />
                       <span>{m.preferences_gender_switcher()}</span>
                     </div>
-                    <GenderPreferenceSelect
-                      showLabel={false}
-                      className="w-full px-0 gap-0"
-                    />
+                    <GenderPreferenceSelect showLabel={false} className="w-full px-0 gap-0" />
                   </div>
 
                   <div className={menuRowClasses}>
@@ -789,10 +723,7 @@ function App() {
           </header>
 
           {!showAppsLauncher && (
-            <ScrollArea
-              ref={scrollAreaRef}
-              className="flex-1 overflow-y-auto px-3 sm:px-4"
-            >
+            <ScrollArea ref={scrollAreaRef} className="flex-1 overflow-y-auto px-3 sm:px-4">
               <div className="space-y-4 pb-4 mt-2">
                 {resolvedApps.length > 0 && (
                   <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 rounded-2xl border border-border/60 bg-muted/30 p-3 sm:p-4 lg:p-5">
@@ -813,9 +744,7 @@ function App() {
                           setShowQuickPanel((prev) => !prev);
                         }}
                         aria-label={
-                          showQuickPanel
-                            ? m.quickActivities_hide()
-                            : m.quickActivities_show()
+                          showQuickPanel ? m.quickActivities_hide() : m.quickActivities_show()
                         }
                         aria-expanded={showQuickPanel}
                         aria-controls="quick-activities-panel"
@@ -829,9 +758,7 @@ function App() {
                         className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-3"
                       >
                         {quickActivityOrder
-                          .map((name) =>
-                            resolvedApps.find((app) => app.name === name),
-                          )
+                          .map((name) => resolvedApps.find((app) => app.name === name))
                           .filter((app): app is AppInterface => Boolean(app))
                           .map((app) => (
                             <Button
@@ -842,9 +769,7 @@ function App() {
                               className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
                               size="sm"
                             >
-                              <div className="text-white scale-110">
-                                {app.icon}
-                              </div>
+                              <div className="text-white scale-110">{app.icon}</div>
                               <span className="leading-tight text-white text-center">
                                 {app.label}
                               </span>
@@ -895,10 +820,7 @@ function App() {
                 paddingBottom: "max(0.5rem, env(safe-area-inset-bottom))",
               }}
             >
-              <ChatInput
-                onSendMessage={handleSendMessage}
-                onVoiceInput={handleVoiceInput}
-              />
+              <ChatInput onSendMessage={handleSendMessage} onVoiceInput={handleVoiceInput} />
             </div>
           )}
         </div>
