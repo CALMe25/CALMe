@@ -854,5 +854,7 @@
   "conversation_alert_get_safe": "לך/י למרחב המוגן הקרוב ביותר מיד. זוז/י מהר אבל בבטחה.",
   "conversation_alert_breathing": "עכשיו בוא ננשום ביחד כדי להישאר רגועים.",
   "conversation_alert_wait": "אני כאן איתך. נעבור את זה ביחד.",
-  "conversation_alert_all_clear": "תראה/י את זה, הצלחנו! בטוח לעזוב את המרחב המוגן מתי שתרגיש/י מוכן/ה."
+  "conversation_alert_all_clear": "תראה/י את זה, הצלחנו! בטוח לעזוב את המרחב המוגן מתי שתרגיש/י מוכן/ה.",
+  "scale_title": "כמה עוצמתית ההרגשה כרגע? (1–10)",
+  "scale_selection": "בחרת: {scaleValue}/10"
 }

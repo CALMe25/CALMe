@@ -854,5 +854,7 @@
   "conversation_alert_get_safe": "Get to the nearest protected space immediately. Move quickly but safely.",
   "conversation_alert_breathing": "Now let's breathe together to stay calm.",
   "conversation_alert_wait": "I'm here with you. We'll get through this together.",
-  "conversation_alert_all_clear": "Look at that, we made it! It's safe to leave the protected space whenever you feel ready."
+  "conversation_alert_all_clear": "Look at that, we made it! It's safe to leave the protected space whenever you feel ready.",
+  "scale_title": "How intense does this feel right now? (1–10)",
+  "scale_selection": "You selected: {scaleValue}/10"
 }

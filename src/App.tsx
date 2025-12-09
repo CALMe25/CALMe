@@ -5,6 +5,7 @@ import { ChatInput } from "./chat_interface/ChatInput";
 import { ScrollArea } from "./chat_interface/ui/scroll-area";
 import { Logo } from "./assets/Logo";
 import { Button } from "./chat_interface/ui/button";
+import { Scale } from "./components/ui/Scale";
 import { Menu, Moon, Languages, UserRound, Accessibility } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import {
@@ -56,7 +57,7 @@ function App() {
   const { userGender } = useUserPreferences();
   const localizedApps = useLocalizedApps();
   const { cycleTheme } = useTheme();
-
+  const [scaleValue, setScaleValue] = useState<number | null>(null);
   // Helper for dynamic conversation node message lookups
   // Only used for conversation flow where node ID is dynamic
   const getConvMessage = useCallback(
@@ -753,29 +754,43 @@ function App() {
                       </Button>
                     </div>
                     {showQuickPanel && (
-                      <div
-                        id="quick-activities-panel"
-                        className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-3"
-                      >
-                        {quickActivityOrder
-                          .map((name) => resolvedApps.find((app) => app.name === name))
-                          .filter((app): app is AppInterface => Boolean(app))
-                          .map((app) => (
-                            <Button
-                              key={app.name}
-                              onClick={() => {
-                                handleAppLaunch(app);
-                              }}
-                              className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
-                              size="sm"
-                            >
-                              <div className="text-white scale-110">{app.icon}</div>
-                              <span className="leading-tight text-white text-center">
-                                {app.label}
-                              </span>
-                            </Button>
-                          ))}
-                      </div>
+                      <>
+                        {/* CALME intensity scale inside activities panel */}
+                        <div className="mb-3">
+                          <p className="text-xs sm:text-sm text-muted-foreground mb-2">
+                            {m.scale_title()}
+                          </p>
+                          <Scale selected={scaleValue} onSelect={setScaleValue} />
+                          {scaleValue !== null && (
+                            <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
+                              {m.scale_selection({ scaleValue: scaleValue })}
+                            </p>
+                          )}
+                        </div>
+                        <div
+                          id="quick-activities-panel"
+                          className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-3"
+                        >
+                          {quickActivityOrder
+                            .map((name) => resolvedApps.find((app) => app.name === name))
+                            .filter((app): app is AppInterface => Boolean(app))
+                            .map((app) => (
+                              <Button
+                                key={app.name}
+                                onClick={() => {
+                                  handleAppLaunch(app);
+                                }}
+                                className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
+                                size="sm"
+                              >
+                                <div className="text-white scale-110">{app.icon}</div>
+                                <span className="leading-tight text-white text-center">
+                                  {app.label}
+                                </span>
+                              </Button>
+                            ))}
+                        </div>
+                      </>
                     )}
                   </div>
                 )}
@@ -797,7 +812,6 @@ function App() {
               </div>
             </ScrollArea>
           )}
-
           {showAppsLauncher && (
             <AppLauncher
               chosenApp={chosenApp}
