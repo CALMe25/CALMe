@@ -8,7 +8,7 @@
     "dev:firsttime": "echo 'Starting dev server... Add ?firsttime=true to URL in browser' && vite",
     "build": "vite build && tsc -b",
     "lint": "oxlint --type-aware .",
-    "lint:fix": "oxlint --type-aware . --fix",
+    "lint:fix": "oxlint --type-aware --type-check . --fix",
     "format": "oxfmt .",
     "format:check": "oxfmt . --check",
     "preview": "vite preview",
