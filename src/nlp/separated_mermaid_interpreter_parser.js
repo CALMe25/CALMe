@@ -808,7 +808,7 @@ function App() {
   // Your existing JSX...
 }
 */
-/* 
+/*
 ===============================================
 ARCHITECTURE BENEFITS: MERMAID-DRIVEN NLP
 ===============================================
