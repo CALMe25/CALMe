@@ -16,12 +16,8 @@
   "activities_breathing_description": "A guided breathing exercise to help you relax and focus.",
   "activities_breathing_subtitle": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Follow the rhythm to calm your nervous system.",
         "userGender=female": "Follow the rhythm to calm your nervous system.",
@@ -36,12 +32,8 @@
   "activities_breathing_cyclesRecommendation": "Recommended: 4–8 cycles.",
   "activities_breathing_followGuide": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Follow the breathing guide",
         "userGender=female": "Follow the breathing guide",
@@ -52,12 +44,8 @@
   "activities_breathing_paused": "Paused",
   "activities_breathing_restart": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Restart Exercise",
         "userGender=female": "Restart Exercise",
@@ -67,12 +55,8 @@
   ],
   "activities_breathing_feelBetter": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "I Feel Better",
         "userGender=female": "I Feel Better",
@@ -83,14 +67,8 @@
   "activities_breathing_howItHelps": "How it helps",
   "activities_breathing_step": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "Inhale through your nose for 4 seconds",
         "step=1, userGender=female": "Inhale through your nose for 4 seconds",
@@ -110,12 +88,8 @@
   "activities_stretching_label": "Stretching Routine",
   "activities_stretching_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Follow along with simple stretching exercises to improve flexibility.",
         "userGender=female": "Follow along with simple stretching exercises to improve flexibility.",
@@ -128,12 +102,8 @@
   "activities_stretching_previous": "← Previous",
   "activities_stretching_pause": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Pause",
         "userGender=female": "Pause",
@@ -143,12 +113,8 @@
   ],
   "activities_stretching_start": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Start",
         "userGender=female": "Start",
@@ -158,12 +124,8 @@
   ],
   "activities_stretching_restart": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Restart",
         "userGender=female": "Restart",
@@ -174,12 +136,8 @@
   "activities_stretching_next": "Next →",
   "activities_stretching_reset": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Reset Routine",
         "userGender=female": "Reset Routine",
@@ -189,12 +147,8 @@
   ],
   "activities_stretching_disclaimer": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Take your time with each stretch. Listen to your body and never force a movement.",
         "userGender=female": "Take your time with each stretch. Listen to your body and never force a movement.",
@@ -206,14 +160,8 @@
   "activities_stretching_exercises_neckRolls_description": "Gentle neck stretches to release tension",
   "activities_stretching_exercises_neckRolls_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "Sit or stand with good posture",
         "step=1, userGender=female": "Sit or stand with good posture",
@@ -233,12 +181,8 @@
   "activities_stretching_exercises_shoulderShrugs_name": "Shoulder Shrugs",
   "activities_stretching_exercises_shoulderShrugs_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Release shoulder tension",
         "userGender=female": "Release shoulder tension",
@@ -248,14 +192,8 @@
   ],
   "activities_stretching_exercises_shoulderShrugs_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "Stand with arms at your sides",
         "step=1, userGender=female": "Stand with arms at your sides",
@@ -275,12 +213,8 @@
   "activities_stretching_exercises_armCircles_name": "Arm Circles",
   "activities_stretching_exercises_armCircles_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Loosen shoulder joints",
         "userGender=female": "Loosen shoulder joints",
@@ -290,14 +224,8 @@
   ],
   "activities_stretching_exercises_armCircles_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "Extend arms straight out to sides",
         "step=1, userGender=female": "Extend arms straight out to sides",
@@ -317,12 +245,8 @@
   "activities_stretching_exercises_sideStretch_name": "Side Stretch",
   "activities_stretching_exercises_sideStretch_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Stretch your sides and obliques",
         "userGender=female": "Stretch your sides and obliques",
@@ -332,14 +256,8 @@
   ],
   "activities_stretching_exercises_sideStretch_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "Stand with feet shoulder-width apart",
         "step=1, userGender=female": "Stand with feet shoulder-width apart",
@@ -359,12 +277,8 @@
   "activities_stretching_exercises_forwardFold_name": "Forward Fold",
   "activities_stretching_exercises_forwardFold_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Stretch hamstrings and lower back",
         "userGender=female": "Stretch hamstrings and lower back",
@@ -374,14 +288,8 @@
   ],
   "activities_stretching_exercises_forwardFold_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "Stand with feet hip-width apart",
         "step=1, userGender=female": "Stand with feet hip-width apart",
@@ -401,12 +309,8 @@
   "activities_matchingCards_label": "Matching Cards",
   "activities_matchingCards_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Test your memory and concentration with this classic matching game.",
         "userGender=female": "Test your memory and concentration with this classic matching game.",
@@ -418,12 +322,8 @@
   "activities_matchingCards_winBanner": "🎉 Great work! You cleared the board.",
   "activities_matchingCards_playAgain": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Play again",
         "userGender=female": "Play again",
@@ -433,12 +333,8 @@
   ],
   "activities_matchingCards_reset": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Reset Game",
         "userGender=female": "Reset Game",
@@ -448,12 +344,8 @@
   ],
   "activities_matchingCards_exit": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Exit Game",
         "userGender=female": "Exit Game",
@@ -483,12 +375,8 @@
   "activities_puzzle_label": "Jigsaw Puzzle",
   "activities_puzzle_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Assemble various images by dragging and dropping puzzle pieces.",
         "userGender=female": "Assemble various images by dragging and dropping puzzle pieces.",
@@ -502,12 +390,8 @@
   "activities_paint_colors": "Colors",
   "activities_paint_clear": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Clear",
         "userGender=female": "Clear",
@@ -521,12 +405,8 @@
   "activities_snake_gameOver": "Game Over",
   "activities_snake_restart": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Restart",
         "userGender=female": "Restart",
@@ -538,12 +418,8 @@
   "activities_numberGuessing_label": "Number Guessing",
   "activities_numberGuessing_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Guess the number between 1 and 10. Test your intuition!",
         "userGender=female": "Guess the number between 1 and 10. Test your intuition!",
@@ -553,12 +429,8 @@
   ],
   "activities_numberGuessing_subtitle": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Guess the number between 1 and 10",
         "userGender=female": "Guess the number between 1 and 10",
@@ -568,12 +440,8 @@
   ],
   "activities_numberGuessing_initialMessage": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "I'm thinking of a number between 1 and 10. Can you guess it?",
         "userGender=female": "I'm thinking of a number between 1 and 10. Can you guess it?",
@@ -584,12 +452,8 @@
   "activities_numberGuessing_invalidNumber": "Please enter a valid number between 1 and 10!",
   "activities_numberGuessing_congratulations": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "🎉 Congratulations! You guessed it in {attempts} {attemptsWord}!",
         "userGender=female": "🎉 Congratulations! You guessed it in {attempts} {attemptsWord}!",
@@ -606,12 +470,8 @@
   "activities_numberGuessing_rangeLabel": "Range",
   "activities_numberGuessing_placeholder": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Enter your guess",
         "userGender=female": "Enter your guess",
@@ -621,12 +481,8 @@
   ],
   "activities_numberGuessing_guessButton": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Guess",
         "userGender=female": "Guess",
@@ -637,12 +493,8 @@
   "activities_numberGuessing_previousGuesses": "Previous Guesses",
   "activities_numberGuessing_playAgain": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Play Again",
         "userGender=female": "Play Again",
@@ -652,12 +504,8 @@
   ],
   "activities_numberGuessing_reset": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Reset",
         "userGender=female": "Reset",
@@ -667,12 +515,8 @@
   ],
   "activities_numberGuessing_exitGame": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Exit Game",
         "userGender=female": "Exit Game",
@@ -683,12 +527,8 @@
   "activities_numberGuessing_ariaGuessInput": "Number guess input",
   "activities_numberGuessing_ariaSubmitGuess": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Submit guess",
         "userGender=female": "Submit guess",
@@ -698,12 +538,8 @@
   ],
   "activities_numberGuessing_ariaStartNew": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Start new game",
         "userGender=female": "Start new game",
@@ -713,12 +549,8 @@
   ],
   "activities_numberGuessing_ariaExitGame": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "Exit game",
         "userGender=female": "Exit game",
@@ -728,12 +560,8 @@
   ],
   "conversation_start": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "I see you opened my app. I'm here with you. How do you feel right now?",
         "userGender=female": "I see you opened my app. I'm here with you. How do you feel right now?",

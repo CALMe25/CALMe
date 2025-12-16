@@ -1,6 +1,6 @@
 ---
 name: Bake Container Image
-'on':
+"on":
   workflow_run:
     workflows: ["CI"]
     branches: [main]
@@ -104,6 +104,6 @@ jobs:
           token: ${{ secrets.DELETE_PACKAGES }}
           repository_owner: ${{ github.repository_owner }}
           repository: ${{ github.repository }}
-          package_name: ''
+          package_name: ""
           untagged_only: true
           owner_type: org

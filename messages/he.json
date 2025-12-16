@@ -16,12 +16,8 @@
   "activities_breathing_description": "תרגיל נשימה מודרך שיעזור לך להירגע ולהתמקד.",
   "activities_breathing_subtitle": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "עקוב אחר הקצב כדי להרגיע את מערכת העצבים שלך.",
         "userGender=female": "עקבי אחר הקצב כדי להרגיע את מערכת העצבים שלך.",
@@ -36,12 +32,8 @@
   "activities_breathing_cyclesRecommendation": "מומלץ: 4-8 מחזורים.",
   "activities_breathing_followGuide": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "עקוב אחר מדריך הנשימה",
         "userGender=female": "עקבי אחר מדריך הנשימה",
@@ -52,12 +44,8 @@
   "activities_breathing_paused": "מושהה",
   "activities_breathing_restart": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "התחל מחדש את התרגיל",
         "userGender=female": "התחילי מחדש את התרגיל",
@@ -67,12 +55,8 @@
   ],
   "activities_breathing_feelBetter": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "אני מרגיש יותר טוב",
         "userGender=female": "אני מרגישה יותר טוב",
@@ -83,14 +67,8 @@
   "activities_breathing_howItHelps": "איך זה עוזר",
   "activities_breathing_step": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "שאף דרך האף למשך 4 שניות",
         "step=1, userGender=female": "שאפי דרך האף למשך 4 שניות",
@@ -110,12 +88,8 @@
   "activities_stretching_label": "תרגילי מתיחות",
   "activities_stretching_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "עקוב אחר תרגילי מתיחה פשוטים לשיפור הגמישות.",
         "userGender=female": "עקבי אחר תרגילי מתיחה פשוטים לשיפור הגמישות.",
@@ -128,12 +102,8 @@
   "activities_stretching_previous": "→ קודם",
   "activities_stretching_pause": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "השהה",
         "userGender=female": "השהי",
@@ -143,12 +113,8 @@
   ],
   "activities_stretching_start": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "התחל",
         "userGender=female": "התחילי",
@@ -158,12 +124,8 @@
   ],
   "activities_stretching_restart": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "התחל מחדש",
         "userGender=female": "התחילי מחדש",
@@ -174,12 +136,8 @@
   "activities_stretching_next": "← הבא",
   "activities_stretching_reset": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "אפס שגרה",
         "userGender=female": "אפסי שגרה",
@@ -189,12 +147,8 @@
   ],
   "activities_stretching_disclaimer": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "קח את הזמן שלך עם כל מתיחה. הקשב לגוף שלך ולעולם אל תכריח תנועה.",
         "userGender=female": "קחי את הזמן שלך עם כל מתיחה. הקשיבי לגוף שלך ולעולם אל תכריחי תנועה.",
@@ -206,14 +160,8 @@
   "activities_stretching_exercises_neckRolls_description": "מתיחות צוואר עדינות לשחרור מתח",
   "activities_stretching_exercises_neckRolls_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "שב או עמוד עם יציבה טובה",
         "step=1, userGender=female": "שבי או עמדי עם יציבה טובה",
@@ -233,12 +181,8 @@
   "activities_stretching_exercises_shoulderShrugs_name": "משיכת כתפיים",
   "activities_stretching_exercises_shoulderShrugs_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "שחרר מתח בכתפיים",
         "userGender=female": "שחררי מתח בכתפיים",
@@ -248,14 +192,8 @@
   ],
   "activities_stretching_exercises_shoulderShrugs_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "עמוד עם הזרועות לצד",
         "step=1, userGender=female": "עמדי עם הזרועות לצד",
@@ -275,12 +213,8 @@
   "activities_stretching_exercises_armCircles_name": "סיבובי זרועות",
   "activities_stretching_exercises_armCircles_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "שחרר מפרקי כתפיים",
         "userGender=female": "שחררי מפרקי כתפיים",
@@ -290,14 +224,8 @@
   ],
   "activities_stretching_exercises_armCircles_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "הושט זרועות ישרות לצדדים",
         "step=1, userGender=female": "הושיטי זרועות ישרות לצדדים",
@@ -317,12 +245,8 @@
   "activities_stretching_exercises_sideStretch_name": "מתיחה לצד",
   "activities_stretching_exercises_sideStretch_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "מתח את הצדדים והאלכסונים שלך",
         "userGender=female": "מתחי את הצדדים והאלכסונים שלך",
@@ -332,14 +256,8 @@
   ],
   "activities_stretching_exercises_sideStretch_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "עמוד עם רגליים ברוחב הכתפיים",
         "step=1, userGender=female": "עמדי עם רגליים ברוחב הכתפיים",
@@ -359,12 +277,8 @@
   "activities_stretching_exercises_forwardFold_name": "כיפוף קדימה",
   "activities_stretching_exercises_forwardFold_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "מתח את שרירי הירך האחוריים והגב התחתון",
         "userGender=female": "מתחי את שרירי הירך האחוריים והגב התחתון",
@@ -374,14 +288,8 @@
   ],
   "activities_stretching_exercises_forwardFold_instructions": [
     {
-      "declarations": [
-        "input step",
-        "input userGender"
-      ],
-      "selectors": [
-        "step",
-        "userGender"
-      ],
+      "declarations": ["input step", "input userGender"],
+      "selectors": ["step", "userGender"],
       "match": {
         "step=1, userGender=male": "עמוד עם רגליים ברוחב הירכיים",
         "step=1, userGender=female": "עמדי עם רגליים ברוחב הירכיים",
@@ -401,12 +309,8 @@
   "activities_matchingCards_label": "משחק הזיכרון",
   "activities_matchingCards_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "בדוק את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה.",
         "userGender=female": "בדקי את הזיכרון והריכוז שלך עם משחק ההתאמה הקלאסי הזה.",
@@ -418,12 +322,8 @@
   "activities_matchingCards_winBanner": "🎉 עבודה מצוינת! ניקית את הלוח.",
   "activities_matchingCards_playAgain": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "שחק שוב",
         "userGender=female": "שחקי שוב",
@@ -433,12 +333,8 @@
   ],
   "activities_matchingCards_reset": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "אפס משחק",
         "userGender=female": "אפסי משחק",
@@ -448,12 +344,8 @@
   ],
   "activities_matchingCards_exit": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "צא מהמשחק",
         "userGender=female": "צאי מהמשחק",
@@ -483,12 +375,8 @@
   "activities_puzzle_label": "פאזל",
   "activities_puzzle_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "הרכב תמונות שונות על ידי גרירה ושחרור של חלקי פאזל.",
         "userGender=female": "הרכיבי תמונות שונות על ידי גרירה ושחרור של חלקי פאזל.",
@@ -502,12 +390,8 @@
   "activities_paint_colors": "צבעים",
   "activities_paint_clear": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "נקה",
         "userGender=female": "נקי",
@@ -521,12 +405,8 @@
   "activities_snake_gameOver": "משחק נגמר",
   "activities_snake_restart": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "התחל מחדש",
         "userGender=female": "התחילי מחדש",
@@ -538,12 +418,8 @@
   "activities_numberGuessing_label": "ניחוש מספרים",
   "activities_numberGuessing_description": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "נחש את המספר בין 1 ל-10. בדוק את האינטואיציה שלך!",
         "userGender=female": "נחשי את המספר בין 1 ל-10. בדקי את האינטואיציה שלך!",
@@ -553,12 +429,8 @@
   ],
   "activities_numberGuessing_subtitle": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "נחש את המספר בין 1 ל-10",
         "userGender=female": "נחשי את המספר בין 1 ל-10",
@@ -568,12 +440,8 @@
   ],
   "activities_numberGuessing_initialMessage": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "אני חושב על מספר בין 1 ל-10. אתה יכול לנחש אותו?",
         "userGender=female": "אני חושב על מספר בין 1 ל-10. את יכולה לנחש אותו?",
@@ -584,12 +452,8 @@
   "activities_numberGuessing_invalidNumber": "נא להזין מספר תקין בין 1 ל-10!",
   "activities_numberGuessing_congratulations": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "🎉 כל הכבוד! הצלחת תוך {attempts} {attemptsWord}!",
         "userGender=female": "🎉 כל הכבוד! הצלחת תוך {attempts} {attemptsWord}!",
@@ -606,12 +470,8 @@
   "activities_numberGuessing_rangeLabel": "טווח",
   "activities_numberGuessing_placeholder": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "הזן את הניחוש שלך",
         "userGender=female": "הזיני את הניחוש שלך",
@@ -621,12 +481,8 @@
   ],
   "activities_numberGuessing_guessButton": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "נחש",
         "userGender=female": "נחשי",
@@ -637,12 +493,8 @@
   "activities_numberGuessing_previousGuesses": "ניחושים קודמים",
   "activities_numberGuessing_playAgain": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "שחק שוב",
         "userGender=female": "שחקי שוב",
@@ -652,12 +504,8 @@
   ],
   "activities_numberGuessing_reset": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "אפס",
         "userGender=female": "אפסי",
@@ -667,12 +515,8 @@
   ],
   "activities_numberGuessing_exitGame": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "צא מהמשחק",
         "userGender=female": "צאי מהמשחק",
@@ -683,12 +527,8 @@
   "activities_numberGuessing_ariaGuessInput": "קלט ניחוש מספר",
   "activities_numberGuessing_ariaSubmitGuess": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "שלח ניחוש",
         "userGender=female": "שלחי ניחוש",
@@ -698,12 +538,8 @@
   ],
   "activities_numberGuessing_ariaStartNew": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "התחל משחק חדש",
         "userGender=female": "התחילי משחק חדש",
@@ -713,12 +549,8 @@
   ],
   "activities_numberGuessing_ariaExitGame": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "צא מהמשחק",
         "userGender=female": "צאי מהמשחק",
@@ -728,12 +560,8 @@
   ],
   "conversation_start": [
     {
-      "declarations": [
-        "input userGender"
-      ],
-      "selectors": [
-        "userGender"
-      ],
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
       "match": {
         "userGender=male": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך אתה מרגיש עכשיו?",
         "userGender=female": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך את מרגישה עכשיו?",

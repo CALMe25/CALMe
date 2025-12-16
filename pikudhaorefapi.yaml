@@ -1,5 +1,5 @@
-subtitle: ' פורטל החירום הלאומי '
-alt: ''
+subtitle: " פורטל החירום הלאומי "
+alt: ""
 bannerImage: /media/tryfit1t/פורטל-חירום-לאומי.png
 content:
   - newsListFeatured:
@@ -7,19 +7,19 @@ content:
       allUpdatesUrl: https://www.oref.org.il/heb/updates-and-newsflash/update-page
       newsItems:
         - id: 15834
-          time: '2025-07-21T06:00:00Z'
+          time: "2025-07-21T06:00:00Z"
           hebTime: כ"ה תמוז תשפ"ה
           title: מדיניות ההתגוננות של פיקוד העורף
           text: |-
             <p dir="rtl">מדיניות ההתגוננות ללא שינוי.<br /><br />המדיניות בתוקף החל <strong>מיום שלישי, 15 ביולי 2025, בשעה 18:00 ועד ליום שלישי, 22 ביולי 2025, בשעה 20:00.</strong></p>
             <p dir="rtl"><strong><a href="https://www.oref.org.il/heb/articles/info/iron-swords/1100/" title="מדיניות התגוננות">ההנחיות המלאות מפורטות בקישור הבא</a><br /></strong></p>
         - id: 21046
-          time: '2025-07-21T06:00:00Z'
+          time: "2025-07-21T06:00:00Z"
           hebTime: כ"ה תמוז תשפ"ה
           title: לא נוגעים בנפלים
           text: <p dir="rtl">בעת הזו, ייתכן שיש חימושים קטנים שהתפזרו בשטח רחב יחסית ולא התפוצצו. במקרה של זיהוי חימוש כזה, לא נוגעים! הנמצאים בחוץ נדרשים להתרחק מהאיזור בזהירות ולקרוא לכוחות הביטחון.<br />אם אתם רואים נפל או חפץ חשוד - התרחקו מהמקום, הרחיקו אנשים אחרים ודווחו למשטרת ישראל.<br /><a href="https://www.oref.org.il/heb/articles/info/iron-swords/1102/" title="נפלים וחפצים בלתי מזוהים">להנחיות המלאות</a></p>
         - id: 16221
-          time: '2025-07-21T06:00:00Z'
+          time: "2025-07-21T06:00:00Z"
           hebTime: כ"ה תמוז תשפ"ה
           title: הורידו את יישומון פיקוד העורף
           text: '<p style="text-align: right;" dir="rtl">כאשר אנחנו יוצאים מהבית חשוב לדאוג שנוכל לקבל את ההתרעות בזמן אמת. לכן, הפעילו את שירותי המיקום והורידו את יישומון פיקוד העורף - אמצעי ההתרעה היחיד שמתריע בפנינו על מגוון איומים, בכל מקום בו אנו נמצאים.<br /><a href="https://onelink.to/8p5wpq">להורדת יישומון פיקוד העורף</a><br /><a href="https://www.oref.org.il/heb/articles/info/iron-swords/1107/" title="היישומון של פיקוד העורף">למידע המלא על יישומון פיקוד העורף</a></p>'
@@ -74,7 +74,7 @@ content:
   - targetAudiencesList:
       title: מידע לקהלי יעד
       targetAudiencesItems:
-        - alt: ''
+        - alt: ""
           text: הורים וילדים
           icon: /media/vhshocs4/targetparents.png
           link:
@@ -82,7 +82,7 @@ content:
             name: הורים וילדים
             url: https://www.oref.org.il/heb/emergencies/parents-kids/
             type: Content
-        - alt: ''
+        - alt: ""
           text: אנשים עם מוגבלות
           icon: /media/vp3aw1hv/8058.png
           link:
@@ -90,7 +90,7 @@ content:
             name: אנשים עם מוגבלות ואזרחים ותיקים
             url: https://www.oref.org.il/heb/emergencies/disabilities-elderly/
             type: Content
-        - alt: ''
+        - alt: ""
           text: דוברי אמהרית
           icon: /media/aadh1xaj/דוברי-אמהרית.png
           link:
@@ -98,7 +98,7 @@ content:
             name: דוברי אמהרית
             url: https://www.oref.org.il/heb/emergencies/amharic/
             type: Content
-        - alt: ''
+        - alt: ""
           text: ציבור חרדי
           icon: /media/3mfcrrzu/ציבור-חרדי.png
           link:
@@ -106,7 +106,7 @@ content:
             name: לציבור החרדי
             url: https://www.oref.org.il/heb/emergencies/haredim/
             type: Content
-        - alt: ''
+        - alt: ""
           text: שירותים חיוניים
           icon: /media/fzqf2dlx/משרדי-ממשלה.png
           link:
@@ -115,7 +115,7 @@ content:
             url: https://www.oref.org.il/heb/recommendations/gov/
             type: Content
   - emergenciesLobby:
-      title: ''
+      title: ""
       content:
         - emergency:
             id: 2458
@@ -130,7 +130,7 @@ content:
                     - alt: מאזניים שגרת חיים מול הצלת חיים
                       subtitle: ההנחיות לקיום פעילויות חינוכיות, מקומות העבודה והתקהלויות
                       image: /media/xq3coudy/whatsapp-image-2025-06-23-at-140614.jpeg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -140,7 +140,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 2475
-                      path: '-1,1169,1170,1183,2458,2459,2475'
+                      path: "-1,1169,1170,1183,2458,2459,2475"
                       title: מדיניות ההתגוננות של פיקוד העורף
                       breadcrums:
                         - title: מידע והנחיות
@@ -152,8 +152,8 @@ content:
                     - alt: רסיס של טיל
                       subtitle: ראיתם נפל או חפץ חשוד? לא נוגעים ולא מתקרבים, זה מסכן חיים!
                       image: /media/2albulnk/התרחקו-מנפלים-ודווחו.png
-                      videoAlt: ''
-                      readTime: ' דקה'
+                      videoAlt: ""
+                      readTime: " דקה"
                       contentUrl:
                         target: _self
                         name: התרחקו מנפלים ודווחו
@@ -162,30 +162,30 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 2296
-                      path: '-1,1169,1170,1183,2458,2459,2296'
-                      title: ' נפלים וחפצים בלתי מזוהים'
+                      path: "-1,1169,1170,1183,2458,2459,2296"
+                      title: " נפלים וחפצים בלתי מזוהים"
                       breadcrums:
                         - title: מידע והנחיות
                           link: /heb/emergencies/info
                         - title: מלחמת חרבות ברזל
                           link: /heb/emergencies/info/iron-swords
-                        - title: ' נפלים וחפצים בלתי מזוהים'
+                        - title: " נפלים וחפצים בלתי מזוהים"
                           link: /heb/emergencies/info/iron-swords/נפלים-וחפצים-בלתי-מזוהים
                     - alt: ממשיכים להישמע להנחיות פיקוד העורף
                       subtitle: |
                         זה לא נגמר עד שזה לא נגמר: למרות הפסקת האש, יש להמשיך ולהישמע להנחיות פיקוד העורף
                       image: /media/1cemrb5s/prj0419_simu_lev_ein_shinoi_heb_feed_062420252.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 1 דקות
                       contentUrl:
                         target: _self
-                        name: 'זה לא נגמר עד שזה לא נגמר: ממשיכים להישמע להנחיות פיקוד העורף'
+                        name: "זה לא נגמר עד שזה לא נגמר: ממשיכים להישמע להנחיות פיקוד העורף"
                         url: https://www.oref.org.il/heb/articles/info/iron-swords/1127/
                         type: Content
                       showOnHomePage: true
                       isGuideline: false
                       id: 21097
-                      path: '-1,1169,1170,1183,2458,2459,21097'
+                      path: "-1,1169,1170,1183,2458,2459,21097"
                       title: ממשיכים להישמע להנחיות
                       breadcrums:
                         - title: מידע והנחיות
@@ -194,10 +194,10 @@ content:
                           link: /heb/emergencies/info/iron-swords
                         - title: ממשיכים להישמע להנחיות
                           link: /heb/emergencies/info/iron-swords/ממשיכים-להישמע-להנחיות
-                    - alt: ''
+                    - alt: ""
                       subtitle: לפני קבלת התרעה על ירי טילים מתימן - תתקבל הנחיה מקדימה ביישומון פיקוד העורף
                       image: /media/kwlpinll/הנחיה-מקדימה.jpeg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -207,7 +207,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 19960
-                      path: '-1,1169,1170,1183,2458,2459,19960'
+                      path: "-1,1169,1170,1183,2458,2459,19960"
                       title: זמן להיערכות לפני ירי טילים מתימן
                       breadcrums:
                         - title: מידע והנחיות
@@ -219,7 +219,7 @@ content:
                     - alt: שלבי התרעה בעת ירי טילים מאיראן
                       subtitle: הכרת השלבים בקבלת ההתרעה יאפשרו לכם להגיע למרחב המוגן
                       image: /media/twsh25fr/whatsapp-image-2025-07-02-at-182823.jpeg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -229,7 +229,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 20827
-                      path: '-1,1169,1170,1183,2458,2459,20827'
+                      path: "-1,1169,1170,1183,2458,2459,20827"
                       title: שלבי קבלת הנחיות בירי טילים מתימן
                       breadcrums:
                         - title: מידע והנחיות
@@ -241,8 +241,8 @@ content:
                     - alt: שיגור רקטות וטילים
                       subtitle: הנחיות מצילות חיים
                       image: /media/xmpnfxlx/ירי-רקטות-וטילים.png
-                      videoAlt: ''
-                      readTime: ' דקה וחצי'
+                      videoAlt: ""
+                      readTime: " דקה וחצי"
                       contentUrl:
                         target: _self
                         name: ירי רקטות וטילים 2
@@ -251,7 +251,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2524
-                      path: '-1,1169,1170,1183,2458,2459,2524'
+                      path: "-1,1169,1170,1183,2458,2459,2524"
                       title: ירי רקטות וטילים
                       breadcrums:
                         - title: מידע והנחיות
@@ -263,7 +263,7 @@ content:
                     - alt: היישומון של פיקוד העורף
                       subtitle: כדי לקבל התרעות והנחיות מצילות חיים על מגוון איומים בהתאם למיקומכם
                       image: /media/i0uiktbz/היישמון-של-פיקוד-העורף.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -273,7 +273,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 20363
-                      path: '-1,1169,1170,1183,2458,2459,20363'
+                      path: "-1,1169,1170,1183,2458,2459,20363"
                       title: הורידו את יישומון פיקוד העורף
                       breadcrums:
                         - title: מידע והנחיות
@@ -285,7 +285,7 @@ content:
                     - alt: צופרים, טלפון עם התרעה על ירי רקטות וטילים ומחשב עם פורטל החירום הלאומי
                       subtitle: כך נקבל התרעות בזמן אמת ובכל מקום שבו אנחנו נמצאים
                       image: /media/edclzbe2/אמצכי-התרעה-של-פיקוד-העורף.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -295,7 +295,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 2661
-                      path: '-1,1169,1170,1183,2458,2459,2661'
+                      path: "-1,1169,1170,1183,2458,2459,2661"
                       title: אמצעי ההתרעה של פיקוד העורף
                       breadcrums:
                         - title: מידע והנחיות
@@ -304,11 +304,11 @@ content:
                           link: /heb/emergencies/info/iron-swords
                         - title: אמצעי ההתרעה של פיקוד העורף
                           link: /heb/emergencies/info/iron-swords/אמצעי-ההתרעה-של-פיקוד-העורף
-                    - alt: 'דירה שלושה חדרים ומרחב מוגן מודגש בירוק '
+                    - alt: "דירה שלושה חדרים ומרחב מוגן מודגש בירוק "
                       subtitle: |
                         ממ"ד, ממ"ק, מקלט או מרחב מוגן ציבורי - כך נבחר את המרחב המוגן
                       image: /media/kd0auzyf/כיצד-נבחר-מרחב-מוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -318,7 +318,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 20332
-                      path: '-1,1169,1170,1183,2458,2459,20332'
+                      path: "-1,1169,1170,1183,2458,2459,20332"
                       title: כיצד לבחור את המרחב המוגן?
                       breadcrums:
                         - title: מידע והנחיות
@@ -330,7 +330,7 @@ content:
                     - alt: כלי טיס בשמיים
                       subtitle: הנחיות מצילות חיים
                       image: /media/gzphyghj/כלי-טיס-עוין.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -340,19 +340,19 @@ content:
                       showOnHomePage: false
                       isGuideline: true
                       id: 20543
-                      path: '-1,1169,1170,1183,2458,2459,20543'
-                      title: 'חדירת כלי טיס עוין '
+                      path: "-1,1169,1170,1183,2458,2459,20543"
+                      title: "חדירת כלי טיס עוין "
                       breadcrums:
                         - title: מידע והנחיות
                           link: /heb/emergencies/info
                         - title: מלחמת חרבות ברזל
                           link: /heb/emergencies/info/iron-swords
-                        - title: 'חדירת כלי טיס עוין '
+                        - title: "חדירת כלי טיס עוין "
                           link: /heb/emergencies/info/iron-swords/כלי-טיס-עוין-מעודכן
                     - alt: שעון מצויר
                       subtitle: כך תדעו בתוך כמה זמן עליכם להיכנס למרחב המוגן
                       image: /media/mh2euepd/כך-תדעו-בתוך-כמה-זמן-עליכם-להיכנס-למרחב-המוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -362,7 +362,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 2303
-                      path: '-1,1169,1170,1183,2458,2459,2303'
+                      path: "-1,1169,1170,1183,2458,2459,2303"
                       title: מה זמן הכניסה למרחב המוגן?
                       breadcrums:
                         - title: מידע והנחיות
@@ -374,7 +374,7 @@ content:
                     - alt: אנשים רצים לבניין
                       subtitle: מדוע כה חשוב להיזהר בעת הגעה למרחב המוגן?
                       image: /media/cn5dgrnv/לא-רצים-אל-המרחב-המוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -384,7 +384,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 20456
-                      path: '-1,1169,1170,1183,2458,2459,20456'
+                      path: "-1,1169,1170,1183,2458,2459,20456"
                       title: לא רצים אל המרחב המוגן
                       breadcrums:
                         - title: מידע והנחיות
@@ -396,7 +396,7 @@ content:
                     - alt: ציוד חירום ארוז מראש, כולל תיק, מים, מזון ושימושים אישיים
                       subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
                       image: /media/rxcfwroa/8086.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -406,7 +406,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 20361
-                      path: '-1,1169,1170,1183,2458,2459,20361'
+                      path: "-1,1169,1170,1183,2458,2459,20361"
                       title: נערכים למצבי חירום עם כל הציוד הנדרש
                       breadcrums:
                         - title: מידע והנחיות
@@ -423,7 +423,7 @@ content:
                     - alt: ילדים מאושרים
                       subtitle: חוסר הוודאות משפיע על כולנו. לפניכם מספר דרכים שיקנו לילדים עוגנים רגשיים
                       image: /media/rsjpfg4f/whatsapp-image-2025-06-27-at-092754.jpeg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -433,7 +433,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21141
-                      path: '-1,1169,1170,1183,2458,2461,21141'
+                      path: "-1,1169,1170,1183,2458,2461,21141"
                       title: כך נעזור לילדים לעבור את התקופה
                       breadcrums:
                         - title: מידע והנחיות
@@ -445,7 +445,7 @@ content:
                     - alt: אמא וילדה במרפסת
                       subtitle: תגובות ילדים לחירום והאופן שבו נסייע להם להתמודד
                       image: /media/bwqalxrj/מדברים-עם-הילדים-על-המצב.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -455,7 +455,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8696
-                      path: '-1,1169,1170,1183,2458,2461,8696'
+                      path: "-1,1169,1170,1183,2458,2461,8696"
                       title: סיוע לילדים להתמודד עם מצב חירום
                       breadcrums:
                         - title: מידע והנחיות
@@ -468,7 +468,7 @@ content:
                       subtitle: |
                         עצות להתמודדות עם הקושי הנפשי ומספרי הטלפון של קווי סיוע
                       image: /media/rkqbdsmb/חשים-מתח-עצות-להתמודדות.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -478,7 +478,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8703
-                      path: '-1,1169,1170,1183,2458,2461,8703'
+                      path: "-1,1169,1170,1183,2458,2461,8703"
                       title: התמודדות ותמיכה במצבי חירום - דגשים ומוקדי סיוע
                       breadcrums:
                         - title: מידע והנחיות
@@ -490,7 +490,7 @@ content:
                     - alt: איש גולל בטלפון
                       subtitle: בעת הזו חשוב לצרוך מידע רק ממקורות רשמיים ומהימנים
                       image: /media/3btgw1jt/לא-מעבירים-מידע-ברשת.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -500,7 +500,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8705
-                      path: '-1,1169,1170,1183,2458,2461,8705'
+                      path: "-1,1169,1170,1183,2458,2461,8705"
                       title: לא מעבירים מידע ברשת
                       breadcrums:
                         - title: מידע והנחיות
@@ -512,7 +512,7 @@ content:
                     - alt: אישה מטפלת באדם קשיש
                       subtitle: דגשים למטפלים בני משפחה, מטפלים זרים ושכנים לסיוע למבוגרים בזמן חירום
                       image: /media/5e1ldg4r/הנחיות-לבני-משפחה-ומטפלים-בקשישים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 וחצי דקות
                       contentUrl:
                         target: _self
@@ -522,7 +522,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8711
-                      path: '-1,1169,1170,1183,2458,2461,8711'
+                      path: "-1,1169,1170,1183,2458,2461,8711"
                       title: התמודדות אוכלוסייה מבוגרת בחירום
                       breadcrums:
                         - title: מידע והנחיות
@@ -534,7 +534,7 @@ content:
                     - alt: איש צופה בשקיעה
                       subtitle: אל"ם (במיל') פרופ' ירון בר דיין, מומחה ברפואה פנימית, עם כלים להתמודדות
                       image: /media/yvyenhak/איך-להתמודד-עם-לחץ-במלחמה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -544,7 +544,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8700
-                      path: '-1,1169,1170,1183,2458,2461,8700'
+                      path: "-1,1169,1170,1183,2458,2461,8700"
                       title: איך להתמודד עם לחץ במלחמה?
                       breadcrums:
                         - title: מידע והנחיות
@@ -556,7 +556,7 @@ content:
                     - alt: איש משתמש באייפד
                       subtitle: עדכונים שוטפים ממשרדי הממשלה והרשויות באשר לפעילות השוטפת של המשק
                       image: /media/31coh3s4/מידע-על-שירותים-חיוניים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 14 דקות
                       contentUrl:
                         target: _self
@@ -566,7 +566,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8694
-                      path: '-1,1169,1170,1183,2458,2461,8694'
+                      path: "-1,1169,1170,1183,2458,2461,8694"
                       title: מידע על שירותים חיוניים
                       breadcrums:
                         - title: מידע והנחיות
@@ -578,7 +578,7 @@ content:
                     - alt: איש כותב
                       subtitle: הנחיות ההתגוננות בעת ירי אל העורף
                       image: /media/stclb32v/getfilecontent_hh.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -588,7 +588,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8712
-                      path: '-1,1169,1170,1183,2458,2461,8712'
+                      path: "-1,1169,1170,1183,2458,2461,8712"
                       title: הנחיות פיקוד העורף במבצעי עבר
                       breadcrums:
                         - title: מידע והנחיות
@@ -600,7 +600,7 @@ content:
                     - alt: אישה מדברת בטלפון
                       subtitle: מוקדי סיוע לתמיכה נפשית במצב חירום
                       image: /media/ixfeo3h4/תמיכה-נפשית-מוקדי-סיוע.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -610,7 +610,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8695
-                      path: '-1,1169,1170,1183,2458,2461,8695'
+                      path: "-1,1169,1170,1183,2458,2461,8695"
                       title: תמיכה נפשית – מוקדי סיוע
                       breadcrums:
                         - title: מידע והנחיות
@@ -632,8 +632,8 @@ content:
                     - alt: שיגור רקטות וטילים
                       subtitle: הנחיות מצילות חיים
                       image: /media/xmpnfxlx/ירי-רקטות-וטילים.png
-                      videoAlt: ''
-                      readTime: ' דקה וחצי'
+                      videoAlt: ""
+                      readTime: " דקה וחצי"
                       contentUrl:
                         target: _self
                         name: ירי רקטות וטילים מעודכן
@@ -642,7 +642,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 7862
-                      path: '-1,1169,1170,1183,1202,1220,7862'
+                      path: "-1,1169,1170,1183,1202,1220,7862"
                       title: ירי רקטות וטילים
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -654,7 +654,7 @@ content:
                     - alt: כלי טיס בשמיים
                       subtitle: הנחיות מצילות חיים
                       image: /media/gzphyghj/כלי-טיס-עוין.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -664,7 +664,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 7863
-                      path: '-1,1169,1170,1183,1202,1220,7863'
+                      path: "-1,1169,1170,1183,1202,1220,7863"
                       title: כלי טיס עוין
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -676,7 +676,7 @@ content:
                     - alt: שעון מצויר
                       subtitle: כך תדעו בתוך כמה זמן עליכם להיכנס למרחב המוגן
                       image: /media/mh2euepd/כך-תדעו-בתוך-כמה-זמן-עליכם-להיכנס-למרחב-המוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -686,7 +686,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8603
-                      path: '-1,1169,1170,1183,1202,1220,8603'
+                      path: "-1,1169,1170,1183,1202,1220,8603"
                       title: מה זמן הכניסה למרחב המוגן?
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -698,7 +698,7 @@ content:
                     - alt: אנשים רצים לבניין
                       subtitle: מדוע כה חשוב להיזהר בעת הגעה למרחב המוגן?
                       image: /media/cn5dgrnv/לא-רצים-אל-המרחב-המוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -708,7 +708,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8605
-                      path: '-1,1169,1170,1183,1202,1220,8605'
+                      path: "-1,1169,1170,1183,1202,1220,8605"
                       title: לא רצים אל המרחב המוגן
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -721,7 +721,7 @@ content:
                       subtitle: |
                         אם מתקבלת התרעה בנסיעה יש לעצור בזהירות ולהיכנס למרחב מוגן סמוך
                       image: /media/iltkxhao/בזמן-התרעה-מתרחקים-מהרכב.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -731,19 +731,19 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8609
-                      path: '-1,1169,1170,1183,1202,1220,8609'
-                      title: 'הנחיות בעת קבלת התרעה בנסיעה ברכב '
+                      path: "-1,1169,1170,1183,1202,1220,8609"
+                      title: "הנחיות בעת קבלת התרעה בנסיעה ברכב "
                       breadcrums:
                         - title: הנחיות מצילות חיים
                           link: /heb/emergencies/life-saving-guidelines
                         - title: הנחיות מצילות חיים
                           link: /heb/emergencies/life-saving-guidelines/lsg
-                        - title: 'הנחיות בעת קבלת התרעה בנסיעה ברכב '
+                        - title: "הנחיות בעת קבלת התרעה בנסיעה ברכב "
                           link: /heb/emergencies/life-saving-guidelines/lsg/הנחיות-בעת-קבלת-התרעה-בנסיעה-ברכב
                     - alt: איש שוכב על הקרקע
                       subtitle: בשטח פתוח יש לשכב ולהגן על הראש כדי לא להיפגע מרסיסים
                       image: /media/be2n3kiq/שכיבה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -753,7 +753,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8611
-                      path: '-1,1169,1170,1183,1202,1220,8611'
+                      path: "-1,1169,1170,1183,1202,1220,8611"
                       title: שכיבה על קרקע מצילה חיים
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -763,9 +763,9 @@ content:
                         - title: שכיבה על קרקע מצילה חיים
                           link: /heb/emergencies/life-saving-guidelines/lsg/שכיבה-על-קרקע-מצילה-חיים
                     - alt: אנשים מתקהלים
-                      subtitle: '  אם מתקבלת התרעה בזמן אירוע רב משתתפים, יש לשכב על הקרקע או להשתופף במקום'
+                      subtitle: "  אם מתקבלת התרעה בזמן אירוע רב משתתפים, יש לשכב על הקרקע או להשתופף במקום"
                       image: /media/5snddmfj/הנחיות-להתקהלויות.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -775,7 +775,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8614
-                      path: '-1,1169,1170,1183,1202,1220,8614'
+                      path: "-1,1169,1170,1183,1202,1220,8614"
                       title: הנחיות להתקהלויות
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -785,9 +785,9 @@ content:
                         - title: הנחיות להתקהלויות
                           link: /heb/emergencies/life-saving-guidelines/lsg/הנחיות-להתקהלויות
                     - alt: רסיס של טיל
-                      subtitle: 'מתרחקים, מרחיקים ומדווחים: האופן שבו יש לפעול כשרואים נפלים'
+                      subtitle: "מתרחקים, מרחיקים ומדווחים: האופן שבו יש לפעול כשרואים נפלים"
                       image: /media/2albulnk/התרחקו-מנפלים-ודווחו.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -797,7 +797,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8590
-                      path: '-1,1169,1170,1183,1202,1220,8590'
+                      path: "-1,1169,1170,1183,1202,1220,8590"
                       title: התרחקו מנפלים ודווחו
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -809,7 +809,7 @@ content:
                     - alt: אנשי מד"א מטפלים בנפגעים
                       subtitle: דגשים לטיפול בנפגעים עד להגעת צוותי הסיוע
                       image: /media/wg1kpyxp/עזרה-ראשונה-בירי-רקטות.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 דקות
                       contentUrl:
                         target: _self
@@ -819,7 +819,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8615
-                      path: '-1,1169,1170,1183,1202,1220,8615'
+                      path: "-1,1169,1170,1183,1202,1220,8615"
                       title: עזרה ראשונה במצבי חירום
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -833,10 +833,10 @@ content:
                   title: אמצעי התרעה
                   url: means-of-alert
                   content:
-                    - alt: ''
+                    - alt: ""
                       subtitle: מעתה תתקבל הנחיה מקדימה ביישומון פיקוד העורף, לפני קבלת ההתרעה
                       image: /media/kwlpinll/הנחיה-מקדימה.jpeg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -846,7 +846,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 19869
-                      path: '-1,1169,1170,1183,1202,1231,19869'
+                      path: "-1,1169,1170,1183,1202,1231,19869"
                       title: זמן להיערכות לפני ירי טילים מתימן
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -858,7 +858,7 @@ content:
                     - alt: היישומון של פיקוד העורף
                       subtitle: כדי לקבל התרעות והנחיות מצילות חיים על מגוון איומים בהתאם למיקומכם
                       image: /media/i0uiktbz/היישמון-של-פיקוד-העורף.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -868,7 +868,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 2405
-                      path: '-1,1169,1170,1183,1202,1231,2405'
+                      path: "-1,1169,1170,1183,1202,1231,2405"
                       title: הורידו את יישומון פיקוד העורף
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -880,7 +880,7 @@ content:
                     - alt: טלפון עם התרעה על ירי רקטות וטילים
                       subtitle: כך תדעו מה אזור ההתרעה שאליו אתם שייכים
                       image: /media/psmbmksn/התרעה-ממוקדת-לכל-תושב.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -890,7 +890,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8621
-                      path: '-1,1169,1170,1183,1202,1231,8621'
+                      path: "-1,1169,1170,1183,1202,1231,8621"
                       title: התרעה ממוקדת לכל תושב
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -902,7 +902,7 @@ content:
                     - alt: יישומון פיקוד העורף בטלוויזיה
                       subtitle: מעתה ניתן לקבל התרעות בזמן אמת בצפייה בכל תוכן בטלוויזיה
                       image: /media/ylbdmigr/יישומון-חדש-חדש-שני.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -912,7 +912,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 17601
-                      path: '-1,1169,1170,1183,1202,1231,17601'
+                      path: "-1,1169,1170,1183,1202,1231,17601"
                       title: חדש! יישומון פיקוד העורף בטלוויזיה
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -924,7 +924,7 @@ content:
                     - alt: צופרים, טלפון עם התרעה על ירי רקטות וטילים ומחשב עם פורטל החירום הלאומי
                       subtitle: כך נקבל התרעות בזמן אמת ובכל מקום שבו אנחנו נמצאים
                       image: /media/edclzbe2/אמצכי-התרעה-של-פיקוד-העורף.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -934,7 +934,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8616
-                      path: '-1,1169,1170,1183,1202,1231,8616'
+                      path: "-1,1169,1170,1183,1202,1231,8616"
                       title: אמצעי ההתרעה של פיקוד העורף
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -946,7 +946,7 @@ content:
                     - alt: הודעת חירום בטלפון
                       subtitle: מערכת "מסר אישי", מאפשרת להעביר הודעות התגוננות באירועי חירום רחבי היקף ישירות לטלפונים הניידים
                       image: /media/cecdfg5y/חדש.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -956,7 +956,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8623
-                      path: '-1,1169,1170,1183,1202,1231,8623'
+                      path: "-1,1169,1170,1183,1202,1231,8623"
                       title: מערכת הודעות התגוננות מטעם פיקוד העורף
                       breadcrums:
                         - title: הנחיות מצילות חיים
@@ -979,7 +979,7 @@ content:
                       subtitle: |
                         ממ"ד, ממ"ק, מקלט או מרחב מוגן ציבורי - כך נבחר את המרחב המוגן
                       image: /media/kd0auzyf/כיצד-נבחר-מרחב-מוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -989,7 +989,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 20384
-                      path: '-1,1169,1170,1183,1673,2147,20384'
+                      path: "-1,1169,1170,1183,1673,2147,20384"
                       title: כיצד לבחור את המרחב המוגן?
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1001,7 +1001,7 @@ content:
                     - alt: ציוד חירום ארוז מראש, כולל תיק, מים, מזון ושימושים אישיים
                       subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
                       image: /media/j54iqf4x/ציוד-לשעת-חירום-ערוך.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -1011,7 +1011,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 15696
-                      path: '-1,1169,1170,1183,1673,2147,15696'
+                      path: "-1,1169,1170,1183,1673,2147,15696"
                       title: נערכים למצבי חירום עם כל הציוד הנדרש
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1023,7 +1023,7 @@ content:
                     - alt: שעון מצויר
                       subtitle: כך תדעו בתוך כמה זמן עליכם להיכנס למרחב המוגן
                       image: /media/mh2euepd/כך-תדעו-בתוך-כמה-זמן-עליכם-להיכנס-למרחב-המוגן.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -1033,7 +1033,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 20389
-                      path: '-1,1169,1170,1183,1673,2147,20389'
+                      path: "-1,1169,1170,1183,1673,2147,20389"
                       title: מה זמן הכניסה למרחב המוגן?
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1045,7 +1045,7 @@ content:
                     - alt: איש סוגר את חלון הממ"ד
                       subtitle: כדי שנוכל לשהות בממ"ד או במקלט בחירום, חשוב לוודא שהוא מוכן ומצויד
                       image: /media/snbmpa1h/הנחיות-לתפעול-הממד-בחירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1055,7 +1055,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8560
-                      path: '-1,1169,1170,1183,1673,2147,8560'
+                      path: "-1,1169,1170,1183,1673,2147,8560"
                       title: כך נשמור את המרחב המוגן מוכן בחירום
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1068,7 +1068,7 @@ content:
                       subtitle: |
                         אם נדרשים תיקונים בדלת ובחלון הממד יש לפנות ליצרן או לחברה המייצרת בתו תקן פריטי מסגרות למקלטים
                       image: /media/nqjbwmlr/הנחיות-לתחזוקת-הממד.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -1078,7 +1078,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 20794
-                      path: '-1,1169,1170,1183,1673,2147,20794'
+                      path: "-1,1169,1170,1183,1673,2147,20794"
                       title: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1090,7 +1090,7 @@ content:
                     - alt: חלונות סגורים של מקלט
                       subtitle: מקלט משותף, ציבורי ומוסדי - מי אחראי לתחזוקה וכיצד נוודא שהוא מוכן לשימוש?
                       image: /media/synb3x02/שימוש-במקלט-המשותף-בחירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -1100,7 +1100,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8576
-                      path: '-1,1169,1170,1183,1673,2147,8576'
+                      path: "-1,1169,1170,1183,1673,2147,8576"
                       title: תחזוקת המקלט
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1112,7 +1112,7 @@ content:
                     - alt: איש סוגר חלון
                       subtitle: ממ"ד, ממ"ק, ממ"מ ומקלט - המאפיינים שלהם והאופן שבו יש לתחזק אותם
                       image: /media/vlknhxvz/מרחב-מוגן-תקני.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -1122,7 +1122,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8573
-                      path: '-1,1169,1170,1183,1673,2147,8573'
+                      path: "-1,1169,1170,1183,1673,2147,8573"
                       title: מרחב מוגן תקני
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1134,7 +1134,7 @@ content:
                     - alt: מרחב מוגן יביל
                       subtitle: בניית ממ"ד בהליך מזורז, מרחב מוגן נייד או שיפורי מיגון - כך תוכלו לשפר את המיגון בביתכם
                       image: /media/1ycmq0hd/פתרונות-מיגון-חדשים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -1144,7 +1144,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8584
-                      path: '-1,1169,1170,1183,1673,2147,8584'
+                      path: "-1,1169,1170,1183,1673,2147,8584"
                       title: פתרונות למיגון הבית
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1156,7 +1156,7 @@ content:
                     - alt: מערכות אוורור וסינון
                       subtitle: שימוש במערכת במרחב המוגן
                       image: /media/5gdngjgh/מערכות-אוורור-וסינון.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1166,7 +1166,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8561
-                      path: '-1,1169,1170,1183,1673,2147,8561'
+                      path: "-1,1169,1170,1183,1673,2147,8561"
                       title: מערכות אוורור וסינון
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1178,7 +1178,7 @@ content:
                     - alt: שרטוטים אדריכליים
                       subtitle: חומרי העזר ודרכי יצירת התקשרות לטובת תכנון מרחבים מוגנים
                       image: /media/p3mfofpk/הנחיות-מפרטים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1188,7 +1188,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8575
-                      path: '-1,1169,1170,1183,1673,2147,8575'
+                      path: "-1,1169,1170,1183,1673,2147,8575"
                       title: תכנון ובניית מרחבים מוגנים - הנחיות, תקנות ודרכי התקשרות
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1200,7 +1200,7 @@ content:
                     - alt: מדבקת תקינות של ממ"ד
                       subtitle: בניתם מרחב מוגן? מספר דגשים לבחינה בעת קבלתו מהקבלן
                       image: /media/vz3nh2cq/בדיקת-תקינות-לממד-חדש.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -1210,7 +1210,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8563
-                      path: '-1,1169,1170,1183,1673,2147,8563'
+                      path: "-1,1169,1170,1183,1673,2147,8563"
                       title: בדיקת תקינות לממ"ד חדש
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1222,7 +1222,7 @@ content:
                     - alt: איש מקליד במחשב
                       subtitle: רשימת הטלפונים החשובים שיש להכין מראש
                       image: /media/lwtduid4/דרכי-תקשורת-לשעת-חירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1232,7 +1232,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 20604
-                      path: '-1,1169,1170,1183,1673,2147,20604'
+                      path: "-1,1169,1170,1183,1673,2147,20604"
                       title: דרכי תקשורת לשעת חירום
                       breadcrums:
                         - title: הנחיות למיגון
@@ -1254,7 +1254,7 @@ content:
                     - alt: ילדים מאושרים
                       subtitle: חוסר הוודאות משפיע על כולנו. לפניכם מספר דרכים שיקנו לילדים עוגנים רגשיים
                       image: /media/rsjpfg4f/whatsapp-image-2025-06-27-at-092754.jpeg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1264,7 +1264,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21335
-                      path: '-1,1169,1170,1183,2148,2149,21335'
+                      path: "-1,1169,1170,1183,2148,2149,21335"
                       title: כך נעזור לילדים לעבור את התקופה
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1276,7 +1276,7 @@ content:
                     - alt: ילדה מחבקת דובי
                       subtitle: מה עושים אם הילדים חוזרים לדפוסי התנהגות קודמים?
                       image: /media/puwbppp5/התמודדות-עם-רגרסיה-של-הילדים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1286,7 +1286,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8578
-                      path: '-1,1169,1170,1183,2148,2149,8578'
+                      path: "-1,1169,1170,1183,2148,2149,8578"
                       title: התמודדות עם רגרסיה אצל הילדים
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1298,8 +1298,8 @@ content:
                     - alt: אמא מדברת עם הילדה שלה
                       subtitle: הדברים שאנחנו כהורים יכולים לעשות
                       image: /media/2camq02r/צילום-מסך-2025-06-22-153512.png
-                      videoAlt: ''
-                      readTime: '3 דקות '
+                      videoAlt: ""
+                      readTime: "3 דקות "
                       contentUrl:
                         target: _self
                         name: יוצאים גדולים בצעדים קטנים
@@ -1308,7 +1308,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8562
-                      path: '-1,1169,1170,1183,2148,2149,8562'
+                      path: "-1,1169,1170,1183,2148,2149,8562"
                       title: כך נסייע לילדים להתמודד עם מצב חירום
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1320,7 +1320,7 @@ content:
                     - alt: אמא מדברת עם הילדה שלה
                       subtitle: מדוע חשוב להסביר לילדים את המתרחש וכיצד לעשות זאת
                       image: /media/1e1iafla/מדוע-לדבר-על-מצבי-חירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1330,7 +1330,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21336
-                      path: '-1,1169,1170,1183,2148,2149,21336'
+                      path: "-1,1169,1170,1183,2148,2149,21336"
                       title: איך לדבר עם ילדים על מצב חירום?
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1342,7 +1342,7 @@ content:
                     - alt: ילדה מפחדת
                       subtitle: כך נסביר לילדים את התפקיד של האזעקה
                       image: /media/tp1p5tyc/למה-ההתרעה-כל-כך-מפחידה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -1352,7 +1352,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8607
-                      path: '-1,1169,1170,1183,2148,2149,8607'
+                      path: "-1,1169,1170,1183,2148,2149,8607"
                       title: למה האזעקה כל כך חזקה?
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1364,7 +1364,7 @@ content:
                     - alt: משפחה אוכלת
                       subtitle: מתבגרים רבים חווים דכדוך בתקופה זו. כיצד נגביר את תחושת הביטחון שלהם?
                       image: /media/oznji24f/כך-נסייע-לבני-הנוער.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -1374,7 +1374,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8597
-                      path: '-1,1169,1170,1183,2148,2149,8597'
+                      path: "-1,1169,1170,1183,2148,2149,8597"
                       title: כך נסייע לבני הנוער
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1386,7 +1386,7 @@ content:
                     - alt: מיכל דליות מסבירה
                       subtitle: איך לתווך לילדים את המלחמה, ולספק להן כלים להתמודדות רגשית? מיכל דליות מסבירה
                       image: /media/a5clcnvb/כך-תפתחו-חוסן-רגשי-בילדים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 דקות
                       contentUrl:
                         target: _self
@@ -1396,7 +1396,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8604
-                      path: '-1,1169,1170,1183,2148,2149,8604'
+                      path: "-1,1169,1170,1183,2148,2149,8604"
                       title: כך תפתחו חוסן רגשי בילדים
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1408,7 +1408,7 @@ content:
                     - alt: אבא ובן מדברים
                       subtitle: איך להסביר את מצב החירום ובאילו שיטות ניתן להירגע?
                       image: /media/nthcc3s5/תיווך-המצב-לילדים-על-הרצף-האוטיסטי.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -1418,14 +1418,14 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 8816
-                      path: '-1,1169,1170,1183,2148,2149,8816'
-                      title: 'תיווך המצב לילדים ובוגרים עם צרכים מיוחדים '
+                      path: "-1,1169,1170,1183,2148,2149,8816"
+                      title: "תיווך המצב לילדים ובוגרים עם צרכים מיוחדים "
                       breadcrums:
                         - title: התמודדות בחירום
                           link: /heb/emergencies/coping-emergencies
                         - title: תמיכה בילדים
                           link: /heb/emergencies/coping-emergencies/supporting-children
-                        - title: 'תיווך המצב לילדים ובוגרים עם צרכים מיוחדים '
+                        - title: "תיווך המצב לילדים ובוגרים עם צרכים מיוחדים "
                           link: /heb/emergencies/coping-emergencies/supporting-children/תיווך-המצב-לילדים-ובוגרים-עם-צרכים-מיוחדים
               - emergencySubCategory:
                   id: 2150
@@ -1433,9 +1433,9 @@ content:
                   url: emergency-tools
                   content:
                     - alt: אישה במתח
-                      subtitle: 'עצות להתמודדות עם הקושי הנפשי ומספרי הטלפון של קווי הסיוע '
+                      subtitle: "עצות להתמודדות עם הקושי הנפשי ומספרי הטלפון של קווי הסיוע "
                       image: /media/rkqbdsmb/חשים-מתח-עצות-להתמודדות.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -1445,7 +1445,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8864
-                      path: '-1,1169,1170,1183,2148,2150,8864'
+                      path: "-1,1169,1170,1183,2148,2150,8864"
                       title: התמודדות ותמיכה במצבי חירום - דגשים ומוקדי סיוע
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1457,7 +1457,7 @@ content:
                     - alt: שני אנשים מדברים
                       subtitle: ערבות הדדית תציל חיים - בואו לעזור ולתרום
                       image: /media/xfzaxhzw/כך-תוכלו-להתנדב-ולסייע.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1467,19 +1467,19 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8870
-                      path: '-1,1169,1170,1183,2148,2150,8870'
-                      title: ' כך תוכלו להתנדב ולסייע'
+                      path: "-1,1169,1170,1183,2148,2150,8870"
+                      title: " כך תוכלו להתנדב ולסייע"
                       breadcrums:
                         - title: התמודדות בחירום
                           link: /heb/emergencies/coping-emergencies
                         - title: כלים להתמודדות בחירום
                           link: /heb/emergencies/coping-emergencies/emergency-tools
-                        - title: ' כך תוכלו להתנדב ולסייע'
+                        - title: " כך תוכלו להתנדב ולסייע"
                           link: /heb/emergencies/coping-emergencies/emergency-tools/כך-תוכלו-להתנדב-ולסייע
                     - alt: אישה מטפלת באדם קשיש
                       subtitle: דגשים למטפלים במבוגרים בזמן חירום
                       image: /media/5e1ldg4r/הנחיות-לבני-משפחה-ומטפלים-בקשישים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1489,7 +1489,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8869
-                      path: '-1,1169,1170,1183,2148,2150,8869'
+                      path: "-1,1169,1170,1183,2148,2150,8869"
                       title: הנחיות לבני משפחה ומטפלים בקשישים
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1501,7 +1501,7 @@ content:
                     - alt: איש גולל בטלפון
                       subtitle: בעת הזו חשוב לצרוך מידע רק ממקורות רשמיים ומהימנים
                       image: /media/3btgw1jt/לא-מעבירים-מידע-ברשת.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1511,7 +1511,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8871
-                      path: '-1,1169,1170,1183,2148,2150,8871'
+                      path: "-1,1169,1170,1183,2148,2150,8871"
                       title: לא מעבירים מידע ברשת
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1523,7 +1523,7 @@ content:
                     - alt: איש צופה בשקיעה
                       subtitle: אל"ם (במיל') פרופ' ירון בר דיין, מומחה ברפואה פנימית, עם כלים להתמודדות
                       image: /media/yvyenhak/איך-להתמודד-עם-לחץ-במלחמה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -1533,7 +1533,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 3039
-                      path: '-1,1169,1170,1183,2148,2150,3039'
+                      path: "-1,1169,1170,1183,2148,2150,3039"
                       title: איך להתמודד עם לחץ במלחמה?
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1545,7 +1545,7 @@ content:
                     - alt: איש משתמש באייפד
                       subtitle: עדכונים שוטפים ממשרדי הממשלה והרשויות באשר לפעילות השוטפת של המשק
                       image: /media/5syd1azj/צילום-מסך-2025-03-02-122937.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 14 דקות
                       contentUrl:
                         target: _self
@@ -1555,7 +1555,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 19634
-                      path: '-1,1169,1170,1183,2148,2150,19634'
+                      path: "-1,1169,1170,1183,2148,2150,19634"
                       title: מידע על שירותים חיוניים
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1567,7 +1567,7 @@ content:
                     - alt: אבא וילדים משחקים בטלפון
                       subtitle: הולכים לעבודה וללימודים בהתאם להנחיות פיקוד העורף
                       image: /media/asvcg1zf/צילום-מסך-2025-03-02-122618.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1577,7 +1577,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 21321
-                      path: '-1,1169,1170,1183,2148,2150,21321'
+                      path: "-1,1169,1170,1183,2148,2150,21321"
                       title: לחיות לצד ההנחיות
                       breadcrums:
                         - title: התמודדות בחירום
@@ -1599,7 +1599,7 @@ content:
                     - alt: כלי טיס בשמיים
                       subtitle: הנחיות מצילות חיים
                       image: /media/gzphyghj/כלי-טיס-עוין.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -1609,7 +1609,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 7867
-                      path: '-1,1169,1170,1183,1204,1219,7867'
+                      path: "-1,1169,1170,1183,1204,1219,7867"
                       title: כלי טיס עוין
                       breadcrums:
                         - title: איומים בטחוניים
@@ -1619,9 +1619,9 @@ content:
                         - title: כלי טיס עוין
                           link: /heb/emergencies/security-threats/main/כלי-טיס-עוין
                     - alt: התרעה בטלפון על כלי טיס עוין
-                      subtitle: 'הכרת אופן קבלת ההתרעה והנחיות ההתנהגות - יכולה להציל חיים. '
+                      subtitle: "הכרת אופן קבלת ההתרעה והנחיות ההתנהגות - יכולה להציל חיים. "
                       image: /media/4bylckzf/התרעה-על-חדירת-כלי-טיס-עברית.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות וחצי
                       contentUrl:
                         target: _self
@@ -1631,7 +1631,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8779
-                      path: '-1,1169,1170,1183,1204,1219,8779'
+                      path: "-1,1169,1170,1183,1204,1219,8779"
                       title: התרעה על חדירת כלי טיס עוין
                       breadcrums:
                         - title: איומים בטחוניים
@@ -1643,8 +1643,8 @@ content:
                     - alt: גדר
                       subtitle: הנחיות מצילות חיים
                       image: /media/sfnn43us/חדירת-מחבלים.png
-                      videoAlt: ''
-                      readTime: ' דקה'
+                      videoAlt: ""
+                      readTime: " דקה"
                       contentUrl:
                         target: _self
                         name: חדירת מחבלים
@@ -1653,7 +1653,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2532
-                      path: '-1,1169,1170,1183,1204,1219,2532'
+                      path: "-1,1169,1170,1183,1204,1219,2532"
                       title: חדירת מחבלים
                       breadcrums:
                         - title: איומים בטחוניים
@@ -1675,7 +1675,7 @@ content:
                     - alt: מוקד הרעידה
                       subtitle: הנחיות מצילות חיים
                       image: /media/ctvb4w4x/guideathquacke.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1685,7 +1685,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2579
-                      path: '-1,1169,1170,1183,1677,2262,2579'
+                      path: "-1,1169,1170,1183,1677,2262,2579"
                       title: רעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1697,7 +1697,7 @@ content:
                     - alt: מגניטודה
                       subtitle: מה היא רעידת אדמה, כיצד היא מתרחשת ומה האיום בישראל?
                       image: /media/os0hr5iq/8162.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1707,7 +1707,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9110
-                      path: '-1,1169,1170,1183,1677,2262,9110'
+                      path: "-1,1169,1170,1183,1677,2262,9110"
                       title: מהי רעידת אדמה והאיום בישראל
                       breadcrums:
                         - title: רעידת אדמה
@@ -1719,7 +1719,7 @@ content:
                     - alt: התרעה בטלפון על רעידת אדמה
                       subtitle: ביישומון פיקוד העורף, בפורטל החירום הלאומי, בצופרים ובאמצעי התקשורת
                       image: /media/m1hfzncl/רעידת-אדמה-עברית.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -1729,7 +1729,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9114
-                      path: '-1,1169,1170,1183,1677,2262,9114'
+                      path: "-1,1169,1170,1183,1677,2262,9114"
                       title: התרעה על רעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1741,7 +1741,7 @@ content:
                     - alt: איש מקבע ספריה לקיר
                       subtitle: קבלת התרעות, הכרת ההנחיות והכנת הבית והמשפחה
                       image: /media/bshccjev/8118.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1751,7 +1751,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9122
-                      path: '-1,1169,1170,1183,1677,2262,9122'
+                      path: "-1,1169,1170,1183,1677,2262,9122"
                       title: היערכות לרעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1763,7 +1763,7 @@ content:
                     - alt: איש פותח דלת לחדר מדרגות
                       subtitle: כך תדעו כיצד לבחור את המקום הבטוח שתוכלו להגיע אליו בתוך שניות ברעידת אדמה
                       image: /media/kupjkncq/מקום-בטוח-כתבה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1773,7 +1773,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 2676
-                      path: '-1,1169,1170,1183,1677,2262,2676'
+                      path: "-1,1169,1170,1183,1677,2262,2676"
                       title: המקום הבטוח ברעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1785,7 +1785,7 @@ content:
                     - alt: רשימת ציוד נדרש לשעת חירום
                       subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
                       image: /media/mvefad3h/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -1795,7 +1795,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9129
-                      path: '-1,1169,1170,1183,1677,2262,9129'
+                      path: "-1,1169,1170,1183,1677,2262,9129"
                       title: נערכים למצבי חירום עם כל הציוד הנדרש
                       breadcrums:
                         - title: רעידת אדמה
@@ -1807,7 +1807,7 @@ content:
                     - alt: אמא וילדה כותבות
                       subtitle: כל המילים שחשוב להכיר
                       image: /media/5juprbtt/רעידת-אדמה-מילון-לילדים.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 7 דקות
                       contentUrl:
                         target: _self
@@ -1817,7 +1817,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 19461
-                      path: '-1,1169,1170,1183,1677,2262,19461'
+                      path: "-1,1169,1170,1183,1677,2262,19461"
                       title: רעידת אדמה - מילון לילדים
                       breadcrums:
                         - title: רעידת אדמה
@@ -1834,7 +1834,7 @@ content:
                     - alt: הריסות מבנים לאחר רעידת אדמה
                       subtitle: גם אם רעידת האדמה הסתיימה - הסכנה עוד לא חלפה
                       image: /media/xwlnezgv/הנחיות-לאחר-רעידת-אדמה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1844,7 +1844,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 2998
-                      path: '-1,1169,1170,1183,1677,2263,2998'
+                      path: "-1,1169,1170,1183,1677,2263,2998"
                       title: הנחיות לאחר רעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1856,7 +1856,7 @@ content:
                     - alt: איש חילוץ מחלץ אנשים מתחת להריסות
                       subtitle: הנחיות לחילוץ לכודים מתחת להריסות
                       image: /media/4h2hddna/חילוץ-לכודים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1866,7 +1866,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9526
-                      path: '-1,1169,1170,1183,1677,2263,9526'
+                      path: "-1,1169,1170,1183,1677,2263,9526"
                       title: חילוץ לכודים מתחת להריסות
                       breadcrums:
                         - title: רעידת אדמה
@@ -1878,7 +1878,7 @@ content:
                     - alt: איש בודק דופק
                       subtitle: דגשים לטיפול בפצועים כתוצאה מרעידת אדמה
                       image: /media/dyrja0yb/עזרה-ראשונה-ברעידת-אדמה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 דקות
                       contentUrl:
                         target: _self
@@ -1888,7 +1888,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9528
-                      path: '-1,1169,1170,1183,1677,2263,9528'
+                      path: "-1,1169,1170,1183,1677,2263,9528"
                       title: עזרה ראשונה ברעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1900,7 +1900,7 @@ content:
                     - alt: אנשים אורזים שימורים ובקבוקי מים
                       subtitle: כיצד להשיג את הציוד ההכרחי להישרדות?
                       image: /media/0iwn21vj/הצטיידות-לאחר-רעידת-אדמה.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -1910,7 +1910,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9531
-                      path: '-1,1169,1170,1183,1677,2263,9531'
+                      path: "-1,1169,1170,1183,1677,2263,9531"
                       title: הצטיידות לאחר רעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1922,8 +1922,8 @@ content:
                     - alt: בית חולים שדה
                       subtitle: כך מסייעים לתושבים לאחר רעידת אדמה
                       image: /media/ytpd3ef5/אתרי-סיוע-לאוכלוסיה.png
-                      videoAlt: ''
-                      readTime: ' דקה וחצי'
+                      videoAlt: ""
+                      readTime: " דקה וחצי"
                       contentUrl:
                         target: _self
                         name: אתרי סיוע לאוכלוסייה
@@ -1932,7 +1932,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9532
-                      path: '-1,1169,1170,1183,1677,2263,9532'
+                      path: "-1,1169,1170,1183,1677,2263,9532"
                       title: אתרי סיוע לאוכלוסייה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1944,7 +1944,7 @@ content:
                     - alt: מבנה שנפגע מרעידת אדמה
                       subtitle: מה צריך לבדוק לפני שחוזרים לבית לאחר רעידת אדמה?
                       image: /media/p04f2zxs/כניסה-למבנה-לאחר-רעידת-אדמה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -1954,7 +1954,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9533
-                      path: '-1,1169,1170,1183,1677,2263,9533'
+                      path: "-1,1169,1170,1183,1677,2263,9533"
                       title: כניסה למבנה לאחר רעידת אדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1966,7 +1966,7 @@ content:
                     - alt: רעידת אדמה בקרקע
                       subtitle: רעידות משנה, גלישת מדרונות ושריפות - תופעות לאחר רעידת אדמה
                       image: /media/keki30vx/ההשפעות-של-רעידת-האדמה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -1976,7 +1976,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9534
-                      path: '-1,1169,1170,1183,1677,2263,9534'
+                      path: "-1,1169,1170,1183,1677,2263,9534"
                       title: ההשפעות של רעידת האדמה
                       breadcrums:
                         - title: רעידת אדמה
@@ -1993,7 +1993,7 @@ content:
                     - alt: גל סוער
                       subtitle: הנחיות מצילות חיים
                       image: /media/xjpf2y3b/צונאמי-כתבה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: חצי דקה
                       contentUrl:
                         target: _self
@@ -2003,7 +2003,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2710
-                      path: '-1,1169,1170,1183,1677,2264,2710'
+                      path: "-1,1169,1170,1183,1677,2264,2710"
                       title: צונמי
                       breadcrums:
                         - title: רעידת אדמה
@@ -2015,7 +2015,7 @@ content:
                     - alt: חוף ים
                       subtitle: האפשרות שיתרחש צונמי בארץ וההיערכות הנדרשת
                       image: /media/rvte0kuj/צונאמי-הסיכון-בישראל-וההיערכות-הנדרשת.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2025,7 +2025,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9335
-                      path: '-1,1169,1170,1183,1677,2264,9335'
+                      path: "-1,1169,1170,1183,1677,2264,9335"
                       title: האיום בישראל מצונמי
                       breadcrums:
                         - title: רעידת אדמה
@@ -2037,7 +2037,7 @@ content:
                     - alt: התרעה בטלפון על חשש לצונמי
                       subtitle: כך נדע שיש חשש לצונמי
                       image: /media/nzedtntz/התרעה-על-צונאמי.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2047,7 +2047,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9346
-                      path: '-1,1169,1170,1183,1677,2264,9346'
+                      path: "-1,1169,1170,1183,1677,2264,9346"
                       title: התרעה על צונמי
                       breadcrums:
                         - title: רעידת אדמה
@@ -2069,7 +2069,7 @@ content:
                     - alt: מפת ישראל עם בניינים
                       subtitle: הסכנות שחשוב להיערך אליהן מראש
                       image: /media/3mwcip0s/האיומים-על-מדינת-ישראל.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 6 דקות
                       contentUrl:
                         target: _self
@@ -2079,7 +2079,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8946
-                      path: '-1,1169,1170,1183,2151,2152,8946'
+                      path: "-1,1169,1170,1183,2151,2152,8946"
                       title: האיומים על מדינת ישראל
                       breadcrums:
                         - title: היערכות לחירום
@@ -2091,7 +2091,7 @@ content:
                     - alt: רשימת ציוד נדרש לשעת חירום
                       subtitle: כדי שנוכל להתמודד בצורה מיטבית, חשוב להכין מראש ציוד לחירום ולאחסן אותו במרחב המוגן
                       image: /media/mvefad3h/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -2101,7 +2101,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8951
-                      path: '-1,1169,1170,1183,2151,2152,8951'
+                      path: "-1,1169,1170,1183,2151,2152,8951"
                       title: נערכים למצבי חירום עם כל הציוד הנדרש
                       breadcrums:
                         - title: היערכות לחירום
@@ -2110,10 +2110,10 @@ content:
                           link: /heb/emergencies/emergency-preparedness/preparing-routine
                         - title: נערכים למצבי חירום עם כל הציוד הנדרש
                           link: /heb/emergencies/emergency-preparedness/preparing-routine/נערכים-למצבי-חירום-עם-כל-הציוד-הנדרש
-                    - alt: 'משפחה '
+                    - alt: "משפחה "
                       subtitle: מדברים, משתפים ומתרגלים - כך נכין את המשפחה למצבי חירום
                       image: /media/x5inytme/תוכנית-חירום-משפחתית.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2123,7 +2123,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8948
-                      path: '-1,1169,1170,1183,2151,2152,8948'
+                      path: "-1,1169,1170,1183,2151,2152,8948"
                       title: הכנת תוכנית חירום משפחתית
                       breadcrums:
                         - title: היערכות לחירום
@@ -2135,7 +2135,7 @@ content:
                     - alt: ידיים מחזיקות איור של בית
                       subtitle: כך נהפוך את הבית למקום הבטוח ביותר
                       image: /media/uyvkmnvf/8088.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2145,7 +2145,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8950
-                      path: '-1,1169,1170,1183,2151,2152,8950'
+                      path: "-1,1169,1170,1183,2151,2152,8950"
                       title: הכנת הבית לחירום
                       breadcrums:
                         - title: היערכות לחירום
@@ -2154,10 +2154,10 @@ content:
                           link: /heb/emergencies/emergency-preparedness/preparing-routine
                         - title: הכנת הבית לחירום
                           link: /heb/emergencies/emergency-preparedness/preparing-routine/הכנת-הבית-לחירום
-                    - alt: ''
+                    - alt: ""
                       subtitle: רשימת הטלפונים החשובים שצריך להכין מראש
                       image: /media/lwtduid4/דרכי-תקשורת-לשעת-חירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2167,7 +2167,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21215
-                      path: '-1,1169,1170,1183,2151,2152,21215'
+                      path: "-1,1169,1170,1183,2151,2152,21215"
                       title: דרכי תקשורת לשעת חירום
                       breadcrums:
                         - title: היערכות לחירום
@@ -2176,10 +2176,10 @@ content:
                           link: /heb/emergencies/emergency-preparedness/preparing-routine
                         - title: דרכי תקשורת לשעת חירום
                           link: /heb/emergencies/emergency-preparedness/preparing-routine/דרכי-תקשורת-לשעת-חירום
-                    - alt: 'עמוד חשמל '
-                      subtitle: 'כך תיערכו מראש ותתנהלו נכון בעת הפסקות חשמל '
+                    - alt: "עמוד חשמל "
+                      subtitle: "כך תיערכו מראש ותתנהלו נכון בעת הפסקות חשמל "
                       image: /media/ufqlq1zz/הפסקת-חשמל.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2189,7 +2189,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 18290
-                      path: '-1,1169,1170,1183,2151,2152,18290'
+                      path: "-1,1169,1170,1183,2151,2152,18290"
                       title: היערכות להפסקות חשמל
                       breadcrums:
                         - title: היערכות לחירום
@@ -2201,19 +2201,19 @@ content:
                     - alt: מרחב מוגן נייד
                       subtitle: ' הליך מזורז לבניית ממ"ד או שיפורי מיגון - כך תבנו מיגון בביתכם'
                       image: /media/rmwbywde/7905.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       showOnHomePage: true
                       isGuideline: false
                       id: 21214
-                      path: '-1,1169,1170,1183,2151,2152,21214'
-                      title: 'פתרונות למיגון הבית '
+                      path: "-1,1169,1170,1183,2151,2152,21214"
+                      title: "פתרונות למיגון הבית "
                       breadcrums:
                         - title: היערכות לחירום
                           link: /heb/emergencies/emergency-preparedness
                         - title: נערכים בשגרה, מוכנים בחירום
                           link: /heb/emergencies/emergency-preparedness/preparing-routine
-                        - title: 'פתרונות למיגון הבית '
+                        - title: "פתרונות למיגון הבית "
                           link: /heb/emergencies/emergency-preparedness/preparing-routine/פתרונות-למיגון-הבית
               - emergencySubCategory:
                   id: 2153
@@ -2223,7 +2223,7 @@ content:
                     - alt: צופרים, טלפון עם התרעה על ירי רקטות וטילים ומחשב עם פורטל החירום הלאומי
                       subtitle: כך נקבל התרעות בזמן אמת ובכל מקום שבו אנחנו נמצאים
                       image: /media/edclzbe2/אמצכי-התרעה-של-פיקוד-העורף.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2233,7 +2233,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8897
-                      path: '-1,1169,1170,1183,2151,2153,8897'
+                      path: "-1,1169,1170,1183,2151,2153,8897"
                       title: אמצעי ההתרעה של פיקוד העורף
                       breadcrums:
                         - title: היערכות לחירום
@@ -2245,7 +2245,7 @@ content:
                     - alt: התרעה בטלפון על ירי רקטות וטילים
                       subtitle: כך תדעו מה אזור ההתרעה שאליו אתם שייכים
                       image: /media/psmbmksn/התרעה-ממוקדת-לכל-תושב.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2255,7 +2255,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8898
-                      path: '-1,1169,1170,1183,2151,2153,8898'
+                      path: "-1,1169,1170,1183,2151,2153,8898"
                       title: התרעה ממוקדת לכל תושב
                       breadcrums:
                         - title: היערכות לחירום
@@ -2267,7 +2267,7 @@ content:
                     - alt: יישומון פיקוד העורף
                       subtitle: חדש - מענה מיוחד לחרשים וכבדי שמיעה, וקבלת התרעת "צבע אדום"
                       image: /media/i0uiktbz/היישמון-של-פיקוד-העורף.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2277,7 +2277,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8895
-                      path: '-1,1169,1170,1183,2151,2153,8895'
+                      path: "-1,1169,1170,1183,2151,2153,8895"
                       title: יישומון פיקוד העורף
                       breadcrums:
                         - title: היערכות לחירום
@@ -2289,7 +2289,7 @@ content:
                     - alt: הודעת חירום בטלפון
                       subtitle: חדש - הודעות מתפרצות לנייד עם הנחיות מצילות חיים
                       image: /media/cecdfg5y/חדש.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -2299,7 +2299,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 8899
-                      path: '-1,1169,1170,1183,2151,2153,8899'
+                      path: "-1,1169,1170,1183,2151,2153,8899"
                       title: מערכת הודעות התגוננות מטעם פיקוד העורף
                       breadcrums:
                         - title: היערכות לחירום
@@ -2316,7 +2316,7 @@ content:
                     - alt: איש סוגר את חלון הממ"ד
                       subtitle: כדי שנוכל לשהות בממ"ד או במקלט בחירום, חשוב לוודא שהוא מוכן ומצויד
                       image: /media/snbmpa1h/הנחיות-לתפעול-הממד-בחירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2326,7 +2326,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21236
-                      path: '-1,1169,1170,1183,2151,2154,21236'
+                      path: "-1,1169,1170,1183,2151,2154,21236"
                       title: כך נשמור את המרחב המוגן מוכן בחירום
                       breadcrums:
                         - title: היערכות לחירום
@@ -2338,7 +2338,7 @@ content:
                     - alt: איש סוגר חלון
                       subtitle: ממ"ד, ממ"ק, ממ"מ ומקלט - המאפיינים שלהם והאופן שבו יש לתחזק אותם
                       image: /media/vlknhxvz/מרחב-מוגן-תקני.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -2348,7 +2348,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21237
-                      path: '-1,1169,1170,1183,2151,2154,21237'
+                      path: "-1,1169,1170,1183,2151,2154,21237"
                       title: מרחב מוגן תקני
                       breadcrums:
                         - title: היערכות לחירום
@@ -2360,7 +2360,7 @@ content:
                     - alt: חלונות סגורים של מקלט
                       subtitle: מקלט משותף, ציבורי ומוסדי - מי אחראי לתחזוקה וכיצד נוודא שהוא מוכן לשימוש?
                       image: /media/synb3x02/שימוש-במקלט-המשותף-בחירום.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 דקות
                       contentUrl:
                         target: _self
@@ -2370,7 +2370,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9019
-                      path: '-1,1169,1170,1183,2151,2154,9019'
+                      path: "-1,1169,1170,1183,2151,2154,9019"
                       title: תחזוקת המקלט
                       breadcrums:
                         - title: היערכות לחירום
@@ -2383,7 +2383,7 @@ content:
                       subtitle: |
                         אם נדרשים תיקונים בדלת ובחלון הממד יש לפנות ליצרן או לחברה המייצרת בתו תקן פריטי מסגרות למקלטים
                       image: /media/nqjbwmlr/הנחיות-לתחזוקת-הממד.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -2393,7 +2393,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21238
-                      path: '-1,1169,1170,1183,2151,2154,21238'
+                      path: "-1,1169,1170,1183,2151,2154,21238"
                       title: אנשי המקצוע המאושרים לתיקון דלת וחלון הממ"ד
                       breadcrums:
                         - title: היערכות לחירום
@@ -2405,7 +2405,7 @@ content:
                     - alt: שרטוט
                       subtitle: חומרי העזר ודרכי יצירת התקשרות לטובת תכנון מרחבים מוגנים
                       image: /media/0xalfqmh/הנחיות-מפרטים-ותקנות.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2415,7 +2415,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9047
-                      path: '-1,1169,1170,1183,2151,2154,9047'
+                      path: "-1,1169,1170,1183,2151,2154,9047"
                       title: תכנון ובניית מרחבים מוגנים
                       breadcrums:
                         - title: היערכות לחירום
@@ -2427,7 +2427,7 @@ content:
                     - alt: מדבקת תקינות של ממ"ד
                       subtitle: בניתם מרחב מוגן? מספר דגשים לבחינה בעת קבלתו מהקבלן
                       image: /media/vz3nh2cq/בדיקת-תקינות-לממד-חדש.jpg
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -2437,7 +2437,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 21239
-                      path: '-1,1169,1170,1183,2151,2154,21239'
+                      path: "-1,1169,1170,1183,2151,2154,21239"
                       title: בדיקת תקינות לממ"ד חדש
                       breadcrums:
                         - title: היערכות לחירום
@@ -2449,7 +2449,7 @@ content:
                     - alt: מרחב מוגן נייד
                       subtitle: ' הליך מזורז לבניית ממ"ד או שיפורי מיגון - כך תבנו מיגון בביתכם'
                       image: /media/w1rfb1yw/מרחב-מוגן-נייד.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -2459,14 +2459,14 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9036
-                      path: '-1,1169,1170,1183,2151,2154,9036'
-                      title: 'פתרונות למיגון הבית '
+                      path: "-1,1169,1170,1183,2151,2154,9036"
+                      title: "פתרונות למיגון הבית "
                       breadcrums:
                         - title: היערכות לחירום
                           link: /heb/emergencies/emergency-preparedness
                         - title: מקלטים וממ"דים
                           link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms
-                        - title: 'פתרונות למיגון הבית '
+                        - title: "פתרונות למיגון הבית "
                           link: /heb/emergencies/emergency-preparedness/shelters-protected-rooms/פתרונות-למיגון-הבית
               - emergencySubCategory:
                   id: 2155
@@ -2474,9 +2474,9 @@ content:
                   url: emergency-education
                   content:
                     - alt: מדריכת חירום מאויירת
-                      subtitle: ' יום חינוך לחירום בבתי הספר היסודיים והכשרת חילוץ לתלמידי כיתות י'''
+                      subtitle: " יום חינוך לחירום בבתי הספר היסודיים והכשרת חילוץ לתלמידי כיתות י'"
                       image: /media/33zdklj4/8179.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -2486,7 +2486,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9012
-                      path: '-1,1169,1170,1183,2151,2155,9012'
+                      path: "-1,1169,1170,1183,2151,2155,9012"
                       title: חינוך והכשרות לחירום בבתי הספר
                       breadcrums:
                         - title: היערכות לחירום
@@ -2498,7 +2498,7 @@ content:
                     - alt: מדריכת חירום מסבירה לילד
                       subtitle: כיצד מזמינים הדרכה לחירום ומה תוכנה?
                       image: /media/4tolanzg/8191.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2508,7 +2508,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9028
-                      path: '-1,1169,1170,1183,2151,2155,9028'
+                      path: "-1,1169,1170,1183,2151,2155,9028"
                       title: הדרכות לציבור הרחב
                       breadcrums:
                         - title: היערכות לחירום
@@ -2520,7 +2520,7 @@ content:
                     - alt: איש מקליד במחשב
                       subtitle: 'חדש: הכשרה מקוונת לממוני הג"א במפעלים ובמוסדות'
                       image: /media/rrkfs5x3/8097.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 5 דקות
                       contentUrl:
                         target: _self
@@ -2530,7 +2530,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9097
-                      path: '-1,1169,1170,1183,2151,2155,9097'
+                      path: "-1,1169,1170,1183,2151,2155,9097"
                       title: קורס מקוון לממוני הג"א
                       breadcrums:
                         - title: היערכות לחירום
@@ -2542,7 +2542,7 @@ content:
                     - alt: צוותי חילוץ מחלצים אנשים מתוך הריסות
                       subtitle: התוכנית להכשרת צוותי סע"ר ברשויות ובארגוני ממשלה
                       image: /media/knofnpt4/הכשרת-צוותי-סער.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: שתיים וחצי דקות
                       contentUrl:
                         target: _self
@@ -2552,7 +2552,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9095
-                      path: '-1,1169,1170,1183,2151,2155,9095'
+                      path: "-1,1169,1170,1183,2151,2155,9095"
                       title: הכשרת צוותי חילוץ קל
                       breadcrums:
                         - title: היערכות לחירום
@@ -2574,7 +2574,7 @@ content:
                     - alt: חומר מסוכן דולף ממפעל תעשייתי
                       subtitle: הנחיות מצילות חיים
                       image: /media/mbbcnhoc/אירוע-חומרים-מסוכנים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -2584,7 +2584,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2819
-                      path: '-1,1169,1170,1183,1998,2265,2819'
+                      path: "-1,1169,1170,1183,1998,2265,2819"
                       title: אירוע חומרים מסוכנים
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2596,7 +2596,7 @@ content:
                     - alt: התרעה בטלפון על חומרים מסוכנים
                       subtitle: אמצעי ההתרעה על אירוע חומרים מסוכנים כתוצאה מירי טילים
                       image: /media/hj5oktou/התרעה-על-חומס.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2606,7 +2606,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9023
-                      path: '-1,1169,1170,1183,1998,2265,9023'
+                      path: "-1,1169,1170,1183,1998,2265,9023"
                       title: התרעה על אירוע חומרים מסוכנים
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2618,7 +2618,7 @@ content:
                     - alt: איש מבצע החייאה לנפגע
                       subtitle: דגשים למתן עזרה ראשונה לנפגעים כתוצאה מחשיפה לחומרים מסוכנים
                       image: /media/0jfahyxh/טיפול-בנפגעים-מחומרים-מסוכנים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -2628,7 +2628,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9089
-                      path: '-1,1169,1170,1183,1998,2265,9089'
+                      path: "-1,1169,1170,1183,1998,2265,9089"
                       title: טיפול בנפגעים מחומרים מסוכנים
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2640,7 +2640,7 @@ content:
                     - alt: חלון מנופץ
                       subtitle: הנחיות מצילות חיים
                       image: /media/whabqmft/סכנת-פיצוץ-והדף-חזק.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה
                       contentUrl:
                         target: _self
@@ -2650,7 +2650,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2645
-                      path: '-1,1169,1170,1183,1998,2265,2645'
+                      path: "-1,1169,1170,1183,1998,2265,2645"
                       title: סכנת פיצוץ והדף חזק
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2662,8 +2662,8 @@ content:
                     - alt: מיכלי חומר מסוכן
                       subtitle: סוגי החומרים המסוכנים והמקומות שבהם הם נמצאים
                       image: /media/mbadwrqo/מהם-חומרים-מסוכנים.png
-                      videoAlt: ''
-                      readTime: '2 דקות וחצי '
+                      videoAlt: ""
+                      readTime: "2 דקות וחצי "
                       contentUrl:
                         target: _self
                         name: מהם חומרים מסוכנים?
@@ -2672,7 +2672,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9138
-                      path: '-1,1169,1170,1183,1998,2265,9138'
+                      path: "-1,1169,1170,1183,1998,2265,9138"
                       title: מהם חומרים מסוכנים?
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2684,7 +2684,7 @@ content:
                     - alt: שריפה במפעל
                       subtitle: מהם הנזקים והסימפטומים האפשריים וכיצד לטפל בנפגעים?
                       image: /media/b1ofeto2/נזקי-אירוע-חומרים-מסוכנים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -2694,7 +2694,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9184
-                      path: '-1,1169,1170,1183,1998,2265,9184'
+                      path: "-1,1169,1170,1183,1998,2265,9184"
                       title: חומרים מסוכנים - נזקים וטיפול בנפגעים באירוע
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2706,7 +2706,7 @@ content:
                     - alt: איש עם מסיכה שמחזיק טופס
                       subtitle: סמכויות מרכז חומרים מסוכנים, חובות מחזיקי חומרים מסוכנים, טפסים להורדה ודרכי התקשרות
                       image: /media/zwvndkss/חומרים-מסוכנים-במערכה-ביטחונית.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -2716,7 +2716,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9221
-                      path: '-1,1169,1170,1183,1998,2265,9221'
+                      path: "-1,1169,1170,1183,1998,2265,9221"
                       title: חומרים מסוכנים - אחריות, טפסים ודרכי התקשרות
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2728,7 +2728,7 @@ content:
                     - alt: משפחה קוראת ספר
                       subtitle: חומרים מסוכנים בסביבתם של ילדים
                       image: /media/up3lxf5b/לדבר-עם-הילדים-על-חומרים-מסוכנים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2738,7 +2738,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9225
-                      path: '-1,1169,1170,1183,1998,2265,9225'
+                      path: "-1,1169,1170,1183,1998,2265,9225"
                       title: לדבר עם הילדים על חומרים מסוכנים
                       breadcrums:
                         - title: חומרים מסוכנים
@@ -2759,9 +2759,9 @@ content:
                   content:
                     - alt: שריפה בשטח פתוח
                       subtitle: |
-                        דרכי מניעת שריפות בשטח פתוח והנחיות התנהגות 
+                        דרכי מניעת שריפות בשטח פתוח והנחיות התנהגות
                       image: /media/0z0dspyt/שריפות-בשטחים-פתוחים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות וחצי
                       contentUrl:
                         target: _self
@@ -2771,7 +2771,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9288
-                      path: '-1,1169,1170,1183,1675,2266,9288'
+                      path: "-1,1169,1170,1183,1675,2266,9288"
                       title: שריפות בשטחים פתוחים
                       breadcrums:
                         - title: שריפות וסופות
@@ -2783,8 +2783,8 @@ content:
                     - alt: אנשי כבאות והצלה מכבים שריפה
                       subtitle: הנחיות מצילות חיים
                       image: /media/h3yp5mta/שריפות-הנחיות-מצילות-חיים.png
-                      videoAlt: ''
-                      readTime: ' 2 וחצי דקות '
+                      videoAlt: ""
+                      readTime: " 2 וחצי דקות "
                       contentUrl:
                         target: _self
                         name: שריפות - הנחיות מצילות חיים
@@ -2793,7 +2793,7 @@ content:
                       showOnHomePage: true
                       isGuideline: true
                       id: 2943
-                      path: '-1,1169,1170,1183,1675,2266,2943'
+                      path: "-1,1169,1170,1183,1675,2266,2943"
                       title: שריפות
                       breadcrums:
                         - title: שריפות וסופות
@@ -2805,7 +2805,7 @@ content:
                     - alt: מטפה
                       subtitle: התקנת גלאי עשן, הצטיידות במטפה ותרגול - דגשים חשובים
                       image: /media/wlxhwey2/הגנה-על-הבית-מפני-שריפה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 4 דקות
                       contentUrl:
                         target: _self
@@ -2815,7 +2815,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9292
-                      path: '-1,1169,1170,1183,1675,2266,9292'
+                      path: "-1,1169,1170,1183,1675,2266,9292"
                       title: הגנה על הבית מפני שריפה
                       breadcrums:
                         - title: שריפות וסופות
@@ -2828,7 +2828,7 @@ content:
                       subtitle: |
                         כיצד נגרמות שריפות, אילו סוגי שריפות קיימות, ומה משפיע על עוצמתן? מדריך
                       image: /media/gruabjxd/מהי-שריפה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 3 דקות
                       contentUrl:
                         target: _self
@@ -2838,7 +2838,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9294
-                      path: '-1,1169,1170,1183,1675,2266,9294'
+                      path: "-1,1169,1170,1183,1675,2266,9294"
                       title: כיצד נגרמות שריפות?
                       breadcrums:
                         - title: שריפות וסופות
@@ -2850,7 +2850,7 @@ content:
                     - alt: הצתה של חוט בשקע
                       subtitle: כללי זהירות בבית ודגשים לקיום שיחה משפחתית
                       image: /media/ptdat4rm/בטיחות-באש-ליד-ילדים.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 וחצי דקות
                       contentUrl:
                         target: _self
@@ -2860,7 +2860,7 @@ content:
                       showOnHomePage: false
                       isGuideline: false
                       id: 9295
-                      path: '-1,1169,1170,1183,1675,2266,9295'
+                      path: "-1,1169,1170,1183,1675,2266,9295"
                       title: בטיחות באש בסביבת ילדים
                       breadcrums:
                         - title: שריפות וסופות
@@ -2877,7 +2877,7 @@ content:
                     - alt: שמשת חלון רטובה מגשם
                       subtitle: חימום בטוח וזהירות משיטפונות - דגשים חשובים
                       image: /media/wj1p15l0/היערכות-למזג-אוויר-סוער.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: דקה וחצי
                       contentUrl:
                         target: _self
@@ -2887,7 +2887,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9398
-                      path: '-1,1169,1170,1183,1675,2267,9398'
+                      path: "-1,1169,1170,1183,1675,2267,9398"
                       title: מזג אוויר קיצון - היערכות והתמודדות
                       breadcrums:
                         - title: שריפות וסופות
@@ -2899,7 +2899,7 @@ content:
                     - alt: אמא מלבישה את בתה במעיל
                       subtitle: דגשים לקיום שיחה משפחתית על התמודדות עם מזג אוויר סוער
                       image: /media/kxsfzmot/הכנת-המשפחה-לסופה.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2909,7 +2909,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9400
-                      path: '-1,1169,1170,1183,1675,2267,9400'
+                      path: "-1,1169,1170,1183,1675,2267,9400"
                       title: הכנת המשפחה לסופה
                       breadcrums:
                         - title: שריפות וסופות
@@ -2921,7 +2921,7 @@ content:
                     - alt: ספה בשיטפון
                       subtitle: 10 דגשים לשיחה משפחתית על התמודדות עם שיטפון
                       image: /media/drwd2h1s/הכנת-הילדים-לשיטפון.png
-                      videoAlt: ''
+                      videoAlt: ""
                       readTime: 2 דקות
                       contentUrl:
                         target: _self
@@ -2931,7 +2931,7 @@ content:
                       showOnHomePage: true
                       isGuideline: false
                       id: 9401
-                      path: '-1,1169,1170,1183,1675,2267,9401'
+                      path: "-1,1169,1170,1183,1675,2267,9401"
                       title: הכנת הילדים לשיטפון
                       breadcrums:
                         - title: שריפות וסופות
@@ -3006,20 +3006,20 @@ pageSeoProperties:
     - name: og:image
       content: /media/kvpohwhe/8480-1.jpg
     - name: og:url
-      content: ''
+      content: ""
   linkTags:
     - rel: canonical
-      href: ''
+      href: ""
     - rel: alternate
-      href: ''
+      href: ""
       hrefLang: en
     - rel: alternate
-      href: ''
+      href: ""
       hrefLang: he
     - rel: alternate
-      href: ''
+      href: ""
       hrefLang: ru
     - rel: alternate
-      href: ''
+      href: ""
       hrefLang: ar
 breadcrums: []
