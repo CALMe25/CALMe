@@ -6,7 +6,6 @@ type ScaleProps = {
   max?: number;
   selected?: number | null;
   onSelect?: (value: number) => void;
-  circleSize?: number;
 };
 
 export const Scale: React.FC<ScaleProps> = ({
@@ -14,7 +13,6 @@ export const Scale: React.FC<ScaleProps> = ({
   max = 10,
   selected: controlledSelected,
   onSelect,
-  circleSize = 56,
 }) => {
   const [internalSelected, setInternalSelected] = useState<number | null>(null);
 
@@ -29,16 +27,22 @@ export const Scale: React.FC<ScaleProps> = ({
 
   const values = Array.from({ length: max - min + 1 }, (_, i) => min + i);
 
+  // Responsive sizes: min diameter 30px, prefer viewport-based up to 56px. Font min 12px.
+  const buttonSize = "clamp(30px, 6vw, 56px)";
+  const fontSize = "clamp(12px, 1.6vw, 18px)";
+
   return (
     <div
       style={{
         backgroundColor: "white",
-        padding: "16px 24px",
+        padding: "12px",
         borderRadius: 12,
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
         alignItems: "center",
         boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
+        gap: 8,
+        flexWrap: "wrap",
       }}
     >
       {values.map((value) => {
@@ -50,26 +54,39 @@ export const Scale: React.FC<ScaleProps> = ({
             onClick={() => {
               handleSelect(value);
             }}
+            // Use CSS variables to ensure true square buttons and responsive font-size
             style={{
-              width: circleSize,
-              height: circleSize,
+              width: buttonSize,
+              height: buttonSize,
+              minWidth: "30px",
+              minHeight: "30px",
               borderRadius: "50%",
               border: "none",
               cursor: onSelect ? "pointer" : "default",
-              backgroundColor: isSelected ? "transparent" : "#78B3E8",
-              color: "black",
-              fontSize: 16,
+              backgroundColor: isSelected ? "#4A90E2" : "#78B3E8",
+              color: isSelected ? "white" : "black",
+              fontSize: fontSize,
               fontWeight: 500,
-              display: "flex",
+              display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              transition: "transform 0.1s ease, box-shadow 0.1s ease",
-              boxShadow: isSelected ? "0 0 0 3px rgba(74,144,226,0.4)" : "none",
+              transition: "transform 0.12s ease, box-shadow 0.12s ease",
+              boxShadow: isSelected ? "0 0 0 4px rgba(74,144,226,0.18)" : "none",
               position: "relative",
+              padding: 0,
+              lineHeight: 1,
             }}
           >
             {isSelected ? (
-              <div style={{ position: "relative", width: "100%", height: "100%" }}>
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                }}
+              >
                 <Logo className="w-full h-full" />
                 <div
                   style={{
@@ -78,15 +95,16 @@ export const Scale: React.FC<ScaleProps> = ({
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     color: "white",
-                    fontSize: 18,
+                    fontSize: fontSize,
                     fontWeight: "bold",
+                    pointerEvents: "none",
                   }}
                 >
                   {value}
                 </div>
               </div>
             ) : (
-              value
+              <span style={{ display: "inline-block", lineHeight: 1 }}>{value}</span>
             )}
           </button>
         );
