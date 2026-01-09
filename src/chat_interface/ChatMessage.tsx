@@ -5,6 +5,8 @@ import { Play, Pause, Mic } from "lucide-react";
 import { type AppInterface, quickActivityOrder } from "../appsContextApi";
 import { useLocalizedApps } from "../hooks/useLocalizedApps";
 import { useLanguage } from "../contexts/LanguageContext";
+import { Scale } from "../components/ui/Scale";
+import { m } from "../paraglide/messages.js";
 
 interface ChatMessageProps {
   id: string;
@@ -17,6 +19,10 @@ interface ChatMessageProps {
   audioDuration?: number;
   onAppLaunch?: (appToLaunch: AppInterface | undefined) => void;
   onAudioPlay?: (messageId: string) => void;
+  // Scale props for first chat box
+  showScale?: boolean;
+  scaleValue?: number | null;
+  onScaleSelect?: (value: number) => void;
 }
 
 export function ChatMessage({
@@ -30,6 +36,9 @@ export function ChatMessage({
   audioDuration = 0,
   onAppLaunch,
   onAudioPlay,
+  showScale = false,
+  scaleValue = null,
+  onScaleSelect,
 }: ChatMessageProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -80,7 +89,7 @@ export function ChatMessage({
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div
-        className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[280px] ${alignRight ? "flex-row-reverse" : "flex-row"}`}
+        className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[60%] lg:max-w-[50%] ${alignRight ? "flex-row-reverse" : "flex-row"}`}
       >
         <Avatar className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
           <AvatarImage src={isUser ? undefined : "/api/placeholder/32/32"} />
@@ -148,6 +157,18 @@ export function ChatMessage({
               </>
             ) : (
               <p className="text-sm leading-relaxed mb-3">{content}</p>
+            )}
+
+            {showScale && (
+              <div className="mb-3">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-2">{m.scale_title()}</p>
+                <Scale selected={scaleValue} onSelect={onScaleSelect} />
+                {scaleValue !== null && (
+                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
+                    {m.scale_selection({ scaleValue: scaleValue })}
+                  </p>
+                )}
+              </div>
             )}
 
             {type === "app-buttons" && (
