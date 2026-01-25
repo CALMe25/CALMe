@@ -1,0 +1,14 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "conversation_start": [
+    {
+      "declarations": ["input userGender"],
+      "selectors": ["userGender"],
+      "match": {
+        "userGender=male": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך אתה מרגיש עכשיו?",
+        "userGender=female": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך את מרגישה עכשיו?",
+        "userGender=*": "אני רואה שפתחת את האפליקציה שלי. אני כאן איתך. איך את/ה מרגיש/ה עכשיו?"
+      }
+    }
+  ]
+}

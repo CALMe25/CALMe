@@ -1,0 +1,36 @@
+---
+name: Deployment to Cloudflare Workers
+'on':
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose an environment to deploy to"
+        required: true
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+jobs:
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment || 'prod' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    environment: ${{ github.event.inputs.environment || 'prod' }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        env:
+          CLOUDFLARE_ENV: ${{ github.event.inputs.environment || 'prod' }}
+        with:
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy --env ""
+          environment: ${{ github.event.inputs.environment || 'prod' }}
