@@ -92,7 +92,7 @@ export function ChatMessage({
         className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[60%] lg:max-w-[50%] ${alignRight ? "flex-row-reverse" : "flex-row"}`}
       >
         <Avatar className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
-          <AvatarImage src={isUser ? undefined : "/api/placeholder/32/32"} />
+          <AvatarImage src={isUser ? undefined : "/favicon.svg"} />
           <AvatarFallback
             className={isUser ? "bg-primary text-primary-foreground text-xs" : "bg-muted text-xs"}
           >
