@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import calmeLogo from "../assets/calme-logo.svg";
 import { m } from "../paraglide/messages.js";
 import { useUserPreferences } from "../contexts/UserPreferencesContext";
 
@@ -215,7 +214,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
             >
               {!card.isFlipped && !card.isMatched && !flippedCards.includes(card.id) && (
                 <div className="flex flex-col items-center justify-center w-full h-full">
-                  <img src={calmeLogo} alt="CALMe Logo" className="w-20 h-20 mx-auto mb-2" />
+                  <img src="/pwa-192x192.png" alt="CALMe Logo" className="w-20 h-20 mx-auto mb-2" />
                   <span className="text-xl font-bold text-primary" style={{ letterSpacing: "2px" }}>
                     CALMe
                   </span>
