@@ -172,17 +172,7 @@ export function ChatMessage({
               <p className="text-sm leading-relaxed mb-3">{content}</p>
             )}
 
-            {showScale && (
-              <div className="mb-3">
-                <p className="text-xs sm:text-sm text-muted-foreground mb-2">{m.scale_title()}</p>
-                <Scale selected={scaleValue} onSelect={onScaleSelect} />
-                {scaleValue !== null && (
-                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
-                    {m.scale_selection({ scaleValue: scaleValue })}
-                  </p>
-                )}
-              </div>
-            )}
+            {/* Scale renders outside the bubble — see below */}
 
             {type === "app-buttons" && (
               <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
@@ -213,6 +203,17 @@ export function ChatMessage({
           </span>
         </div>
       </div>
+      {showScale && (
+        <div className="w-full mt-2 px-1">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-2">{m.scale_title()}</p>
+          <Scale selected={scaleValue} onSelect={onScaleSelect} />
+          {scaleValue !== null && (
+            <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
+              {m.scale_selection({ scaleValue: scaleValue })}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

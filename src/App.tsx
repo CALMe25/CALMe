@@ -78,8 +78,8 @@ function App() {
           return convFn();
         }
       }
-      console.warn(`Conversation node not found: conversation_${nodeId}`);
-      return `[Missing: ${nodeId}]`;
+      // Return empty string so callers fall through to node.content
+      return "";
     },
     [userGender],
   );

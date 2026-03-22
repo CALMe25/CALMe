@@ -185,7 +185,10 @@ export class ConversationController implements ConversationControllerInterface {
       this.initializationComplete = true;
     } catch (error) {
       console.error("❌ INIT: Failed to initialize profile:", error);
-      // Even on error, mark as complete so app can continue
+      // On error, assume onboarding needed (safe default)
+      this.isOnboarding = true;
+      this.conversationMap = onboardingConversationMap;
+      this.currentNodeId = onboardingConversationMap.startNode;
       this.initializationComplete = true;
     }
   }
