@@ -78,7 +78,7 @@ class EnhancedParser {
    * Checks if the input contains a keyword, using word-boundary matching for short words
    * to prevent substring false positives (e.g., "no" matching inside "know").
    */
-  private matchesKeyword(input: string, keyword: string): boolean {
+  matchesKeyword(input: string, keyword: string): boolean {
     if (keyword.length <= 3 && !keyword.includes(" ")) {
       return new RegExp(`\\b${keyword}\\b`, "i").test(input);
     }
