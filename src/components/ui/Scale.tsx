@@ -57,7 +57,7 @@ export const Scale: React.FC<ScaleProps> = ({
               cursor: onSelect ? "pointer" : "default",
               backgroundColor: isSelected ? "#4A90E2" : "#78B3E8",
               color: isSelected ? "white" : "black",
-              fontSize: "clamp(12px, 1.8vw, 20px)",
+              fontSize: "clamp(16px, 3vw, 28px)",
               fontWeight: 500,
               display: "flex",
               alignItems: "center",
@@ -87,7 +87,7 @@ export const Scale: React.FC<ScaleProps> = ({
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     color: "white",
-                    fontSize: "clamp(12px, 1.8vw, 20px)",
+                    fontSize: "clamp(16px, 3vw, 28px)",
                     fontWeight: "bold",
                     pointerEvents: "none",
                   }}

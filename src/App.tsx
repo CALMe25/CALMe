@@ -62,16 +62,17 @@ function App() {
   const handleScaleSelect = useCallback((value: number) => {
     setScaleValue(value);
     // Insert as a user message bubble with just the number
+    // Insert before the welcome message (at the top)
     setConversationHistory((prev) => [
-      ...prev,
       {
         id: `${Date.now()}_scale`,
         type: "message" as const,
-        content: String(value),
+        content: `${value}/10`,
         timestamp: new Date().toISOString(),
         isUser: true,
         nodeId: "scale_response",
       },
+      ...prev,
     ]);
   }, []);
   // Helper for dynamic conversation node message lookups
