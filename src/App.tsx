@@ -18,6 +18,7 @@ import { AccessibilityToolbar } from "./components/AccessibilityToolbar";
 import { ConversationController } from "./conversation/ConversationController";
 import { ConversationEngine } from "./conversation/ConversationEngine";
 import { AlertTimer } from "./components/AlertTimer";
+import { playAlertSound } from "./utils/alertSound";
 import { DarkModeToggle } from "./components/DarkModeToggle";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { GenderPreferenceSelect } from "./components/GenderPreference";
@@ -372,6 +373,11 @@ function App() {
           },
         ]);
 
+        // Play alert sound during onboarding test
+        if (nextNode.id === "onboard_test_sound") {
+          playAlertSound(0.1);
+        }
+
         if (activityTrigger) {
           setActivityReturnNode(activityTrigger.returnNode);
           const targetApp = resolvedApps.find((app) => app.name === activityTrigger.activityName);
@@ -514,6 +520,8 @@ function App() {
   };
 
   const handleDemoAlert = () => {
+    playAlertSound();
+
     if (alertInterval) {
       clearInterval(alertInterval);
       setAlertInterval(null);
