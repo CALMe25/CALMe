@@ -97,7 +97,7 @@ function App() {
   const [chosenApp, setChosenApp] = useState<AppInterface | undefined>();
   const [appsTimeout, setAppsTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
-  const [showQuickPanel, setShowQuickPanel] = useState(true);
+  const [activitiesSidebarOpen, setActivitiesSidebarOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
@@ -711,62 +711,6 @@ function App() {
           {!showAppsLauncher && (
             <ScrollArea ref={scrollAreaRef} className="flex-1 overflow-y-auto px-3 sm:px-4">
               <div className="space-y-4 pb-4 mt-2">
-                {resolvedApps.length > 0 && (
-                  <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 rounded-2xl border border-border/60 bg-muted/30 p-3 sm:p-4 lg:p-5">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h2 className="text-sm font-medium text-muted-foreground">
-                          {m.quickActivities_title()}
-                        </h2>
-                        <p className="text-xs text-muted-foreground/70 hidden xs:block">
-                          {m.quickActivities_subtitle()}
-                        </p>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-9 w-9 rounded-full text-muted-foreground hover:text-foreground flex-shrink-0"
-                        onClick={() => {
-                          setShowQuickPanel((prev) => !prev);
-                        }}
-                        aria-label={
-                          showQuickPanel ? m.quickActivities_hide() : m.quickActivities_show()
-                        }
-                        aria-expanded={showQuickPanel}
-                        aria-controls="quick-activities-panel"
-                      >
-                        {showQuickPanel ? "−" : "+"}
-                      </Button>
-                    </div>
-                    {showQuickPanel && (
-                      <>
-                        <div
-                          id="quick-activities-panel"
-                          className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-3"
-                        >
-                          {quickActivityOrder
-                            .map((name) => resolvedApps.find((app) => app.name === name))
-                            .filter((app): app is AppInterface => Boolean(app))
-                            .map((app) => (
-                              <Button
-                                key={app.name}
-                                onClick={() => {
-                                  handleAppLaunch(app);
-                                }}
-                                className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
-                                size="sm"
-                              >
-                                <div className="text-white scale-110">{app.icon}</div>
-                                <span className="leading-tight text-white text-center">
-                                  {app.label}
-                                </span>
-                              </Button>
-                            ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
                 {conversationHistory.map((message, index) => (
                   <ChatMessage
                     key={index}
@@ -820,6 +764,66 @@ function App() {
             setAccessibilityOpen(false);
           }}
         />
+
+        {/* Activities sidebar */}
+        {!showAppsLauncher && (
+          <Sheet open={activitiesSidebarOpen} onOpenChange={setActivitiesSidebarOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="fixed bottom-20 right-4 z-50 h-12 w-12 rounded-full shadow-lg bg-indigo-500 text-white border-0 hover:bg-indigo-600 hover:text-white"
+                aria-label="Open activities"
+              >
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side={isRTL ? "left" : "right"} className="w-64 sm:w-72">
+              <SheetHeader>
+                <SheetTitle>Activities</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-2 mt-4">
+                {quickActivityOrder
+                  .map((name) => resolvedApps.find((app) => app.name === name))
+                  .filter((app): app is AppInterface => Boolean(app))
+                  .map((app) => (
+                    <button
+                      type="button"
+                      key={app.name}
+                      onClick={() => {
+                        handleAppLaunch(app);
+                        setActivitiesSidebarOpen(false);
+                      }}
+                      className="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-muted/20 px-3 py-3 text-left transition-all duration-150 hover:bg-indigo-500/10 hover:border-indigo-500/40 active:scale-[0.98]"
+                    >
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600">
+                        {app.icon}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium truncate">{app.label}</div>
+                        {app.description && (
+                          <div className="text-xs text-muted-foreground truncate">
+                            {app.description}
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        )}
       </AppsProvider>
     </>
   );
