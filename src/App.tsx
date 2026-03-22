@@ -58,6 +58,22 @@ function App() {
   const localizedApps = useLocalizedApps();
   const { cycleTheme } = useTheme();
   const [scaleValue, setScaleValue] = useState<number | null>(null);
+
+  const handleScaleSelect = useCallback((value: number) => {
+    setScaleValue(value);
+    // Insert as a user message bubble with just the number
+    setConversationHistory((prev) => [
+      ...prev,
+      {
+        id: `${Date.now()}_scale`,
+        type: "message" as const,
+        content: String(value),
+        timestamp: new Date().toISOString(),
+        isUser: true,
+        nodeId: "scale_response",
+      },
+    ]);
+  }, []);
   // Helper for dynamic conversation node message lookups
   // Only used for conversation flow where node ID is dynamic
   const getConvMessage = useCallback(
@@ -734,7 +750,7 @@ function App() {
                     onAudioPlay={handleAudioPlay}
                     showScale={index === 0}
                     scaleValue={scaleValue}
-                    onScaleSelect={setScaleValue}
+                    onScaleSelect={handleScaleSelect}
                   />
                 ))}
               </div>

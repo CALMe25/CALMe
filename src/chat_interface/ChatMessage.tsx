@@ -6,7 +6,6 @@ import { type AppInterface, quickActivityOrder } from "../appsContextApi";
 import { useLocalizedApps } from "../hooks/useLocalizedApps";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Scale } from "../components/ui/Scale";
-import { m } from "../paraglide/messages.js";
 
 interface ChatMessageProps {
   id: string;
@@ -196,6 +195,15 @@ export function ChatMessage({
             )}
           </div>
 
+          {showScale && scaleValue === null && (
+            <div className="mt-2 w-full">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2">
+                On a scale of 1-10, how are you feeling right now?
+              </p>
+              <Scale selected={scaleValue} onSelect={onScaleSelect} />
+            </div>
+          )}
+
           <span
             className={`text-xs text-muted-foreground mt-1 ${alignRight ? "text-right" : "text-left"}`}
           >
@@ -203,17 +211,6 @@ export function ChatMessage({
           </span>
         </div>
       </div>
-      {showScale && (
-        <div className="w-full mt-2 px-1">
-          <p className="text-xs sm:text-sm text-muted-foreground mb-2">{m.scale_title()}</p>
-          <Scale selected={scaleValue} onSelect={onScaleSelect} />
-          {scaleValue !== null && (
-            <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
-              {m.scale_selection({ scaleValue: scaleValue })}
-            </p>
-          )}
-        </div>
-      )}
     </div>
   );
 }
