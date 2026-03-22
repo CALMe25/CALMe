@@ -16,6 +16,7 @@ import {
 import AppLauncher from "./AppLauncher/AppLauncher";
 import { AccessibilityToolbar } from "./components/AccessibilityToolbar";
 import { ConversationController } from "./conversation/ConversationController";
+import { ConversationEngine } from "./conversation/ConversationEngine";
 import { AlertTimer } from "./components/AlertTimer";
 import { DarkModeToggle } from "./components/DarkModeToggle";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
@@ -83,6 +84,8 @@ function App() {
     [userGender],
   );
   const [conversationController] = useState(() => new ConversationController());
+  const [engine] = useState(() => new ConversationEngine());
+  const [useNewEngine, setUseNewEngine] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -113,54 +116,61 @@ function App() {
   const menuLabelClasses = "flex items-center gap-3 text-sm font-medium";
 
   useEffect(() => {
-    const initializeConversation = async () => {
-      let retries = 0;
-      while (!conversationController.isInitialized() && retries < 50) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        retries++;
-      }
-      if (!conversationController.isInitialized()) {
-        console.error("Controller initialization timeout");
-      }
-      try {
-        const initialNode = conversationController.getCurrentNode();
-        const activityPrompt = ACTIVITY_PROMPT_NODES.has(initialNode.id);
-        const content =
-          getConvMessage(initialNode.id) ||
-          (initialNode.content ?? "") ||
-          m.conversation_helloImHereWithYou();
+    const init = async () => {
+      await engine.initialize();
+      if (engine.hasCompletedOnboarding()) {
+        setUseNewEngine(true);
+        const opening = engine.getOpeningMessage();
         setConversationHistory([
           {
-            id: Date.now().toString(),
-            type: activityPrompt ? "app-buttons" : "message",
-            content,
-            timestamp: new Date().toISOString(),
+            id: opening.id,
+            type: "message",
+            content: opening.content,
+            timestamp: opening.timestamp,
             isUser: false,
-            nodeId: initialNode.id,
-            appsTypes: activityPrompt ? "activities" : undefined,
+            nodeId: "connect",
           },
         ]);
         setIsInitialized(true);
-      } catch (error) {
-        console.error("Error initializing conversation:", error);
-        const fallbackId = "start";
-        const activityPrompt = ACTIVITY_PROMPT_NODES.has(fallbackId);
-        setConversationHistory([
-          {
-            id: Date.now().toString(),
-            type: activityPrompt ? "app-buttons" : "message",
-            content: m.conversation_welcomeToCalme(),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            nodeId: fallbackId,
-            appsTypes: activityPrompt ? "activities" : undefined,
-          },
-        ]);
+      } else {
+        // Fall back to old controller for onboarding
+        setUseNewEngine(false);
+        let retries = 0;
+        while (!conversationController.isInitialized() && retries < 50) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          retries++;
+        }
+        try {
+          const initialNode = conversationController.getCurrentNode();
+          const content =
+            getConvMessage(initialNode.id) || (initialNode.content ?? "") || "Welcome to CALMe.";
+          setConversationHistory([
+            {
+              id: Date.now().toString(),
+              type: "message",
+              content,
+              timestamp: new Date().toISOString(),
+              isUser: false,
+              nodeId: initialNode.id,
+            },
+          ]);
+        } catch {
+          setConversationHistory([
+            {
+              id: Date.now().toString(),
+              type: "message",
+              content: "Welcome to CALMe. I'm here to support you.",
+              timestamp: new Date().toISOString(),
+              isUser: false,
+              nodeId: "start",
+            },
+          ]);
+        }
         setIsInitialized(true);
       }
     };
-    void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES, getConvMessage]);
+    void init();
+  }, [engine, conversationController, getConvMessage]);
 
   // Update conversation history translations when language changes
   useEffect(() => {
@@ -275,147 +285,120 @@ function App() {
     };
   }, [isRTL, mobileMenuOpen]);
 
-  const processUserInput = useCallback(() => {
+  const processUserInput = useCallback(async () => {
     if (!userInput.trim()) return;
 
-    try {
-      const parserType = conversationController.getCurrentParserType();
+    if (useNewEngine) {
+      try {
+        const requestedActivity = engine.getRequestedActivity(userInput);
+        const botMsg = await engine.processMessage(userInput);
 
-      let nextNode;
-      let activityTrigger;
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: botMsg.id,
+            type: "message" as const,
+            content: botMsg.content,
+            timestamp: botMsg.timestamp,
+            isUser: false,
+            nodeId: engine.getPhase(),
+          },
+        ]);
 
-      if (parserType == null) {
-        // No parser on this node — auto-advance to the next node
-        const currentNode = conversationController.getCurrentNode();
-        if (typeof currentNode.next === "string") {
-          const advanced = conversationController.moveToNode(currentNode.next);
-          nextNode = advanced;
-          activityTrigger = undefined;
-        } else {
-          // No parser and no simple next — nothing to do
+        if (requestedActivity) {
+          const targetApp = resolvedApps.find((app) => app.name === requestedActivity);
+          if (targetApp) {
+            setChosenApp(targetApp);
+            setShouldAutoLaunchApp(true);
+            const timer = setTimeout(() => setShowAppsLauncher(true), 2000);
+            setAppsTimeout(timer);
+          }
+        }
+      } catch (error) {
+        console.error("Error processing message:", error);
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}_error`,
+            type: "message" as const,
+            content: "I'm still here. Could you say that again?",
+            timestamp: new Date().toISOString(),
+            isUser: false,
+            nodeId: "error",
+          },
+        ]);
+      }
+    } else {
+      // Old controller path for onboarding
+      try {
+        const parserType = conversationController.getCurrentParserType();
+        if (parserType == null) {
+          const currentNode = conversationController.getCurrentNode();
+          if (typeof currentNode.next === "string") {
+            const advanced = conversationController.moveToNode(currentNode.next);
+            const content =
+              getConvMessage(advanced.id) || (advanced.content ?? "") || "How can I help you?";
+            setConversationHistory((prev) => [
+              ...prev,
+              {
+                id: Date.now().toString(),
+                type: "message" as const,
+                content,
+                timestamp: new Date().toISOString(),
+                isUser: false,
+                nodeId: advanced.id,
+              },
+            ]);
+            setUserInput("");
+            return;
+          }
+          setUserInput("");
           return;
         }
-      } else {
         const stepResult = conversationController.runParser(parserType, userInput);
-        ({ nextNode, activityTrigger } = conversationController.processParserOutput(stepResult));
-      }
+        const { nextNode, activityTrigger } =
+          conversationController.processParserOutput(stepResult);
+        const content =
+          getConvMessage(nextNode.id) || (nextNode.content ?? "") || "How can I help you?";
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString(),
+            type: "message" as const,
+            content,
+            timestamp: new Date().toISOString(),
+            isUser: false,
+            nodeId: nextNode.id,
+          },
+        ]);
 
-      const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
-      const content =
-        getConvMessage(nextNode.id) || (nextNode.content ?? "") || "How can I help you?";
-      const newMessage: Message = {
-        id: Date.now().toString(),
-        type: activityPrompt ? "app-buttons" : "message",
-        content,
-        timestamp: new Date().toISOString(),
-        isUser: false,
-        nodeId: nextNode.id,
-        appsTypes: activityPrompt ? "activities" : undefined,
-      };
-
-      setConversationHistory((prev) => [...prev, newMessage]);
-
-      if (activityTrigger) {
-        setActivityReturnNode(activityTrigger.returnNode);
-        const targetApp = resolvedApps.find((app) => app.name === activityTrigger.activityName);
-
-        if (targetApp) {
-          if (activityTrigger.activityName === "breathing") {
-            const transitionMsg: Message = {
-              id: Date.now().toString() + "_transition",
-              type: "message",
-              content: m.conversation_breathingTransition(),
-              timestamp: new Date().toISOString(),
-              isUser: false,
-              nodeId: nextNode.id,
-            };
-            setConversationHistory((prev) => [...prev, transitionMsg]);
+        if (activityTrigger) {
+          setActivityReturnNode(activityTrigger.returnNode);
+          const targetApp = resolvedApps.find((app) => app.name === activityTrigger.activityName);
+          if (targetApp) {
+            setChosenApp(targetApp);
+            setShouldAutoLaunchApp(true);
+            const timer = setTimeout(() => setShowAppsLauncher(true), 2000);
+            setAppsTimeout(timer);
           }
-
-          setChosenApp(targetApp);
-          setShouldAutoLaunchApp(true);
-          const timer = setTimeout(() => {
-            setShowAppsLauncher(true);
-          }, 2000);
-          setAppsTimeout(timer);
-        } else if (
-          !["breathing", "stretching", "matching-cards", "sudoku", "puzzle", "paint"].includes(
-            activityTrigger.activityName,
-          )
-        ) {
-          // Get localized activity name
-          const targetApp = localizedApps.find((app) => app.name === activityTrigger.activityName);
-          const localizedName = (targetApp?.label ?? "") || activityTrigger.activityName;
-
-          const placeholderMsg: Message = {
-            id: Date.now().toString() + "_placeholder",
-            type: "message",
-            content: m.conversation_activityWouldBeCalled({
-              activityName: localizedName,
-            }),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            nodeId: nextNode.id,
-          };
-          setConversationHistory((prev) => [...prev, placeholderMsg]);
-
-          setTimeout(() => {
-            conversationController.moveToNode(activityTrigger.returnNode);
-            const returnNode = conversationController.getCurrentNode();
-            const content =
-              getConvMessage(returnNode.id) ||
-              (returnNode.content ?? "") ||
-              m.conversation_letsContinue();
-            const continueMsg: Message = {
-              id: Date.now().toString() + "_continue",
-              type: "message",
-              content,
-              timestamp: new Date().toISOString(),
-              isUser: false,
-              nodeId: returnNode.id,
-            };
-            setConversationHistory((prev) => [...prev, continueMsg]);
-          }, 1500);
-        } else {
-          // Get localized activity name
-          const targetApp = localizedApps.find((app) => app.name === activityTrigger.activityName);
-          const localizedName = (targetApp?.label ?? "") || activityTrigger.activityName;
-
-          const mismatchMsg: Message = {
-            id: Date.now().toString() + "_mismatch",
-            type: "message",
-            content: m.conversation_startingExercise({
-              activityName: localizedName,
-            }),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            nodeId: nextNode.id,
-          };
-          setConversationHistory((prev) => [...prev, mismatchMsg]);
         }
+      } catch (error) {
+        console.error("Error processing user input:", error);
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}_error`,
+            type: "message" as const,
+            content: "I didn't quite catch that. Could you try again?",
+            timestamp: new Date().toISOString(),
+            isUser: false,
+            nodeId: "error",
+          },
+        ]);
       }
-    } catch (error) {
-      console.error("Error processing user input:", error);
-      const errorMsg: Message = {
-        id: Date.now().toString() + "_error",
-        type: "message",
-        content: m.conversation_didntUnderstand(),
-        timestamp: new Date().toISOString(),
-        isUser: false,
-        nodeId: conversationController.getCurrentNode().id,
-      };
-      setConversationHistory((prev) => [...prev, errorMsg]);
     }
-
     setUserInput("");
-  }, [
-    userInput,
-    conversationController,
-    ACTIVITY_PROMPT_NODES,
-    resolvedApps,
-    getConvMessage,
-    localizedApps,
-  ]);
+  }, [userInput, useNewEngine, engine, conversationController, resolvedApps, getConvMessage]);
 
   useEffect(() => {
     if (userInput !== "" && isInitialized) {
@@ -477,6 +460,20 @@ function App() {
       } catch (error) {
         console.error("Error returning from activity:", error);
       }
+    } else if (useNewEngine) {
+      // Engine returns to engage phase after activity
+      const returnMsg = await engine.processMessage("I just finished the activity");
+      setConversationHistory((prev) => [
+        ...prev,
+        {
+          id: returnMsg.id,
+          type: "message",
+          content: returnMsg.content,
+          timestamp: returnMsg.timestamp,
+          isUser: false,
+          nodeId: engine.getPhase(),
+        },
+      ]);
     }
   };
 
@@ -525,17 +522,32 @@ function App() {
     setShowAlertButton(false);
     setAlertTimer(180);
 
-    setConversationHistory((prev) => [
-      ...prev,
-      {
-        id: `${Date.now()}_alert_start`,
-        type: "message",
-        content: m.alert_alertStart(),
-        timestamp: new Date().toISOString(),
-        isUser: false,
-        nodeId: "alert_start",
-      },
-    ]);
+    if (useNewEngine) {
+      const alertMsg = engine.activateAlert();
+      setConversationHistory((prev) => [
+        ...prev,
+        {
+          id: alertMsg.id,
+          type: "message",
+          content: alertMsg.content,
+          timestamp: alertMsg.timestamp,
+          isUser: false,
+          nodeId: "alert",
+        },
+      ]);
+    } else {
+      setConversationHistory((prev) => [
+        ...prev,
+        {
+          id: `${Date.now()}_alert_start`,
+          type: "message",
+          content: "Alert detected. Let's make sure you're safe.",
+          timestamp: new Date().toISOString(),
+          isUser: false,
+          nodeId: "alert_start",
+        },
+      ]);
+    }
 
     const interval = setInterval(() => {
       setAlertTimer((prev) => {
@@ -573,60 +585,6 @@ function App() {
       }
     };
   }, [alertInterval]);
-
-  const [isConversationComplete, setIsConversationComplete] = useState(false);
-
-  // Check for conversation completion after messages update (so the final message is visible)
-  useEffect(() => {
-    if (
-      conversationHistory.length > 0 &&
-      conversationController.isComplete() &&
-      !conversationController.isInOnboarding()
-    ) {
-      // Delay so the user can read the final message
-      const timer = setTimeout(() => {
-        setIsConversationComplete(true);
-      }, 3000);
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-    setIsConversationComplete(false);
-  }, [conversationHistory, conversationController]);
-
-  if (isConversationComplete && !showAppsLauncher) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">{m.conversation_conversationComplete()}</h2>
-          <p className="text-gray-600 mb-4">{m.conversation_thankYou()}</p>
-          <Button
-            onClick={() => {
-              setIsConversationComplete(false);
-              conversationController.reset();
-              const initialNode = conversationController.getCurrentNode();
-              const content =
-                getConvMessage(initialNode.id) ||
-                (initialNode.content ?? "") ||
-                m.conversation_helloImHereWithYou();
-              setConversationHistory([
-                {
-                  id: Date.now().toString(),
-                  type: "message",
-                  content,
-                  timestamp: new Date().toISOString(),
-                  isUser: false,
-                  nodeId: initialNode.id,
-                },
-              ]);
-            }}
-          >
-            {m.conversation_startNewConversation()}
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
