@@ -458,23 +458,30 @@ Respond with a JSON object:
 
 ### Future Language Expansion
 
-The current implementation supports English, Hebrew, and Arabic. Future iterations should add:
-
-**Priority 1 — Large Israeli populations:**
+**Base languages (shipped with the app, no download required):**
+- Hebrew
+- English
 - Russian
+- Amharic
+- Arabic
+
+These five must have complete Paraglide translations, full offline parser keyword lists, and offline message generator pools bundled in the app. They represent the core populations who need crisis support in Israel.
+
+**Future downloadable language packs:**
+
+*Priority 1 — Israeli populations:*
 - Ukrainian
-- Amharic (Ethiopian community)
 - Yiddish (Ultra-Orthodox communities)
 - Ladino / Judeo-Spanish (Sephardic elderly population)
 
-**Priority 2 — Refugee and asylum-seeker communities:**
+*Priority 2 — Refugee and asylum-seeker communities:*
 - Tigrinya (Eritrean)
 - Sudanese Arabic
 - French (African francophone refugees)
 - Swahili
 - Somali
 
-**Priority 3 — Broader international:**
+*Priority 3 — Broader international:*
 - Spanish
 - Portuguese (European)
 - Brazilian Portuguese
