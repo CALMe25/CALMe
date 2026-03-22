@@ -234,12 +234,11 @@ interface PersistedConversationState {
 **Offline multi-signal extraction algorithm:**
 
 ```
-1. Run keyword scan for ALL signal types simultaneously:
-   - Safety keywords: shelter/mamad/safe → safe; outside/exposed/no shelter → unsafe
-   - Stress keywords: reuse existing enhancedParser keyword lists
-   - Social keywords: alone/by myself → alone; kids/family/people/everyone → with_others;
-     taking care of/looking after → caregiver
-   - Location keywords: reuse existing location keyword lists
+1. Run keyword scan for ALL signal types simultaneously using expanded keyword
+   lists in enhancedParser.ts (stressKeywords, safetyKeywords, locationKeywords,
+   socialKeywords). Each list covers 20-40+ keywords/phrases per category including
+   colloquial expressions, Hebrew-English terms (mamad, miklat), and crisis-specific
+   language (rockets, siren, explosion).
 
 2. Run sentiment analysis on full message (existing sentiment library)
 
@@ -456,6 +455,32 @@ Respond with a JSON object:
 13. **Alert fires during onboarding** — should pause onboarding, handle safety, resume
 14. **API rate limit / 500 error** — should fall back to offline, stay offline for 5 min
 15. **User re-engages after closing** — should restart smoothly, no "complete" screen
+
+### Future Language Expansion
+
+The current implementation supports English, Hebrew, and Arabic. Future iterations should add:
+
+**Priority 1 — Large Israeli populations:**
+- Russian
+- Ukrainian
+- Amharic (Ethiopian community)
+- Yiddish (Ultra-Orthodox communities)
+- Ladino / Judeo-Spanish (Sephardic elderly population)
+
+**Priority 2 — Refugee and asylum-seeker communities:**
+- Tigrinya (Eritrean)
+- Sudanese Arabic
+- French (African francophone refugees)
+- Swahili
+- Somali
+
+**Priority 3 — Broader international:**
+- Spanish
+- Portuguese (European)
+- Brazilian Portuguese
+- German
+
+Each language requires: Paraglide message translations, offline parser keyword lists (transliterated and native script), and LLM system prompt language awareness. The hybrid architecture supports this — the LLM path handles any language natively, and the offline path needs keyword lists per language. Priority 1 and 2 languages reflect communities in Israel who are most likely to need crisis support and least likely to be fluent in Hebrew or English.
 
 ### Offline Parser Test Cases
 - "i feel bad" → moderate stress, safety unknown, social unknown → engage
