@@ -113,11 +113,20 @@ export function ChatMessage({
         </Avatar>
 
         <div className="flex flex-col min-w-0">
+          {showScale && scaleValue === null && (
+            <div className="mb-2 w-full">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2">
+                On a scale of 1-10, how are you feeling right now?
+              </p>
+              <Scale selected={scaleValue} onSelect={onScaleSelect} />
+            </div>
+          )}
+
           <div
             className={`px-3 sm:px-4 py-2 sm:py-3 rounded-2xl ${
               isUser
                 ? "bg-primary text-primary-foreground rounded-br-sm"
-                : "bg-muted text-muted-foreground rounded-bl-sm"
+                : "bg-secondary text-secondary-foreground rounded-bl-sm"
             }`}
           >
             {type === "audio" ? (
@@ -194,15 +203,6 @@ export function ChatMessage({
               </div>
             )}
           </div>
-
-          {showScale && scaleValue === null && (
-            <div className="mt-2 w-full">
-              <p className="text-xs sm:text-sm text-muted-foreground mb-2">
-                On a scale of 1-10, how are you feeling right now?
-              </p>
-              <Scale selected={scaleValue} onSelect={onScaleSelect} />
-            </div>
-          )}
 
           <span
             className={`text-xs text-muted-foreground mt-1 ${alignRight ? "text-right" : "text-left"}`}
