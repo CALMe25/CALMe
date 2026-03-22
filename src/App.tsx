@@ -280,13 +280,25 @@ function App() {
 
     try {
       const parserType = conversationController.getCurrentParserType();
-      if (parserType == null) {
-        console.warn("No parser type specified for current node");
-        return;
-      }
 
-      const stepResult = conversationController.runParser(parserType, userInput);
-      const { nextNode, activityTrigger } = conversationController.processParserOutput(stepResult);
+      let nextNode;
+      let activityTrigger;
+
+      if (parserType == null) {
+        // No parser on this node — auto-advance to the next node
+        const currentNode = conversationController.getCurrentNode();
+        if (typeof currentNode.next === "string") {
+          const advanced = conversationController.moveToNode(currentNode.next);
+          nextNode = advanced;
+          activityTrigger = undefined;
+        } else {
+          // No parser and no simple next — nothing to do
+          return;
+        }
+      } else {
+        const stepResult = conversationController.runParser(parserType, userInput);
+        ({ nextNode, activityTrigger } = conversationController.processParserOutput(stepResult));
+      }
 
       const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
       const content =
@@ -562,9 +574,27 @@ function App() {
     };
   }, [alertInterval]);
 
-  const isConversationComplete = conversationController.isComplete();
+  const [isConversationComplete, setIsConversationComplete] = useState(false);
 
-  if (isConversationComplete && !showAppsLauncher && !conversationController.isInOnboarding()) {
+  // Check for conversation completion after messages update (so the final message is visible)
+  useEffect(() => {
+    if (
+      conversationHistory.length > 0 &&
+      conversationController.isComplete() &&
+      !conversationController.isInOnboarding()
+    ) {
+      // Delay so the user can read the final message
+      const timer = setTimeout(() => {
+        setIsConversationComplete(true);
+      }, 3000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+    setIsConversationComplete(false);
+  }, [conversationHistory, conversationController]);
+
+  if (isConversationComplete && !showAppsLauncher) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
@@ -572,6 +602,7 @@ function App() {
           <p className="text-gray-600 mb-4">{m.conversation_thankYou()}</p>
           <Button
             onClick={() => {
+              setIsConversationComplete(false);
               conversationController.reset();
               const initialNode = conversationController.getCurrentNode();
               const content =
