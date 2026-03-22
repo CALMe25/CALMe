@@ -1,8 +1,6 @@
 // Conversation Controller for CALMe Therapeutic Flow
 // Implements dynamic conversation flow based on conversation map specification
 
-import { conversationMapV2 } from "./conversationMapV2";
-import { therapeuticConversationMap } from "./conversationMap";
 import { onboardingConversationMap, onboardingParsers } from "./onboardingMap";
 import { userProfileStorage, type UserProfile } from "../storage/userProfileStorage";
 import * as enhancedParser from "../parser/enhancedParser";
@@ -128,8 +126,8 @@ export class ConversationController implements ConversationControllerInterface {
       this.currentNodeId = onboardingConversationMap.startNode;
     } else {
       // Set default conversation map but wait for profile to determine which to use
-      this.conversationMap = conversationMapV2;
-      this.currentNodeId = conversationMapV2.startNode;
+      this.conversationMap = onboardingConversationMap;
+      this.currentNodeId = onboardingConversationMap.startNode;
     }
 
     void this.initializeProfile();
@@ -175,8 +173,8 @@ export class ConversationController implements ConversationControllerInterface {
         console.log("✅ INIT: Using main conversation map");
         this.userVariables.name = this.userProfile.name;
         this.isOnboarding = false;
-        this.conversationMap = conversationMapV2;
-        this.currentNodeId = conversationMapV2.startNode;
+        this.conversationMap = onboardingConversationMap;
+        this.currentNodeId = onboardingConversationMap.startNode;
       }
 
       console.log("🚀 INIT: Profile initialization complete");
@@ -193,7 +191,7 @@ export class ConversationController implements ConversationControllerInterface {
   }
 
   initialize(map?: ConversationMap): void {
-    this.conversationMap = map || therapeuticConversationMap;
+    this.conversationMap = map || onboardingConversationMap;
     this.currentNodeId = this.conversationMap.startNode;
   }
 
@@ -449,8 +447,8 @@ export class ConversationController implements ConversationControllerInterface {
       this.isOnboarding = false;
 
       // Switch to main conversation
-      this.conversationMap = conversationMapV2;
-      this.currentNodeId = conversationMapV2.startNode;
+      this.conversationMap = onboardingConversationMap;
+      this.currentNodeId = onboardingConversationMap.startNode;
 
       console.log("✅ Onboarding completed for:", profile.name);
     } catch (error) {
@@ -555,7 +553,7 @@ export class ConversationController implements ConversationControllerInterface {
   // Switch to alert mode -- always uses V2 map which has alert nodes
   switchToAlertMode() {
     console.log("🚨 Switching to alert mode");
-    this.conversationMap = conversationMapV2;
+    this.conversationMap = onboardingConversationMap;
     this.currentNodeId = "alert_start";
   }
 
