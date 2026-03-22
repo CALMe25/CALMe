@@ -69,7 +69,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.29.1",
-    "@inlang/paraglide-js": "^2.9.1",
+    "@inlang/paraglide-js": "^2.15.1",
     "@types/node": "^25.0.10",
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
