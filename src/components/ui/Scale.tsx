@@ -37,12 +37,11 @@ export const Scale: React.FC<ScaleProps> = ({
         backgroundColor: "white",
         padding: "12px",
         borderRadius: 12,
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
+        display: "grid",
+        gridTemplateColumns: "repeat(5, 1fr)",
+        justifyItems: "center",
         boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
         gap: 8,
-        flexWrap: "wrap",
       }}
     >
       {values.map((value) => {
