@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+@import url("https://fonts.cdnfonts.com/css/opendyslexic");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -129,7 +130,7 @@
 
   html,
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-bold;
     /* Prevent text size adjustment on mobile */
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
@@ -139,6 +140,18 @@
     /* Better font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Dyslexia-friendly mode */
+  .dyslexic {
+    font-family: "OpenDyslexic", "Atkinson Hyperlegible", sans-serif !important;
+    letter-spacing: 0.05em;
+    word-spacing: 0.15em;
+    line-height: 1.8;
+  }
+
+  .dyslexic * {
+    font-family: inherit !important;
   }
 
   /* RTL Support - Mirror UI elements for RTL languages */

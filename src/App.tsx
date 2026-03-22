@@ -54,7 +54,7 @@ const isMessageFunction = (value: unknown): value is AnyMessageFunction => {
 function App() {
   const { currentLocale } = useLanguage();
   const isRTL = currentLocale === "he";
-  const { userGender } = useUserPreferences();
+  const { userGender, dyslexicMode, setDyslexicMode } = useUserPreferences();
   const localizedApps = useLocalizedApps();
   const { cycleTheme } = useTheme();
   const [scaleValue, setScaleValue] = useState<number | null>(null);
@@ -712,6 +712,26 @@ function App() {
                     </div>
                     <LanguageSwitcher variant="menu" />
                   </div>
+
+                  <button
+                    type="button"
+                    className={menuRowClasses}
+                    onClick={() => {
+                      setDyslexicMode(!dyslexicMode);
+                    }}
+                  >
+                    <div className={menuLabelClasses}>
+                      <span className="w-4 h-4 flex items-center justify-center text-xs font-bold">
+                        Aa
+                      </span>
+                      <span>Dyslexia-friendly</span>
+                    </div>
+                    <span
+                      className={`text-xs ${dyslexicMode ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}`}
+                    >
+                      {dyslexicMode ? "On" : "Off"}
+                    </span>
+                  </button>
 
                   {showAlertButton && (
                     <button
