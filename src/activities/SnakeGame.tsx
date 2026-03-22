@@ -23,6 +23,7 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   const [food, setFood] = useState(initialFood);
   const [direction, setDirection] = useState({ x: 1, y: 0 });
   const directionRef = useRef(direction);
+  const foodRef = useRef(food);
 
   const setDirectionImmediate = (dir: { x: number; y: number }) => {
     directionRef.current = dir;
@@ -54,18 +55,26 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
   }, [direction]);
 
   useEffect(() => {
+    foodRef.current = food;
+  }, [food]);
+
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case "ArrowUp":
+          e.preventDefault();
           tryChangeDirection({ x: 0, y: -1 });
           break;
         case "ArrowDown":
+          e.preventDefault();
           tryChangeDirection({ x: 0, y: 1 });
           break;
         case "ArrowLeft":
+          e.preventDefault();
           tryChangeDirection({ x: -1, y: 0 });
           break;
         case "ArrowRight":
+          e.preventDefault();
           tryChangeDirection({ x: 1, y: 0 });
           break;
         default:
@@ -83,49 +92,53 @@ const SnakeGame: React.FC<SnakeGameProps> = ({ onGameEnd }) => {
     if (gameOver) return;
 
     const gameLoop = setInterval(() => {
-      const newSnake = [...snake];
-      const head = { ...newSnake[0] };
-      head.x += direction.x;
-      head.y += direction.y;
+      setSnake((prevSnake) => {
+        const newSnake = [...prevSnake];
+        const head = { ...newSnake[0] };
+        head.x += directionRef.current.x;
+        head.y += directionRef.current.y;
 
-      // Wall collision
-      if (
-        head.x < 0 ||
-        head.x >= canvasSize / snakeSize ||
-        head.y < 0 ||
-        head.y >= canvasSize / snakeSize
-      ) {
-        setGameOver(true);
-        return;
-      }
-
-      // Self collision
-      for (let i = 1; i < newSnake.length; i++) {
-        if (head.x === newSnake[i].x && head.y === newSnake[i].y) {
+        // Wall collision
+        if (
+          head.x < 0 ||
+          head.x >= canvasSize / snakeSize ||
+          head.y < 0 ||
+          head.y >= canvasSize / snakeSize
+        ) {
           setGameOver(true);
-          return;
+          return prevSnake;
         }
-      }
 
-      newSnake.unshift(head);
+        // Self collision
+        for (let i = 1; i < newSnake.length; i++) {
+          if (head.x === newSnake[i].x && head.y === newSnake[i].y) {
+            setGameOver(true);
+            return prevSnake;
+          }
+        }
 
-      // Food collision
-      if (head.x === food.x && head.y === food.y) {
-        setFood({
-          x: Math.floor(Math.random() * (canvasSize / snakeSize)),
-          y: Math.floor(Math.random() * (canvasSize / snakeSize)),
-        });
-      } else {
-        newSnake.pop();
-      }
+        newSnake.unshift(head);
 
-      setSnake(newSnake);
+        // Food collision
+        if (head.x === foodRef.current.x && head.y === foodRef.current.y) {
+          const newFood = {
+            x: Math.floor(Math.random() * (canvasSize / snakeSize)),
+            y: Math.floor(Math.random() * (canvasSize / snakeSize)),
+          };
+          foodRef.current = newFood;
+          setFood(newFood);
+        } else {
+          newSnake.pop();
+        }
+
+        return newSnake;
+      });
     }, 200);
 
     return () => {
       clearInterval(gameLoop);
     };
-  }, [snake, direction, food, gameOver, canvasSize]);
+  }, [gameOver, canvasSize]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

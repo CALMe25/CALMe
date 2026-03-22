@@ -131,7 +131,7 @@ export default function DigitalCanvas({ onGameEnd }: DigitalCanvasProps) {
     const context = contextRef.current;
     if (!canvas || !context) return;
     context.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--background");
-    context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+    context.fillRect(0, 0, canvas.width, canvas.height);
   };
 
   return (

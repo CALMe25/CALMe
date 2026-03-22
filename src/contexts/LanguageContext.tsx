@@ -6,10 +6,7 @@ interface LanguageContextType {
   triggerUpdate: () => void;
 }
 
-const LanguageContext = createContext<LanguageContextType>({
-  currentLocale: "en",
-  triggerUpdate: () => {},
-});
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 const LOCALE_STORAGE_KEY = "calme-locale";
 
@@ -52,5 +49,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 }
 
 export function useLanguage() {
-  return useContext(LanguageContext);
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
 }

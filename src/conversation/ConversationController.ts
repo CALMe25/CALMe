@@ -220,11 +220,13 @@ export class ConversationController implements ConversationControllerInterface {
     }
 
     if (currentNode.next == null) {
-      // Check if this is an end node or if we're completing onboarding
       if (currentNode.type === "end" && this.isOnboarding) {
         console.log("🎯 PROCESS: Completing onboarding");
-        // Complete onboarding with collected data
         void this.completeOnboarding(this.userVariables);
+      }
+      // End nodes legitimately have no next -- return current node instead of throwing
+      if (currentNode.type === "end") {
+        return { nextNode: currentNode, activityTrigger: undefined };
       }
       throw new Error(`Node ${this.currentNodeId} has no next steps defined`);
     }
@@ -395,6 +397,16 @@ export class ConversationController implements ConversationControllerInterface {
       throw new Error(`Node ${nodeId} not found`);
     }
     this.currentNodeId = nodeId;
+
+    // Apply variable substitution (consistent with getCurrentNode)
+    if (node.content != null) {
+      let content = node.content;
+      Object.entries(this.userVariables).forEach(([key, value]) => {
+        content = content.replace(new RegExp(`\\{${key}\\}`, "g"), String(value));
+      });
+      return { ...node, content };
+    }
+
     return node;
   }
 
@@ -456,7 +468,7 @@ export class ConversationController implements ConversationControllerInterface {
       const result = parser(input);
 
       // Store extracted values for profile building
-      if (result.type === "extraction") {
+      if (result.type === "extraction" && result.informationType != null) {
         this.userVariables[result.informationType] = result.extractedValue;
       }
 
@@ -469,8 +481,17 @@ export class ConversationController implements ConversationControllerInterface {
         return enhancedParser.classifyStress(input);
       case "classifySafety":
         return enhancedParser.classifySafety(input);
-      case "extractLocation":
-        return enhancedParser.extractLocation(input);
+      case "extractLocation": {
+        const locResult = enhancedParser.extractLocation(input);
+        if (
+          locResult.type === "extraction" &&
+          locResult.extractedValue != null &&
+          locResult.extractedValue !== ""
+        ) {
+          this.userVariables["location"] = locResult.extractedValue;
+        }
+        return locResult;
+      }
       case "parseYesNo":
         return enhancedParser.parseYesNo(input);
       case "parseActivityPreference": {
@@ -482,6 +503,10 @@ export class ConversationController implements ConversationControllerInterface {
           result.category !== "unclear_activity"
         ) {
           this.attemptedActivities.add(result.category);
+        }
+        // Store calming preference during onboarding
+        if (this.isOnboarding && result.category != null) {
+          this.userVariables["calmingPreferences"] = result.category;
         }
         return result;
       }
@@ -527,9 +552,10 @@ export class ConversationController implements ConversationControllerInterface {
     return allActivities.filter((activity) => !this.attemptedActivities.has(activity));
   }
 
-  // Switch to alert mode
+  // Switch to alert mode -- always uses V2 map which has alert nodes
   switchToAlertMode() {
     console.log("🚨 Switching to alert mode");
+    this.conversationMap = conversationMapV2;
     this.currentNodeId = "alert_start";
   }
 

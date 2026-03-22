@@ -209,7 +209,7 @@ const nodes = new Map<string, ConversationNode>([
   // === PROFILE REVIEW ===
   createNode(
     "onboard_review",
-    "{name}, here's your emergency profile:\n🏠 Safe space: {safeSpace} ({timeToSafety} to reach)\n♿ Accessibility: {accessibilityNeeds}\n🫁 Calming method: {calmingPreference}\n🗣️ Communication: {communicationPreference}\n\nDoes this look right?",
+    "{name}, here's your emergency profile:\n🏠 Safe space: {location} ({duration} to reach)\n♿ Accessibility: {accessibility}\n🫁 Calming method: {calmingPreferences}\n🗣️ Communication: {communication}\n\nDoes this look right?",
     "question",
     {
       conditions: [
@@ -225,7 +225,16 @@ const nodes = new Map<string, ConversationNode>([
     "onboard_what_to_change",
     "What would you like to change?",
     "question",
-    "onboard_safe_space", // Loop back to relevant section based on response
+    {
+      conditions: [
+        { if: 'extractedValue.includes("name")', goto: "onboard_start" },
+        { if: 'extractedValue.includes("location")', goto: "onboard_safe_space" },
+        { if: 'extractedValue.includes("time")', goto: "onboard_time_to_safety" },
+        { if: 'extractedValue.includes("accessibility")', goto: "onboard_accessibility" },
+        { if: 'extractedValue.includes("calming")', goto: "onboard_calming_preferences" },
+        { default: true, goto: "onboard_safe_space" },
+      ],
+    },
     "extractChangeRequest",
   ),
 

@@ -352,7 +352,7 @@ export class NLPParser {
       const result = plugin(text, doc);
       pluginResults = { ...pluginResults, ...result };
     }
-    //const semanticAnalysis = analyzeText(text);
+    const semanticAnalysis = analyzeText(text);
     console.log("the doc is ", doc);
     console.log("the text is ", text);
     console.log("the Sentiment is ", semanticAnalysis);

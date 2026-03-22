@@ -30,8 +30,7 @@ const nodes = new Map<string, ConversationNode>([
         { if: 'category === "in_transit"', goto: "transit_context" },
         { if: 'category === "outdoor_worker"', goto: "outdoor_context" },
         { if: 'category === "caregiver"', goto: "caregiver_context" },
-        { if: "needsClarification === true", goto: "start_clarify" },
-        { default: true, goto: "moderate_stress_check" },
+        { default: true, goto: "start_clarify" },
       ],
     },
     "classifyStress",
@@ -43,18 +42,9 @@ const nodes = new Map<string, ConversationNode>([
     "question",
     {
       conditions: [
-        {
-          if: 'category === "no_stress" || extractedValue.includes("relax")',
-          goto: "no_stress_flow",
-        },
-        {
-          if: 'category === "moderate_stress" || extractedValue.includes("somewhat")',
-          goto: "moderate_stress_check",
-        },
-        {
-          if: 'category === "high_stress" || extractedValue.includes("very")',
-          goto: "high_stress_immediate",
-        },
+        { if: 'category === "no_stress"', goto: "no_stress_flow" },
+        { if: 'category === "moderate_stress"', goto: "moderate_stress_check" },
+        { if: 'category === "high_stress"', goto: "high_stress_immediate" },
         { default: true, goto: "moderate_stress_check" },
       ],
     },
@@ -130,9 +120,9 @@ const nodes = new Map<string, ConversationNode>([
     "question",
     {
       conditions: [
-        { if: 'category === "safe"', goto: "check_if_alone" },
-        { if: 'category === "unsafe"', goto: "unsafe_can_move" },
-        { if: "needsClarification === true", goto: "check_safety_clarify" },
+        { if: 'category === "SAFE"', goto: "check_if_alone" },
+        { if: 'category === "DANGER"', goto: "unsafe_can_move" },
+        { if: 'category === "UNSURE"', goto: "check_safety_clarify" },
         { default: true, goto: "check_safety_clarify" },
       ],
     },
@@ -145,8 +135,8 @@ const nodes = new Map<string, ConversationNode>([
     "question",
     {
       conditions: [
-        { if: 'category === "safe"', goto: "check_if_alone" },
-        { if: 'category === "unsafe"', goto: "unsafe_can_move" },
+        { if: 'category === "SAFE"', goto: "check_if_alone" },
+        { if: 'category === "DANGER"', goto: "unsafe_can_move" },
         { default: true, goto: "unsafe_can_move" },
       ],
     },
@@ -318,7 +308,6 @@ const nodes = new Map<string, ConversationNode>([
         { if: 'category === "music"', goto: "activity_music" },
         { if: 'category === "story"', goto: "activity_story" },
         { if: 'category === "no_activity"', goto: "end_node" },
-        { if: "needsClarification === true", goto: "activity_choice_clarify" },
         { default: true, goto: "activity_choice_clarify" },
       ],
     },
@@ -335,10 +324,7 @@ const nodes = new Map<string, ConversationNode>([
         { if: 'category === "stretching"', goto: "activity_stretching" },
         { if: 'category === "matching-cards"', goto: "activity_matching" },
         { if: 'category === "grounding"', goto: "activity_grounding" },
-        {
-          if: 'extractedValue.includes("listen") || extractedValue.includes("music")',
-          goto: "activity_music",
-        },
+        { if: 'category === "music"', goto: "activity_music" },
         { if: 'category === "no_activity"', goto: "end_node" },
         { default: true, goto: "activity_breathing" },
       ],
@@ -431,18 +417,9 @@ const nodes = new Map<string, ConversationNode>([
     "question",
     {
       conditions: [
-        {
-          if: 'extractedValue.includes("better") || category === "no_stress"',
-          goto: "end_node",
-        },
-        {
-          if: 'extractedValue.includes("another") || extractedValue.includes("more")',
-          goto: "activity_choice",
-        },
-        {
-          if: 'extractedValue.includes("struggling") || category === "high_stress"',
-          goto: "continue_support",
-        },
+        { if: 'category === "no_stress"', goto: "end_node" },
+        { if: 'category === "moderate_stress"', goto: "activity_choice" },
+        { if: 'category === "high_stress"', goto: "continue_support" },
         { default: true, goto: "continue_loop_options" },
       ],
     },
@@ -455,22 +432,12 @@ const nodes = new Map<string, ConversationNode>([
     "question",
     {
       conditions: [
-        {
-          if: 'extractedValue.includes("another") || extractedValue.includes("activity")',
-          goto: "activity_choice",
-        },
-        {
-          if: 'extractedValue.includes("better") || category === "yes"',
-          goto: "end_node",
-        },
-        {
-          if: 'extractedValue.includes("struggling")',
-          goto: "continue_support",
-        },
+        { if: 'category === "no"', goto: "activity_choice" },
+        { if: 'category === "yes"', goto: "end_node" },
         { default: true, goto: "end_node" },
       ],
     },
-    "classifyStress",
+    "parseYesNo",
   ),
 
   // === EMERGENCY SUPPORT ===

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:firsttime": "echo 'Starting dev server... Add ?firsttime=true to URL in browser' && vite",
-    "build": "vite build && tsc -b",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && tsc -b && vite build",
     "lint": "oxlint --type-aware .",
     "lint:fix": "oxlint --type-aware --type-check . --fix",
     "format": "oxfmt .",

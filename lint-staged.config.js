@@ -3,6 +3,6 @@
  * @type {import('lint-staged').Configuration}
  */
 export default {
-  "**/*.[jt]s?(x)": ["oxfmt", "oxlint --type-aware --type-check --fix"],
+  "**/*.[jt]s?(x)": ["oxfmt", "oxlint --fix"],
   "**/*.ts?(x)": () => "tsc -p tsconfig.json --noEmit",
 };

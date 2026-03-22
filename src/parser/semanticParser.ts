@@ -47,7 +47,7 @@ function applyCrisisPatterns(doc: CompromiseDocument): CompromiseDocument {
   // Apply each pattern manually
   Object.entries(crisisPlugin.patterns).forEach(([pattern, tag]: [string, string]) => {
     const matches = doc.match(pattern);
-    if (matches.has("")) {
+    if (matches.found) {
       matches.tag(tag);
     }
   });

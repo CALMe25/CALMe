@@ -74,6 +74,17 @@ class EnhancedParser {
     return parsed;
   }
 
+  /**
+   * Checks if the input contains a keyword, using word-boundary matching for short words
+   * to prevent substring false positives (e.g., "no" matching inside "know").
+   */
+  private matchesKeyword(input: string, keyword: string): boolean {
+    if (keyword.length <= 3 && !keyword.includes(" ")) {
+      return new RegExp(`\\b${keyword}\\b`, "i").test(input);
+    }
+    return input.toLowerCase().includes(keyword.toLowerCase());
+  }
+
   // Keyword mappings for quick categorization
   private stressKeywords: KeywordMapping[] = [
     {
@@ -153,7 +164,6 @@ class EnhancedParser {
     console.log("🔍 Parser: Analyzing stress level from input:", input);
 
     const doc = nlp(input);
-    const lowerInput = input.toLowerCase();
 
     // Use dynamic keywords from i18n if available
     if (this.messages) {
@@ -178,7 +188,7 @@ class EnhancedParser {
       // Check for keyword matches with i18n keywords
       for (const mapping of stressKeywordMappings) {
         for (const keyword of mapping.keywords) {
-          if (lowerInput.includes(keyword)) {
+          if (this.matchesKeyword(input, keyword)) {
             console.log(`✅ Parser: Found i18n keyword match: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
@@ -193,7 +203,7 @@ class EnhancedParser {
       // Fallback to hardcoded English keywords
       for (const mapping of this.stressKeywords) {
         for (const keyword of mapping.keywords) {
-          if (lowerInput.includes(keyword)) {
+          if (this.matchesKeyword(input, keyword)) {
             console.log(`✅ Parser: Found keyword match: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
@@ -259,8 +269,6 @@ class EnhancedParser {
   classifySafety(input: string): ParserResult {
     console.log("🔍 Parser: Analyzing safety status from input:", input);
 
-    const lowerInput = input.toLowerCase();
-
     // Use dynamic keywords from i18n if available
     if (this.messages) {
       const safetyKeywordMappings = [
@@ -284,7 +292,7 @@ class EnhancedParser {
       // Check for keyword matches with i18n keywords
       for (const mapping of safetyKeywordMappings) {
         for (const keyword of mapping.keywords) {
-          if (lowerInput.includes(keyword)) {
+          if (this.matchesKeyword(input, keyword)) {
             console.log(`✅ Parser: Found i18n safety keyword: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
@@ -301,7 +309,7 @@ class EnhancedParser {
       const negativeKeywords = this.parseKeywords(this.messages.parser.negativeResponses);
 
       for (const keyword of affirmativeKeywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           console.log("✅ Parser: Affirmative response detected (i18n)");
           return {
             type: "classification",
@@ -313,7 +321,7 @@ class EnhancedParser {
       }
 
       for (const keyword of negativeKeywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           console.log("❌ Parser: Negative response detected (i18n)");
           return {
             type: "classification",
@@ -327,7 +335,7 @@ class EnhancedParser {
       // Fallback to hardcoded English keywords
       for (const mapping of this.safetyKeywords) {
         for (const keyword of mapping.keywords) {
-          if (lowerInput.includes(keyword)) {
+          if (this.matchesKeyword(input, keyword)) {
             console.log(`✅ Parser: Found safety keyword: "${keyword}" → ${mapping.category}`);
             return {
               type: "classification",
@@ -378,14 +386,13 @@ class EnhancedParser {
   extractLocation(input: string): ParserResult {
     console.log("🔍 Parser: Extracting location from input:", input);
 
-    const lowerInput = input.toLowerCase();
     let extractedLocation = "";
     let confidence = 0;
 
     // Check location keywords
     for (const mapping of this.locationKeywords) {
       for (const keyword of mapping.keywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           console.log(`📍 Parser: Found location keyword: "${keyword}"`);
           extractedLocation = mapping.category;
           confidence = mapping.confidence;
@@ -438,8 +445,6 @@ class EnhancedParser {
   parseYesNo(input: string): ParserResult {
     console.log("🔍 Parser: Analyzing yes/no response:", input);
 
-    const lowerInput = input.toLowerCase();
-
     // Use i18n keywords if available
     if (this.messages) {
       const affirmativeKeywords = this.parseKeywords(this.messages.parser.affirmativeResponses);
@@ -448,7 +453,7 @@ class EnhancedParser {
 
       // Check affirmative
       for (const keyword of affirmativeKeywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           return {
             type: "classification",
             category: "yes",
@@ -460,7 +465,7 @@ class EnhancedParser {
 
       // Check negative
       for (const keyword of negativeKeywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           return {
             type: "classification",
             category: "no",
@@ -472,7 +477,7 @@ class EnhancedParser {
 
       // Check uncertain
       for (const keyword of uncertainKeywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           return {
             type: "classification",
             category: "maybe",
@@ -488,8 +493,8 @@ class EnhancedParser {
       // Strong yes indicators
       if (
         doc.has("(yes|yeah|yep|yup|sure|definitely|absolutely|correct|right|exactly)") ||
-        lowerInput.includes("yes") ||
-        lowerInput.includes("yeah")
+        this.matchesKeyword(input, "yes") ||
+        this.matchesKeyword(input, "yeah")
       ) {
         return {
           type: "classification",
@@ -502,8 +507,8 @@ class EnhancedParser {
       // Strong no indicators
       if (
         doc.has("(no|nope|not|negative|nah|never|wrong)") ||
-        lowerInput.includes("no") ||
-        lowerInput.includes("nope")
+        this.matchesKeyword(input, "no") ||
+        this.matchesKeyword(input, "nope")
       ) {
         return {
           type: "classification",
@@ -569,7 +574,7 @@ class EnhancedParser {
 
     for (const mapping of activityKeywords) {
       for (const keyword of mapping.keywords) {
-        if (lowerInput.includes(keyword)) {
+        if (this.matchesKeyword(input, keyword)) {
           console.log(`🎯 Parser: Activity preference detected: ${mapping.activity}`);
           return {
             type: "classification",

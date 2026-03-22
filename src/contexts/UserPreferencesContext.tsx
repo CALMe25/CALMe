@@ -7,14 +7,9 @@ interface UserPreferencesContextType {
   setUserGender: (gender: UserGender) => void;
 }
 
-const defaultValue: UserPreferencesContextType = {
-  userGender: "unspecified",
-  setUserGender: () => {},
-};
-
 const STORAGE_KEY = "calme-user-gender";
 
-const UserPreferencesContext = createContext<UserPreferencesContextType>(defaultValue);
+const UserPreferencesContext = createContext<UserPreferencesContextType | undefined>(undefined);
 
 function getStoredPreferenceValue(): UserGender {
   if (typeof window === "undefined") return "unspecified";
@@ -62,5 +57,9 @@ export function UserPreferencesProvider({ children }: { children: ReactNode }) {
 }
 
 export function useUserPreferences() {
-  return useContext(UserPreferencesContext);
+  const context = useContext(UserPreferencesContext);
+  if (context === undefined) {
+    throw new Error("useUserPreferences must be used within a UserPreferencesProvider");
+  }
+  return context;
 }

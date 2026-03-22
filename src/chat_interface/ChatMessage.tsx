@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Play, Pause, Mic } from "lucide-react";
@@ -42,7 +42,15 @@ export function ChatMessage({
 }: ChatMessageProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const apps = useLocalizedApps();
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+    };
+  }, []);
   const { currentLocale } = useLanguage();
   const isRTL = currentLocale === "he";
   const alignRight = isUser;
@@ -62,23 +70,28 @@ export function ChatMessage({
 
   const handleAudioPlay = () => {
     if (isPlaying) {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+      intervalRef.current = null;
       setIsPlaying(false);
       setCurrentTime(0);
       return;
     }
 
+    if (audioDuration <= 0) return;
+
     setIsPlaying(true);
     onAudioPlay?.(id);
 
     let elapsed = 0;
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       elapsed += 0.1;
       setCurrentTime(elapsed);
 
       if (elapsed >= audioDuration) {
         setIsPlaying(false);
         setCurrentTime(0);
-        clearInterval(interval);
+        if (intervalRef.current !== null) clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     }, 100);
   };
@@ -140,7 +153,7 @@ export function ChatMessage({
                           isUser ? "bg-primary-foreground/60" : "bg-muted-foreground/60"
                         }`}
                         style={{
-                          width: `${(currentTime / audioDuration) * 100}%`,
+                          width: `${audioDuration > 0 ? (currentTime / audioDuration) * 100 : 0}%`,
                         }}
                       />
                     </div>

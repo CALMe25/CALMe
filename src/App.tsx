@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext, useCallback } from "react";
-import "./App.css";
 import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
 import { ScrollArea } from "./chat_interface/ui/scroll-area";
@@ -478,12 +477,10 @@ function App() {
   }, [appsTimeout]);
 
   useEffect(() => {
-    if (shouldAutoLaunchApp) {
-      const breathingApp = resolvedApps.find((subapps) => subapps.name === "breathing");
-      setChosenApp(breathingApp);
+    if (shouldAutoLaunchApp && chosenApp != null) {
       setShowAppsLauncher(true);
     }
-  }, [shouldAutoLaunchApp, resolvedApps]);
+  }, [shouldAutoLaunchApp, chosenApp]);
 
   const handleAppLaunch = (appToLaunch: AppInterface | undefined) => {
     if (!appToLaunch) {
