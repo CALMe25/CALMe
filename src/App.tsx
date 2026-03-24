@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext, useCallback } from "react";
-import "./App.css";
 import { ChatMessage } from "./chat_interface/ChatMessage";
 import { ChatInput } from "./chat_interface/ChatInput";
 import { ScrollArea } from "./chat_interface/ui/scroll-area";
@@ -17,7 +16,9 @@ import {
 import AppLauncher from "./AppLauncher/AppLauncher";
 import { AccessibilityToolbar } from "./components/AccessibilityToolbar";
 import { ConversationController } from "./conversation/ConversationController";
+import { ConversationEngine } from "./conversation/ConversationEngine";
 import { AlertTimer } from "./components/AlertTimer";
+import { playAlertSound } from "./utils/alertSound";
 import { DarkModeToggle } from "./components/DarkModeToggle";
 import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { GenderPreferenceSelect } from "./components/GenderPreference";
@@ -53,10 +54,27 @@ const isMessageFunction = (value: unknown): value is AnyMessageFunction => {
 function App() {
   const { currentLocale } = useLanguage();
   const isRTL = currentLocale === "he";
-  const { userGender } = useUserPreferences();
+  const { userGender, dyslexicMode, setDyslexicMode } = useUserPreferences();
   const localizedApps = useLocalizedApps();
   const { cycleTheme } = useTheme();
   const [scaleValue, setScaleValue] = useState<number | null>(null);
+
+  const handleScaleSelect = useCallback((value: number) => {
+    setScaleValue(value);
+    // Insert as a user message bubble with just the number
+    // Insert before the welcome message (at the top)
+    setConversationHistory((prev) => [
+      {
+        id: `${Date.now()}_scale`,
+        type: "message" as const,
+        content: `${value}/10`,
+        timestamp: new Date().toISOString(),
+        isUser: true,
+        nodeId: "scale_response",
+      },
+      ...prev,
+    ]);
+  }, []);
   // Helper for dynamic conversation node message lookups
   // Only used for conversation flow where node ID is dynamic
   const getConvMessage = useCallback(
@@ -78,12 +96,14 @@ function App() {
           return convFn();
         }
       }
-      console.warn(`Conversation node not found: conversation_${nodeId}`);
-      return `[Missing: ${nodeId}]`;
+      // Return empty string so callers fall through to node.content
+      return "";
     },
     [userGender],
   );
   const [conversationController] = useState(() => new ConversationController());
+  const [engine] = useState(() => new ConversationEngine());
+  const [useNewEngine, setUseNewEngine] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [conversationHistory, setConversationHistory] = useState<Message[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -95,7 +115,7 @@ function App() {
   const [chosenApp, setChosenApp] = useState<AppInterface | undefined>();
   const [appsTimeout, setAppsTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
   const [activityReturnNode, setActivityReturnNode] = useState<string | null>(null);
-  const [showQuickPanel, setShowQuickPanel] = useState(true);
+  const [activitiesSidebarOpen, setActivitiesSidebarOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [accessibilityOpen, setAccessibilityOpen] = useState(false);
 
@@ -114,54 +134,61 @@ function App() {
   const menuLabelClasses = "flex items-center gap-3 text-sm font-medium";
 
   useEffect(() => {
-    const initializeConversation = async () => {
-      let retries = 0;
-      while (!conversationController.isInitialized() && retries < 50) {
-        await new Promise((resolve) => setTimeout(resolve, 100));
-        retries++;
-      }
-      if (!conversationController.isInitialized()) {
-        console.error("Controller initialization timeout");
-      }
-      try {
-        const initialNode = conversationController.getCurrentNode();
-        const activityPrompt = ACTIVITY_PROMPT_NODES.has(initialNode.id);
-        const content =
-          getConvMessage(initialNode.id) ||
-          (initialNode.content ?? "") ||
-          m.conversation_helloImHereWithYou();
+    const init = async () => {
+      await engine.initialize();
+      if (engine.hasCompletedOnboarding()) {
+        setUseNewEngine(true);
+        const opening = engine.getOpeningMessage();
         setConversationHistory([
           {
-            id: Date.now().toString(),
-            type: activityPrompt ? "app-buttons" : "message",
-            content,
-            timestamp: new Date().toISOString(),
+            id: opening.id,
+            type: "message",
+            content: opening.content,
+            timestamp: opening.timestamp,
             isUser: false,
-            nodeId: initialNode.id,
-            appsTypes: activityPrompt ? "activities" : undefined,
+            nodeId: "connect",
           },
         ]);
         setIsInitialized(true);
-      } catch (error) {
-        console.error("Error initializing conversation:", error);
-        const fallbackId = "start";
-        const activityPrompt = ACTIVITY_PROMPT_NODES.has(fallbackId);
-        setConversationHistory([
-          {
-            id: Date.now().toString(),
-            type: activityPrompt ? "app-buttons" : "message",
-            content: m.conversation_welcomeToCalme(),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            nodeId: fallbackId,
-            appsTypes: activityPrompt ? "activities" : undefined,
-          },
-        ]);
+      } else {
+        // Fall back to old controller for onboarding
+        setUseNewEngine(false);
+        let retries = 0;
+        while (!conversationController.isInitialized() && retries < 50) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+          retries++;
+        }
+        try {
+          const initialNode = conversationController.getCurrentNode();
+          const content =
+            getConvMessage(initialNode.id) || (initialNode.content ?? "") || "Welcome to CALMe.";
+          setConversationHistory([
+            {
+              id: Date.now().toString(),
+              type: "message",
+              content,
+              timestamp: new Date().toISOString(),
+              isUser: false,
+              nodeId: initialNode.id,
+            },
+          ]);
+        } catch {
+          setConversationHistory([
+            {
+              id: Date.now().toString(),
+              type: "message",
+              content: "Welcome to CALMe. I'm here to support you.",
+              timestamp: new Date().toISOString(),
+              isUser: false,
+              nodeId: "start",
+            },
+          ]);
+        }
         setIsInitialized(true);
       }
     };
-    void initializeConversation();
-  }, [conversationController, ACTIVITY_PROMPT_NODES, getConvMessage]);
+    void init();
+  }, [engine, conversationController, getConvMessage]);
 
   // Update conversation history translations when language changes
   useEffect(() => {
@@ -276,135 +303,125 @@ function App() {
     };
   }, [isRTL, mobileMenuOpen]);
 
-  const processUserInput = useCallback(() => {
+  const processUserInput = useCallback(async () => {
     if (!userInput.trim()) return;
 
-    try {
-      const parserType = conversationController.getCurrentParserType();
-      if (parserType == null) {
-        console.warn("No parser type specified for current node");
-        return;
-      }
+    if (useNewEngine) {
+      try {
+        const requestedActivity = engine.getRequestedActivity(userInput);
+        const botMsg = await engine.processMessage(userInput);
 
-      const stepResult = conversationController.runParser(parserType, userInput);
-      const { nextNode, activityTrigger } = conversationController.processParserOutput(stepResult);
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: botMsg.id,
+            type: "message" as const,
+            content: botMsg.content,
+            timestamp: botMsg.timestamp,
+            isUser: false,
+            nodeId: engine.getPhase(),
+          },
+        ]);
 
-      const activityPrompt = ACTIVITY_PROMPT_NODES.has(nextNode.id);
-      const content =
-        getConvMessage(nextNode.id) || (nextNode.content ?? "") || "How can I help you?";
-      const newMessage: Message = {
-        id: Date.now().toString(),
-        type: activityPrompt ? "app-buttons" : "message",
-        content,
-        timestamp: new Date().toISOString(),
-        isUser: false,
-        nodeId: nextNode.id,
-        appsTypes: activityPrompt ? "activities" : undefined,
-      };
-
-      setConversationHistory((prev) => [...prev, newMessage]);
-
-      if (activityTrigger) {
-        setActivityReturnNode(activityTrigger.returnNode);
-        const targetApp = resolvedApps.find((app) => app.name === activityTrigger.activityName);
-
-        if (targetApp) {
-          if (activityTrigger.activityName === "breathing") {
-            const transitionMsg: Message = {
-              id: Date.now().toString() + "_transition",
-              type: "message",
-              content: m.conversation_breathingTransition(),
-              timestamp: new Date().toISOString(),
-              isUser: false,
-              nodeId: nextNode.id,
-            };
-            setConversationHistory((prev) => [...prev, transitionMsg]);
+        if (requestedActivity) {
+          const targetApp = resolvedApps.find((app) => app.name === requestedActivity);
+          if (targetApp) {
+            setChosenApp(targetApp);
+            setShouldAutoLaunchApp(true);
+            const timer = setTimeout(() => setShowAppsLauncher(true), 2000);
+            setAppsTimeout(timer);
           }
-
-          setChosenApp(targetApp);
-          setShouldAutoLaunchApp(true);
-          const timer = setTimeout(() => {
-            setShowAppsLauncher(true);
-          }, 2000);
-          setAppsTimeout(timer);
-        } else if (
-          !["breathing", "stretching", "matching-cards", "sudoku", "puzzle", "paint"].includes(
-            activityTrigger.activityName,
-          )
-        ) {
-          // Get localized activity name
-          const targetApp = localizedApps.find((app) => app.name === activityTrigger.activityName);
-          const localizedName = (targetApp?.label ?? "") || activityTrigger.activityName;
-
-          const placeholderMsg: Message = {
-            id: Date.now().toString() + "_placeholder",
-            type: "message",
-            content: m.conversation_activityWouldBeCalled({
-              activityName: localizedName,
-            }),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            nodeId: nextNode.id,
-          };
-          setConversationHistory((prev) => [...prev, placeholderMsg]);
-
-          setTimeout(() => {
-            conversationController.moveToNode(activityTrigger.returnNode);
-            const returnNode = conversationController.getCurrentNode();
-            const content =
-              getConvMessage(returnNode.id) ||
-              (returnNode.content ?? "") ||
-              m.conversation_letsContinue();
-            const continueMsg: Message = {
-              id: Date.now().toString() + "_continue",
-              type: "message",
-              content,
-              timestamp: new Date().toISOString(),
-              isUser: false,
-              nodeId: returnNode.id,
-            };
-            setConversationHistory((prev) => [...prev, continueMsg]);
-          }, 1500);
-        } else {
-          // Get localized activity name
-          const targetApp = localizedApps.find((app) => app.name === activityTrigger.activityName);
-          const localizedName = (targetApp?.label ?? "") || activityTrigger.activityName;
-
-          const mismatchMsg: Message = {
-            id: Date.now().toString() + "_mismatch",
-            type: "message",
-            content: m.conversation_startingExercise({
-              activityName: localizedName,
-            }),
-            timestamp: new Date().toISOString(),
-            isUser: false,
-            nodeId: nextNode.id,
-          };
-          setConversationHistory((prev) => [...prev, mismatchMsg]);
         }
+      } catch (error) {
+        console.error("Error processing message:", error);
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}_error`,
+            type: "message" as const,
+            content: "I'm still here. Could you say that again?",
+            timestamp: new Date().toISOString(),
+            isUser: false,
+            nodeId: "error",
+          },
+        ]);
       }
-    } catch (error) {
-      console.error("Error processing user input:", error);
-      const errorMsg: Message = {
-        id: Date.now().toString() + "_error",
-        type: "message",
-        content: m.conversation_didntUnderstand(),
-        timestamp: new Date().toISOString(),
-        isUser: false,
-        nodeId: conversationController.getCurrentNode().id,
-      };
-      setConversationHistory((prev) => [...prev, errorMsg]);
-    }
+    } else {
+      // Old controller path for onboarding
+      try {
+        const parserType = conversationController.getCurrentParserType();
+        if (parserType == null) {
+          const currentNode = conversationController.getCurrentNode();
+          if (typeof currentNode.next === "string") {
+            const advanced = conversationController.moveToNode(currentNode.next);
+            const content =
+              getConvMessage(advanced.id) || (advanced.content ?? "") || "How can I help you?";
+            setConversationHistory((prev) => [
+              ...prev,
+              {
+                id: Date.now().toString(),
+                type: "message" as const,
+                content,
+                timestamp: new Date().toISOString(),
+                isUser: false,
+                nodeId: advanced.id,
+              },
+            ]);
+            setUserInput("");
+            return;
+          }
+          setUserInput("");
+          return;
+        }
+        const stepResult = conversationController.runParser(parserType, userInput);
+        const { nextNode, activityTrigger } =
+          conversationController.processParserOutput(stepResult);
+        const content =
+          getConvMessage(nextNode.id) || (nextNode.content ?? "") || "How can I help you?";
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: Date.now().toString(),
+            type: "message" as const,
+            content,
+            timestamp: new Date().toISOString(),
+            isUser: false,
+            nodeId: nextNode.id,
+          },
+        ]);
 
+        // Play alert sound during onboarding test
+        if (nextNode.id === "onboard_test_sound") {
+          playAlertSound(0.1);
+        }
+
+        if (activityTrigger) {
+          setActivityReturnNode(activityTrigger.returnNode);
+          const targetApp = resolvedApps.find((app) => app.name === activityTrigger.activityName);
+          if (targetApp) {
+            setChosenApp(targetApp);
+            setShouldAutoLaunchApp(true);
+            const timer = setTimeout(() => setShowAppsLauncher(true), 2000);
+            setAppsTimeout(timer);
+          }
+        }
+      } catch (error) {
+        console.error("Error processing user input:", error);
+        setConversationHistory((prev) => [
+          ...prev,
+          {
+            id: `${Date.now()}_error`,
+            type: "message" as const,
+            content: "I didn't quite catch that. Could you try again?",
+            timestamp: new Date().toISOString(),
+            isUser: false,
+            nodeId: "error",
+          },
+        ]);
+      }
+    }
     setUserInput("");
-  }, [
-    userInput,
-    conversationController,
-    ACTIVITY_PROMPT_NODES,
-    resolvedApps,
-    getConvMessage,
-    localizedApps,
-  ]);
+  }, [userInput, useNewEngine, engine, conversationController, resolvedApps, getConvMessage]);
 
   useEffect(() => {
     if (userInput !== "" && isInitialized) {
@@ -466,6 +483,20 @@ function App() {
       } catch (error) {
         console.error("Error returning from activity:", error);
       }
+    } else if (useNewEngine) {
+      // Engine returns to engage phase after activity
+      const returnMsg = await engine.processMessage("I just finished the activity");
+      setConversationHistory((prev) => [
+        ...prev,
+        {
+          id: returnMsg.id,
+          type: "message",
+          content: returnMsg.content,
+          timestamp: returnMsg.timestamp,
+          isUser: false,
+          nodeId: engine.getPhase(),
+        },
+      ]);
     }
   };
 
@@ -478,12 +509,10 @@ function App() {
   }, [appsTimeout]);
 
   useEffect(() => {
-    if (shouldAutoLaunchApp) {
-      const breathingApp = resolvedApps.find((subapps) => subapps.name === "breathing");
-      setChosenApp(breathingApp);
+    if (shouldAutoLaunchApp && chosenApp != null) {
       setShowAppsLauncher(true);
     }
-  }, [shouldAutoLaunchApp, resolvedApps]);
+  }, [shouldAutoLaunchApp, chosenApp]);
 
   const handleAppLaunch = (appToLaunch: AppInterface | undefined) => {
     if (!appToLaunch) {
@@ -508,6 +537,8 @@ function App() {
   };
 
   const handleDemoAlert = () => {
+    playAlertSound();
+
     if (alertInterval) {
       clearInterval(alertInterval);
       setAlertInterval(null);
@@ -516,17 +547,32 @@ function App() {
     setShowAlertButton(false);
     setAlertTimer(180);
 
-    setConversationHistory((prev) => [
-      ...prev,
-      {
-        id: `${Date.now()}_alert_start`,
-        type: "message",
-        content: m.alert_alertStart(),
-        timestamp: new Date().toISOString(),
-        isUser: false,
-        nodeId: "alert_start",
-      },
-    ]);
+    if (useNewEngine) {
+      const alertMsg = engine.activateAlert();
+      setConversationHistory((prev) => [
+        ...prev,
+        {
+          id: alertMsg.id,
+          type: "message",
+          content: alertMsg.content,
+          timestamp: alertMsg.timestamp,
+          isUser: false,
+          nodeId: "alert",
+        },
+      ]);
+    } else {
+      setConversationHistory((prev) => [
+        ...prev,
+        {
+          id: `${Date.now()}_alert_start`,
+          type: "message",
+          content: "Alert detected. Let's make sure you're safe.",
+          timestamp: new Date().toISOString(),
+          isUser: false,
+          nodeId: "alert_start",
+        },
+      ]);
+    }
 
     const interval = setInterval(() => {
       setAlertTimer((prev) => {
@@ -564,41 +610,6 @@ function App() {
       }
     };
   }, [alertInterval]);
-
-  const isConversationComplete = conversationController.isComplete();
-
-  if (isConversationComplete && !showAppsLauncher && !conversationController.isInOnboarding()) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">{m.conversation_conversationComplete()}</h2>
-          <p className="text-gray-600 mb-4">{m.conversation_thankYou()}</p>
-          <Button
-            onClick={() => {
-              conversationController.reset();
-              const initialNode = conversationController.getCurrentNode();
-              const content =
-                getConvMessage(initialNode.id) ||
-                (initialNode.content ?? "") ||
-                m.conversation_helloImHereWithYou();
-              setConversationHistory([
-                {
-                  id: Date.now().toString(),
-                  type: "message",
-                  content,
-                  timestamp: new Date().toISOString(),
-                  isUser: false,
-                  nodeId: initialNode.id,
-                },
-              ]);
-            }}
-          >
-            {m.conversation_startNewConversation()}
-          </Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -702,6 +713,26 @@ function App() {
                     <LanguageSwitcher variant="menu" />
                   </div>
 
+                  <button
+                    type="button"
+                    className={menuRowClasses}
+                    onClick={() => {
+                      setDyslexicMode(!dyslexicMode);
+                    }}
+                  >
+                    <div className={menuLabelClasses}>
+                      <span className="w-4 h-4 flex items-center justify-center text-xs font-bold">
+                        Aa
+                      </span>
+                      <span>Dyslexia-friendly</span>
+                    </div>
+                    <span
+                      className={`text-xs ${dyslexicMode ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}`}
+                    >
+                      {dyslexicMode ? "On" : "Off"}
+                    </span>
+                  </button>
+
                   {showAlertButton && (
                     <button
                       type="button"
@@ -725,62 +756,6 @@ function App() {
           {!showAppsLauncher && (
             <ScrollArea ref={scrollAreaRef} className="flex-1 overflow-y-auto px-3 sm:px-4">
               <div className="space-y-4 pb-4 mt-2">
-                {resolvedApps.length > 0 && (
-                  <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 rounded-2xl border border-border/60 bg-muted/30 p-3 sm:p-4 lg:p-5">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h2 className="text-sm font-medium text-muted-foreground">
-                          {m.quickActivities_title()}
-                        </h2>
-                        <p className="text-xs text-muted-foreground/70 hidden xs:block">
-                          {m.quickActivities_subtitle()}
-                        </p>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-9 w-9 rounded-full text-muted-foreground hover:text-foreground flex-shrink-0"
-                        onClick={() => {
-                          setShowQuickPanel((prev) => !prev);
-                        }}
-                        aria-label={
-                          showQuickPanel ? m.quickActivities_hide() : m.quickActivities_show()
-                        }
-                        aria-expanded={showQuickPanel}
-                        aria-controls="quick-activities-panel"
-                      >
-                        {showQuickPanel ? "−" : "+"}
-                      </Button>
-                    </div>
-                    {showQuickPanel && (
-                      <>
-                        <div
-                          id="quick-activities-panel"
-                          className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-3"
-                        >
-                          {quickActivityOrder
-                            .map((name) => resolvedApps.find((app) => app.name === name))
-                            .filter((app): app is AppInterface => Boolean(app))
-                            .map((app) => (
-                              <Button
-                                key={app.name}
-                                onClick={() => {
-                                  handleAppLaunch(app);
-                                }}
-                                className="flex h-auto min-h-[60px] w-full flex-col items-center justify-center gap-2 rounded-xl border-0 bg-indigo-500/90 px-4 py-3 text-xs font-medium text-white transition-all duration-200 hover:scale-[1.02] hover:bg-indigo-500 active:scale-95 sm:text-sm"
-                                size="sm"
-                              >
-                                <div className="text-white scale-110">{app.icon}</div>
-                                <span className="leading-tight text-white text-center">
-                                  {app.label}
-                                </span>
-                              </Button>
-                            ))}
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
                 {conversationHistory.map((message, index) => (
                   <ChatMessage
                     key={index}
@@ -796,7 +771,7 @@ function App() {
                     onAudioPlay={handleAudioPlay}
                     showScale={index === 0}
                     scaleValue={scaleValue}
-                    onScaleSelect={setScaleValue}
+                    onScaleSelect={handleScaleSelect}
                   />
                 ))}
               </div>
@@ -834,6 +809,66 @@ function App() {
             setAccessibilityOpen(false);
           }}
         />
+
+        {/* Activities sidebar */}
+        {!showAppsLauncher && (
+          <Sheet open={activitiesSidebarOpen} onOpenChange={setActivitiesSidebarOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                className="fixed bottom-20 right-4 z-50 h-12 w-12 rounded-full shadow-lg bg-indigo-500 text-white border-0 hover:bg-indigo-600 hover:text-white"
+                aria-label="Open activities"
+              >
+                <svg
+                  className="w-5 h-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side={isRTL ? "left" : "right"} className="w-64 sm:w-72">
+              <SheetHeader>
+                <SheetTitle>Activities</SheetTitle>
+              </SheetHeader>
+              <div className="flex flex-col gap-2 mt-4">
+                {quickActivityOrder
+                  .map((name) => resolvedApps.find((app) => app.name === name))
+                  .filter((app): app is AppInterface => Boolean(app))
+                  .map((app) => (
+                    <button
+                      type="button"
+                      key={app.name}
+                      onClick={() => {
+                        handleAppLaunch(app);
+                        setActivitiesSidebarOpen(false);
+                      }}
+                      className="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-muted/20 px-3 py-3 text-left transition-all duration-150 hover:bg-indigo-500/10 hover:border-indigo-500/40 active:scale-[0.98]"
+                    >
+                      <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600">
+                        {app.icon}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium truncate">{app.label}</div>
+                        {app.description && (
+                          <div className="text-xs text-muted-foreground truncate">
+                            {app.description}
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  ))}
+              </div>
+            </SheetContent>
+          </Sheet>
+        )}
       </AppsProvider>
     </>
   );

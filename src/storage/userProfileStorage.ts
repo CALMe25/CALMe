@@ -154,26 +154,44 @@ class UserProfileStorage {
     });
   }
 
-  // Profile management
+  // Profile management -- uses a single transaction to deactivate + save atomically
   async saveProfile(profile: UserProfile): Promise<void> {
     if (!this.db) await this.init();
 
     const transaction = this.db!.transaction(["profiles"], "readwrite");
     const store = transaction.objectStore("profiles");
 
-    // Ensure only one active profile (for now)
-    if (profile.isActive) {
-      await this.deactivateAllProfiles();
-    }
-
     return new Promise((resolve, reject) => {
-      const request = store.put(profile);
-      request.onsuccess = () => {
+      if (profile.isActive) {
+        // Deactivate all existing profiles within the same transaction
+        const getAllRequest = store.getAll();
+        getAllRequest.onsuccess = () => {
+          const results: unknown[] = Array.isArray(getAllRequest.result)
+            ? getAllRequest.result
+            : [];
+          for (const entry of results) {
+            if (isUserProfileRecord(entry) && entry.isActive && entry.id !== profile.id) {
+              entry.isActive = false;
+              store.put(entry);
+            }
+          }
+          // Save the new profile in the same transaction
+          store.put(profile);
+        };
+        getAllRequest.onerror = () => {
+          const errorMessage = getAllRequest.error?.message ?? "Unknown error";
+          reject(new Error(errorMessage));
+        };
+      } else {
+        store.put(profile);
+      }
+
+      transaction.oncomplete = () => {
         console.log("Profile saved successfully:", profile.id);
         resolve();
       };
-      request.onerror = () => {
-        const errorMessage = request.error?.message ?? "Unknown error";
+      transaction.onerror = () => {
+        const errorMessage = transaction.error?.message ?? "Unknown error";
         reject(new Error(errorMessage));
       };
     });
@@ -220,14 +238,6 @@ class UserProfileStorage {
         reject(new Error(errorMessage));
       };
     });
-  }
-
-  private async deactivateAllProfiles(): Promise<void> {
-    const profiles = await this.getAllProfiles();
-    for (const profile of profiles) {
-      profile.isActive = false;
-      await this.saveProfile(profile);
-    }
   }
 
   // Conversation state management
@@ -303,17 +313,17 @@ class UserProfileStorage {
 
     const transaction = this.db!.transaction(["activityHistory"], "readonly");
     const store = transaction.objectStore("activityHistory");
-    const index = store.index("profileId");
+    const index = store.index("timestamp");
 
     return new Promise((resolve, reject) => {
       const activities: ActivityHistoryEntry[] = [];
-      const request = index.openCursor(IDBKeyRange.only(profileId), "prev");
+      const request = index.openCursor(null, "prev");
 
       request.onsuccess = () => {
         const cursor = request.result;
         if (cursor !== null && cursor !== undefined && activities.length < limit) {
           const entry: unknown = cursor.value;
-          if (isActivityHistoryEntryRecord(entry)) {
+          if (isActivityHistoryEntryRecord(entry) && entry.profileId === profileId) {
             activities.push(entry);
           }
           cursor.continue();
@@ -337,14 +347,20 @@ class UserProfileStorage {
       "readwrite",
     );
 
-    const promises = [
-      transaction.objectStore("profiles").clear(),
-      transaction.objectStore("conversationState").clear(),
-      transaction.objectStore("activityHistory").clear(),
-    ];
+    transaction.objectStore("profiles").clear();
+    transaction.objectStore("conversationState").clear();
+    transaction.objectStore("activityHistory").clear();
 
-    await Promise.all(promises);
-    console.log("All user data cleared");
+    return new Promise((resolve, reject) => {
+      transaction.oncomplete = () => {
+        console.log("All user data cleared");
+        resolve();
+      };
+      transaction.onerror = () => {
+        const errorMessage = transaction.error?.message ?? "Unknown error";
+        reject(new Error(errorMessage));
+      };
+    });
   }
 }
 

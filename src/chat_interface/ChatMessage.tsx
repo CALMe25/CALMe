@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Play, Pause, Mic } from "lucide-react";
@@ -6,7 +6,6 @@ import { type AppInterface, quickActivityOrder } from "../appsContextApi";
 import { useLocalizedApps } from "../hooks/useLocalizedApps";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Scale } from "../components/ui/Scale";
-import { m } from "../paraglide/messages.js";
 
 interface ChatMessageProps {
   id: string;
@@ -42,7 +41,15 @@ export function ChatMessage({
 }: ChatMessageProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const apps = useLocalizedApps();
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+    };
+  }, []);
   const { currentLocale } = useLanguage();
   const isRTL = currentLocale === "he";
   const alignRight = isUser;
@@ -62,23 +69,28 @@ export function ChatMessage({
 
   const handleAudioPlay = () => {
     if (isPlaying) {
+      if (intervalRef.current !== null) clearInterval(intervalRef.current);
+      intervalRef.current = null;
       setIsPlaying(false);
       setCurrentTime(0);
       return;
     }
 
+    if (audioDuration <= 0) return;
+
     setIsPlaying(true);
     onAudioPlay?.(id);
 
     let elapsed = 0;
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       elapsed += 0.1;
       setCurrentTime(elapsed);
 
       if (elapsed >= audioDuration) {
         setIsPlaying(false);
         setCurrentTime(0);
-        clearInterval(interval);
+        if (intervalRef.current !== null) clearInterval(intervalRef.current);
+        intervalRef.current = null;
       }
     }, 100);
   };
@@ -101,11 +113,20 @@ export function ChatMessage({
         </Avatar>
 
         <div className="flex flex-col min-w-0">
+          {showScale && scaleValue === null && (
+            <div className="mb-2 w-full">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2">
+                On a scale of 1-10, how are you feeling right now?
+              </p>
+              <Scale selected={scaleValue} onSelect={onScaleSelect} />
+            </div>
+          )}
+
           <div
             className={`px-3 sm:px-4 py-2 sm:py-3 rounded-2xl ${
               isUser
                 ? "bg-primary text-primary-foreground rounded-br-sm"
-                : "bg-muted text-muted-foreground rounded-bl-sm"
+                : "bg-secondary text-secondary-foreground rounded-bl-sm"
             }`}
           >
             {type === "audio" ? (
@@ -140,7 +161,7 @@ export function ChatMessage({
                           isUser ? "bg-primary-foreground/60" : "bg-muted-foreground/60"
                         }`}
                         style={{
-                          width: `${(currentTime / audioDuration) * 100}%`,
+                          width: `${audioDuration > 0 ? (currentTime / audioDuration) * 100 : 0}%`,
                         }}
                       />
                     </div>
@@ -159,17 +180,7 @@ export function ChatMessage({
               <p className="text-sm leading-relaxed mb-3">{content}</p>
             )}
 
-            {showScale && (
-              <div className="mb-3">
-                <p className="text-xs sm:text-sm text-muted-foreground mb-2">{m.scale_title()}</p>
-                <Scale selected={scaleValue} onSelect={onScaleSelect} />
-                {scaleValue !== null && (
-                  <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
-                    {m.scale_selection({ scaleValue: scaleValue })}
-                  </p>
-                )}
-              </div>
-            )}
+            {/* Scale renders outside the bubble — see below */}
 
             {type === "app-buttons" && (
               <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
@@ -196,7 +207,7 @@ export function ChatMessage({
           <span
             className={`text-xs text-muted-foreground mt-1 ${alignRight ? "text-right" : "text-left"}`}
           >
-            {nodeId != null ? `${nodeId} • ${formatTime(timestamp)}` : formatTime(timestamp)}
+            {formatTime(timestamp)}
           </span>
         </div>
       </div>

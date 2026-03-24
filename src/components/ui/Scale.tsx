@@ -27,22 +27,17 @@ export const Scale: React.FC<ScaleProps> = ({
 
   const values = Array.from({ length: max - min + 1 }, (_, i) => min + i);
 
-  // Responsive sizes: min diameter 30px, prefer viewport-based up to 56px. Font min 12px.
-  const buttonSize = "clamp(30px, 6vw, 56px)";
-  const fontSize = "clamp(12px, 1.6vw, 18px)";
-
   return (
     <div
       style={{
         backgroundColor: "white",
-        padding: "12px",
+        padding: "clamp(8px, 2vw, 16px)",
         borderRadius: 12,
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
+        display: "grid",
+        gridTemplateColumns: "repeat(5, 1fr)",
         boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-        gap: 8,
-        flexWrap: "wrap",
+        gap: "clamp(4px, 1.5vw, 10px)",
+        width: "100%",
       }}
     >
       {values.map((value) => {
@@ -54,20 +49,17 @@ export const Scale: React.FC<ScaleProps> = ({
             onClick={() => {
               handleSelect(value);
             }}
-            // Use CSS variables to ensure true square buttons and responsive font-size
             style={{
-              width: buttonSize,
-              height: buttonSize,
-              minWidth: "30px",
-              minHeight: "30px",
+              width: "100%",
+              aspectRatio: "1 / 1",
               borderRadius: "50%",
               border: "none",
               cursor: onSelect ? "pointer" : "default",
               backgroundColor: isSelected ? "#4A90E2" : "#78B3E8",
               color: isSelected ? "white" : "black",
-              fontSize: fontSize,
+              fontSize: "clamp(16px, 3vw, 28px)",
               fontWeight: 500,
-              display: "inline-flex",
+              display: "flex",
               alignItems: "center",
               justifyContent: "center",
               transition: "transform 0.12s ease, box-shadow 0.12s ease",
@@ -95,7 +87,7 @@ export const Scale: React.FC<ScaleProps> = ({
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     color: "white",
-                    fontSize: fontSize,
+                    fontSize: "clamp(16px, 3vw, 28px)",
                     fontWeight: "bold",
                     pointerEvents: "none",
                   }}

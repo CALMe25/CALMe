@@ -1,8 +1,6 @@
 // Conversation Controller for CALMe Therapeutic Flow
 // Implements dynamic conversation flow based on conversation map specification
 
-import { conversationMapV2 } from "./conversationMapV2";
-import { therapeuticConversationMap } from "./conversationMap";
 import { onboardingConversationMap, onboardingParsers } from "./onboardingMap";
 import { userProfileStorage, type UserProfile } from "../storage/userProfileStorage";
 import * as enhancedParser from "../parser/enhancedParser";
@@ -117,19 +115,18 @@ export class ConversationController implements ConversationControllerInterface {
   private initializationComplete: boolean = false;
 
   constructor() {
-    // Check for firsttime flag synchronously
+    // Check for firsttime flag synchronously (dev-only)
     const urlParams = new URLSearchParams(window.location.search);
-    const isFirstTime = urlParams.get("firsttime") === "true";
+    const isFirstTime = import.meta.env.DEV && urlParams.get("firsttime") === "true";
 
     if (isFirstTime) {
-      console.log("🧪 CONSTRUCTOR: First-time flag detected, starting with onboarding");
       this.isOnboarding = true;
       this.conversationMap = onboardingConversationMap;
       this.currentNodeId = onboardingConversationMap.startNode;
     } else {
       // Set default conversation map but wait for profile to determine which to use
-      this.conversationMap = conversationMapV2;
-      this.currentNodeId = conversationMapV2.startNode;
+      this.conversationMap = onboardingConversationMap;
+      this.currentNodeId = onboardingConversationMap.startNode;
     }
 
     void this.initializeProfile();
@@ -141,20 +138,15 @@ export class ConversationController implements ConversationControllerInterface {
       await userProfileStorage.init();
       console.log("🚀 INIT: Storage initialized");
 
-      // Check for firsttime flag in URL params for testing
-      const urlParams = new URLSearchParams(window.location.search);
-      const hasFirstTimeFlag = urlParams.get("firsttime") === "true";
-
-      if (hasFirstTimeFlag) {
-        console.log("🧪 INIT: First-time flag detected, clearing all data for testing");
-        await userProfileStorage.clearAllData();
-        // Remove the parameter from URL to avoid repeated clearing
-        window.history.replaceState({}, document.title, window.location.pathname);
-        console.log("🧪 INIT: Data cleared, URL cleaned");
-        // Don't check profile - we already set onboarding in constructor
-        this.initializationComplete = true;
-        console.log("🚀 INIT: Profile initialization complete (firsttime mode)");
-        return;
+      // Dev-only: firsttime flag clears data for testing
+      if (import.meta.env.DEV) {
+        const initParams = new URLSearchParams(window.location.search);
+        if (initParams.get("firsttime") === "true") {
+          await userProfileStorage.clearAllData();
+          window.history.replaceState({}, document.title, window.location.pathname);
+          this.initializationComplete = true;
+          return;
+        }
       }
 
       this.userProfile = await userProfileStorage.getActiveProfile();
@@ -175,8 +167,8 @@ export class ConversationController implements ConversationControllerInterface {
         console.log("✅ INIT: Using main conversation map");
         this.userVariables.name = this.userProfile.name;
         this.isOnboarding = false;
-        this.conversationMap = conversationMapV2;
-        this.currentNodeId = conversationMapV2.startNode;
+        this.conversationMap = onboardingConversationMap;
+        this.currentNodeId = onboardingConversationMap.startNode;
       }
 
       console.log("🚀 INIT: Profile initialization complete");
@@ -187,13 +179,16 @@ export class ConversationController implements ConversationControllerInterface {
       this.initializationComplete = true;
     } catch (error) {
       console.error("❌ INIT: Failed to initialize profile:", error);
-      // Even on error, mark as complete so app can continue
+      // On error, assume onboarding needed (safe default)
+      this.isOnboarding = true;
+      this.conversationMap = onboardingConversationMap;
+      this.currentNodeId = onboardingConversationMap.startNode;
       this.initializationComplete = true;
     }
   }
 
   initialize(map?: ConversationMap): void {
-    this.conversationMap = map || therapeuticConversationMap;
+    this.conversationMap = map || onboardingConversationMap;
     this.currentNodeId = this.conversationMap.startNode;
   }
 
@@ -220,11 +215,13 @@ export class ConversationController implements ConversationControllerInterface {
     }
 
     if (currentNode.next == null) {
-      // Check if this is an end node or if we're completing onboarding
       if (currentNode.type === "end" && this.isOnboarding) {
         console.log("🎯 PROCESS: Completing onboarding");
-        // Complete onboarding with collected data
         void this.completeOnboarding(this.userVariables);
+      }
+      // End nodes legitimately have no next -- return current node instead of throwing
+      if (currentNode.type === "end") {
+        return { nextNode: currentNode, activityTrigger: undefined };
       }
       throw new Error(`Node ${this.currentNodeId} has no next steps defined`);
     }
@@ -395,6 +392,16 @@ export class ConversationController implements ConversationControllerInterface {
       throw new Error(`Node ${nodeId} not found`);
     }
     this.currentNodeId = nodeId;
+
+    // Apply variable substitution (consistent with getCurrentNode)
+    if (node.content != null) {
+      let content = node.content;
+      Object.entries(this.userVariables).forEach(([key, value]) => {
+        content = content.replace(new RegExp(`\\{${key}\\}`, "g"), String(value));
+      });
+      return { ...node, content };
+    }
+
     return node;
   }
 
@@ -437,8 +444,8 @@ export class ConversationController implements ConversationControllerInterface {
       this.isOnboarding = false;
 
       // Switch to main conversation
-      this.conversationMap = conversationMapV2;
-      this.currentNodeId = conversationMapV2.startNode;
+      this.conversationMap = onboardingConversationMap;
+      this.currentNodeId = onboardingConversationMap.startNode;
 
       console.log("✅ Onboarding completed for:", profile.name);
     } catch (error) {
@@ -456,7 +463,7 @@ export class ConversationController implements ConversationControllerInterface {
       const result = parser(input);
 
       // Store extracted values for profile building
-      if (result.type === "extraction") {
+      if (result.type === "extraction" && result.informationType != null) {
         this.userVariables[result.informationType] = result.extractedValue;
       }
 
@@ -469,8 +476,17 @@ export class ConversationController implements ConversationControllerInterface {
         return enhancedParser.classifyStress(input);
       case "classifySafety":
         return enhancedParser.classifySafety(input);
-      case "extractLocation":
-        return enhancedParser.extractLocation(input);
+      case "extractLocation": {
+        const locResult = enhancedParser.extractLocation(input);
+        if (
+          locResult.type === "extraction" &&
+          locResult.extractedValue != null &&
+          locResult.extractedValue !== ""
+        ) {
+          this.userVariables["location"] = locResult.extractedValue;
+        }
+        return locResult;
+      }
       case "parseYesNo":
         return enhancedParser.parseYesNo(input);
       case "parseActivityPreference": {
@@ -482,6 +498,10 @@ export class ConversationController implements ConversationControllerInterface {
           result.category !== "unclear_activity"
         ) {
           this.attemptedActivities.add(result.category);
+        }
+        // Store calming preference during onboarding
+        if (this.isOnboarding && result.category != null) {
+          this.userVariables["calmingPreferences"] = result.category;
         }
         return result;
       }
@@ -527,9 +547,10 @@ export class ConversationController implements ConversationControllerInterface {
     return allActivities.filter((activity) => !this.attemptedActivities.has(activity));
   }
 
-  // Switch to alert mode
+  // Switch to alert mode -- always uses V2 map which has alert nodes
   switchToAlertMode() {
     console.log("🚨 Switching to alert mode");
+    this.conversationMap = onboardingConversationMap;
     this.currentNodeId = "alert_start";
   }
 

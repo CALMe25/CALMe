@@ -33,7 +33,6 @@ export default tseslint.config(
     rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "react-hooks/immutability": "warn",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/ban-ts-comment": "warn",

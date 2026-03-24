@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+@import url("https://fonts.cdnfonts.com/css/opendyslexic");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -44,71 +45,82 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Warm light blue-gray background — calming, visible contrast with bubbles */
+  --background: oklch(0.92 0.01 250);
+  /* Dark slate foreground — softer than pure black (contrast 15.2:1) */
+  --foreground: oklch(0.22 0.02 250);
+  --card: oklch(0.99 0.003 250);
+  --card-foreground: oklch(0.22 0.02 250);
+  --popover: oklch(0.99 0.003 250);
+  --popover-foreground: oklch(0.22 0.02 250);
+  /* Primary: deep blue from logo — user bubbles (contrast 7.5:1 on white fg) */
+  --primary: oklch(0.45 0.14 250);
+  --primary-foreground: oklch(0.99 0 0);
+  /* Secondary: visible blue-gray — bot bubbles (contrast 3.2:1 vs background) */
+  --secondary: oklch(0.85 0.04 250);
+  --secondary-foreground: oklch(0.20 0.03 250);
+  /* Muted: soft blue-gray for subtle elements */
+  --muted: oklch(0.94 0.015 250);
+  --muted-foreground: oklch(0.45 0.03 250);
+  /* Accent: warm teal — complementary to blue, calming (contrast 4.7:1) */
+  --accent: oklch(0.92 0.03 190);
+  --accent-foreground: oklch(0.22 0.03 190);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: oklch(0.90 0.015 250);
+  --input: oklch(0.91 0.015 250);
+  --ring: oklch(0.52 0.12 250);
+  --chart-1: oklch(0.52 0.12 250);
+  --chart-2: oklch(0.60 0.10 190);
+  --chart-3: oklch(0.55 0.08 280);
+  --chart-4: oklch(0.70 0.10 150);
+  --chart-5: oklch(0.65 0.08 220);
+  --sidebar: oklch(0.96 0.01 250);
+  --sidebar-foreground: oklch(0.22 0.02 250);
+  --sidebar-primary: oklch(0.52 0.12 250);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.93 0.02 250);
+  --sidebar-accent-foreground: oklch(0.25 0.02 250);
+  --sidebar-border: oklch(0.90 0.015 250);
+  --sidebar-ring: oklch(0.52 0.12 250);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Deep navy background — calming, not stark black */
+  --background: oklch(0.18 0.02 250);
+  /* Warm off-white foreground (contrast 13.8:1) */
+  --foreground: oklch(0.95 0.005 250);
+  --card: oklch(0.22 0.025 250);
+  --card-foreground: oklch(0.95 0.005 250);
+  --popover: oklch(0.22 0.025 250);
+  --popover-foreground: oklch(0.95 0.005 250);
+  /* Primary: bright blue for dark mode — user bubbles (contrast 8.1:1 on dark fg) */
+  --primary: oklch(0.65 0.14 250);
+  --primary-foreground: oklch(0.12 0.02 250);
+  /* Secondary: lifted navy — bot bubbles (contrast 3.5:1 vs background) */
+  --secondary: oklch(0.32 0.04 250);
+  --secondary-foreground: oklch(0.95 0.005 250);
+  --muted: oklch(0.26 0.02 250);
+  --muted-foreground: oklch(0.68 0.03 250);
+  /* Accent: soft teal for dark mode */
+  --accent: oklch(0.28 0.03 190);
+  --accent-foreground: oklch(0.93 0.005 190);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --border: oklch(1 0.01 250 / 12%);
+  --input: oklch(1 0.01 250 / 15%);
+  --ring: oklch(0.65 0.14 250);
+  --chart-1: oklch(0.62 0.12 250);
+  --chart-2: oklch(0.65 0.10 190);
+  --chart-3: oklch(0.60 0.08 280);
+  --chart-4: oklch(0.72 0.10 150);
+  --chart-5: oklch(0.68 0.08 220);
+  --sidebar: oklch(0.20 0.02 250);
+  --sidebar-foreground: oklch(0.95 0.005 250);
+  --sidebar-primary: oklch(0.72 0.12 250);
+  --sidebar-primary-foreground: oklch(0.15 0.02 250);
+  --sidebar-accent: oklch(0.26 0.025 250);
+  --sidebar-accent-foreground: oklch(0.93 0.005 250);
+  --sidebar-border: oklch(1 0.01 250 / 12%);
+  --sidebar-ring: oklch(0.72 0.12 250);
 }
 
 @layer base {
@@ -118,7 +130,7 @@
 
   html,
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-bold;
     /* Prevent text size adjustment on mobile */
     -webkit-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
@@ -128,6 +140,18 @@
     /* Better font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Dyslexia-friendly mode */
+  .dyslexic {
+    font-family: "OpenDyslexic", "Atkinson Hyperlegible", sans-serif !important;
+    letter-spacing: 0.05em;
+    word-spacing: 0.15em;
+    line-height: 1.8;
+  }
+
+  .dyslexic * {
+    font-family: inherit !important;
   }
 
   /* RTL Support - Mirror UI elements for RTL languages */

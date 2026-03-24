@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { m } from "../paraglide/messages.js";
 import { useUserPreferences } from "../contexts/UserPreferencesContext";
 
@@ -53,36 +53,47 @@ const MatchingGame: React.FC<MatchingGameProps> = ({ onGameEnd }) => {
   const [matchesFound, setMatchesFound] = useState(0);
   const [isChecking, setIsChecking] = useState(false); // To prevent flipping more than 2 cards at once
   const [showWinBanner, setShowWinBanner] = useState(false);
+  const mismatchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Clean up mismatch timer on unmount
+  useEffect(() => {
+    return () => {
+      if (mismatchTimerRef.current) {
+        clearTimeout(mismatchTimerRef.current);
+      }
+    };
+  }, []);
 
   // Effect to check for matches when two cards are flipped
   useEffect(() => {
-    if (flippedCards.length === 2) {
-      setIsChecking(true);
-      const [id1, id2] = flippedCards;
-      const card1 = cards.find((card) => card.id === id1);
-      const card2 = cards.find((card) => card.id === id2);
+    if (flippedCards.length !== 2 || !cards.length) return;
 
-      if (card1 && card2 && card1.value === card2.value) {
+    setIsChecking(true);
+    const [id1, id2] = flippedCards;
+    const card1 = cards.find((card) => card.id === id1);
+    const card2 = cards.find((card) => card.id === id2);
+
+    if (card1 && card2 && card1.value === card2.value) {
+      setCards((prevCards) =>
+        prevCards.map((card) =>
+          card.id === id1 || card.id === id2 ? { ...card, isMatched: true } : card,
+        ),
+      );
+      setMatchesFound((prev) => prev + 1);
+      setFlippedCards([]);
+      setIsChecking(false);
+    } else {
+      mismatchTimerRef.current = setTimeout(() => {
         setCards((prevCards) =>
+          // Wait for the flip animation to finish before hiding the emoji
           prevCards.map((card) =>
-            card.id === id1 || card.id === id2 ? { ...card, isMatched: true } : card,
+            card.id === id1 || card.id === id2 ? { ...card, isFlipped: false } : card,
           ),
         );
-        setMatchesFound((prev) => prev + 1);
         setFlippedCards([]);
         setIsChecking(false);
-      } else {
-        setTimeout(() => {
-          setCards((prevCards) =>
-            // Wait for the flip animation to finish before hiding the emoji
-            prevCards.map((card) =>
-              card.id === id1 || card.id === id2 ? { ...card, isFlipped: false } : card,
-            ),
-          );
-          setFlippedCards([]);
-          setIsChecking(false);
-        }, 1500); // 1.5 s for flip animation
-      }
+        mismatchTimerRef.current = null;
+      }, 1500); // 1.5 s for flip animation
     }
   }, [flippedCards, cards]);
 
