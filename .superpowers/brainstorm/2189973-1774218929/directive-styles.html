@@ -1,0 +1,108 @@
+<h2>How directive should the bot be during crisis?</h2>
+<p class="subtitle">Each option shows a simulated conversation with someone sheltering during a rocket alert</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Firm & Specific — First Responder Voice</h3>
+      <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:14px;margin:8px 0;font-family:system-ui;">
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">I'm here with you. What's your name?</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">Dana</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Dana, count the people around you right now. Tell me the number.</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">4 people</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Good. Look at each person. Point to the one who seems most stressed. Go check on them now. Ask if they need water.</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">there's a kid crying</div>
+        </div>
+        <div style="margin-bottom:0;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Go to the child. Kneel to their level. Say: "My name is Dana. I'm going to stay right here with you." Do that now.</div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Strengths</h4><ul><li>Clear, no ambiguity</li><li>Activates prefrontal cortex immediately</li><li>Matches Six Cs "Challenge" precisely</li><li>Works when person can barely think</li></ul></div>
+        <div class="cons"><h4>Risks</h4><ul><li>Could feel bossy or cold</li><li>No room for "I can't do that"</li><li>Same tone whether calm or panicking</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Guided & Gentle — Supportive Friend Voice</h3>
+      <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:14px;margin:8px 0;font-family:system-ui;">
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Hey, I'm here. What should I call you?</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">Dana</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Dana, can you look around? Who do you see near you?</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">some people, a kid</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Is anyone looking like they could use some support? Sometimes even a small thing helps.</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">the kid is crying</div>
+        </div>
+        <div style="margin-bottom:0;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">That sounds hard. Do you think you could go sit near them? Sometimes just being close helps a kid feel safer.</div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Strengths</h4><ul><li>Warm, non-threatening</li><li>User has choice — feels in control</li><li>Works for lower-stress situations</li></ul></div>
+        <div class="cons"><h4>Risks</h4><ul><li>Too vague when someone is panicking</li><li>"Can you...?" invites "no"</li><li>Doesn't fully activate executive function</li><li>Slower to restore agency</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Adaptive — Reads Stress Level, Shifts Tone</h3>
+      <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:14px;margin:8px 0;font-family:system-ui;">
+        <div style="margin-bottom:6px;text-align:center;"><span style="background:#c0392b;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">HIGH STRESS DETECTED — firm mode</span></div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">I'm here. I'm not going anywhere. What's your name?</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">dana i can't breathe</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">Dana. Press your feet into the floor. Feel that? Good. Now count the people near you. How many?</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">4 i think. there's a kid crying</div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">4 people, one kid. Go to the child now. Kneel down and tell them your name.</div>
+        </div>
+        <div style="margin-bottom:12px;text-align:right;">
+          <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">ok i did that. she stopped crying a little</div>
+        </div>
+        <div style="margin-bottom:6px;text-align:center;"><span style="background:#27ae60;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">STABILIZING — shifting to guided mode</span></div>
+        <div style="margin-bottom:0;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:85%;">You did that. You helped her. Does anyone else around you look like they could use something? Water, a blanket?</div>
+        </div>
+      </div>
+      <div class="pros-cons" style="margin-top:8px;">
+        <div class="pros"><h4>Strengths</h4><ul><li>Firm when needed, gentle when possible</li><li>Matches Six Cs model precisely — directive to restore function, then softer</li><li>Acknowledges progress ("You did that")</li><li>Transitions feel natural</li></ul></div>
+        <div class="cons"><h4>Risks</h4><ul><li>More complex to implement</li><li>Stress detection must be accurate</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>

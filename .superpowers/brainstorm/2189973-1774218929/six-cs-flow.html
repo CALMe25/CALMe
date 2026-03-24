@@ -1,0 +1,190 @@
+<h2>Six Cs Conversation Engine — Full Design</h2>
+<p class="subtitle">Review each section. Click to confirm it looks right or flag concerns.</p>
+
+<div class="section">
+  <h3>1. Entry — No Onboarding, Straight to Commitment</h3>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;">
+      <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:13px;font-family:system-ui;">
+        <div style="text-align:center;margin-bottom:8px;"><span style="background:#c0392b;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">ALERT ACTIVE</span></div>
+        <div style="margin-bottom:10px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">I'm here with you. I'm not going anywhere. What's your name?</div>
+        </div>
+        <div style="text-align:center;color:#888;font-size:11px;margin:8px 0;">No onboarding screen. No forms. No buttons to skip.<br>The name question IS the first cognitive task.</div>
+      </div>
+      <p style="margin-top:8px;font-size:13px;color:#666;"><strong>First-time user:</strong> App opens → straight to conversation. Profile collected after crisis.</p>
+    </div>
+    <div style="flex:1;min-width:280px;">
+      <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:13px;font-family:system-ui;">
+        <div style="text-align:center;margin-bottom:8px;"><span style="background:#c0392b;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">ALERT ACTIVE</span></div>
+        <div style="margin-bottom:10px;">
+          <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">Dana, I'm here. Are you somewhere safe?</div>
+        </div>
+        <div style="text-align:center;color:#888;font-size:11px;margin:8px 0;">Returning user with profile.<br>Skips name, goes straight to safety check.</div>
+      </div>
+      <p style="margin-top:8px;font-size:13px;color:#666;"><strong>Returning user:</strong> Already knows name. Jumps to safety assessment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>2. The Six Cs Sequence — Adaptive, Skippable</h3>
+  <div style="background:#f8f9fa;border-radius:12px;padding:20px;border:1px solid #ddd;">
+    <div style="display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:center;margin-bottom:16px;">
+      <div style="background:#2c3e50;color:white;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;">Commitment</div>
+      <div style="color:#999;">→</div>
+      <div style="background:#2980b9;color:white;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;">Cognitive</div>
+      <div style="color:#999;">→</div>
+      <div style="background:#e67e22;color:white;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;">Challenge</div>
+      <div style="color:#999;">→</div>
+      <div style="background:#27ae60;color:white;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;">Control</div>
+      <div style="color:#999;">→</div>
+      <div style="background:#8e44ad;color:white;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600;">Continuity</div>
+    </div>
+    <div style="text-align:center;margin-bottom:12px;">
+      <div style="background:#e74c3c;color:white;padding:4px 12px;border-radius:12px;font-size:12px;display:inline-block;">Compassion woven through every message</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <tr style="border-bottom:1px solid #ddd;">
+        <td style="padding:8px;font-weight:600;color:#2c3e50;width:120px;">Commitment</td>
+        <td style="padding:8px;">"I'm here. I'm not going anywhere."</td>
+        <td style="padding:8px;color:#888;width:100px;">~5 sec</td>
+      </tr>
+      <tr style="border-bottom:1px solid #ddd;">
+        <td style="padding:8px;font-weight:600;color:#2980b9;">Cognitive</td>
+        <td style="padding:8px;">"Count the people around you." / "What floor are you on?" / "How many exits can you see?"</td>
+        <td style="padding:8px;color:#888;">~15 sec</td>
+      </tr>
+      <tr style="border-bottom:1px solid #ddd;">
+        <td style="padding:8px;font-weight:600;color:#e67e22;">Challenge</td>
+        <td style="padding:8px;">"Go check on the person who looks most stressed." / "Find water for the child." / "Ask the person next to you their name."</td>
+        <td style="padding:8px;color:#888;">~30 sec</td>
+      </tr>
+      <tr style="border-bottom:1px solid #ddd;">
+        <td style="padding:8px;font-weight:600;color:#27ae60;">Control</td>
+        <td style="padding:8px;">"Do you want to get them water, or sit with them?" / "Would you rather check on the elderly person or the child first?"</td>
+        <td style="padding:8px;color:#888;">~15 sec</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;font-weight:600;color:#8e44ad;">Continuity</td>
+        <td style="padding:8px;">"The siren went off at [time]. You got to shelter. You've helped [person]. The threat will pass."</td>
+        <td style="padding:8px;color:#888;">~20 sec</td>
+      </tr>
+    </table>
+    <p style="margin-top:12px;font-size:12px;color:#888;text-align:center;">
+      <strong>Skip logic:</strong> If user says "I'm with 6 people and a kid is freaking out" → skip Commitment + Cognitive, jump to Challenge.<br>
+      <strong>Fallback:</strong> When stress level is unknown, default to firm/directive (option A).
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <h3>3. Inline Micro-Activities vs Sidebar Activities</h3>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:280px;background:#fff3e0;border-radius:12px;padding:16px;border:1px solid #ffcc80;">
+      <h4 style="margin:0 0 8px;color:#e65100;">During Crisis (inline only)</h4>
+      <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;">
+        <li>"Count the people around you"</li>
+        <li>"Describe 3 things you can see"</li>
+        <li>"Check if anyone needs water"</li>
+        <li>"Ask the person next to you their name"</li>
+        <li>"What supplies do you have?"</li>
+        <li>"Is anyone injured?"</li>
+      </ul>
+      <p style="font-size:12px;color:#bf360c;margin:8px 0 0;font-weight:600;">Activities sidebar HIDDEN. No breathing exercises. No games. Stay in the real world.</p>
+    </div>
+    <div style="flex:1;min-width:280px;background:#e8f5e9;border-radius:12px;padding:16px;border:1px solid #a5d6a7;">
+      <h4 style="margin:0 0 8px;color:#2e7d32;">After Crisis (sidebar available)</h4>
+      <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8;">
+        <li>Breathing exercises</li>
+        <li>Matching game</li>
+        <li>Digital canvas</li>
+        <li>Snake, Sudoku, puzzles</li>
+        <li>Stretching routine</li>
+      </ul>
+      <p style="font-size:12px;color:#1b5e20;margin:8px 0 0;font-weight:600;">Activities sidebar VISIBLE. Recovery mode. Decompression. Calming is appropriate now.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>4. Adaptive Tone — Firm → Guided Transition</h3>
+  <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:13px;font-family:system-ui;">
+    <div style="text-align:center;margin-bottom:8px;"><span style="background:#c0392b;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">CRISIS — FIRM MODE</span></div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">I'm here with you. What's your name?</div>
+    </div>
+    <div style="margin-bottom:8px;text-align:right;">
+      <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">dana im so scared</div>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">Dana. Press your feet into the floor. Feel that? Now count the people near you.</div>
+    </div>
+    <div style="margin-bottom:8px;text-align:right;">
+      <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">4 people and a kid</div>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">Go to the child. Kneel down. Say your name. Do it now.</div>
+    </div>
+    <div style="margin-bottom:8px;text-align:right;">
+      <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">i did. she says her name is maya</div>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">You did that, Dana. Maya knows your name now. That matters.</div>
+    </div>
+    <div style="text-align:center;margin:10px 0 8px;"><span style="background:#27ae60;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">STABILIZING — SHIFTING TO GUIDED</span></div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">Does Maya need anything? Water, a blanket? What about the others around you?</div>
+    </div>
+    <div style="margin-bottom:8px;text-align:right;">
+      <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">i gave her water. theres an old man who looks shaky</div>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">You're helping people, Dana. Want to check on him too?</div>
+    </div>
+    <div style="text-align:center;margin:10px 0 8px;"><span style="background:#2980b9;color:white;padding:2px 10px;border-radius:8px;font-size:11px;">ALL CLEAR — RECOVERY MODE</span></div>
+    <div style="margin-bottom:0;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">The alert has passed. You made it — and you helped Maya and the others get through it too. How are you feeling?</div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#888;margin-top:8px;text-align:center;">
+    Notice: short commanding sentences during crisis → longer supportive questions during recovery.<br>
+    Compassion throughout: "You did that." / "That matters." / "You're helping people."
+  </p>
+</div>
+
+<div class="section">
+  <h3>5. Post-Crisis: Profile Collection + Activities</h3>
+  <div style="background:#1a1a2e;color:#e0e0e0;border-radius:12px;padding:16px;font-size:13px;font-family:system-ui;">
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">Dana, you handled that really well. Want to set up your profile so I'm ready faster next time?</div>
+    </div>
+    <div style="margin-bottom:8px;text-align:right;">
+      <div style="background:#2d4a22;color:white;padding:8px 12px;border-radius:12px 12px 4px 12px;display:inline-block;">sure</div>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div style="background:#3a6ea5;color:white;padding:8px 12px;border-radius:12px 12px 12px 4px;display:inline-block;max-width:90%;">Where's your usual safe space? Mamad, miklat, stairwell?</div>
+    </div>
+    <div style="text-align:center;color:#888;font-size:11px;margin:8px 0;">
+      Onboarding happens HERE — after the crisis, when they're calm.<br>
+      Activities sidebar is now visible for decompression.
+    </div>
+  </div>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="approve" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>This design looks right</h3>
+      <p>Ready to write the spec</p>
+    </div>
+  </div>
+  <div class="option" data-choice="changes" onclick="toggleSelect(this)">
+    <div class="letter">✎</div>
+    <div class="content">
+      <h3>Needs changes</h3>
+      <p>I'll describe what to adjust in the terminal</p>
+    </div>
+  </div>
+</div>

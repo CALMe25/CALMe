@@ -180,7 +180,7 @@ export class ConversationEngine {
     if (analysis.safety !== "unknown") {
       this.state.context.safety = analysis.safety;
     }
-    if (analysis.stressLevel !== "moderate") {
+    if (analysis.stressLevel !== "unknown") {
       this.state.context.stressLevel = analysis.stressLevel;
     }
     if (analysis.socialContext !== "unknown") {

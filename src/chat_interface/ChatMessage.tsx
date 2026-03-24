@@ -207,7 +207,7 @@ export function ChatMessage({
           <span
             className={`text-xs text-muted-foreground mt-1 ${alignRight ? "text-right" : "text-left"}`}
           >
-            {nodeId != null ? `${nodeId} • ${formatTime(timestamp)}` : formatTime(timestamp)}
+            {formatTime(timestamp)}
           </span>
         </div>
       </div>

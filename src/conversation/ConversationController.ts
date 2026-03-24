@@ -115,12 +115,11 @@ export class ConversationController implements ConversationControllerInterface {
   private initializationComplete: boolean = false;
 
   constructor() {
-    // Check for firsttime flag synchronously
+    // Check for firsttime flag synchronously (dev-only)
     const urlParams = new URLSearchParams(window.location.search);
-    const isFirstTime = urlParams.get("firsttime") === "true";
+    const isFirstTime = import.meta.env.DEV && urlParams.get("firsttime") === "true";
 
     if (isFirstTime) {
-      console.log("🧪 CONSTRUCTOR: First-time flag detected, starting with onboarding");
       this.isOnboarding = true;
       this.conversationMap = onboardingConversationMap;
       this.currentNodeId = onboardingConversationMap.startNode;
@@ -139,20 +138,15 @@ export class ConversationController implements ConversationControllerInterface {
       await userProfileStorage.init();
       console.log("🚀 INIT: Storage initialized");
 
-      // Check for firsttime flag in URL params for testing
-      const urlParams = new URLSearchParams(window.location.search);
-      const hasFirstTimeFlag = urlParams.get("firsttime") === "true";
-
-      if (hasFirstTimeFlag) {
-        console.log("🧪 INIT: First-time flag detected, clearing all data for testing");
-        await userProfileStorage.clearAllData();
-        // Remove the parameter from URL to avoid repeated clearing
-        window.history.replaceState({}, document.title, window.location.pathname);
-        console.log("🧪 INIT: Data cleared, URL cleaned");
-        // Don't check profile - we already set onboarding in constructor
-        this.initializationComplete = true;
-        console.log("🚀 INIT: Profile initialization complete (firsttime mode)");
-        return;
+      // Dev-only: firsttime flag clears data for testing
+      if (import.meta.env.DEV) {
+        const initParams = new URLSearchParams(window.location.search);
+        if (initParams.get("firsttime") === "true") {
+          await userProfileStorage.clearAllData();
+          window.history.replaceState({}, document.title, window.location.pathname);
+          this.initializationComplete = true;
+          return;
+        }
       }
 
       this.userProfile = await userProfileStorage.getActiveProfile();
