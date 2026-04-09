@@ -4,8 +4,17 @@ Offline-first psychological first aid for active crisis situations. CALMe delive
 
 Built for the reality that during a rocket attack in Israel, a shelling in Ukraine, or a disaster anywhere else, you can't call a therapist, your phone might not have signal, and emergency services are dealing with physical casualties first.
 
-<!-- TODO: Add demo GIF or screenshot here -->
-<!-- ![CALMe demo](docs/assets/demo.gif) -->
+## Why CALMe is different
+
+- Works fully offline -- no connectivity required after first download
+- No onboarding during crisis -- immediate access
+- Designed for cognitive activation, not passive calming
+- Built for real-world conflict and disaster scenarios
+
+## 60-second demo
+
+<!-- TODO: Record and add demo GIF or video -->
+*Coming soon -- watch this space.*
 
 ## The problem
 
@@ -36,6 +45,14 @@ The app guides users through the Six Cs:
 - **Multi-language** -- Hebrew, Arabic, and English support via compile-time i18n (Paraglide-JS).
 - **Accessibility** -- ARIA-compliant contrast, dyslexia-friendly mode (OpenDyslexic font), screen reader support.
 - **Companion mode** -- floating helper bubble for users caring for dependents (children, elderly, injured).
+
+## Architecture highlights
+
+- Offline-first design using service workers and local caching -- no runtime backend dependency
+- Fully client-side execution -- all NLP, conversation logic, and storage run in the browser
+- Modular conversation engine with state-driven flow (30+ nodes, skip logic, phase transitions)
+- NLP layer for interpreting fragmented, emotional input (Compromise.js + Sentiment)
+- IndexedDB persistence for session continuity across reloads
 
 ## Tech stack
 
