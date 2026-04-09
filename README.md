@@ -18,13 +18,15 @@ Built for the reality that during a rocket attack in Israel, a shelling in Ukrai
 
 ## The problem
 
-In the first minutes after a rocket attack, terror incident, or natural disaster, people experience acute stress that shuts down executive function. Existing mental health tools assume connectivity, require onboarding, and rely on emotional soothing -- which actually suppresses the thinking brain during crisis.
+In the first minutes after a rocket attack, terror incident, or natural disaster, people experience acute stress that shuts down executive function. Since October 7, 2023, 21% of Israelis reported moderate-to-severe anxiety symptoms and 38% reported at least one mental health symptom. The State Comptroller found that resilience centers meant to serve an estimated 1.3 million affected people had treated fewer than 15,750 by end of 2023 -- less than 1.3% of those in significant distress.
+
+Existing mental health tools assume connectivity, require onboarding, and rely on emotional soothing -- which actually suppresses the thinking brain during crisis.
 
 ## How CALMe works
 
 CALMe uses Dr. Farhi's core insight: **activating people during crisis restores executive function faster than calming them.** The fear response and the thinking brain can't run at full power simultaneously -- give someone a cognitive task and the fear starts to quiet. Research shows this can happen in as little as 90 seconds.
 
-The app guides users through the Six Cs:
+The app guides users through the Six Cs (known in Hebrew as MA'ASEH / מעש"ה):
 
 | C | Purpose | Example |
 |---|---------|---------|
@@ -43,7 +45,7 @@ The app guides users through the Six Cs:
 - **No onboarding during crisis** -- opens directly to "I'm here with you." No onboarding forms during crisis. Activities sidebar hidden until recovery phase.
 - **Recovery activities** -- breathing exercises, matching games, digital canvas, stretching routines, Sudoku -- triggered by the conversation engine based on stress level.
 - **Multi-language** -- Hebrew, Arabic, and English support via compile-time i18n (Paraglide-JS).
-- **Accessibility** -- ARIA-compliant contrast, dyslexia-friendly mode (OpenDyslexic font), screen reader support.
+- **Accessibility (WCAG 2.2)** -- ARIA-compliant contrast, dyslexia-friendly mode (OpenDyslexic font), screen reader support, speech-to-text and text-to-speech planned.
 - **Companion mode** -- floating helper bubble for users caring for dependents (children, elderly, injured).
 
 ## Architecture highlights
@@ -109,6 +111,17 @@ docs/                # Architecture, resources, specs
 This is not a wellness app. CALMe is built for the minutes between a siren and an all-clear, when a person is alone in a shelter with their phone and no one to call. The Six Cs model has been field-tested during active conflict in Israel and validated across emergency mental health research globally.
 
 The design philosophy: **don't sedate, activate.** Transform the user from passive victim to active participant. Restore agency, then stabilize.
+
+## Team
+
+CALMe is built by a multidisciplinary team, not a solo side project:
+
+- **Ziva Wernick** -- Computer Science, project and information systems management
+- **Ro'i Bandel** -- Development
+- **Rona Eckert** -- Aerospace engineer, system engineering and integration lead
+- **Matan Dahan** -- Social worker, therapeutic content developer and resilience evaluator
+- **Anat Levine** -- UX/UI architect, user experience design
+- **Josh Levine** -- Technical writer, software architecture, language model integration
 
 ## Research foundation
 
