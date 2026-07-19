@@ -117,13 +117,18 @@ export function generateReply(
   profile: UserProfileSummary | null,
   usedMessages: string[],
 ): string {
-  const pool = messagePools[phase];
-  if (!pool) return "I'm here with you.";
+  const pool: MessagePool | undefined = messagePools[phase];
+  if (pool == null) return "I'm here with you.";
 
   const subKey = selectSubKey(phase, context);
   let candidates = pool[subKey] ?? pool[Object.keys(pool)[0]] ?? ["I'm here with you."];
 
-  if (phase === "ensure_safety" && profile?.safeSpaceType && pool["profile_aware"]) {
+  if (
+    phase === "ensure_safety" &&
+    profile != null &&
+    profile.safeSpaceType !== "" &&
+    "profile_aware" in pool
+  ) {
     const profileMessages = pool["profile_aware"].filter((m) => !usedMessages.includes(m));
     if (profileMessages.length > 0) {
       candidates = profileMessages;
@@ -159,6 +164,8 @@ function selectSubKey(phase: ConversationPhase, context: ConversationContext): s
           return "alone";
         case "caregiver":
           return "caregiver";
+        case "unknown":
+          return "unknown_social";
         default:
           return "unknown_social";
       }

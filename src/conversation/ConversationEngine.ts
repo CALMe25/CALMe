@@ -50,7 +50,7 @@ export class ConversationEngine {
   }
 
   hasCompletedOnboarding(): boolean {
-    return this.rawProfile !== null && this.rawProfile.onboardingCompleted === true;
+    return this.rawProfile !== null && this.rawProfile.onboardingCompleted;
   }
 
   getState(): ConversationState {
@@ -82,7 +82,7 @@ export class ConversationEngine {
     return msg;
   }
 
-  async processMessage(userText: string): Promise<ChatMessage> {
+  processMessage(userText: string): ChatMessage {
     const userMsg: ChatMessage = {
       id: `${Date.now()}_user`,
       role: "user",
