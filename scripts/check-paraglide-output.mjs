@@ -8,8 +8,7 @@ import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 const target =
-  process.argv[2] ??
-  fileURLToPath(new URL("../src/paraglide/messages/_index.js", import.meta.url));
+  process.argv[2] ?? fileURLToPath(new URL("../src/paraglide/messages/_index.js", import.meta.url));
 
 const source = readFileSync(target, "utf8");
 const exportCount = (source.match(/^export /gm) ?? []).length;
