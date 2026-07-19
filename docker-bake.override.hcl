@@ -1,5 +1,5 @@
 # All versions in one place – parsed as an env‑file by Buildx Bake
-node        = "22"
+node        = "24"
 node_tag    = "alpine"
 nginx       = "1.29"
 nginx_tag   = "alpine-slim"
