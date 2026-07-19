@@ -180,9 +180,10 @@ export class ConversationEngine {
     if (analysis.safety !== "unknown") {
       this.state.context.safety = analysis.safety;
     }
-    if (analysis.stressLevel !== "unknown") {
-      this.state.context.stressLevel = analysis.stressLevel;
-    }
+    // StressLevel has no "unknown" sentinel; the offline parser already carries
+    // the prior context value forward when no new stress signal is detected, so
+    // always adopt the analyzed level here.
+    this.state.context.stressLevel = analysis.stressLevel;
     if (analysis.socialContext !== "unknown") {
       this.state.context.socialContext = analysis.socialContext;
     }
