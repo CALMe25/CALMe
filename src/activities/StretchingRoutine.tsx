@@ -21,6 +21,8 @@ const EXERCISE_KEYS = [
 
 const EXERCISE_DURATIONS = [30, 30, 45, 40, 30];
 
+const INSTRUCTION_STEPS = ["1", "2", "3", "4"] as const;
+
 export default function StretchingRoutine() {
   const { currentLocale } = useLanguage();
   const { userGender } = useUserPreferences();
@@ -33,10 +35,10 @@ export default function StretchingRoutine() {
    * @returns Array of localized instruction strings
    */
   const buildInstructions = useCallback(
-    (getter: (args: { step: string; userGender: string }) => string, count = 4) =>
-      Array.from({ length: count }, (_, index) =>
-        getter({ step: (index + 1).toString(), userGender }),
-      ),
+    (
+      getter: (inputs: { step: (typeof INSTRUCTION_STEPS)[number]; userGender: string }) => string,
+      count = 4,
+    ) => INSTRUCTION_STEPS.slice(0, count).map((step) => getter({ step, userGender })),
     [userGender],
   );
 
