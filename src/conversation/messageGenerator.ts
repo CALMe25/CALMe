@@ -81,6 +81,11 @@ const messagePools: Record<ConversationPhase, MessagePool> = {
       "Are you with other people right now, or on your own?",
       "Is anyone around you?",
     ],
+    checking_in: [
+      "How are you feeling right now?",
+      "What's going on for you at the moment?",
+      "How are you holding up right now?",
+    ],
     low_stress: [
       "You made it through. How's everyone around you doing?",
       "Sometimes after the adrenaline fades, people crash a bit. That's normal.",
@@ -157,6 +162,9 @@ function selectSubKey(phase: ConversationPhase, context: ConversationContext): s
       return "initial";
     case "engage":
       if (context.stressLevel === "calm") return "low_stress";
+      // No usable stress signal yet — ask an open, exploratory question to
+      // gather more rather than assuming a moderate-tier state.
+      if (context.stressLevel === "unknown") return "checking_in";
       switch (context.socialContext) {
         case "with_others":
           return "with_others";
