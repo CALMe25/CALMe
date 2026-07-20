@@ -7,7 +7,7 @@ export type ConversationPhase =
   | "closing";
 
 export type SafetyLevel = "safe" | "unsafe" | "unknown";
-export type StressLevel = "calm" | "moderate" | "high" | "crisis";
+export type StressLevel = "calm" | "moderate" | "high" | "crisis" | "unknown";
 export type SocialContext = "alone" | "with_others" | "caregiver" | "unknown";
 export type LocationType = "shelter" | "home" | "transit" | "outdoors" | "unknown";
 
@@ -63,7 +63,7 @@ export interface UserProfileSummary {
 export function createInitialContext(): ConversationContext {
   return {
     safety: "unknown",
-    stressLevel: "moderate",
+    stressLevel: "unknown",
     socialContext: "unknown",
     location: "unknown",
     hasStabilized: false,

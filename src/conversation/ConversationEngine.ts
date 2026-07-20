@@ -131,7 +131,9 @@ export class ConversationEngine {
   deactivateAlert(): ChatMessage {
     this.state.context.isAlertActive = false;
     this.state.phase = "engage";
-    this.state.context.stressLevel = "moderate";
+    // After an alert passes we have no fresh signal about their stress, so reset
+    // to "unknown" and let the engage phase check in rather than assuming moderate.
+    this.state.context.stressLevel = "unknown";
 
     const reply = "The alert has passed. You made it.";
     const msg: ChatMessage = {
@@ -180,10 +182,12 @@ export class ConversationEngine {
     if (analysis.safety !== "unknown") {
       this.state.context.safety = analysis.safety;
     }
-    // StressLevel has no "unknown" sentinel; the offline parser already carries
-    // the prior context value forward when no new stress signal is detected, so
-    // always adopt the analyzed level here.
-    this.state.context.stressLevel = analysis.stressLevel;
+    // Preserve the prior assessed stress level when the new reading is "unknown"
+    // (no usable signal). This prevents a low-signal message from clobbering a
+    // previously assessed "high" or "crisis" level back down.
+    if (analysis.stressLevel !== "unknown") {
+      this.state.context.stressLevel = analysis.stressLevel;
+    }
     if (analysis.socialContext !== "unknown") {
       this.state.context.socialContext = analysis.socialContext;
     }

@@ -82,7 +82,7 @@ export function analyzeOffline(
   const updatedContext: ConversationContext = {
     ...context,
     safety: safety !== "unknown" ? safety : context.safety,
-    stressLevel: stressLevel !== "moderate" ? stressLevel : context.stressLevel,
+    stressLevel: stressLevel !== "unknown" ? stressLevel : context.stressLevel,
     socialContext: socialContext !== "unknown" ? socialContext : context.socialContext,
     location: location !== "unknown" ? location : context.location,
   };
@@ -115,8 +115,8 @@ function extractSafety(input: string): SafetyLevel {
 
 function extractStress(input: string): StressLevel {
   const result = enhancedParser.classifyStress(input);
-  if (result.confidence < 0.4) return "moderate";
-  if (result.category === undefined) return "moderate";
+  if (result.confidence < 0.4) return "unknown";
+  if (result.category === undefined) return "unknown";
   switch (result.category) {
     case "no_stress":
       return "calm";
@@ -128,7 +128,7 @@ function extractStress(input: string): StressLevel {
       return "high";
     }
     default:
-      return "moderate";
+      return "unknown";
   }
 }
 
