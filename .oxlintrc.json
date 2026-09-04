@@ -219,6 +219,6 @@
     "**/ui/breadcrumb.tsx",
     "**/ui/progress.tsx",
     "**/ui/resizable.tsx",
-    "Docs/**"
+    "docs/**"
   ]
 }
