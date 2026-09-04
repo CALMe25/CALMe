@@ -303,13 +303,13 @@ function App() {
     };
   }, [isRTL, mobileMenuOpen]);
 
-  const processUserInput = useCallback(async () => {
+  const processUserInput = useCallback(() => {
     if (!userInput.trim()) return;
 
     if (useNewEngine) {
       try {
         const requestedActivity = engine.getRequestedActivity(userInput);
-        const botMsg = await engine.processMessage(userInput);
+        const botMsg = engine.processMessage(userInput);
 
         setConversationHistory((prev) => [
           ...prev,
@@ -323,12 +323,14 @@ function App() {
           },
         ]);
 
-        if (requestedActivity) {
+        if (requestedActivity != null) {
           const targetApp = resolvedApps.find((app) => app.name === requestedActivity);
           if (targetApp) {
             setChosenApp(targetApp);
             setShouldAutoLaunchApp(true);
-            const timer = setTimeout(() => setShowAppsLauncher(true), 2000);
+            const timer = setTimeout(() => {
+              setShowAppsLauncher(true);
+            }, 2000);
             setAppsTimeout(timer);
           }
         }
@@ -401,7 +403,9 @@ function App() {
           if (targetApp) {
             setChosenApp(targetApp);
             setShouldAutoLaunchApp(true);
-            const timer = setTimeout(() => setShowAppsLauncher(true), 2000);
+            const timer = setTimeout(() => {
+              setShowAppsLauncher(true);
+            }, 2000);
             setAppsTimeout(timer);
           }
         }
@@ -485,7 +489,7 @@ function App() {
       }
     } else if (useNewEngine) {
       // Engine returns to engage phase after activity
-      const returnMsg = await engine.processMessage("I just finished the activity");
+      const returnMsg = engine.processMessage("I just finished the activity");
       setConversationHistory((prev) => [
         ...prev,
         {
@@ -857,7 +861,7 @@ function App() {
                       </div>
                       <div className="min-w-0">
                         <div className="text-sm font-medium truncate">{app.label}</div>
-                        {app.description && (
+                        {app.description != null && app.description !== "" && (
                           <div className="text-xs text-muted-foreground truncate">
                             {app.description}
                           </div>

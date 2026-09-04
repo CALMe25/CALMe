@@ -216,7 +216,7 @@ export default function BreathingExercise({ onGameEnd }: BreathingExerciseProps)
             {m.activities_breathing_howItHelps()}
           </h3>
           <ul className="list-disc list-inside space-y-1.5">
-            {["1", "2", "3"].map((step) => (
+            {(["1", "2", "3"] as const).map((step) => (
               <li key={step}>{m.activities_breathing_step({ step, userGender })}</li>
             ))}
           </ul>

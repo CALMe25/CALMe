@@ -82,7 +82,7 @@ export function analyzeOffline(
   const updatedContext: ConversationContext = {
     ...context,
     safety: safety !== "unknown" ? safety : context.safety,
-    stressLevel: stressLevel !== "moderate" ? stressLevel : context.stressLevel,
+    stressLevel: stressLevel !== "unknown" ? stressLevel : context.stressLevel,
     socialContext: socialContext !== "unknown" ? socialContext : context.socialContext,
     location: location !== "unknown" ? location : context.location,
   };
@@ -102,6 +102,7 @@ export function analyzeOffline(
 function extractSafety(input: string): SafetyLevel {
   const result = enhancedParser.classifySafety(input);
   if (result.confidence < 0.5) return "unknown";
+  if (result.category === undefined) return "unknown";
   switch (result.category) {
     case "SAFE":
       return "safe";
@@ -114,7 +115,8 @@ function extractSafety(input: string): SafetyLevel {
 
 function extractStress(input: string): StressLevel {
   const result = enhancedParser.classifyStress(input);
-  if (result.confidence < 0.4) return "moderate";
+  if (result.confidence < 0.4) return "unknown";
+  if (result.category === undefined) return "unknown";
   switch (result.category) {
     case "no_stress":
       return "calm";
@@ -126,7 +128,7 @@ function extractStress(input: string): StressLevel {
       return "high";
     }
     default:
-      return "moderate";
+      return "unknown";
   }
 }
 
@@ -150,7 +152,8 @@ function extractSocialContext(input: string): SocialContext {
 
 function extractLocation(input: string): LocationType {
   const result = enhancedParser.extractLocation(input);
-  if (result.type !== "extraction" || !result.extractedValue) return "unknown";
+  if (result.type !== "extraction" || result.extractedValue == null || result.extractedValue === "")
+    return "unknown";
   const loc = result.extractedValue.toLowerCase();
   if (["home", "house", "apartment", "flat", "my place", "my room"].includes(loc)) return "home";
   if (["shelter", "miklat", "mamad", "stairway", "bunker", "safe room", "stairwell"].includes(loc))

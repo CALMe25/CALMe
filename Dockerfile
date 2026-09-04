@@ -2,7 +2,7 @@
 # Multi-stage build for optimized image
 
 # Global args for all stages
-ARG NODE_VERSION=22
+ARG NODE_VERSION=24
 ARG NODE_TAG=alpine
 ARG NGINX_VERSION=1.29
 ARG NGINX_TAG=alpine-slim

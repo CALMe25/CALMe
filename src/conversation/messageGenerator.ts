@@ -81,6 +81,11 @@ const messagePools: Record<ConversationPhase, MessagePool> = {
       "Are you with other people right now, or on your own?",
       "Is anyone around you?",
     ],
+    checking_in: [
+      "How are you feeling right now?",
+      "What's going on for you at the moment?",
+      "How are you holding up right now?",
+    ],
     low_stress: [
       "You made it through. How's everyone around you doing?",
       "Sometimes after the adrenaline fades, people crash a bit. That's normal.",
@@ -117,13 +122,18 @@ export function generateReply(
   profile: UserProfileSummary | null,
   usedMessages: string[],
 ): string {
-  const pool = messagePools[phase];
-  if (!pool) return "I'm here with you.";
+  const pool: MessagePool | undefined = messagePools[phase];
+  if (pool == null) return "I'm here with you.";
 
   const subKey = selectSubKey(phase, context);
   let candidates = pool[subKey] ?? pool[Object.keys(pool)[0]] ?? ["I'm here with you."];
 
-  if (phase === "ensure_safety" && profile?.safeSpaceType && pool["profile_aware"]) {
+  if (
+    phase === "ensure_safety" &&
+    profile != null &&
+    profile.safeSpaceType !== "" &&
+    "profile_aware" in pool
+  ) {
     const profileMessages = pool["profile_aware"].filter((m) => !usedMessages.includes(m));
     if (profileMessages.length > 0) {
       candidates = profileMessages;
@@ -152,6 +162,9 @@ function selectSubKey(phase: ConversationPhase, context: ConversationContext): s
       return "initial";
     case "engage":
       if (context.stressLevel === "calm") return "low_stress";
+      // No usable stress signal yet — ask an open, exploratory question to
+      // gather more rather than assuming a moderate-tier state.
+      if (context.stressLevel === "unknown") return "checking_in";
       switch (context.socialContext) {
         case "with_others":
           return "with_others";
@@ -159,6 +172,8 @@ function selectSubKey(phase: ConversationPhase, context: ConversationContext): s
           return "alone";
         case "caregiver":
           return "caregiver";
+        case "unknown":
+          return "unknown_social";
         default:
           return "unknown_social";
       }
