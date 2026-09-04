@@ -30,7 +30,6 @@ export function ChatMessage({
   content,
   timestamp,
   isUser,
-  nodeId,
   appsTypes,
   audioDuration = 0,
   onAppLaunch,
