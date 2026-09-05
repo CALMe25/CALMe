@@ -27,17 +27,25 @@ export const Scale: React.FC<ScaleProps> = ({
 
   const values = Array.from({ length: max - min + 1 }, (_, i) => min + i);
 
+  // Responsive sizes: fixed diameter (min 30px, prefer viewport-based up to 56px).
+  // Circles keep their size and wrap to the next line only when the row can't fit them.
+  const buttonSize = "clamp(30px, 6vw, 56px)";
+  const fontSize = "clamp(12px, 1.6vw, 18px)";
+
   return (
     <div
       style={{
         backgroundColor: "white",
-        padding: "clamp(8px, 2vw, 16px)",
+        padding: "12px",
         borderRadius: 12,
-        display: "grid",
-        gridTemplateColumns: "repeat(5, 1fr)",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
         boxShadow: "0 2px 6px rgba(0,0,0,0.06)",
-        gap: "clamp(4px, 1.5vw, 10px)",
-        width: "100%",
+        gap: 8,
+        flexWrap: "wrap",
+        width: "fit-content",
+        maxWidth: "100%",
       }}
     >
       {values.map((value) => {
@@ -50,14 +58,16 @@ export const Scale: React.FC<ScaleProps> = ({
               handleSelect(value);
             }}
             style={{
-              width: "100%",
-              aspectRatio: "1 / 1",
+              width: buttonSize,
+              height: buttonSize,
+              minWidth: "30px",
+              minHeight: "30px",
               borderRadius: "50%",
               border: "none",
               cursor: onSelect ? "pointer" : "default",
               backgroundColor: isSelected ? "#4A90E2" : "#78B3E8",
               color: isSelected ? "white" : "black",
-              fontSize: "clamp(16px, 3vw, 28px)",
+              fontSize: fontSize,
               fontWeight: 500,
               display: "flex",
               alignItems: "center",
@@ -87,7 +97,7 @@ export const Scale: React.FC<ScaleProps> = ({
                     left: "50%",
                     transform: "translate(-50%, -50%)",
                     color: "white",
-                    fontSize: "clamp(16px, 3vw, 28px)",
+                    fontSize: fontSize,
                     fontWeight: "bold",
                     pointerEvents: "none",
                   }}
