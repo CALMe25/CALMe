@@ -6,6 +6,7 @@ import { type AppInterface, quickActivityOrder } from "../appsContextApi";
 import { useLocalizedApps } from "../hooks/useLocalizedApps";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Scale } from "../components/ui/Scale";
+import { m } from "../paraglide/messages.js";
 
 interface ChatMessageProps {
   id: string;
@@ -100,7 +101,11 @@ export function ChatMessage({
       dir={isRTL ? "rtl" : "ltr"}
     >
       <div
-        className={`flex items-start gap-2 sm:gap-3 max-w-[85%] sm:max-w-[75%] md:max-w-[60%] lg:max-w-[50%] ${alignRight ? "flex-row-reverse" : "flex-row"}`}
+        className={`flex items-start gap-2 sm:gap-3 ${
+          showScale
+            ? "max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%]"
+            : "max-w-[85%] sm:max-w-[75%] md:max-w-[60%] lg:max-w-[50%]"
+        } ${alignRight ? "flex-row-reverse" : "flex-row"}`}
       >
         <Avatar className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0">
           <AvatarImage src={isUser ? undefined : "/favicon.svg"} />
@@ -112,12 +117,15 @@ export function ChatMessage({
         </Avatar>
 
         <div className="flex flex-col min-w-0">
-          {showScale && scaleValue === null && (
-            <div className="mb-2 w-full">
-              <p className="text-xs sm:text-sm text-muted-foreground mb-2">
-                On a scale of 1-10, how are you feeling right now?
-              </p>
+          {showScale && (
+            <div className="mb-3">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-2">{m.scale_title()}</p>
               <Scale selected={scaleValue} onSelect={onScaleSelect} />
+              {scaleValue !== null && (
+                <p className="mt-2 text-xs sm:text-sm text-muted-foreground">
+                  {m.scale_selection({ scaleValue: scaleValue })}
+                </p>
+              )}
             </div>
           )}
 
